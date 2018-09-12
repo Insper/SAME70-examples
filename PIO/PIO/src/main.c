@@ -52,30 +52,30 @@
 
 // Funcao principal chamada na inicalizacao do uC.
 int main(void){
-	
+
 	//board clock
 	sysclk_init();
-	
+
 	//Desliga watchdog
-	WDT->WDT_MR = WDT_MR_WDDIS;	
+	WDT->WDT_MR = WDT_MR_WDDIS;
 
 	pmc_enable_periph_clk(LED_PIO_ID);
 	pmc_enable_periph_clk(BUT_PIO_ID);
-	
+
 	pio_configure(LED_PIO, PIO_OUTPUT_0, LED_PIO_PIN_MASK, PIO_DEFAULT);
 	pio_configure(BUT_PIO, PIO_INPUT, BUT_PIO_PIN_MASK, PIO_PULLUP);
-	
+
 	// super loop
 	// aplicacoes embarcadas no devem sair do while(1).
 	while(1){
 		if(pio_get(BUT_PIO, PIO_INPUT, BUT_PIO_PIN_MASK)){
 			int i = 0;
-		
+
 			for (i=0;i<5;i++){
 				pio_clear(LED_PIO, LED_PIO_PIN_MASK);
 				delay_ms(200);
 				pio_set(LED_PIO, LED_PIO_PIN_MASK);
-				delay_ms(200);  
+				delay_ms(200);
 			}
 		}
 		else{
