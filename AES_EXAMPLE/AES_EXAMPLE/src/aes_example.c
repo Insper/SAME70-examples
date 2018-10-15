@@ -522,18 +522,17 @@ static void ase_xdmac_configure(void){
 
 	/*Enable XDMA interrupt */
 	NVIC_ClearPendingIRQ(XDMAC_IRQn);
-	NVIC_SetPriority( XDMAC_IRQn ,1);
+	NVIC_SetPriority(XDMAC_IRQn , 0);
 	NVIC_EnableIRQ(XDMAC_IRQn);
 
 	/** XDMAC channel configuration. */
 	static xdmac_channel_config_t xdmac_channel_MEM2AES_cfg;
 
 	/* Initialize channel config */
-
 	xdmac_channel_MEM2AES_cfg.mbr_ubc = XDMAC_UBC_NVIEW_NDV0 |
-                                      XDMAC_UBC_NDE_FETCH_DIS |
-                                      XDMAC_UBC_NDEN_UPDATED |
-                                      BUFFER_SIZE;
+										XDMAC_UBC_NDE_FETCH_DIS |
+										XDMAC_UBC_NDEN_UPDATED |
+										BUFFER_SIZE;
 
 	xdmac_channel_MEM2AES_cfg.mbr_sa = (uint32_t)bufferRX;
 	xdmac_channel_MEM2AES_cfg.mbr_da = (uint32_t)&AES->AES_IDATAR[0] ;
@@ -573,10 +572,10 @@ static void ase_xdmac_configure(void){
 										XDMAC_CC_SAM_FIXED_AM |
 										XDMAC_CC_DAM_INCREMENTED_AM |
 										XDMAC_CC_PERID(XDMAC_CH_NUM_AES2MEM);
-  xdmac_channel_AES2MEM_cfg.mbr_bc = 0;
-  xdmac_channel_AES2MEM_cfg.mbr_ds = 0;
+  xdmac_channel_AES2MEM_cfg.mbr_bc  = 0;
+  xdmac_channel_AES2MEM_cfg.mbr_ds  = 0;
   xdmac_channel_AES2MEM_cfg.mbr_sus = 0;
-  xdmac_channel_AES2MEM_cfg.mbr_dus =0;
+  xdmac_channel_AES2MEM_cfg.mbr_dus = 0;
   
   xdmac_configure_transfer(XDMAC, XDMAC_CH_AES2MEM, &xdmac_channel_AES2MEM_cfg);
   xdmac_channel_set_descriptor_control(XDMAC, XDMAC_CH_AES2MEM, 0);

@@ -1,3 +1,27 @@
+/************************************************************************
+* 5 semestre - Eng. da Computao - Insper
+* Rafael Corsi - rafael.corsi@insper.edu.br
+*
+* Material:
+*  - Kit: ATMEL SAME70-XPLD - ARM CORTEX M7
+*
+* Objetivo:
+*  - Demonstrar do uso do TC e RTC
+*
+* Periféricos:
+*  - TC
+*  - RTC
+*  - PIO
+*  - PMC
+*
+* Log:
+*  - 10/2018: Criação
+*************************************************************************/
+
+/************************************************************************/
+/* includes                                                             */
+/************************************************************************/
+
 #include "asf.h"
 
 /************************************************************************/
@@ -15,33 +39,31 @@
 #define WEEK        18
 #define HOUR        15
 #define MINUTE      45
-#define SECOND      45
+#define SECOND      0
 
-/**
- * LEDs
- */
+// LEDs
 #define LED_PIO_ID		 ID_PIOC
 #define LED_PIO        PIOC
-#define LED_PIN		     8
-#define LED_PIN_MASK   (1<<LED_PIN)
+#define LED_IDX		     8
+#define LED_IDX_MASK   (1<<LED_IDX)
 
-/**
- * Botão
- */
+// Botão
 #define BUT_PIO_ID       ID_PIOA
 #define BUT_PIO          PIOA
-#define BUT_PIN		       11
-#define BUT_PIN_MASK     (1 << BUT_PIN)
+#define BUT_IDX		       11
+#define BUT_IDX_MASK     (1 << BUT_IDX)
 #define BUT_DEBOUNCING_VALUE  79
 
 /************************************************************************/
-/* VAR globais                                                          */
+/* globais                                                              */
 /************************************************************************/
+
+// toda variável global que for alterada dentro de uma interrupcao
+// deve possuir o pragma volatile.
 volatile uint8_t flag_led0 = 1;
 
-
 /************************************************************************/
-/* PROTOTYPES                                                           */
+/* prototypes                                                           */
 /************************************************************************/
 
 void BUT_init(void);
@@ -51,34 +73,27 @@ void RTC_init(void);
 void pin_toggle(Pio *pio, uint32_t mask);
 
 /************************************************************************/
-/* Handlers                                                             */
+/* handlers / callbacks                                                 */
 /************************************************************************/
-
-/**
- *  Handle Interrupcao botao 1
- */
-static void Button1_Handler(uint32_t id, uint32_t mask)
-{
-
-}
 
 /**
  *  Interrupt handler for TC1 interrupt.
  */
-void TC1_Handler(void){
+void TC1_Handler(void)
+{
 	volatile uint32_t ul_dummy;
 
-    /****************************************************************
+  /****************************************************************
 	* Devemos indicar ao TC que a interrupção foi satisfeita.
-    ******************************************************************/
+  ******************************************************************/
 	ul_dummy = tc_get_status(TC0, 1);
 
 	/* Avoid compiler warning */
 	UNUSED(ul_dummy);
 
 	/** Muda o estado do LED */
-    if(flag_led0)
-        pin_toggle(LED_PIO, LED_PIN_MASK);
+  if(flag_led0)
+    pin_toggle(LED_PIO, LED_IDX_MASK);
 }
 
 /**
@@ -86,18 +101,28 @@ void TC1_Handler(void){
  */
 void RTC_Handler(void)
 {
+  // Limpa interrupção
 	uint32_t ul_status = rtc_get_status(RTC);
 
-	/* Second increment interrupt */
-	if ((ul_status & RTC_SR_SEC) == RTC_SR_SEC) {
+  // Podemos entrar na interrupção do RTC por vários
+  // precisamos verificar qual a razão de termos entrado
+  // aqui. Por isso dos ifs.
 
+  // Second increment interrupt
+	if ((ul_status & RTC_SR_SEC) == RTC_SR_SEC)
+  {
+    /* limpa interrupcao */
 		rtc_clear_status(RTC, RTC_SCCR_SECCLR);
-
-	} else {
+	}
+  else
+  {
 		/* Time or date alarm */
-		if ((ul_status & RTC_SR_ALARM) == RTC_SR_ALARM) {
+		if ((ul_status & RTC_SR_ALARM) == RTC_SR_ALARM)
+    {
+      /* para o piscar do led */
       flag_led0 = 0;
 
+      /* limpa interrupcao */
 			rtc_clear_status(RTC, RTC_SCCR_ALRCLR);
 		}
 	}
@@ -111,7 +136,8 @@ void RTC_Handler(void)
 /**
  *  Toggle pin controlado pelo PIO (out)
  */
-void pin_toggle(Pio *pio, uint32_t mask){
+void pin_toggle(Pio *pio, uint32_t mask)
+{
    if(pio_get_output_data_status(pio, mask))
     pio_clear(pio, mask);
    else
@@ -119,37 +145,20 @@ void pin_toggle(Pio *pio, uint32_t mask){
 }
 
 /**
- * @Brief Inicializa o pino do BUT
- */
-void BUT_init(void){
-    /* config. pino botao em modo de entrada */
-    pmc_enable_periph_clk(BUT_PIO_ID);
-    pio_set_input(BUT_PIO, BUT_PIN_MASK, PIO_PULLUP | PIO_DEBOUNCE);
-
-    /* config. interrupcao em borda de descida no botao do kit */
-    /* indica funcao (but_Handler) a ser chamada quando houver uma interrupção */
-    pio_enable_interrupt(BUT_PIO, BUT_PIN_MASK);
-    pio_handler_set(BUT_PIO, BUT_PIO_ID, BUT_PIN_MASK, PIO_IT_FALL_EDGE, Button1_Handler);
-
-    /* habilita interrupçcão do PIO que controla o botao */
-    /* e configura sua prioridade                        */
-    NVIC_EnableIRQ(BUT_PIO_ID);
-    NVIC_SetPriority(BUT_PIO_ID, 1);
-};
-
-/**
  * @Brief Inicializa o pino do LED
  */
-void LED_init(int estado){
+void LED_init(int estado)
+{
     pmc_enable_periph_clk(LED_PIO_ID);
-    pio_set_output(LED_PIO, LED_PIN_MASK, estado, 0, 0 );
+    pio_set_output(LED_PIO, LED_IDX_MASK, estado, 0, 0 );
 };
 
 /**
  * Configura TimerCounter (TC0) para gerar uma interrupcao no canal 0-(ID_TC1)
  * a cada 250 ms (4Hz)
  */
-void TC_init(int freq, int TC, int ID_TC, int TC_CHANNEL){
+void TC_init(int freq, int TC, int ID_TC, int TC_CHANNEL)
+{
     uint32_t ul_div;
     uint32_t ul_tcclks;
     uint32_t ul_sysclk = sysclk_get_cpu_hz();
@@ -182,7 +191,8 @@ void TC_init(int freq, int TC, int ID_TC, int TC_CHANNEL){
 /**
  * Configura o RTC para funcionar com interrupcao de alarme
  */
-void RTC_init(){
+void RTC_init()
+{
     /* Configura o PMC */
     pmc_enable_periph_clk(ID_RTC);
 
@@ -201,38 +211,38 @@ void RTC_init(){
 
     /* Ativa interrupcao via alarme */
     rtc_enable_interrupt(RTC,  RTC_IER_ALREN);
-
 }
 
 /************************************************************************/
 /* Main Code	                                                        */
 /************************************************************************/
-int main(void){
-	/* Initialize the SAM system */
-	sysclk_init();
+int main(void)
+{
+  	// Inicializa clock
+  	sysclk_init();
 
-	/* Disable the watchdog */
-	WDT->WDT_MR = WDT_MR_WDDIS;
+  	/* Disable the watchdog */
+  	WDT->WDT_MR = WDT_MR_WDDIS;
 
-  /* Configura Leds */
-  LED_init(0);
+    /* inicializa variaveis globais */
+    flag_led0 = 0;
 
-	/* Configura os botões */
-	BUT_init();
+    /* Configura Leds */
+    LED_init(0);
 
-  /** Configura timer TC0, canal 1 */
-  TC_init(4, TC0, ID_TC1, 1);
+    /* Configura timer TC0 - canal 1 */
+    TC_init(4, TC0, ID_TC1, 1);
 
-  /** Configura RTC */
-  RTC_init();
+    /* Configura RTC */
+    RTC_init();
 
-  /* configura alarme do RTC */
-  rtc_set_date_alarm(RTC, 1, MOUNTH, 1, DAY);
-  rtc_set_time_alarm(RTC, 1, HOUR, 1, MINUTE+1, 1, SECOND);
+    /* configura alarme do RTC
+     *  para um 30 segundos após o inicio do sistema */
+    rtc_set_date_alarm(RTC, 1, MOUNTH, 1, DAY);
+    rtc_set_time_alarm(RTC, 1, HOUR,   1, MINUTE+1, 1, SECOND);
 
-	while (1) {
-		/* Entra em modo sleep */
-
-	}
-
+  	while (1)
+    {
+      /* Entrar em modo sleep */
+  	}
 }
