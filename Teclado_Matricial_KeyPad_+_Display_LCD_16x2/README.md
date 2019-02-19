@@ -2,8 +2,6 @@
 * Teclado Matricial + Display LCD 16x2 (Modo 4 Bits)
 * Marco Mello - marcoasma@insper.edu.br
 
-* Exemplo de aplicação utilizando:
-
 # Resumo :
 
 Esse exemplo demonstra o uso do teclado matricial de 16 teclas (4x4) juntamente com o display de LCD 16x2 em modo 4 Bits
@@ -21,22 +19,22 @@ Módulos :
 Pinos específicos :
 
 1) Teclado Matricial (KeyPad) - 16 Teclas 4x4
-	D4 -> PB0
-	D5 -> PA3
-	D6 -> PA4
-	D7 -> PB1
-	RS -> PD21
-	EN -> PD25
+- D4 -> PB0
+- D5 -> PA3
+- D6 -> PA4
+- D7 -> PB1
+- RS -> PD21
+- EN -> PD25
 
 2) Display LCD 16x4 Modo 4 Bit
-	LIN1 -> PC31
-	LIN2 -> PB3
-	LIN3 -> PA0
-	LIN4 -> PD28
-	COL1 -> PC17
-	COL2 -> PC30
-	COL3 -> PB2
-	COL4 -> PA19
+- LIN1 -> PC31
+- LIN2 -> PB3
+- LIN3 -> PA0
+- LIN4 -> PD28
+- COL1 -> PC17
+- COL2 -> PC30
+- COL3 -> PB2
+- OL4 -> PA19
 
 ## Diagrama
 
