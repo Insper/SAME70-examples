@@ -1,5 +1,5 @@
 /**
- * 5 semestre - Eng. da Computação - Insper
+ * 5 semestre - Eng. da ComputaÃ§Ã£o - Insper
  * Rafael Corsi - rafael.corsi@insper.edu.br
  *
  * Projeto 0 para a placa SAME70-XPLD
@@ -23,11 +23,6 @@
 /* defines                                                              */
 /************************************************************************/
 
-#define LED_PIO           PIOC
-#define LED_PIO_ID        ID_PIOC
-#define LED_PIO_IDX       8u
-#define LED_PIO_IDX_MASK  (1u << LED_PIO_PIN)
-
 /************************************************************************/
 /* constants                                                            */
 /************************************************************************/
@@ -50,7 +45,7 @@ void init(void);
 /* funcoes                                                              */
 /************************************************************************/
 
-// Função de inicialização do uC
+// FunÃ§Ã£o de inicializaÃ§Ã£o do uC
 void init(void)
 {
 
@@ -66,7 +61,7 @@ int main(void)
   init();
 
   // super loop
-  // aplicacoes embarcadas não devem sair do while(1).
+  // aplicacoes embarcadas nÃ£o devem sair do while(1).
   while (1)
   {
 
