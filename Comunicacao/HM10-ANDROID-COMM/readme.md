@@ -1,3 +1,3 @@
-## Diagrama de conexao do HC05 ao Atmel
+## Diagrama de conexao do HM10 ao Atmel
 ![](Imagens/diagrama_ligacao_hm10.png)
 
