@@ -34,6 +34,8 @@
 
 - Instale o `VJoy` para Windows, no qual permite criarmos um controle virtual programável para comunicarmos via Python. http://vjoystick.sourceforge.net/site/
 
+- Copie os arquivos `vJoyInterface.dll` e `vJoyInterfaceWrap.dll` da pasta `Program Files/VJoy` ou `Arquivos de Programas/VJoy` e pasta `x86` ou `x64` (depenendo do seu sistema operacional) para a `pasta do projeto/PC_Python/pyvjoy` 
+
 - Utilize o arquivo `game_controller.py` como base para o seu controle, ele já vem configurado para usar em um emulador com um botão configurado (botão A do controle -> botão 1 do controle virtual).
 
 - Primeiro vamos testar se o computador instalou a biblioteca de controle virtual corretamente (`vjoy`). Execute o arquivo `game_controller.py` com os parametros `none -c dummy`. 
@@ -53,6 +55,9 @@
 - Verifique se o Atmel conecta com o computador na porta COM configurada anteriormente, isto pode ser verificado utilizando o `Putty`, conecte na COM configurada. Se estiver conectado e funcionando você deverá ver vários (`X0` ou `X1` dependendo se o botão da placa está apertado ou não).
 
 - Se estiver OK com o passo anterior, tente agora executar o `game_controller.py` com os parametros `PORTA_COM -b BAUDRATE` para conectar via serial, o controle agora deve funcionar no emulador, aperte o botão da placa e veja se o botão é pressionado no jogo.
+
+## Diagrama de conexao do HC05 ao Atmel
+![](Imagens/diagrama_ligacao_hc05.png)
 
 ## Conectar ao HM10 via porta Serial Virtual
 

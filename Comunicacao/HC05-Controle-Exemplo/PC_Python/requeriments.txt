@@ -1,3 +1,2 @@
 pyserial
 pyautogui
-pyvjoy
