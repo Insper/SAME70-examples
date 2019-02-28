@@ -25,12 +25,12 @@ Adafruit TB6612 (1)  -  SAME70-XPLD (EXT1)             Adafruit TB6612 (2) - SAM
          - AIN2		   ->		PB1                                  AIN2		   ->		  PB1	
          - AIN1		   ->		PB0                                  AIN1		   ->		  PB0
          - STBY		   ->		NC*                                  STBY		   ->		  NC*
-         - BIN1		   ->		PD25                                 BIN1	      ->		  PD25
-         - BIN2		   ->		PD28                                 BIN2	      ->		  PD28
-         - PWMB		   ->		PD20                                 PWMB	      ->		  PD20
-         - GND		      ->		GND                                  GND		   ->		  GND
-         - VCC		      ->		VCC                                  VCC		   ->		  VCC
-         - VM		      ->		NC*                                  VM		   ->		  NC*
+         - BIN1		   ->		PD25                                 BIN1		   ->		  PD25
+         - BIN2		   ->		PD28                                 BIN2		   ->		  PD28
+         - PWMB		   ->		PD20                                 PWMB		   ->		  PD20
+         - GND		   ->		GND                                     GN		   ->		  GND
+         - VCC		   ->		VCC                                     VCC		   ->		  VCC
+         - VM		   ->		NC*                                     VM		   ->		  NC*
 ```
 
 ## Diagrama
