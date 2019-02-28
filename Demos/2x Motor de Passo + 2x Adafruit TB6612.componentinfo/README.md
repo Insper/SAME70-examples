@@ -16,9 +16,8 @@ Módulos :
 - 2x Driver de Motor -> Adafruit TB6612 1.2A DC/Stepper Motor Driver Breakout Board
 - 2x Motor de Passo -> Mercury Motor SM-42BYG011-25 (4 Fios / Bipolar)
 
-Pinos específicos :
-
--                Motor 1                                              Motor 2
+Pinos específicos:
+                  Motor 1                                              Motor 2
  Adafruit TB6612 (1) - SAME70-XPLD (EXT1)             Adafruit TB6612 (2) - SAME70-XPLD (EXT2)
  
  PWMA		   ->		PA3 PWMA		 ->		  PA3
