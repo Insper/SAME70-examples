@@ -18,6 +18,7 @@ Módulos :
 
 Pinos específicos:
 
+'''
 Motor 1                                                Motor 2
 Adafruit TB6612 (1)  -  SAME70-XPLD (EXT1)             Adafruit TB6612 (2) - SAME70-XPLD (EXT2)
          - PWMA		   ->		PA3                                  PWMA		   ->		  PA3
@@ -27,9 +28,10 @@ Adafruit TB6612 (1)  -  SAME70-XPLD (EXT1)             Adafruit TB6612 (2) - SAM
          - BIN1		   ->		PD25                                 BIN1	      ->		  PD25
          - BIN2		   ->		PD28                                 BIN2	      ->		  PD28
          - PWMB		   ->		PD20                                 PWMB	      ->		  PD20
-         - GND		   ->		GND                                  GND		   ->		  GND
-         - VCC		   ->		VCC                                  VCC		   ->		  VCC
+         - GND		      ->		GND                                  GND		   ->		  GND
+         - VCC		      ->		VCC                                  VCC		   ->		  VCC
          - VM		      ->		NC*                                  VM		   ->		  NC*
+'''
 
 ## Diagrama
 
