@@ -71,14 +71,19 @@ Em dúvidas consulte a tabela ASCII.
 Após o último paramêtro, coloque mais dois parametros, no caso, o caractere inicial da sua fonte e o caractere final, conforme quando criamos a fonte.
 Se a sua fonte for ASCII printável completo, deverá ser ' ' e '~'. Se for apenas números seria '0' e '9'.
 Exemplos: 
+
 ```const tFont sourcecodepro_28 = { 26, sourcecodepro_28_array, 'A', 'Z' };```
+
 ```const tFont calibri_36 = { 95, calibri_36_array, ' ', '~' };```
 
 
 - Agora no arquivo principal `main.c`, devemos incluir as fontes que desejamos utilizar.
 Exemplos:
+
 ```#include "sourcecodepro_28.h"```
+
 ```#include "calibri_36.h"```
+
 ``#include "arial_72.h"``
 
 
