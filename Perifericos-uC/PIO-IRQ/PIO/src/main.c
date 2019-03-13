@@ -102,7 +102,7 @@ void io_init(void)
   // Configura NVIC para receber interrupcoes do PIO do botao
   // com prioridade 4 (quanto mais próximo de 0 maior)
   NVIC_EnableIRQ(BUT_PIO_ID);
-  NVIC_SetPriority(BUT_PIO_ID, 4);
+  NVIC_SetPriority(BUT_PIO_ID, 4); // Prioridade 4
 }
 
 /************************************************************************/

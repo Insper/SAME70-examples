@@ -42,17 +42,14 @@ int main (void)
 	sysclk_init();
 
 	delay_init();
-	pmc_enable_periph_clk(ID_PIOA);
-	pmc_enable_periph_clk(ID_PIOB);
-	pmc_enable_periph_clk(ID_PIOC);
-	pmc_enable_periph_clk(ID_PIOD);
-	pmc_enable_periph_clk(ID_SPI0);
-	
+
 	gfx_mono_ssd1306_init();
 	gfx_mono_draw_filled_circle(20, 16, 16, GFX_PIXEL_SET, GFX_WHOLE);
-    gfx_mono_draw_string("mundo", 50,16, &sysfont);
+   gfx_mono_draw_string("mundo", 50,16, &sysfont);
+
+
+  /* Insert application code here, after the board has been initialized. */
 	while(1) {
-		
+
 	}
-	/* Insert application code here, after the board has been initialized. */
 }

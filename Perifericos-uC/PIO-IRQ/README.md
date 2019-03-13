@@ -36,15 +36,14 @@ O PIO gera somente uma interrupção: independente de qual pino do PIO foi ativa
 
 Uma vez ativada a interrupção em um determinado periférico, será necessário configurar o tipo de sinal que dará origem a essa interrupção, esses atributos estao definidos no arquivo `/src/ASF/sam/drivers/pio.h`:
 
-- Borda de descida (PIO_IT_FALL_EDGE)
-- Borda de subida (PIO_IT_RISI_EDGE)
-- Nível alto (PIO_IT_HIGH_LEVEL)
+- Borda de descida (`PIO_IT_FALL_EDGE`)
+- Borda de subida (`PIO_IT_RISI_EDGE`)
+- Nível alto (`PIO_IT_HIGH_LEVEL`)
 - ...
 
 > Note que podemos concaternar mais de um atributo por pino, possibilitando que ele gere uma interrupção por exemplo tanto em borda de descida quanto em borda de subida.
 
-Além do PIO, pino e atributo, a função `pio_handler_set` recebe como parâmetro um ponteiro de função que será chamado sempre que a interrupção em um determinado **pino** ocorrer. 
-
+Além do PIO, pino e atributo, a função `pio_handler_set()` recebe como parâmetro um ponteiro de função que será chamado sempre que a interrupção em um determinado **pino** ocorrer. 
 
 ```c
  // Set an interrupt handler for the provided pins.
@@ -64,9 +63,19 @@ Além do PIO, pino e atributo, a função `pio_handler_set` recebe como parâmet
                          void (*p_handler) (uint32_t,uint32_t));
 ```
 
-## NVIC
+Exemplo de uso:
 
-O [Nested Vectored Interrupt Controller (NVIC)](http://infocenter.arm.com/help/topic/com.arm.doc.dai0179b/ar01s01s01.html) é a parte do núcleo ARM que lida com interrupções, nele podemos configurar se uma interrupção está ativa ou não, sua prioridade via duas funções definidas no CMSIS :
+```c
+pio_handler_set(BUT_PIO,
+                BUT_PIO_ID,
+                BUT_IDX_MASK,
+                PIO_IT_FALL_EDGE,
+                but_callback);
+```
+
+### NVIC
+
+O [Nested Vectored Interrupt Controller (NVIC)](http://infocenter.arm.com/help/topic/com.arm.doc.dai0179b/ar01s01s01.html) é a parte do núcleo ARM que lida com interrupções, nele podemos configurar se uma interrupção está ativa ou não, sua prioridade via duas funções definidas no [`CMSIS`](https://www.keil.com/pack/doc/CMSIS/Core/html/group__NVIC__gr.html):
 
 ``` c
 NVIC_EnableIRQ (IRQn_Type IRQn)
