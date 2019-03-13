@@ -1,4 +1,4 @@
-A seguir iremos ter uma breve explicação de como configurarmos uma interrupção para o PIO do SAME70, na verdade, iremos usar um driver que abstrai a parte mais baixa da interrupção e iremos conseguir configurar um [callback](https://en.wikipedia.org/wiki/Callback_(computer_programming)) para cada pino do PIO.
+A seguir iremos ter uma breve explicação de como configurarmos uma interrupção para o PIO do SAME70, na verdade, iremos usar um driver que abstrai a parte mais baixa da interrupção e iremos conseguir configurar um [`callback`](https://en.wikipedia.org/wiki/Callback_(computer_programming)) para cada pino do PIO.
 
 ![](https://raw.githubusercontent.com/wiki/Insper/ComputacaoEmbarcada/imgs/PIO-IRQ/callback.png)
 
@@ -40,18 +40,22 @@ A Atmel disponibiliza a função `pio_enable_interrupt()` que ativa e configura 
  void pio_enable_interrupt(Pio *p_pio, const uint32_t ul_mask);
 ```
 
-O PIO gera somente uma interrupção: independente de qual pino do PIO foi ativado o código irá para a função `void PIO_Handler(void)` em questão. Porém a ASF fornece uma camada de abstração (`pio_handler.c`) que possibilita que uma função seja atribuída por pino, dando a sensação que existe uma interrupção por pino quando na verdade isso é tratamento de software.
+O PIO gera somente uma interrupção: independente de qual pino do PIO foi ativado o código irá para a função `void PIO_Handler(void)` em questão. Porém a ASF fornece uma camada de abstração ([`pio_handler.c`](https://github.com/Insper/SAME70-examples/blob/master/Perifericos-uC/PIO-IRQ/PIO/src/ASF/sam/drivers/pio/pio_handler.c)) que possibilita que uma função seja atribuída por pino, dando a sensação que existe uma interrupção por pino quando na verdade isso é tratamento de software.
 
-Uma vez ativada a interrupção em um determinado periférico, será necessário configurar o tipo de sinal que dará origem a essa interrupção, esses atributos estao definidos no arquivo `/src/ASF/sam/drivers/pio.h`:
+Uma vez ativada a interrupção em um determinado periférico, será necessário configurar o tipo de sinal que dará origem a essa interrupção, esses atributos estao definidos no arquivo `[/src/ASF/sam/drivers/pio.h](https://github.com/Insper/SAME70-examples/blob/master/Perifericos-uC/PIO-IRQ/PIO/src/ASF/sam/drivers/pio/pio.h)`:
 
-- Borda de descida (PIO_IT_FALL_EDGE)
-- Borda de subida (PIO_IT_RISIG_EDGE)
-- Nível alto (PIO_IT_HIGH_LEVEL)
-- ...
+``` c
+/*  Low level interrupt is active */
+#define PIO_IT_LOW_LEVEL        (0               | 0 | PIO_IT_AIME)
+/*  High level interrupt is active */
+#define PIO_IT_HIGH_LEVEL       (PIO_IT_RE_OR_HL | 0 | PIO_IT_AIME)
+/*  Falling edge interrupt is active */
+#define PIO_IT_FALL_EDGE        (0               | PIO_IT_EDGE | PIO_IT_AIME)
+/*  Rising edge interrupt is active */
+#define PIO_IT_RISE_EDGE (PIO_IT_RE_OR_HL | PIO_IT_EDGE | PIO_IT_AIME)
+```
 
-> Note que podemos concaternar mais de um atributo por pino, possibilitando que ele gere uma interrupção por exemplo tanto em borda de descida quanto em borda de subida.
-
-Além do PIO, pino e atributo, a função `pio_handler_set` recebe como parâmetro um ponteiro de função que será chamado sempre que a interrupção em um determinado **pino** ocorrer. 
+> Note que podemos concaternar mais de um atributo por pino, possibilitando que ele gere uma interrupção por exemplo tanto em borda de descida quanto em borda de subida. Além do PIO, pino e atributo, a função `[pio_handler_set](https://github.com/Insper/SAME70-examples/blob/master/Perifericos-uC/PIO-IRQ/PIO/src/ASF/sam/drivers/pio/pio_handler.c#L142)` recebe como parâmetro um ponteiro de função que será chamado sempre que a interrupção em um determinado **pino** ocorrer. 
 
 
 ```c
@@ -83,4 +87,6 @@ NVIC_SetPriority (IRQn_Type IRQn, uint32_t priority)
 
 Nessas funções o **IRQn** é o ID do periférico que está sendo configurado e o **priority** é a prioridade que cada periférico terá nas interrupções suportando até 255 diferentes níveis (depende do uC) sendo 0 o maior valor de interrupção.
 
+### Referências
 
+- https://www.youtube.com/watch?v=uFBNf7F3l60
