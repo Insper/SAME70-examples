@@ -37,7 +37,7 @@ O PIO gera somente uma interrupção: independente de qual pino do PIO foi ativa
 Uma vez ativada a interrupção em um determinado periférico, será necessário configurar o tipo de sinal que dará origem a essa interrupção, esses atributos estao definidos no arquivo `/src/ASF/sam/drivers/pio.h`:
 
 - Borda de descida (PIO_IT_FALL_EDGE)
-- Borda de subida (PIO_IT_RISI_EDGE)
+- Borda de subida (PIO_IT_RISIG_EDGE)
 - Nível alto (PIO_IT_HIGH_LEVEL)
 - ...
 
