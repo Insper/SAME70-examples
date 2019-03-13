@@ -24,6 +24,8 @@ Essa função será chamada sempre que ocorrer uma interrupção em um pino, que
 
 Utilizamos o termo `calback` para definir uma chamada de função baseada em evento realizado por um **software** e utilizamos o termo `handler` ou `interrupção` para uma chamada de função realizada pelo próprio **hardware**.
 
+![](https://raw.githubusercontent.com/wiki/Insper/ComputacaoEmbarcada/imgs/PIO-IRQ/callback2.png)
+
 ## Configurando o PIO
 
 Para configurarmos o PIO para gerar interrupção é necessário configurarmos duas parte distintas do uC. A primeira é o próprio PIO e a segunda é o `NVIC` (parte do CORE ARM responsável por receber e gerenciar interrupções).
@@ -80,3 +82,5 @@ NVIC_SetPriority (IRQn_Type IRQn, uint32_t priority)
 ```
 
 Nessas funções o **IRQn** é o ID do periférico que está sendo configurado e o **priority** é a prioridade que cada periférico terá nas interrupções suportando até 255 diferentes níveis (depende do uC) sendo 0 o maior valor de interrupção.
+
+
