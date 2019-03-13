@@ -1,6 +1,6 @@
 A seguir iremos ter uma breve explicação de como configurarmos uma interrupção para o PIO do SAME70, na verdade, iremos usar um driver que abstrai a parte mais baixa da interrupção e iremos conseguir configurar um [callback](https://en.wikipedia.org/wiki/Callback_(computer_programming)) para cada pino do PIO.
 
-![](imgs/PIO_IRQ/callback.png)
+![](https://raw.githubusercontent.com/wiki/Insper/ComputacaoEmbarcada/imgs/PIO-IRQ/callback.png)
 
 ## Definindo a função de callBack
 
