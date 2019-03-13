@@ -20,7 +20,7 @@ Essa função será chamada sempre que ocorrer uma interrupção em um pino, que
 
 ### Callback vs Handler
 
-utilizamod `calback` para definir uma chamada de função baseada em evento realizado por um **software** e utilizamos o termo `handler` ou `interrupção` para uma chamada de função realizada pelo próprio **hardware**.
+Utilizamos o termo `calback` para definir uma chamada de função baseada em evento realizado por um **software** e utilizamos o termo `handler` ou `interrupção` para uma chamada de função realizada pelo próprio **hardware**.
 
 ## Configurando o PIO
 
