@@ -18,6 +18,10 @@ void but_callback(void){
 
 Essa função será chamada sempre que ocorrer uma interrupção em um pino, que será configurado para gerar um interrupção.
 
+### Callback vs Handler
+
+utilizamod `calback` para definir uma chamada de função baseada em evento realizado por um **software** e utilizamos o termo `handler` ou `interrupção` para uma chamada de função realizada pelo próprio **hardware**.
+
 ## Configurando o PIO
 
 Para configurarmos o PIO para gerar interrupção é necessário configurarmos duas parte distintas do uC. A primeira é o próprio PIO e a segunda é o `NVIC` (parte do CORE ARM responsável por receber e gerenciar interrupções).
