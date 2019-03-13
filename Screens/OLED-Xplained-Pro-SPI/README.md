@@ -21,4 +21,4 @@ Módulos :
 
 ## Resultado
 
-![](final.jpg)
+![](final.jpeg)
