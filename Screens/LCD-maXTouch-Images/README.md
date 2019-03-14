@@ -165,7 +165,7 @@ Uma struct do tipo `tImage` comentada que será utilizada para salvar informaç�
  - `dataSize`: Tipo do dado do `*data`
 
 
-`tImage` deve fazer parte do código porém só pode aparecer uma única definição! Sugestão: copiar descomentada para o cabeçalho `main.c` e deixar comentada nos arquivo `.h`.
+`tImage` deve fazer parte do código porém só pode aparecer uma única definição! Sugestão: copiar descomentada para o cabeçalho `main.c` e deixar comentada nos arquivos `.h`.
 
  `lavagens.h`
 ```c
@@ -207,7 +207,7 @@ static const uint8_t image_data_lavagem[25947] = {
 #### tImage lavagem
 
 No final do arquivo possuimos a inicialização de uma struct `tImage` com os parâmetros dessa imagem. Isso será utilizado pelo
-nosso código quando querermos utilizar essa imagem.
+nosso código quando formos utilizar essa imagem.
 
 ```c
 const tImage lavagem = { image_data_lavagem, 93, 93,  8 };
@@ -255,7 +255,7 @@ Temos algumas opções para desenhar a imagem no LCD:
    - mais eficiente e melhor método.
  
  Para implementarmos a transferência direta de memória é necessário configurarmos a região do LCD que será atualizado, para isso
- utilizaremos a função `ili9488\_draw\_pixmap` que possui implementa uma atualização parcial de uma região de memória do LCD. A implementação da funcão está na biblioteca do ili9488 e copiado a baixo:
+ utilizaremos a função `ili9488\_draw\_pixmap` que possui implementa uma atualização parcial de uma região de memória do LCD. A implementação da funcão está na biblioteca do `ili9488` e copiado a baixo:
  
 ```C
  /**
@@ -291,13 +291,16 @@ void ili9488_draw_pixmap(uint32_t ul_x, uint32_t ul_y, uint32_t ul_width,
 }
  ```
  
+Para usarmos essa função, basta a chamarmos com os parâmetros da imagem que desejamos desenhar. Insira no main logo antes do while(1):
  
+ ```diff
+  ili9488_set_foreground_color(COLOR_CONVERT(COLOR_BLACK));
+  sprintf(stingLCD, "Computacao Embarcada %d", 2018);
+  ili9488_draw_string(0, 50, stingLCD);
+
++ // desenha imagem lavagem na posicao X=80 e Y=150
++ ili9488_draw_pixmap(80, 150, lavagem.width, lavagem.height, lavagem.data);
+ ```
  
- 
- 
-
-
-
-
 
 
