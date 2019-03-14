@@ -3,22 +3,17 @@
 - Rafael Corsi 
 
 
-# Resumo :
-
 Esse exemplo demonstra o controle do módulo de LCD maX Touch X PLAINED PRO via interface SPI (Serial Peripheral Interface Bus).
 
 Periféricos uC:
-
     - Power Managment Controller (PMC)
     - USART
     - Serial Protocol Interface (SPI)
  
 APIs :
-
     - Driver ili9488
  
 Módulos : 
-
     - LCD maX Touch X PLAINED PRO 
 
 ## Diagrama
@@ -120,32 +115,102 @@ Porém esse formato deve ser convertido para a transmissão, via a macro : **COL
 ili9488_set_foreground_color(COLOR_CONVERT(COLOR_WHITE));
 ```
 
-# Convertendo uma imagem para o LCD
+# Usando uma imagem no LCD 
 
 Para conseguirmos atualizar o LCD com uma imagem pré definida será necessário convertermos essa imagem para o padrão de pixels
-definido na secção anterior e depois alocarmos essa imagem em uma constante (ou no sdcard) para que o microcontrolador possa
-enviar ao ili9488.
+definido na secção anterior e depois alocarmos essa imagem em uma constante para que o microcontrolador possa enviar ao ili9488.
 
 Passos :
 
 1. Definir a imagem na dimensão correta (em pixels)
-2. Converter a imagem para o formato do LCD
-3. Gerar um arquivo .h para ser incluído no projeto
-4. Ler o arquivo .h e atualizar o LCD via a interface com ili9488
+1. Converter a imagem para o formato do LCD / gerar um vetor de pxs
+   - Gerar um arquivo .h para ser incluído no projeto
+1.. Ler o arquivo .h e atualizar o LCD via a interface com ili9488
 
-Para isso iremos utilizar o programa lcd-image-converter localizado em : Softwares Extras/lcd-image-converter/ para fazer a conversão
-da imagem para o formato correto.
+Para isso iremos utilizar o programa [`lcd-image-converter`](https://sourceforge.net/projects/lcd-image-converter/), fazer o download e instalar (windows)/
 
-## 1
-Considere a imagem a seguir :
+### 1 - Escolhendo imagem 
 
-![Diagrama de blocos](./doc/logo.jpg)
+Vamos colocar o icone a seguir no LCD:
 
-com dimensões de : 398 × 161 px
+![Diagrama de blocos](./doc/lavagens.png)
 
-## 2 e 3
+Salve o arquivo no PC: `lavagens.png`, repare que essa imagem possui dimissão de: `93`x`93`pxs.
 
-Carrega a imagem no software lcd-image-converter e siga os passos a seguir :
+![](./doc/lavagens-px.png)
+
+### 2 Gerando `.h`
+
+![](doc/gerando-h.gif)
+
+1. Abra o `lcd-image-converter` -> `File` -> `New image`
+  - name: `lavagens`
+1. `Image` -> `Import`
+  - Abra o `lavagens.png`
+1. `Options` -> `Conversion` -> `Import` -> `Color R8G8B8.xml` -> `Preset` = **R8G8B8** -> `Ok`
+  - Arquivo de config. fornecido nesse tutorial
+1. `File` -> `Convert...`
+  - name: `lavagens.h`
+  
+Os passos anteriores convertem a imagem (`lavagens.png`) para um vetor de pixels (`lavagens.h`) utilizando a configuração `R8G8B8`. O arquivo `lavagens.h` possui:
+
+#### tImage
+
+Uma struct do tipo `tImage` comentada que será utilizada para salvar informações da imagem:
+
+ -  `*data`: Ponteiro para a imagem (vetor)
+ - `width`: Largura da imagem (em px)
+ - `height`: Altura da imagem (em px)
+ - `dataSize`: Tipo do dado do `*data`
+
+
+`tImage` deve fazer parte do código porém só pode aparecer uma única definição! Sugestão: copiar descomentada para o cabeçalho `main.c` e deixar comentada nos arquivo `.h`.
+
+ `lavagens.h`
+```c
+/*
+ typedef struct {
+     const uint8_t *data;
+     uint16_t width;
+     uint16_t height;
+     uint8_t dataSize;
+     } tImage;
+*/
+```
+
+`main.c`
+```diff
+#include "asf.h"
+#include <string.h>
+#include <stdio.h>
+#include <stdlib.h>
+#include "ioport.h"
+
++typedef struct {
++    const uint8_t *data;
++    uint16_t width;
++    uint16_t height;
++    uint8_t dataSize;
++    } tImage;
+```
+
+#### Vetor de pxs
+
+O arquivo `.h` gerado possui a declaração do vetor onde a imagem será salva.
+
+```c
+static const uint8_t image_data_lavagem[25947] = {
+    0x9b, 0xcb, 0xfd, 0x22, 0x8c, ....
+```
+
+#### tImage lavagem
+
+No final do arquivo possuimos a inicialização de uma struct `tImage` com os parâmetros dessa imagem. Isso será utilizado pelo
+nosso código quando querermos utilizar essa imagem.
+
+```c
+const tImage lavagem = { image_data_lavagem, 93, 93,  8 };
+```
 
 ## 4
 
