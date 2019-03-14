@@ -144,13 +144,13 @@ Salve o arquivo no PC: `lavagens.png`, repare que essa imagem possui dimissão d
 ![](doc/gerando-h.gif)
 
 1. Abra o `lcd-image-converter` -> `File` -> `New image`
-  - name: `lavagens`
+    - name: `lavagens`
 1. `Image` -> `Import`
-  - Abra o `lavagens.png`
+    - Abra o `lavagens.png`
 1. `Options` -> `Conversion` -> `Import` -> `Color R8G8B8.xml` -> `Preset` = **R8G8B8** -> `Ok`
-  - Arquivo de config. fornecido nesse tutorial
+    - Arquivo de config. fornecido nesse tutorial
 1. `File` -> `Convert...`
-  - name: `lavagens.h`
+    - name: `lavagens.h`
   
 Os passos anteriores convertem a imagem (`lavagens.png`) para um vetor de pixels (`lavagens.h`) utilizando a configuração `R8G8B8`. O arquivo `lavagens.h` possui:
 
@@ -212,21 +212,49 @@ nosso código quando querermos utilizar essa imagem.
 const tImage lavagem = { image_data_lavagem, 93, 93,  8 };
 ```
 
-## 4
+### Usando a imagem
 
-Uma vez exportado o arquivo para o .c é necessário agora adicionarmos ao projeto, siga a implementação exemplo em
-*/src/logo.h* para criar uma constante que possui a imagem alocada.
+1. Adicionar arquivo `lavagens.h` ao projeto
+1. Incluindo arquivo no `main`
+1. Usar funções do driver para desenhar no LCD
 
-No código temos algumas opções :
+####  Adionando ao projeto
+
+Agora é necessário adicionarmos o arquivo `lavagens.h` ao projeto. Com o exemplo do LCD aberto no Atmel Studio:
+
+![](doc/inserindo-h.gif)
+
+1. `Solution Explorer` -> `Botão Direito` em `src` -> `Add` -> `New Folder`
+    - Nome: `icones`
+1. Arrastar `lavagens.h` para dentro da pasta criada `icones`
+
+#### Incluindo no main
+
+Edite o `main.c` para incluir o arquivo `lavagens.h`, isso precisa ser feito após a definição do `tImage`:
+
+```diff
+typedef struct {
+    const uint8_t *data;
+    uint16_t width;
+    uint16_t height;
+    uint8_t dataSize;
+    } tImage;
+    
++#include "icones/lavagens.h"
+```
+
+#### Desenhando no LCD
+
+Temos algumas opções para desenhar a imagem no LCD:
 
 1. Atualizar o LCD pixel a pixel com os dados contidos no vetor
- - pouco eficiente, o LCD demorará para atualizar a imagem
-2. Fazermos uma transferência direta de memória entre o uc e o ili9488 (burts)
- - mais eficiente e melhor método.
+   - pouco eficiente, o LCD demorará para atualizar a imagem
+   
+2. Fazermos uma transferência direta de memória entre o uc e o ili9488 (burst)
+   - mais eficiente e melhor método.
  
  Para implementarmos a transferência direta de memória é necessário configurarmos a região do LCD que será atualizado, para isso
- utilizaremos a função *ili9488\_draw\_pixmap* que possui implementa uma atualização parcial de uma região de memória do LCD. A implementação da funcão está na biblioteca do ili9488 e copiado a baixo :
- 
+ utilizaremos a função `ili9488\_draw\_pixmap` que possui implementa uma atualização parcial de uma região de memória do LCD. A implementação da funcão está na biblioteca do ili9488 e copiado a baixo:
  
 ```C
  /**
@@ -241,27 +269,27 @@ No código temos algumas opções :
 void ili9488_draw_pixmap(uint32_t ul_x, uint32_t ul_y, uint32_t ul_width,
 		uint32_t ul_height, const ili9488_color_t *p_ul_pixmap)
 {
-	uint32_t size;
-	uint32_t dwX1, dwY1, dwX2, dwY2;
-	dwX1 = ul_x;
-	dwY1 = ul_y;
-	dwX2 = ul_x + ul_width - 1;
-	dwY2 = ul_y + ul_height - 1;
+  uint32_t size;
+  uint32_t dwX1, dwY1, dwX2, dwY2;
+  dwX1 = ul_x;
+  dwY1 = ul_y;
+  dwX2 = ul_x + ul_width - 1;
+  dwY2 = ul_y + ul_height - 1;
 
-	/* Swap coordinates if necessary */
-	ili9488_check_box_coordinates(&dwX1, &dwY1, &dwX2, &dwY2);
+  /* Swap coordinates if necessary */
+  ili9488_check_box_coordinates(&dwX1, &dwY1, &dwX2, &dwY2);
 
-	/* Determine the refresh window area */
-	ili9488_set_window(dwX1, dwY1, (dwX2 - dwX1 + 1), (dwY2 - dwY1 + 1));
+  /* Determine the refresh window area */
+  ili9488_set_window(dwX1, dwY1, (dwX2 - dwX1 + 1), (dwY2 - dwY1 + 1));
+  size = (dwX2 - dwX1) * (dwY2 - dwY1);
 
-	size = (dwX2 - dwX1) * (dwY2 - dwY1);
+  ili9488_write_register(ILI9488_CMD_MEMORY_WRITE, p_ul_pixmap, size * LCD_DATA_COLOR_UNIT);
 
-	ili9488_write_register(ILI9488_CMD_MEMORY_WRITE, p_ul_pixmap, size * LCD_DATA_COLOR_UNIT);
-
-	/* Reset the refresh window area */
-	ili9488_set_window(0, 0, ILI9488_LCD_WIDTH, ILI9488_LCD_HEIGHT);
+  /* Reset the refresh window area */
+  ili9488_set_window(0, 0, ILI9488_LCD_WIDTH, ILI9488_LCD_HEIGHT);
 }
  ```
+ 
  
  
  
