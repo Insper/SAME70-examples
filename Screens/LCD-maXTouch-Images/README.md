@@ -1,20 +1,21 @@
-# LCD-EXT2
 - Computação Embarcada - Insper
 - Rafael Corsi 
-
 
 Esse exemplo demonstra o controle do módulo de LCD maX Touch X PLAINED PRO via interface SPI (Serial Peripheral Interface Bus).
 
 Periféricos uC:
-    - Power Managment Controller (PMC)
-    - USART
-    - Serial Protocol Interface (SPI)
+
+  - Power Managment Controller (PMC)
+  - USART
+  - Serial Protocol Interface (SPI)
  
 APIs :
-    - Driver ili9488
+
+  - Driver ili9488
  
 Módulos : 
-    - LCD maX Touch X PLAINED PRO 
+
+  - LCD maX Touch X PLAINED PRO 
 
 ## Diagrama
 
