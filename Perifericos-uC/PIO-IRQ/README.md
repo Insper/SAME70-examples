@@ -22,7 +22,7 @@ Essa função será chamada sempre que ocorrer uma interrupção em um pino, que
 
 ### Callback vs Handler
 
-Utilizamos o termo `calback` para definir uma chamada de função baseada em evento realizado por um **software** e utilizamos o termo `handler` ou `interrupção` para uma chamada de função realizada pelo próprio **hardware**.
+Utilizamos o termo `callback` para definir uma chamada de função baseada em evento realizado por um **software** e utilizamos o termo `handler` ou `interrupção` para uma chamada de função realizada pelo próprio **hardware**.
 
 ![](https://raw.githubusercontent.com/wiki/Insper/ComputacaoEmbarcada/imgs/PIO-IRQ/callback2.png)
 
