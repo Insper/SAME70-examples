@@ -15,7 +15,7 @@ Módulos :
 
 ## Diagrama
 
-![](Potenciometro_Motorizado.png)
+![](Potenciometro_Motorizado.PNG)
 
 ## Demonstração
 
