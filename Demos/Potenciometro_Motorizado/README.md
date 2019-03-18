@@ -1,24 +1,29 @@
 # Resumo :
 
-Esse exemplo demonstra o controle do módulo de `OLED 1 XPLAINED PRO`  via interface SPI (Serial Peripheral Interface Bus).
+Esse exemplo demonstra como é feita a leitura do potenciômetro e acionado o motor do mesmo.
 
 Periféricos uC:
 
     - Power Managment Controller (PMC)
-    - Serial Protocol Interface (SPI)
- 
-APIs :
-
-    - Driver SSD1306
+    - GPIO
+	- AFEC
  
 Módulos : 
 
-    - OLED 1 XPLAINED PRO
+    - Slide Pot - Motorized
+	- Driver Motor ponte-H - L298N
 
 ## Diagrama
 
-![](diagrama.png)
+![](Potenciometro_Motorizado.png)
 
-## Resultado
+## Demonstração
 
-![](final.jpeg)
+https://www.youtube.com/watch?v=QDkPhp0zf0g
+
+## Funcionamento
+
+A leitura do potenciômetro é efetuada, fazendo com que o motor gire, buscando a posição definida no código(50% nesse exemplo), sendo 0% o início do percurso e 100% o fim.
+Quando a leitura do potenciômetro está abaixo de 50%, o motor gire no sentiro horário, até alcançar a posição equivalente a 50%, quado a leitura está acima o motor gira
+em sentido anti-horário.
+Esse exemplo também possui uma fita de letira para ilustrar quando a posição está correta, acendendo verde e quando a posição está incorreta, acendendo vermelho.
