@@ -6,12 +6,13 @@ Periféricos uC:
 
     - Power Managment Controller (PMC)
     - GPIO
-	- AFEC
+    - AFEC
  
-Módulos : 
+Componentes : 
 
     - Slide Pot - Motorized
-	- Driver Motor ponte-H - L298N
+    - Driver Motor ponte-H - L298N
+    - Fita de LED RGB
 
 ## Diagrama
 
