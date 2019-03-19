@@ -101,33 +101,22 @@ void TC1_Handler(void)
  */
 void RTC_Handler(void)
 {
-  // Limpa interrupção
+  // Limpa interrupção e pega status
+  //
+  // Podemos entrar na interrupção do RTC por vários
+  // precisamos verificar qual a razão de termos entrado.
 	uint32_t ul_status = rtc_get_status(RTC);
 
-  // Podemos entrar na interrupção do RTC por vários
-  // precisamos verificar qual a razão de termos entrado
-  // aqui. Por isso dos ifs.
-
-  // Second increment interrupt
-	if ((ul_status & RTC_SR_SEC) == RTC_SR_SEC)
+  /* Time or Date alarm */
+  if ((ul_status & RTC_SR_ALARM) == RTC_SR_ALARM)
   {
-    /* limpa interrupcao */
-		rtc_clear_status(RTC, RTC_SCCR_SECCLR);
-	}
-  else
-  {
-		/* Time or date alarm */
-		if ((ul_status & RTC_SR_ALARM) == RTC_SR_ALARM)
-    {
-      /* para o piscar do led */
-      flag_led0 = 0;
+    /* para o piscar do led */
+    flag_led0 = 0;
 
-      /* limpa interrupcao */
-			rtc_clear_status(RTC, RTC_SCCR_ALRCLR);
-		}
-	}
+    /* limpa interrupcao Alarme */
+    rtc_clear_status(RTC, RTC_SCCR_ALRCLR);
+  }
 }
-
 
 /************************************************************************/
 /* Funcoes                                                              */
@@ -151,7 +140,7 @@ void LED_init(int estado)
 {
     pmc_enable_periph_clk(LED_PIO_ID);
     pio_set_output(LED_PIO, LED_IDX_MASK, estado, 0, 0 );
-};
+}
 
 /**
  * Configura TimerCounter (TC0) para gerar uma interrupcao no canal 0-(ID_TC1)
