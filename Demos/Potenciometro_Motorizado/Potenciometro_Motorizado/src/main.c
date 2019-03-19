@@ -1,18 +1,38 @@
 #include <asf.h>
 
-/** Flag para confirmação de conversão */
-volatile bool is_conversion_done = false;
-
-/** Variável para armazenar valor da conversão */
-volatile uint32_t g_ul_value = 0;
 
 #define POT_AFEC         AFEC0
 #define POT_AFEC_ID      ID_AFEC0
 #define POT_AFEC_CH      AFEC_CHANNEL_5 // Pin PB2
 #define POT_AFEC_CH_IR   AFEC_INTERRUPT_EOC_5
 
-static void configure_console(void)
-{
+#define IN1_M1_A			PIOD
+#define IN1_M1_A_ID			ID_PIOD
+#define IN1_M1_A_IDX		28
+#define IN1_M1_A_IDX_MASK (1 << IN1_M1_A_IDX)
+
+#define IN2_M1_B			PIOA
+#define IN2_M1_B_ID			ID_PIOA
+#define IN2_M1_B_IDX		0
+#define IN2_M1_B_IDX_MASK (1 << IN2_M1_B_IDX)
+
+#define IN3_VERD			PIOC
+#define IN3_VERD_ID			ID_PIOC
+#define IN3_VERD_IDX		17
+#define IN3_VERD_IDX_MASK (1 << IN3_VERD_IDX)
+
+#define IN4_VERM			PIOC
+#define IN4_VERM_ID			ID_PIOC
+#define IN4_VERM_IDX		30
+#define IN4_VERM_IDX_MASK (1 << IN4_VERM_IDX)
+
+/** Flag para confirmação de conversão */
+volatile bool is_conversion_done = false;
+
+/** Variável para armazenar valor da conversão */
+volatile uint32_t g_ul_value = 0;
+
+static void configure_console(void){
 	const usart_serial_options_t uart_serial_options = {
 		.baudrate = CONF_UART_BAUDRATE,
 #ifdef CONF_UART_CHAR_LENGTH
@@ -29,8 +49,7 @@ static void configure_console(void)
 	stdio_serial_init(CONF_UART, &uart_serial_options);
 }
 
-static void afec_pot_end_conversion(void)
-{
+static void afec_pot_end_conversion(void){
 	g_ul_value = afec_channel_get_value(POT_AFEC, POT_AFEC_CH);
 	is_conversion_done = true;
 }
@@ -64,34 +83,13 @@ void pot_convert(void){
 	}
 }
 
-void init()
-{
+void init(){
 	
 	sysclk_init();
 	
 	board_init();
 	
 	configure_console();
-		
-	#define IN1_M1_A			PIOD
-	#define IN1_M1_A_ID			ID_PIOD
-	#define IN1_M1_A_IDX		28
-	#define IN1_M1_A_IDX_MASK (1 << IN1_M1_A_IDX)
-
-	#define IN2_M1_B			PIOA
-	#define IN2_M1_B_ID			ID_PIOA
-	#define IN2_M1_B_IDX		0
-	#define IN2_M1_B_IDX_MASK (1 << IN2_M1_B_IDX)
-
-	#define IN3_VERD			PIOC
-	#define IN3_VERD_ID			ID_PIOC
-	#define IN3_VERD_IDX		17
-	#define IN3_VERD_IDX_MASK (1 << IN3_VERD_IDX)
-
-	#define IN4_VERM			PIOC
-	#define IN4_VERM_ID			ID_PIOC
-	#define IN4_VERM_IDX		30
-	#define IN4_VERM_IDX_MASK (1 << IN4_VERM_IDX)
 	
 	pmc_enable_periph_clk(IN1_M1_A_ID);
 	pio_set_output(IN1_M1_A, IN1_M1_A_IDX_MASK, 1, 0, 0);
@@ -112,6 +110,7 @@ void init()
 	
 	pot_init(); //Chama função de inicialização do potenciometro (AFEC0 / CHANNEL5) -> Pino PB2 
 	pot_enable_interrupt(); //Habilita interrupção para a leitura analógica do AFEC0
+	
 	
 }
 
