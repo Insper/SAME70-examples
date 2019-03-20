@@ -28,5 +28,9 @@ src\ASF\sam\utils\cmsis\same70\source\templates\system_same70.c
 
 src\ASF\sam\utils\syscalls\gcc\syscalls.c
 
+src\keypad_LabArqComp.c
+
+src\lcd_LabArqComp.c
+
 src\main.c
 

@@ -1106,6 +1106,9 @@
     <Compile Include="src\ASF\sam\utils\syscalls\gcc\syscalls.c">
       <SubType>compile</SubType>
     </Compile>
+    <Compile Include="src\keypad_LabArqComp.c">
+      <SubType>compile</SubType>
+    </Compile>
     <Compile Include="src\config\conf_board.h">
       <SubType>compile</SubType>
     </Compile>
@@ -1113,6 +1116,9 @@
       <SubType>compile</SubType>
     </Compile>
     <Compile Include="src\keypad_LabArqComp.h">
+      <SubType>compile</SubType>
+    </Compile>
+    <Compile Include="src\lcd_LabArqComp.c">
       <SubType>compile</SubType>
     </Compile>
     <Compile Include="src\lcd_LabArqComp.h">

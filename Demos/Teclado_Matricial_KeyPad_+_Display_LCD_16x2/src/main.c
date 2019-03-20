@@ -1,4 +1,5 @@
-/**
+/*
+ * Data: 19/03/2019 
  * 5º Semestre - Engenharia da Computação - Insper
  * Marco Mello - marcoasma@insper.edu.br
  *
@@ -73,8 +74,7 @@ void init(void)
 		
 	pmc_enable_periph_clk(LED_PIO_ID);
 	pio_set_output(LED_PIO, LED_PIO_IDX_MASK, 1, 0, 0);
-	
-	
+		
 }
 
 /************************************************************************/
