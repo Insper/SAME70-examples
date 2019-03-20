@@ -39,7 +39,7 @@ Pinos específicos :
 
 ## Diagrama
 
-![](Teclado_Matricial_KeyPad_+_Display_LCD_16x2.PNG)
+![](Teclado_Matricial_KeyPad_+_Display_LCD_16x2.png)
 
 ## Funcionamento
 
