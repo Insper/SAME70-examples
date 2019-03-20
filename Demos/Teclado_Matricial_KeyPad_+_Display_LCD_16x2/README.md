@@ -1,6 +1,7 @@
 
 * Teclado Matricial + Display LCD 16x2 (Modo 4 Bits)
 * Marco Mello - marcoasma@insper.edu.br
+* 20/03/2019
 
 # Resumo :
 
@@ -38,17 +39,9 @@ Pinos específicos :
 
 ## Diagrama
 
---
+![](Teclado_Matricial_KeyPad_+_Display_LCD_16x2.PNG)
 
-## Teclado Matricial 4x4 (16 Teclas)
-
---
-
-## Display LCD 16x2 (Modo 4 Bits)
-
---
-
-### Como essa aplicação funciona
+## Funcionamento
 
 O cursor no LCD inicializa na posição (0,0), quando for pressionada uma das teclas do KeyPad, seu respectivo caracter é mostrado no LCD, em seguida a posição do cursor é incrementada e quando um nova tecla for pressionada novamente ela será mostrada na nova posição. Quando ocupada todas as posições do display de LCD, ele limpa a tela e começa novamente a contagem a partir da posição (0,0).
 

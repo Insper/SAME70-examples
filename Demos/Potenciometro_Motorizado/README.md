@@ -1,3 +1,8 @@
+
+* Teclado Matricial + Display LCD 16x2 (Modo 4 Bits)
+* Marco Mello - marcoasma@insper.edu.br
+* 20/03/2019
+
 # Resumo :
 
 Esse exemplo demonstra como é feita a leitura do potenciômetro e acionado o motor do mesmo.
