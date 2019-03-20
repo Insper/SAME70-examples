@@ -4181,6 +4181,326 @@ Discarded input sections
  .debug_macro   0x00000000       0x5f src/keypad_LabArqComp.o
  .debug_macro   0x00000000       0xac src/keypad_LabArqComp.o
  .debug_macro   0x00000000       0x34 src/keypad_LabArqComp.o
+ .group         0x00000000        0x8 src/lcd_LabArqComp.o
+ .group         0x00000000        0x8 src/lcd_LabArqComp.o
+ .group         0x00000000        0x8 src/lcd_LabArqComp.o
+ .group         0x00000000        0x8 src/lcd_LabArqComp.o
+ .group         0x00000000        0x8 src/lcd_LabArqComp.o
+ .group         0x00000000        0x8 src/lcd_LabArqComp.o
+ .group         0x00000000        0x8 src/lcd_LabArqComp.o
+ .group         0x00000000        0x8 src/lcd_LabArqComp.o
+ .group         0x00000000        0x8 src/lcd_LabArqComp.o
+ .group         0x00000000        0x8 src/lcd_LabArqComp.o
+ .group         0x00000000        0x8 src/lcd_LabArqComp.o
+ .group         0x00000000        0x8 src/lcd_LabArqComp.o
+ .group         0x00000000        0x8 src/lcd_LabArqComp.o
+ .group         0x00000000        0x8 src/lcd_LabArqComp.o
+ .group         0x00000000        0x8 src/lcd_LabArqComp.o
+ .group         0x00000000        0x8 src/lcd_LabArqComp.o
+ .group         0x00000000        0x8 src/lcd_LabArqComp.o
+ .group         0x00000000        0x8 src/lcd_LabArqComp.o
+ .group         0x00000000        0x8 src/lcd_LabArqComp.o
+ .group         0x00000000        0x8 src/lcd_LabArqComp.o
+ .group         0x00000000        0x8 src/lcd_LabArqComp.o
+ .group         0x00000000        0x8 src/lcd_LabArqComp.o
+ .group         0x00000000        0x8 src/lcd_LabArqComp.o
+ .group         0x00000000        0x8 src/lcd_LabArqComp.o
+ .group         0x00000000        0x8 src/lcd_LabArqComp.o
+ .group         0x00000000        0x8 src/lcd_LabArqComp.o
+ .group         0x00000000        0x8 src/lcd_LabArqComp.o
+ .group         0x00000000        0x8 src/lcd_LabArqComp.o
+ .group         0x00000000        0x8 src/lcd_LabArqComp.o
+ .group         0x00000000        0x8 src/lcd_LabArqComp.o
+ .group         0x00000000        0x8 src/lcd_LabArqComp.o
+ .group         0x00000000        0x8 src/lcd_LabArqComp.o
+ .group         0x00000000        0x8 src/lcd_LabArqComp.o
+ .group         0x00000000        0x8 src/lcd_LabArqComp.o
+ .group         0x00000000        0x8 src/lcd_LabArqComp.o
+ .group         0x00000000        0x8 src/lcd_LabArqComp.o
+ .group         0x00000000        0x8 src/lcd_LabArqComp.o
+ .group         0x00000000        0x8 src/lcd_LabArqComp.o
+ .group         0x00000000        0x8 src/lcd_LabArqComp.o
+ .group         0x00000000        0x8 src/lcd_LabArqComp.o
+ .group         0x00000000        0x8 src/lcd_LabArqComp.o
+ .group         0x00000000        0x8 src/lcd_LabArqComp.o
+ .group         0x00000000        0x8 src/lcd_LabArqComp.o
+ .group         0x00000000        0x8 src/lcd_LabArqComp.o
+ .group         0x00000000        0x8 src/lcd_LabArqComp.o
+ .group         0x00000000        0x8 src/lcd_LabArqComp.o
+ .group         0x00000000        0x8 src/lcd_LabArqComp.o
+ .group         0x00000000        0x8 src/lcd_LabArqComp.o
+ .group         0x00000000        0x8 src/lcd_LabArqComp.o
+ .group         0x00000000        0x8 src/lcd_LabArqComp.o
+ .group         0x00000000        0x8 src/lcd_LabArqComp.o
+ .group         0x00000000        0x8 src/lcd_LabArqComp.o
+ .group         0x00000000        0x8 src/lcd_LabArqComp.o
+ .group         0x00000000        0x8 src/lcd_LabArqComp.o
+ .group         0x00000000        0x8 src/lcd_LabArqComp.o
+ .group         0x00000000        0x8 src/lcd_LabArqComp.o
+ .group         0x00000000        0x8 src/lcd_LabArqComp.o
+ .group         0x00000000        0x8 src/lcd_LabArqComp.o
+ .group         0x00000000        0x8 src/lcd_LabArqComp.o
+ .group         0x00000000        0x8 src/lcd_LabArqComp.o
+ .group         0x00000000        0x8 src/lcd_LabArqComp.o
+ .group         0x00000000        0x8 src/lcd_LabArqComp.o
+ .group         0x00000000        0x8 src/lcd_LabArqComp.o
+ .group         0x00000000        0x8 src/lcd_LabArqComp.o
+ .group         0x00000000        0x8 src/lcd_LabArqComp.o
+ .group         0x00000000        0x8 src/lcd_LabArqComp.o
+ .group         0x00000000        0x8 src/lcd_LabArqComp.o
+ .group         0x00000000        0x8 src/lcd_LabArqComp.o
+ .group         0x00000000        0x8 src/lcd_LabArqComp.o
+ .group         0x00000000        0x8 src/lcd_LabArqComp.o
+ .group         0x00000000        0x8 src/lcd_LabArqComp.o
+ .group         0x00000000        0x8 src/lcd_LabArqComp.o
+ .group         0x00000000        0x8 src/lcd_LabArqComp.o
+ .group         0x00000000        0x8 src/lcd_LabArqComp.o
+ .group         0x00000000        0x8 src/lcd_LabArqComp.o
+ .group         0x00000000        0x8 src/lcd_LabArqComp.o
+ .group         0x00000000        0x8 src/lcd_LabArqComp.o
+ .group         0x00000000        0x8 src/lcd_LabArqComp.o
+ .group         0x00000000        0x8 src/lcd_LabArqComp.o
+ .group         0x00000000        0x8 src/lcd_LabArqComp.o
+ .group         0x00000000        0x8 src/lcd_LabArqComp.o
+ .group         0x00000000        0x8 src/lcd_LabArqComp.o
+ .group         0x00000000        0x8 src/lcd_LabArqComp.o
+ .group         0x00000000        0x8 src/lcd_LabArqComp.o
+ .group         0x00000000        0x8 src/lcd_LabArqComp.o
+ .group         0x00000000        0x8 src/lcd_LabArqComp.o
+ .group         0x00000000        0x8 src/lcd_LabArqComp.o
+ .group         0x00000000        0x8 src/lcd_LabArqComp.o
+ .group         0x00000000        0x8 src/lcd_LabArqComp.o
+ .group         0x00000000        0x8 src/lcd_LabArqComp.o
+ .group         0x00000000        0x8 src/lcd_LabArqComp.o
+ .group         0x00000000        0x8 src/lcd_LabArqComp.o
+ .group         0x00000000        0x8 src/lcd_LabArqComp.o
+ .group         0x00000000        0x8 src/lcd_LabArqComp.o
+ .group         0x00000000        0x8 src/lcd_LabArqComp.o
+ .group         0x00000000        0x8 src/lcd_LabArqComp.o
+ .group         0x00000000        0x8 src/lcd_LabArqComp.o
+ .group         0x00000000        0x8 src/lcd_LabArqComp.o
+ .group         0x00000000        0x8 src/lcd_LabArqComp.o
+ .group         0x00000000        0x8 src/lcd_LabArqComp.o
+ .group         0x00000000        0x8 src/lcd_LabArqComp.o
+ .group         0x00000000        0x8 src/lcd_LabArqComp.o
+ .group         0x00000000        0x8 src/lcd_LabArqComp.o
+ .group         0x00000000        0x8 src/lcd_LabArqComp.o
+ .group         0x00000000        0x8 src/lcd_LabArqComp.o
+ .group         0x00000000        0x8 src/lcd_LabArqComp.o
+ .group         0x00000000        0x8 src/lcd_LabArqComp.o
+ .group         0x00000000        0x8 src/lcd_LabArqComp.o
+ .group         0x00000000        0x8 src/lcd_LabArqComp.o
+ .group         0x00000000        0x8 src/lcd_LabArqComp.o
+ .group         0x00000000        0x8 src/lcd_LabArqComp.o
+ .group         0x00000000        0x8 src/lcd_LabArqComp.o
+ .group         0x00000000        0x8 src/lcd_LabArqComp.o
+ .group         0x00000000        0x8 src/lcd_LabArqComp.o
+ .group         0x00000000        0x8 src/lcd_LabArqComp.o
+ .group         0x00000000        0x8 src/lcd_LabArqComp.o
+ .group         0x00000000        0x8 src/lcd_LabArqComp.o
+ .group         0x00000000        0x8 src/lcd_LabArqComp.o
+ .group         0x00000000        0x8 src/lcd_LabArqComp.o
+ .group         0x00000000        0x8 src/lcd_LabArqComp.o
+ .group         0x00000000        0x8 src/lcd_LabArqComp.o
+ .group         0x00000000        0x8 src/lcd_LabArqComp.o
+ .group         0x00000000        0x8 src/lcd_LabArqComp.o
+ .group         0x00000000        0x8 src/lcd_LabArqComp.o
+ .group         0x00000000        0x8 src/lcd_LabArqComp.o
+ .group         0x00000000        0x8 src/lcd_LabArqComp.o
+ .group         0x00000000        0x8 src/lcd_LabArqComp.o
+ .group         0x00000000        0x8 src/lcd_LabArqComp.o
+ .group         0x00000000        0x8 src/lcd_LabArqComp.o
+ .group         0x00000000        0x8 src/lcd_LabArqComp.o
+ .group         0x00000000        0x8 src/lcd_LabArqComp.o
+ .group         0x00000000        0x8 src/lcd_LabArqComp.o
+ .group         0x00000000        0x8 src/lcd_LabArqComp.o
+ .group         0x00000000        0x8 src/lcd_LabArqComp.o
+ .group         0x00000000        0x8 src/lcd_LabArqComp.o
+ .group         0x00000000        0x8 src/lcd_LabArqComp.o
+ .group         0x00000000        0x8 src/lcd_LabArqComp.o
+ .group         0x00000000        0x8 src/lcd_LabArqComp.o
+ .group         0x00000000        0x8 src/lcd_LabArqComp.o
+ .group         0x00000000        0x8 src/lcd_LabArqComp.o
+ .group         0x00000000        0x8 src/lcd_LabArqComp.o
+ .group         0x00000000        0x8 src/lcd_LabArqComp.o
+ .group         0x00000000        0x8 src/lcd_LabArqComp.o
+ .group         0x00000000        0x8 src/lcd_LabArqComp.o
+ .group         0x00000000        0x8 src/lcd_LabArqComp.o
+ .group         0x00000000        0x8 src/lcd_LabArqComp.o
+ .group         0x00000000        0x8 src/lcd_LabArqComp.o
+ .group         0x00000000        0x8 src/lcd_LabArqComp.o
+ .group         0x00000000        0x8 src/lcd_LabArqComp.o
+ .group         0x00000000        0x8 src/lcd_LabArqComp.o
+ .group         0x00000000        0x8 src/lcd_LabArqComp.o
+ .group         0x00000000        0x8 src/lcd_LabArqComp.o
+ .group         0x00000000        0x8 src/lcd_LabArqComp.o
+ .group         0x00000000        0x8 src/lcd_LabArqComp.o
+ .text          0x00000000        0x0 src/lcd_LabArqComp.o
+ .data          0x00000000        0x0 src/lcd_LabArqComp.o
+ .bss           0x00000000        0x0 src/lcd_LabArqComp.o
+ .text.Lcd4_Write_String
+                0x00000000       0x1c src/lcd_LabArqComp.o
+ .text.Lcd4_Shift_Right
+                0x00000000       0x14 src/lcd_LabArqComp.o
+ .text.Lcd4_Shift_Left
+                0x00000000       0x14 src/lcd_LabArqComp.o
+ .bss.cpu_irq_critical_section_counter
+                0x00000000        0x4 src/lcd_LabArqComp.o
+ .bss.cpu_irq_prev_interrupt_state
+                0x00000000        0x1 src/lcd_LabArqComp.o
+ .debug_macro   0x00000000      0x8ce src/lcd_LabArqComp.o
+ .debug_macro   0x00000000      0x16d src/lcd_LabArqComp.o
+ .debug_macro   0x00000000      0x652 src/lcd_LabArqComp.o
+ .debug_macro   0x00000000       0x76 src/lcd_LabArqComp.o
+ .debug_macro   0x00000000       0x16 src/lcd_LabArqComp.o
+ .debug_macro   0x00000000      0x6e4 src/lcd_LabArqComp.o
+ .debug_macro   0x00000000       0x22 src/lcd_LabArqComp.o
+ .debug_macro   0x00000000       0x87 src/lcd_LabArqComp.o
+ .debug_macro   0x00000000       0x51 src/lcd_LabArqComp.o
+ .debug_macro   0x00000000       0xef src/lcd_LabArqComp.o
+ .debug_macro   0x00000000       0x6a src/lcd_LabArqComp.o
+ .debug_macro   0x00000000      0x1df src/lcd_LabArqComp.o
+ .debug_macro   0x00000000       0x4a src/lcd_LabArqComp.o
+ .debug_macro   0x00000000       0x3b src/lcd_LabArqComp.o
+ .debug_macro   0x00000000       0x2d src/lcd_LabArqComp.o
+ .debug_macro   0x00000000       0x26 src/lcd_LabArqComp.o
+ .debug_macro   0x00000000      0xf9a src/lcd_LabArqComp.o
+ .debug_macro   0x00000000      0x175 src/lcd_LabArqComp.o
+ .debug_macro   0x00000000      0x257 src/lcd_LabArqComp.o
+ .debug_macro   0x00000000      0xa0f src/lcd_LabArqComp.o
+ .debug_macro   0x00000000      0x1b9 src/lcd_LabArqComp.o
+ .debug_macro   0x00000000      0x336 src/lcd_LabArqComp.o
+ .debug_macro   0x00000000      0x15b src/lcd_LabArqComp.o
+ .debug_macro   0x00000000     0x1851 src/lcd_LabArqComp.o
+ .debug_macro   0x00000000       0x1c src/lcd_LabArqComp.o
+ .debug_macro   0x00000000      0x68d src/lcd_LabArqComp.o
+ .debug_macro   0x00000000      0x31e src/lcd_LabArqComp.o
+ .debug_macro   0x00000000      0x4d4 src/lcd_LabArqComp.o
+ .debug_macro   0x00000000      0x56e src/lcd_LabArqComp.o
+ .debug_macro   0x00000000     0x1332 src/lcd_LabArqComp.o
+ .debug_macro   0x00000000     0x278d src/lcd_LabArqComp.o
+ .debug_macro   0x00000000     0x102b src/lcd_LabArqComp.o
+ .debug_macro   0x00000000      0xe01 src/lcd_LabArqComp.o
+ .debug_macro   0x00000000      0x3b1 src/lcd_LabArqComp.o
+ .debug_macro   0x00000000       0xa0 src/lcd_LabArqComp.o
+ .debug_macro   0x00000000       0x76 src/lcd_LabArqComp.o
+ .debug_macro   0x00000000      0x409 src/lcd_LabArqComp.o
+ .debug_macro   0x00000000       0x64 src/lcd_LabArqComp.o
+ .debug_macro   0x00000000      0x284 src/lcd_LabArqComp.o
+ .debug_macro   0x00000000      0x1d0 src/lcd_LabArqComp.o
+ .debug_macro   0x00000000      0x248 src/lcd_LabArqComp.o
+ .debug_macro   0x00000000      0x524 src/lcd_LabArqComp.o
+ .debug_macro   0x00000000      0x63b src/lcd_LabArqComp.o
+ .debug_macro   0x00000000      0x6b8 src/lcd_LabArqComp.o
+ .debug_macro   0x00000000       0x4c src/lcd_LabArqComp.o
+ .debug_macro   0x00000000      0x468 src/lcd_LabArqComp.o
+ .debug_macro   0x00000000      0x207 src/lcd_LabArqComp.o
+ .debug_macro   0x00000000      0x866 src/lcd_LabArqComp.o
+ .debug_macro   0x00000000     0x1547 src/lcd_LabArqComp.o
+ .debug_macro   0x00000000       0x40 src/lcd_LabArqComp.o
+ .debug_macro   0x00000000       0x76 src/lcd_LabArqComp.o
+ .debug_macro   0x00000000      0xdaf src/lcd_LabArqComp.o
+ .debug_macro   0x00000000       0x82 src/lcd_LabArqComp.o
+ .debug_macro   0x00000000       0x76 src/lcd_LabArqComp.o
+ .debug_macro   0x00000000       0x4c src/lcd_LabArqComp.o
+ .debug_macro   0x00000000      0x135 src/lcd_LabArqComp.o
+ .debug_macro   0x00000000      0x135 src/lcd_LabArqComp.o
+ .debug_macro   0x00000000      0x135 src/lcd_LabArqComp.o
+ .debug_macro   0x00000000       0x6a src/lcd_LabArqComp.o
+ .debug_macro   0x00000000       0x6a src/lcd_LabArqComp.o
+ .debug_macro   0x00000000      0x313 src/lcd_LabArqComp.o
+ .debug_macro   0x00000000       0xb2 src/lcd_LabArqComp.o
+ .debug_macro   0x00000000       0xb2 src/lcd_LabArqComp.o
+ .debug_macro   0x00000000       0xb2 src/lcd_LabArqComp.o
+ .debug_macro   0x00000000      0x11d src/lcd_LabArqComp.o
+ .debug_macro   0x00000000      0x11d src/lcd_LabArqComp.o
+ .debug_macro   0x00000000      0x2cd src/lcd_LabArqComp.o
+ .debug_macro   0x00000000       0xb8 src/lcd_LabArqComp.o
+ .debug_macro   0x00000000       0x5e src/lcd_LabArqComp.o
+ .debug_macro   0x00000000       0x40 src/lcd_LabArqComp.o
+ .debug_macro   0x00000000       0x4c src/lcd_LabArqComp.o
+ .debug_macro   0x00000000       0xa0 src/lcd_LabArqComp.o
+ .debug_macro   0x00000000      0x494 src/lcd_LabArqComp.o
+ .debug_macro   0x00000000      0x135 src/lcd_LabArqComp.o
+ .debug_macro   0x00000000       0x4c src/lcd_LabArqComp.o
+ .debug_macro   0x00000000      0x313 src/lcd_LabArqComp.o
+ .debug_macro   0x00000000       0x6a src/lcd_LabArqComp.o
+ .debug_macro   0x00000000       0xb8 src/lcd_LabArqComp.o
+ .debug_macro   0x00000000       0x6a src/lcd_LabArqComp.o
+ .debug_macro   0x00000000       0x2e src/lcd_LabArqComp.o
+ .debug_macro   0x00000000      0x9b1 src/lcd_LabArqComp.o
+ .debug_macro   0x00000000       0x6a src/lcd_LabArqComp.o
+ .debug_macro   0x00000000       0x88 src/lcd_LabArqComp.o
+ .debug_macro   0x00000000       0x58 src/lcd_LabArqComp.o
+ .debug_macro   0x00000000       0xe2 src/lcd_LabArqComp.o
+ .debug_macro   0x00000000       0x16 src/lcd_LabArqComp.o
+ .debug_macro   0x00000000       0xe2 src/lcd_LabArqComp.o
+ .debug_macro   0x00000000       0x4c src/lcd_LabArqComp.o
+ .debug_macro   0x00000000       0x16 src/lcd_LabArqComp.o
+ .debug_macro   0x00000000       0x4c src/lcd_LabArqComp.o
+ .debug_macro   0x00000000       0x2e src/lcd_LabArqComp.o
+ .debug_macro   0x00000000      0x1b5 src/lcd_LabArqComp.o
+ .debug_macro   0x00000000      0x1b5 src/lcd_LabArqComp.o
+ .debug_macro   0x00000000      0x1b5 src/lcd_LabArqComp.o
+ .debug_macro   0x00000000      0x1b5 src/lcd_LabArqComp.o
+ .debug_macro   0x00000000      0x1b5 src/lcd_LabArqComp.o
+ .debug_macro   0x00000000       0x1c src/lcd_LabArqComp.o
+ .debug_macro   0x00000000       0x2e src/lcd_LabArqComp.o
+ .debug_macro   0x00000000       0x22 src/lcd_LabArqComp.o
+ .debug_macro   0x00000000       0x1c src/lcd_LabArqComp.o
+ .debug_macro   0x00000000       0x52 src/lcd_LabArqComp.o
+ .debug_macro   0x00000000       0x10 src/lcd_LabArqComp.o
+ .debug_macro   0x00000000       0x1c src/lcd_LabArqComp.o
+ .debug_macro   0x00000000       0x4c src/lcd_LabArqComp.o
+ .debug_macro   0x00000000       0x4c src/lcd_LabArqComp.o
+ .debug_macro   0x00000000       0x4c src/lcd_LabArqComp.o
+ .debug_macro   0x00000000      0x31b src/lcd_LabArqComp.o
+ .debug_macro   0x00000000     0x1022 src/lcd_LabArqComp.o
+ .debug_macro   0x00000000      0x100 src/lcd_LabArqComp.o
+ .debug_macro   0x00000000       0x58 src/lcd_LabArqComp.o
+ .debug_macro   0x00000000       0x35 src/lcd_LabArqComp.o
+ .debug_macro   0x00000000       0x9c src/lcd_LabArqComp.o
+ .debug_macro   0x00000000       0x16 src/lcd_LabArqComp.o
+ .debug_macro   0x00000000       0x35 src/lcd_LabArqComp.o
+ .debug_macro   0x00000000      0x353 src/lcd_LabArqComp.o
+ .debug_macro   0x00000000       0x10 src/lcd_LabArqComp.o
+ .debug_macro   0x00000000       0x58 src/lcd_LabArqComp.o
+ .debug_macro   0x00000000       0x1f src/lcd_LabArqComp.o
+ .debug_macro   0x00000000       0x43 src/lcd_LabArqComp.o
+ .debug_macro   0x00000000       0x20 src/lcd_LabArqComp.o
+ .debug_macro   0x00000000      0x187 src/lcd_LabArqComp.o
+ .debug_macro   0x00000000       0x10 src/lcd_LabArqComp.o
+ .debug_macro   0x00000000       0x1c src/lcd_LabArqComp.o
+ .debug_macro   0x00000000       0x52 src/lcd_LabArqComp.o
+ .debug_macro   0x00000000       0x40 src/lcd_LabArqComp.o
+ .debug_macro   0x00000000       0x10 src/lcd_LabArqComp.o
+ .debug_macro   0x00000000       0x40 src/lcd_LabArqComp.o
+ .debug_macro   0x00000000       0xd7 src/lcd_LabArqComp.o
+ .debug_macro   0x00000000       0x16 src/lcd_LabArqComp.o
+ .debug_macro   0x00000000      0x18b src/lcd_LabArqComp.o
+ .debug_macro   0x00000000       0x22 src/lcd_LabArqComp.o
+ .debug_macro   0x00000000       0x16 src/lcd_LabArqComp.o
+ .debug_macro   0x00000000       0x16 src/lcd_LabArqComp.o
+ .debug_macro   0x00000000       0x29 src/lcd_LabArqComp.o
+ .debug_macro   0x00000000       0x75 src/lcd_LabArqComp.o
+ .debug_macro   0x00000000       0x3f src/lcd_LabArqComp.o
+ .debug_macro   0x00000000      0x3ca src/lcd_LabArqComp.o
+ .debug_macro   0x00000000       0x3a src/lcd_LabArqComp.o
+ .debug_macro   0x00000000      0x2bf src/lcd_LabArqComp.o
+ .debug_macro   0x00000000      0x8d6 src/lcd_LabArqComp.o
+ .debug_macro   0x00000000       0x70 src/lcd_LabArqComp.o
+ .debug_macro   0x00000000       0x64 src/lcd_LabArqComp.o
+ .debug_macro   0x00000000       0x5f src/lcd_LabArqComp.o
+ .debug_macro   0x00000000       0xac src/lcd_LabArqComp.o
+ .debug_macro   0x00000000       0x28 src/lcd_LabArqComp.o
+ .debug_macro   0x00000000       0x23 src/lcd_LabArqComp.o
+ .debug_macro   0x00000000       0x94 src/lcd_LabArqComp.o
+ .debug_macro   0x00000000       0x40 src/lcd_LabArqComp.o
+ .debug_macro   0x00000000       0x88 src/lcd_LabArqComp.o
+ .debug_macro   0x00000000      0x1ce src/lcd_LabArqComp.o
+ .debug_macro   0x00000000       0x34 src/lcd_LabArqComp.o
+ .debug_macro   0x00000000       0x16 src/lcd_LabArqComp.o
+ .debug_macro   0x00000000       0x1c src/lcd_LabArqComp.o
  .group         0x00000000        0x8 src/main.o
  .group         0x00000000        0x8 src/main.o
  .group         0x00000000        0x8 src/main.o
@@ -4339,12 +4659,6 @@ Discarded input sections
  .text          0x00000000        0x0 src/main.o
  .data          0x00000000        0x0 src/main.o
  .bss           0x00000000        0x0 src/main.o
- .text.Lcd4_Write_String
-                0x00000000       0x1c src/main.o
- .text.Lcd4_Shift_Right
-                0x00000000       0x14 src/main.o
- .text.Lcd4_Shift_Left
-                0x00000000       0x14 src/main.o
  .bss.cpu_irq_critical_section_counter
                 0x00000000        0x4 src/main.o
  .bss.cpu_irq_prev_interrupt_state
@@ -4594,6 +4908,7 @@ LOAD src/ASF/sam/utils/cmsis/same70/source/templates/gcc/startup_same70.o
 LOAD src/ASF/sam/utils/cmsis/same70/source/templates/system_same70.o
 LOAD src/ASF/sam/utils/syscalls/gcc/syscalls.o
 LOAD src/keypad_LabArqComp.o
+LOAD src/lcd_LabArqComp.o
 LOAD src/main.o
 START GROUP
 LOAD ../src/ASF/thirdparty/CMSIS/Lib/GCC\libarm_cortexM7lfsp_math_softfp.a
@@ -4759,22 +5074,22 @@ LOAD c:/program files (x86)/atmel/studio/7.0/toolchain/arm/arm-gnu-toolchain/bin
                 0x004007cc      0x450 src/keypad_LabArqComp.o
                 0x004007cc                le_keypad
  .text.Lcd4_Port
-                0x00400c1c       0x60 src/main.o
+                0x00400c1c       0x60 src/lcd_LabArqComp.o
                 0x00400c1c                Lcd4_Port
  .text.Lcd4_Cmd
-                0x00400c7c       0x4c src/main.o
+                0x00400c7c       0x4c src/lcd_LabArqComp.o
                 0x00400c7c                Lcd4_Cmd
  .text.Lcd4_Init
-                0x00400cc8       0xe8 src/main.o
+                0x00400cc8       0xe8 src/lcd_LabArqComp.o
                 0x00400cc8                Lcd4_Init
  .text.Lcd4_Clear
-                0x00400db0       0x14 src/main.o
+                0x00400db0       0x14 src/lcd_LabArqComp.o
                 0x00400db0                Lcd4_Clear
  .text.Lcd4_Set_Cursor
-                0x00400dc4       0x38 src/main.o
+                0x00400dc4       0x38 src/lcd_LabArqComp.o
                 0x00400dc4                Lcd4_Set_Cursor
  .text.Lcd4_Write_Char
-                0x00400dfc       0x78 src/main.o
+                0x00400dfc       0x78 src/lcd_LabArqComp.o
                 0x00400dfc                Lcd4_Write_Char
  .text.init     0x00400e74       0x40 src/main.o
                 0x00400e74                init
@@ -4968,23 +5283,25 @@ OUTPUT(Teclado_Matricial_KeyPad_+_Display_LCD_16x2.elf elf32-littlearm)
  .ARM.attributes
                 0x00000204       0x37 src/keypad_LabArqComp.o
  .ARM.attributes
-                0x0000023b       0x37 src/main.o
+                0x0000023b       0x37 src/lcd_LabArqComp.o
  .ARM.attributes
-                0x00000272       0x2e c:/program files (x86)/atmel/studio/7.0/toolchain/arm/arm-gnu-toolchain/bin/../lib/gcc/arm-none-eabi/6.3.1/../../../../arm-none-eabi/lib/thumb/v7e-m\libc.a(lib_a-impure.o)
+                0x00000272       0x37 src/main.o
  .ARM.attributes
-                0x000002a0       0x2e c:/program files (x86)/atmel/studio/7.0/toolchain/arm/arm-gnu-toolchain/bin/../lib/gcc/arm-none-eabi/6.3.1/../../../../arm-none-eabi/lib/thumb/v7e-m\libc.a(lib_a-init.o)
+                0x000002a9       0x2e c:/program files (x86)/atmel/studio/7.0/toolchain/arm/arm-gnu-toolchain/bin/../lib/gcc/arm-none-eabi/6.3.1/../../../../arm-none-eabi/lib/thumb/v7e-m\libc.a(lib_a-impure.o)
  .ARM.attributes
-                0x000002ce       0x2e c:/program files (x86)/atmel/studio/7.0/toolchain/arm/arm-gnu-toolchain/bin/../lib/gcc/arm-none-eabi/6.3.1/../../../../arm-none-eabi/lib/thumb/v7e-m\libc.a(lib_a-__call_atexit.o)
+                0x000002d7       0x2e c:/program files (x86)/atmel/studio/7.0/toolchain/arm/arm-gnu-toolchain/bin/../lib/gcc/arm-none-eabi/6.3.1/../../../../arm-none-eabi/lib/thumb/v7e-m\libc.a(lib_a-init.o)
  .ARM.attributes
-                0x000002fc       0x2e c:/program files (x86)/atmel/studio/7.0/toolchain/arm/arm-gnu-toolchain/bin/../lib/gcc/arm-none-eabi/6.3.1/../../../../arm-none-eabi/lib/thumb/v7e-m\libc.a(lib_a-atexit.o)
+                0x00000305       0x2e c:/program files (x86)/atmel/studio/7.0/toolchain/arm/arm-gnu-toolchain/bin/../lib/gcc/arm-none-eabi/6.3.1/../../../../arm-none-eabi/lib/thumb/v7e-m\libc.a(lib_a-__call_atexit.o)
  .ARM.attributes
-                0x0000032a       0x2e c:/program files (x86)/atmel/studio/7.0/toolchain/arm/arm-gnu-toolchain/bin/../lib/gcc/arm-none-eabi/6.3.1/../../../../arm-none-eabi/lib/thumb/v7e-m\libc.a(lib_a-fini.o)
+                0x00000333       0x2e c:/program files (x86)/atmel/studio/7.0/toolchain/arm/arm-gnu-toolchain/bin/../lib/gcc/arm-none-eabi/6.3.1/../../../../arm-none-eabi/lib/thumb/v7e-m\libc.a(lib_a-atexit.o)
  .ARM.attributes
-                0x00000358       0x2e c:/program files (x86)/atmel/studio/7.0/toolchain/arm/arm-gnu-toolchain/bin/../lib/gcc/arm-none-eabi/6.3.1/../../../../arm-none-eabi/lib/thumb/v7e-m\libc.a(lib_a-lock.o)
+                0x00000361       0x2e c:/program files (x86)/atmel/studio/7.0/toolchain/arm/arm-gnu-toolchain/bin/../lib/gcc/arm-none-eabi/6.3.1/../../../../arm-none-eabi/lib/thumb/v7e-m\libc.a(lib_a-fini.o)
  .ARM.attributes
-                0x00000386       0x2e c:/program files (x86)/atmel/studio/7.0/toolchain/arm/arm-gnu-toolchain/bin/../lib/gcc/arm-none-eabi/6.3.1/../../../../arm-none-eabi/lib/thumb/v7e-m\libc.a(lib_a-__atexit.o)
+                0x0000038f       0x2e c:/program files (x86)/atmel/studio/7.0/toolchain/arm/arm-gnu-toolchain/bin/../lib/gcc/arm-none-eabi/6.3.1/../../../../arm-none-eabi/lib/thumb/v7e-m\libc.a(lib_a-lock.o)
  .ARM.attributes
-                0x000003b4       0x1e c:/program files (x86)/atmel/studio/7.0/toolchain/arm/arm-gnu-toolchain/bin/../lib/gcc/arm-none-eabi/6.3.1/thumb/v7e-m/crtn.o
+                0x000003bd       0x2e c:/program files (x86)/atmel/studio/7.0/toolchain/arm/arm-gnu-toolchain/bin/../lib/gcc/arm-none-eabi/6.3.1/../../../../arm-none-eabi/lib/thumb/v7e-m\libc.a(lib_a-__atexit.o)
+ .ARM.attributes
+                0x000003eb       0x1e c:/program files (x86)/atmel/studio/7.0/toolchain/arm/arm-gnu-toolchain/bin/../lib/gcc/arm-none-eabi/6.3.1/thumb/v7e-m/crtn.o
 
 .comment        0x00000000       0x59
  .comment       0x00000000       0x59 src/ASF/common/services/clock/same70/sysclk.o
@@ -4997,9 +5314,10 @@ OUTPUT(Teclado_Matricial_KeyPad_+_Display_LCD_16x2.elf elf32-littlearm)
  .comment       0x00000059       0x5a src/ASF/sam/utils/cmsis/same70/source/templates/gcc/startup_same70.o
  .comment       0x00000059       0x5a src/ASF/sam/utils/cmsis/same70/source/templates/system_same70.o
  .comment       0x00000059       0x5a src/keypad_LabArqComp.o
+ .comment       0x00000059       0x5a src/lcd_LabArqComp.o
  .comment       0x00000059       0x5a src/main.o
 
-.debug_info     0x00000000     0xcf52
+.debug_info     0x00000000     0xde78
  .debug_info    0x00000000     0x1267 src/ASF/common/services/clock/same70/sysclk.o
  .debug_info    0x00001267      0xa45 src/ASF/common/services/delay/sam/cycle_counter.o
  .debug_info    0x00001cac      0xb01 src/ASF/common/utils/interrupt/interrupt_sam_nvic.o
@@ -5009,9 +5327,10 @@ OUTPUT(Teclado_Matricial_KeyPad_+_Display_LCD_16x2.elf elf32-littlearm)
  .debug_info    0x000081f5     0x156a src/ASF/sam/utils/cmsis/same70/source/templates/gcc/startup_same70.o
  .debug_info    0x0000975f      0x55b src/ASF/sam/utils/cmsis/same70/source/templates/system_same70.o
  .debug_info    0x00009cba     0x1a9b src/keypad_LabArqComp.o
- .debug_info    0x0000b755     0x17fd src/main.o
+ .debug_info    0x0000b755     0x165d src/lcd_LabArqComp.o
+ .debug_info    0x0000cdb2     0x10c6 src/main.o
 
-.debug_abbrev   0x00000000     0x1ac5
+.debug_abbrev   0x00000000     0x1cd5
  .debug_abbrev  0x00000000      0x31f src/ASF/common/services/clock/same70/sysclk.o
  .debug_abbrev  0x0000031f      0x1b3 src/ASF/common/services/delay/sam/cycle_counter.o
  .debug_abbrev  0x000004d2      0x212 src/ASF/common/utils/interrupt/interrupt_sam_nvic.o
@@ -5021,7 +5340,8 @@ OUTPUT(Teclado_Matricial_KeyPad_+_Display_LCD_16x2.elf elf32-littlearm)
  .debug_abbrev  0x0000118c      0x2e4 src/ASF/sam/utils/cmsis/same70/source/templates/gcc/startup_same70.o
  .debug_abbrev  0x00001470      0x102 src/ASF/sam/utils/cmsis/same70/source/templates/system_same70.o
  .debug_abbrev  0x00001572      0x275 src/keypad_LabArqComp.o
- .debug_abbrev  0x000017e7      0x2de src/main.o
+ .debug_abbrev  0x000017e7      0x2a5 src/lcd_LabArqComp.o
+ .debug_abbrev  0x00001a8c      0x249 src/main.o
 
 .debug_loc      0x00000000     0x296a
  .debug_loc     0x00000000      0x183 src/ASF/common/services/clock/same70/sysclk.o
@@ -5030,9 +5350,10 @@ OUTPUT(Teclado_Matricial_KeyPad_+_Display_LCD_16x2.elf elf32-littlearm)
  .debug_loc     0x000015af      0xce3 src/ASF/sam/drivers/pmc/pmc.o
  .debug_loc     0x00002292       0x77 src/ASF/sam/utils/cmsis/same70/source/templates/gcc/startup_same70.o
  .debug_loc     0x00002309      0x1f0 src/keypad_LabArqComp.o
- .debug_loc     0x000024f9      0x471 src/main.o
+ .debug_loc     0x000024f9      0x3bd src/lcd_LabArqComp.o
+ .debug_loc     0x000028b6       0xb4 src/main.o
 
-.debug_aranges  0x00000000      0x5d0
+.debug_aranges  0x00000000      0x5e8
  .debug_aranges
                 0x00000000       0x40 src/ASF/common/services/clock/same70/sysclk.o
  .debug_aranges
@@ -5052,9 +5373,11 @@ OUTPUT(Teclado_Matricial_KeyPad_+_Display_LCD_16x2.elf elf32-littlearm)
  .debug_aranges
                 0x00000538       0x28 src/keypad_LabArqComp.o
  .debug_aranges
-                0x00000560       0x70 src/main.o
+                0x00000560       0x60 src/lcd_LabArqComp.o
+ .debug_aranges
+                0x000005c0       0x28 src/main.o
 
-.debug_ranges   0x00000000      0x650
+.debug_ranges   0x00000000      0x658
  .debug_ranges  0x00000000       0x30 src/ASF/common/services/clock/same70/sysclk.o
  .debug_ranges  0x00000030       0x10 src/ASF/common/services/delay/sam/cycle_counter.o
  .debug_ranges  0x00000040       0x18 src/ASF/common/utils/interrupt/interrupt_sam_nvic.o
@@ -5064,9 +5387,10 @@ OUTPUT(Teclado_Matricial_KeyPad_+_Display_LCD_16x2.elf elf32-littlearm)
  .debug_ranges  0x000005a0       0x18 src/ASF/sam/utils/cmsis/same70/source/templates/gcc/startup_same70.o
  .debug_ranges  0x000005b8       0x20 src/ASF/sam/utils/cmsis/same70/source/templates/system_same70.o
  .debug_ranges  0x000005d8       0x18 src/keypad_LabArqComp.o
- .debug_ranges  0x000005f0       0x60 src/main.o
+ .debug_ranges  0x000005f0       0x50 src/lcd_LabArqComp.o
+ .debug_ranges  0x00000640       0x18 src/main.o
 
-.debug_macro    0x00000000    0x1c917
+.debug_macro    0x00000000    0x1d129
  .debug_macro   0x00000000      0x6d1 src/ASF/common/services/clock/same70/sysclk.o
  .debug_macro   0x000006d1      0x8ce src/ASF/common/services/clock/same70/sysclk.o
  .debug_macro   0x00000f9f      0x652 src/ASF/common/services/clock/same70/sysclk.o
@@ -5233,11 +5557,13 @@ OUTPUT(Teclado_Matricial_KeyPad_+_Display_LCD_16x2.elf elf32-littlearm)
  .debug_macro   0x0001bf2e       0x16 src/keypad_LabArqComp.o
  .debug_macro   0x0001bf44       0x1c src/keypad_LabArqComp.o
  .debug_macro   0x0001bf60       0xc4 src/keypad_LabArqComp.o
- .debug_macro   0x0001c024      0x795 src/main.o
- .debug_macro   0x0001c7b9       0x94 src/main.o
- .debug_macro   0x0001c84d       0xca src/main.o
+ .debug_macro   0x0001c024      0x779 src/lcd_LabArqComp.o
+ .debug_macro   0x0001c79d       0x94 src/lcd_LabArqComp.o
+ .debug_macro   0x0001c831      0x794 src/main.o
+ .debug_macro   0x0001cfc5       0x9a src/main.o
+ .debug_macro   0x0001d05f       0xca src/main.o
 
-.debug_line     0x00000000     0x770e
+.debug_line     0x00000000     0x83c3
  .debug_line    0x00000000      0xb4f src/ASF/common/services/clock/same70/sysclk.o
  .debug_line    0x00000b4f      0x9ed src/ASF/common/services/delay/sam/cycle_counter.o
  .debug_line    0x0000153c      0xa01 src/ASF/common/utils/interrupt/interrupt_sam_nvic.o
@@ -5247,9 +5573,10 @@ OUTPUT(Teclado_Matricial_KeyPad_+_Display_LCD_16x2.elf elf32-littlearm)
  .debug_line    0x00004943      0xa73 src/ASF/sam/utils/cmsis/same70/source/templates/gcc/startup_same70.o
  .debug_line    0x000053b6      0x7e7 src/ASF/sam/utils/cmsis/same70/source/templates/system_same70.o
  .debug_line    0x00005b9d      0xd81 src/keypad_LabArqComp.o
- .debug_line    0x0000691e      0xdf0 src/main.o
+ .debug_line    0x0000691e      0xd9c src/lcd_LabArqComp.o
+ .debug_line    0x000076ba      0xd09 src/main.o
 
-.debug_str      0x00000000    0x893c0
+.debug_str      0x00000000    0x893f3
  .debug_str     0x00000000    0x857c2 src/ASF/common/services/clock/same70/sysclk.o
                               0x85e67 (size before relaxing)
  .debug_str     0x000857c2      0x1b5 src/ASF/common/services/delay/sam/cycle_counter.o
@@ -5268,10 +5595,12 @@ OUTPUT(Teclado_Matricial_KeyPad_+_Display_LCD_16x2.elf elf32-littlearm)
                               0x72812 (size before relaxing)
  .debug_str     0x000879bd     0x1733 src/keypad_LabArqComp.o
                               0x879ee (size before relaxing)
- .debug_str     0x000890f0      0x2d0 src/main.o
-                              0x87c38 (size before relaxing)
+ .debug_str     0x000890f0      0x27e src/lcd_LabArqComp.o
+                              0x878b2 (size before relaxing)
+ .debug_str     0x0008936e       0x85 src/main.o
+                              0x87b18 (size before relaxing)
 
-.debug_frame    0x00000000      0xdec
+.debug_frame    0x00000000      0xdfc
  .debug_frame   0x00000000       0x88 src/ASF/common/services/clock/same70/sysclk.o
  .debug_frame   0x00000088       0x20 src/ASF/common/services/delay/sam/cycle_counter.o
  .debug_frame   0x000000a8       0x30 src/ASF/common/utils/interrupt/interrupt_sam_nvic.o
@@ -5281,13 +5610,14 @@ OUTPUT(Teclado_Matricial_KeyPad_+_Display_LCD_16x2.elf elf32-littlearm)
  .debug_frame   0x00000a0c       0x38 src/ASF/sam/utils/cmsis/same70/source/templates/gcc/startup_same70.o
  .debug_frame   0x00000a44       0x40 src/ASF/sam/utils/cmsis/same70/source/templates/system_same70.o
  .debug_frame   0x00000a84       0x54 src/keypad_LabArqComp.o
- .debug_frame   0x00000ad8      0x154 src/main.o
- .debug_frame   0x00000c2c       0x2c c:/program files (x86)/atmel/studio/7.0/toolchain/arm/arm-gnu-toolchain/bin/../lib/gcc/arm-none-eabi/6.3.1/../../../../arm-none-eabi/lib/thumb/v7e-m\libc.a(lib_a-init.o)
- .debug_frame   0x00000c58       0x5c c:/program files (x86)/atmel/studio/7.0/toolchain/arm/arm-gnu-toolchain/bin/../lib/gcc/arm-none-eabi/6.3.1/../../../../arm-none-eabi/lib/thumb/v7e-m\libc.a(lib_a-__call_atexit.o)
- .debug_frame   0x00000cb4       0x20 c:/program files (x86)/atmel/studio/7.0/toolchain/arm/arm-gnu-toolchain/bin/../lib/gcc/arm-none-eabi/6.3.1/../../../../arm-none-eabi/lib/thumb/v7e-m\libc.a(lib_a-atexit.o)
- .debug_frame   0x00000cd4       0x34 c:/program files (x86)/atmel/studio/7.0/toolchain/arm/arm-gnu-toolchain/bin/../lib/gcc/arm-none-eabi/6.3.1/../../../../arm-none-eabi/lib/thumb/v7e-m\libc.a(lib_a-fini.o)
- .debug_frame   0x00000d08       0xb0 c:/program files (x86)/atmel/studio/7.0/toolchain/arm/arm-gnu-toolchain/bin/../lib/gcc/arm-none-eabi/6.3.1/../../../../arm-none-eabi/lib/thumb/v7e-m\libc.a(lib_a-lock.o)
- .debug_frame   0x00000db8       0x34 c:/program files (x86)/atmel/studio/7.0/toolchain/arm/arm-gnu-toolchain/bin/../lib/gcc/arm-none-eabi/6.3.1/../../../../arm-none-eabi/lib/thumb/v7e-m\libc.a(lib_a-__atexit.o)
+ .debug_frame   0x00000ad8      0x110 src/lcd_LabArqComp.o
+ .debug_frame   0x00000be8       0x54 src/main.o
+ .debug_frame   0x00000c3c       0x2c c:/program files (x86)/atmel/studio/7.0/toolchain/arm/arm-gnu-toolchain/bin/../lib/gcc/arm-none-eabi/6.3.1/../../../../arm-none-eabi/lib/thumb/v7e-m\libc.a(lib_a-init.o)
+ .debug_frame   0x00000c68       0x5c c:/program files (x86)/atmel/studio/7.0/toolchain/arm/arm-gnu-toolchain/bin/../lib/gcc/arm-none-eabi/6.3.1/../../../../arm-none-eabi/lib/thumb/v7e-m\libc.a(lib_a-__call_atexit.o)
+ .debug_frame   0x00000cc4       0x20 c:/program files (x86)/atmel/studio/7.0/toolchain/arm/arm-gnu-toolchain/bin/../lib/gcc/arm-none-eabi/6.3.1/../../../../arm-none-eabi/lib/thumb/v7e-m\libc.a(lib_a-atexit.o)
+ .debug_frame   0x00000ce4       0x34 c:/program files (x86)/atmel/studio/7.0/toolchain/arm/arm-gnu-toolchain/bin/../lib/gcc/arm-none-eabi/6.3.1/../../../../arm-none-eabi/lib/thumb/v7e-m\libc.a(lib_a-fini.o)
+ .debug_frame   0x00000d18       0xb0 c:/program files (x86)/atmel/studio/7.0/toolchain/arm/arm-gnu-toolchain/bin/../lib/gcc/arm-none-eabi/6.3.1/../../../../arm-none-eabi/lib/thumb/v7e-m\libc.a(lib_a-lock.o)
+ .debug_frame   0x00000dc8       0x34 c:/program files (x86)/atmel/studio/7.0/toolchain/arm/arm-gnu-toolchain/bin/../lib/gcc/arm-none-eabi/6.3.1/../../../../arm-none-eabi/lib/thumb/v7e-m\libc.a(lib_a-__atexit.o)
 
 Cross Reference Table
 
@@ -5306,15 +5636,19 @@ HSMCI_Handler                                     src/ASF/sam/utils/cmsis/same70
 HardFault_Handler                                 src/ASF/sam/utils/cmsis/same70/source/templates/gcc/startup_same70.o
 ICM_Handler                                       src/ASF/sam/utils/cmsis/same70/source/templates/gcc/startup_same70.o
 ISI_Handler                                       src/ASF/sam/utils/cmsis/same70/source/templates/gcc/startup_same70.o
-Lcd4_Clear                                        src/main.o
-Lcd4_Cmd                                          src/main.o
-Lcd4_Init                                         src/main.o
-Lcd4_Port                                         src/main.o
-Lcd4_Set_Cursor                                   src/main.o
-Lcd4_Shift_Left                                   src/main.o
-Lcd4_Shift_Right                                  src/main.o
-Lcd4_Write_Char                                   src/main.o
-Lcd4_Write_String                                 src/main.o
+Lcd4_Clear                                        src/lcd_LabArqComp.o
+                                                  src/main.o
+Lcd4_Cmd                                          src/lcd_LabArqComp.o
+Lcd4_Init                                         src/lcd_LabArqComp.o
+                                                  src/main.o
+Lcd4_Port                                         src/lcd_LabArqComp.o
+Lcd4_Set_Cursor                                   src/lcd_LabArqComp.o
+                                                  src/main.o
+Lcd4_Shift_Left                                   src/lcd_LabArqComp.o
+Lcd4_Shift_Right                                  src/lcd_LabArqComp.o
+Lcd4_Write_Char                                   src/lcd_LabArqComp.o
+                                                  src/main.o
+Lcd4_Write_String                                 src/lcd_LabArqComp.o
 MCAN0_Handler                                     src/ASF/sam/utils/cmsis/same70/source/templates/gcc/startup_same70.o
 MCAN1_Handler                                     src/ASF/sam/utils/cmsis/same70/source/templates/gcc/startup_same70.o
 MemManage_Handler                                 src/ASF/sam/utils/cmsis/same70/source/templates/gcc/startup_same70.o
@@ -5494,7 +5828,7 @@ pio_capture_get_interrupt_status                  src/ASF/sam/drivers/pio/pio.o
 pio_capture_read                                  src/ASF/sam/drivers/pio/pio.o
 pio_capture_set_mode                              src/ASF/sam/drivers/pio/pio.o
 pio_clear                                         src/ASF/sam/drivers/pio/pio.o
-                                                  src/main.o
+                                                  src/lcd_LabArqComp.o
                                                   src/keypad_LabArqComp.o
 pio_configure                                     src/ASF/sam/drivers/pio/pio.o
 pio_configure_interrupt                           src/ASF/sam/drivers/pio/pio.o
@@ -5535,6 +5869,7 @@ pio_pull_down                                     src/ASF/sam/drivers/pio/pio.o
 pio_pull_up                                       src/ASF/sam/drivers/pio/pio.o
 pio_set                                           src/ASF/sam/drivers/pio/pio.o
                                                   src/main.o
+                                                  src/lcd_LabArqComp.o
                                                   src/keypad_LabArqComp.o
 pio_set_additional_interrupt_mode                 src/ASF/sam/drivers/pio/pio.o
 pio_set_debounce_filter                           src/ASF/sam/drivers/pio/pio.o
@@ -5544,6 +5879,7 @@ pio_set_io_drive                                  src/ASF/sam/drivers/pio/pio.o
 pio_set_multi_driver                              src/ASF/sam/drivers/pio/pio.o
 pio_set_output                                    src/ASF/sam/drivers/pio/pio.o
                                                   src/main.o
+                                                  src/lcd_LabArqComp.o
                                                   src/keypad_LabArqComp.o
 pio_set_peripheral                                src/ASF/sam/drivers/pio/pio.o
 pio_set_pin_group_high                            src/ASF/sam/drivers/pio/pio.o
@@ -5578,6 +5914,7 @@ pmc_enable_interrupt                              src/ASF/sam/drivers/pmc/pmc.o
 pmc_enable_pck                                    src/ASF/sam/drivers/pmc/pmc.o
 pmc_enable_periph_clk                             src/ASF/sam/drivers/pmc/pmc.o
                                                   src/main.o
+                                                  src/lcd_LabArqComp.o
                                                   src/keypad_LabArqComp.o
 pmc_enable_pllack                                 src/ASF/sam/drivers/pmc/pmc.o
 pmc_enable_sclk_osc_freq_monitor                  src/ASF/sam/drivers/pmc/pmc.o
@@ -5647,7 +5984,7 @@ pmc_switch_udpck_to_upllck                        src/ASF/sam/drivers/pmc/pmc.o
                                                   src/ASF/common/services/clock/same70/sysclk.o
 pmc_wait_wakeup_clocks_restore                    src/ASF/sam/drivers/pmc/sleep.o
 portable_delay_cycles                             src/ASF/common/services/delay/sam/cycle_counter.o
-                                                  src/main.o
+                                                  src/lcd_LabArqComp.o
                                                   src/keypad_LabArqComp.o
 software_init_hook                                c:/program files (x86)/atmel/studio/7.0/toolchain/arm/arm-gnu-toolchain/bin/../lib/gcc/arm-none-eabi/6.3.1/../../../../arm-none-eabi/lib/thumb/v7e-m/crt0.o
 sysclk_disable_usb                                src/ASF/common/services/clock/same70/sysclk.o

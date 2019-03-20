@@ -17,23 +17,23 @@ Idx Name          Size      VMA       LMA       File off  Algn
                   CONTENTS, READONLY
   6 .comment      00000059  00000000  00000000  0002046a  2**0
                   CONTENTS, READONLY
-  7 .debug_info   0000cf52  00000000  00000000  000204c3  2**0
+  7 .debug_info   0000de78  00000000  00000000  000204c3  2**0
                   CONTENTS, READONLY, DEBUGGING
-  8 .debug_abbrev 00001ac5  00000000  00000000  0002d415  2**0
+  8 .debug_abbrev 00001cd5  00000000  00000000  0002e33b  2**0
                   CONTENTS, READONLY, DEBUGGING
-  9 .debug_loc    0000296a  00000000  00000000  0002eeda  2**0
+  9 .debug_loc    0000296a  00000000  00000000  00030010  2**0
                   CONTENTS, READONLY, DEBUGGING
- 10 .debug_aranges 000005d0  00000000  00000000  00031844  2**0
+ 10 .debug_aranges 000005e8  00000000  00000000  0003297a  2**0
                   CONTENTS, READONLY, DEBUGGING
- 11 .debug_ranges 00000650  00000000  00000000  00031e14  2**0
+ 11 .debug_ranges 00000658  00000000  00000000  00032f62  2**0
                   CONTENTS, READONLY, DEBUGGING
- 12 .debug_macro  0001c917  00000000  00000000  00032464  2**0
+ 12 .debug_macro  0001d129  00000000  00000000  000335ba  2**0
                   CONTENTS, READONLY, DEBUGGING
- 13 .debug_line   0000770e  00000000  00000000  0004ed7b  2**0
+ 13 .debug_line   000083c3  00000000  00000000  000506e3  2**0
                   CONTENTS, READONLY, DEBUGGING
- 14 .debug_str    000893c0  00000000  00000000  00056489  2**0
+ 14 .debug_str    000893f3  00000000  00000000  00058aa6  2**0
                   CONTENTS, READONLY, DEBUGGING
- 15 .debug_frame  00000dec  00000000  00000000  000df84c  2**2
+ 15 .debug_frame  00000dfc  00000000  00000000  000e1e9c  2**2
                   CONTENTS, READONLY, DEBUGGING
 
 Disassembly of section .text:
@@ -1176,8 +1176,8 @@ void system_init_flash( uint32_t ul_clk )
   400714:	04000300 	.word	0x04000300
 
 00400718 <keypad_init>:
- *  Author: MarcoASMA
- */ 
+ */
+
 #include "keypad_LabArqComp.h" 
 
 void keypad_init()
@@ -1272,6 +1272,7 @@ void keypad_init()
   4007a2:	f44f 2100 	mov.w	r1, #524288	; 0x80000
   4007a6:	4640      	mov	r0, r8
   4007a8:	47a8      	blx	r5
+	
 }
   4007aa:	b003      	add	sp, #12
   4007ac:	e8bd 83f0 	ldmia.w	sp!, {r4, r5, r6, r7, r8, r9, pc}
@@ -1918,9 +1919,9 @@ char le_keypad()
   400c18:	00400225 	.word	0x00400225
 
 00400c1c <Lcd4_Port>:
-#define EN_PIO_IDX       25
-#define EN_PIO_IDX_MASK  (1 << EN_PIO_IDX)
+ */
 
+#include "lcd_LabArqComp.h"
 
 void Lcd4_Port(char a)
 {
@@ -2163,9 +2164,6 @@ void Lcd4_Init()
 
 00400db0 <Lcd4_Clear>:
 
-
-
-
 void Lcd4_Clear()
 {
   400db0:	b510      	push	{r4, lr}
@@ -2181,9 +2179,7 @@ void Lcd4_Clear()
   400dc0:	00400c7d 	.word	0x00400c7d
 
 00400dc4 <Lcd4_Set_Cursor>:
-
-
-
+}
 
 void Lcd4_Set_Cursor(char a, char b)
 {
@@ -2231,8 +2227,6 @@ void Lcd4_Set_Cursor(char a, char b)
 
 00400dfc <Lcd4_Write_Char>:
 
-
-
 void Lcd4_Write_Char(char a)
 {
   400dfc:	e92d 43f8 	stmdb	sp!, {r3, r4, r5, r6, r7, r8, r9, lr}
@@ -2246,7 +2240,7 @@ void Lcd4_Write_Char(char a)
   400e08:	4620      	mov	r0, r4
   400e0a:	4e16      	ldr	r6, [pc, #88]	; (400e64 <Lcd4_Write_Char+0x68>)
   400e0c:	47b0      	blx	r6
-	Lcd4_Port(y>>4);             
+	Lcd4_Port(y>>4);
   400e0e:	ea4f 1019 	mov.w	r0, r9, lsr #4
   400e12:	f8df 805c 	ldr.w	r8, [pc, #92]	; 400e70 <Lcd4_Write_Char+0x74>
   400e16:	47c0      	blx	r8
@@ -2321,8 +2315,7 @@ void init(void)
   400e94:	4805      	ldr	r0, [pc, #20]	; (400eac <init+0x38>)
   400e96:	4c06      	ldr	r4, [pc, #24]	; (400eb0 <init+0x3c>)
   400e98:	47a0      	blx	r4
-	
-	
+		
 }
   400e9a:	b002      	add	sp, #8
   400e9c:	bd10      	pop	{r4, pc}
