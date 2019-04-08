@@ -23,8 +23,8 @@
 /* defines                                                              */
 /************************************************************************/
 
-#define LED_PIO           PIOC
-#define LED_PIO_ID        ID_PIOC
+#define LED_PIO       PIOC
+#define LED_PIO_ID    ID_PIOC
 #define LED_IDX       8u
 #define LED_IDX_MASK  (1u << LED_IDX)
 
@@ -42,7 +42,7 @@ volatile Bool f_rtt_alarme = false;
 /************************************************************************/
 void pin_toggle(Pio *pio, uint32_t mask);
 void io_init(void);
-static void RTT_init(uint timeSeconds);
+static void RTT_init(uint16_t pllPreScale, uint32_t IrqNPulses);
 
 /************************************************************************/
 /* interrupcoes                                                         */
@@ -82,17 +82,22 @@ void io_init(void){
   pio_configure(LED_PIO, PIO_OUTPUT_0, LED_IDX_MASK, PIO_DEFAULT);
 }
 
-static void RTT_init(uint timeSeconds)
+static float get_time_rtt(){
+  uint ul_previous_time = rtt_read_timer_value(RTT); 
+}
+
+static void RTT_init(uint16_t pllPreScale, uint32_t IrqNPulses)
 {
   uint32_t ul_previous_time;
 
   /* Configure RTT for a 1 second tick interrupt */
   rtt_sel_source(RTT, false);
-  rtt_init(RTT, 32768);
+  rtt_init(RTT, pllPreScale);
+  
   ul_previous_time = rtt_read_timer_value(RTT);
   while (ul_previous_time == rtt_read_timer_value(RTT));
   
-  rtt_write_alarm_time(RTT, timeSeconds+ul_previous_time);
+  rtt_write_alarm_time(RTT, IrqNPulses+ul_previous_time);
 
   /* Enable RTT interrupt */
   NVIC_DisableIRQ(RTT_IRQn);
@@ -122,7 +127,40 @@ int main(void){
   // aplicacoes embarcadas não devem sair do while(1).
   while (1){
     if (f_rtt_alarme){
-      RTT_init(3);           // inicializa RTT a cada 3 segundos
+      
+      /*
+       * O clock base do RTT é 32678Hz
+       * Para gerar outra base de tempo é necessário
+       * usar o PLL pre scale, que divide o clock base.
+       *
+       * Nesse exemplo, estamos operando com um clock base
+       * de pllPreScale = 32768/32768/2 = 2Hz
+       *
+       * Quanto maior a frequência maior a resolução, porém
+       * menor o tempo máximo que conseguimos contar.
+       *
+       * Podemos configurar uma IRQ para acontecer quando 
+       * o contador do RTT atingir um determinado valor
+       * aqui usamos o irqRTTvalue para isso.
+       * 
+       * Nesse exemplo o irqRTTvalue = 8, causando uma
+       * interrupção a cada 2 segundos (lembre que usamos o 
+       * pllPreScale, cada incremento do RTT leva 500ms (2Hz).
+       */
+      uint16_t pllPreScale = (int) (((float) 32768) / 2.0);
+      uint32_t irqRTTvalue  = 4;
+      
+      // reinicia RTT para gerar um novo IRQ
+      RTT_init(pllPreScale, irqRTTvalue);         
+      
+     /*
+      * caso queira ler o valor atual do RTT, basta usar a funcao
+      *   rtt_read_timer_value()
+      */
+      
+      /*
+       * CLEAR FLAG
+       */
       f_rtt_alarme = false;
     }
   }  
