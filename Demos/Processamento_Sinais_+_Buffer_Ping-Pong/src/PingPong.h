@@ -2,7 +2,7 @@
  * PingPong.h
  *
  * Created: 24/05/2018 23:06:14
- *  Author: sabri
+ *  Author: https://github.com/uLipe/ping_pong_buffer
  */ 
 
 

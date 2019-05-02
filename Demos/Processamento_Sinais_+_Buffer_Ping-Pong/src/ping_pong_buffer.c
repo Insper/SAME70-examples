@@ -1,6 +1,8 @@
 /**
  * @brief simple ping pong buffer implementation
- */
+ *
+ * Author: https://github.com/uLipe/ping_pong_buffer
+ */ 
 
 #include <string.h>
 #include "PingPong.h"

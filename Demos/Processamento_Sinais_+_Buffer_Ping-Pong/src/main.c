@@ -5,6 +5,13 @@
  * 
  * Configura o ADC do SAME70 para fazer leitura
  * do sensor de temperatura interno
+ * 
+ * Alterado por Sabrina SS @ al.insper.edu.br
+ * 2018.1
+ * 
+ * Configura ADC e AFEC para fazer leitura
+ * de um sinal externo e retornar como sinal
+ * analógico
  */
 
 /************************************************************************/
@@ -28,7 +35,7 @@
 "-- Compiled: "__DATE__" "__TIME__" --"STRING_EOL
 
 //channel 0 = PD30
-#define canal_generico_pino 0
+#define AFEC_CHANNEL_PIN 0
 
 //! DAC channel used for test
 #define DACC_CHANNEL        0 // (PB13)
@@ -70,6 +77,7 @@ void TC0_Handler(void){
  * \brief AFEC interrupt callback function.
  */
 
+// BUFFER SIZE
 PPBUF_DECLARE(buffer,12000);
 volatile uint32_t buf = 0;
 
@@ -78,9 +86,8 @@ float volume = 0.5;
 uint32_t g_ul_value_old = 0;
 uint32_t temp;
 uint32_t g_ul_value = 0;
-uint32_t corte_alto = 3000;
-uint32_t corte_baixo = 300;
-uint8_t funcao_escolhida = 0;
+uint32_t high_cut = 3000;
+uint32_t low_cut = 300;
 
 static void Softning(){
 	temp = g_ul_value;
@@ -92,11 +99,11 @@ static void Softning(){
 static void Hard_clipping(){
 	g_ul_value = g_ul_value *4;
 	
-	if (g_ul_value > corte_alto){
-		g_ul_value = corte_alto;
+	if (g_ul_value > high_cut){
+		g_ul_value = high_cut;
 	}
-	if (g_ul_value < corte_baixo){
-		g_ul_value = corte_baixo;
+	if (g_ul_value < low_cut){
+		g_ul_value = low_cut;
 	}
 	g_ul_value = g_ul_value / 4;
 
@@ -110,7 +117,7 @@ static void Volume(){
 static void AFEC_Temp_callback(void){
 	/** The conversion data value */
 	
-	g_ul_value = afec_channel_get_value(AFEC0, canal_generico_pino);
+	g_ul_value = afec_channel_get_value(AFEC0, AFEC_CHANNEL_PIN);
 	
 	
 	 //VOLUME
@@ -195,14 +202,14 @@ static void config_ADC_TEMP(void){
 	struct afec_ch_config afec_ch_cfg;
 	afec_ch_get_config_defaults(&afec_ch_cfg);
 	afec_ch_cfg.gain = AFEC_GAINVALUE_0;
-	afec_ch_set_config(AFEC0, canal_generico_pino, &afec_ch_cfg);
+	afec_ch_set_config(AFEC0, AFEC_CHANNEL_PIN, &afec_ch_cfg);
   
 	/*
 	* Calibracao:
 	* Because the internal ADC offset is 0x200, it should cancel it and shift
 	 down to 0.
 	 */
-	afec_channel_set_analog_offset(AFEC0, canal_generico_pino, 0x200);
+	afec_channel_set_analog_offset(AFEC0, AFEC_CHANNEL_PIN, 0x200);
 
 	/***  Configura sensor de temperatura ***/
 	struct afec_temp_sensor_config afec_temp_sensor_cfg;
@@ -211,7 +218,7 @@ static void config_ADC_TEMP(void){
 	afec_temp_sensor_set_config(AFEC0, &afec_temp_sensor_cfg);
 
 	/* Selecina canal e inicializa convers�o */  
-	afec_channel_enable(AFEC0, canal_generico_pino);
+	afec_channel_enable(AFEC0, AFEC_CHANNEL_PIN);
 }
 
 static void config_DAC(void){
