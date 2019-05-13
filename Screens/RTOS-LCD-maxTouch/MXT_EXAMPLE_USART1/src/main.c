@@ -91,6 +91,8 @@
 #include "conf_board.h"
 #include "conf_example.h"
 #include "conf_uart_serial.h"
+#include "tfont.h"
+#include "digital521.h"
 
 /************************************************************************/
 /* LCD + TOUCH                                                          */
@@ -321,6 +323,21 @@ void update_screen(uint32_t tx, uint32_t ty) {
 	}
 }
 
+void font_draw_text(tFont *font, const char *text, int x, int y, int spacing) {
+  char *p = text;
+  while(*p != NULL) {
+    char letter = *p;
+    int letter_offset = letter - font->start_char;
+    if(letter <= font->end_char) {
+      tChar *current_char = font->chars + letter_offset;
+      ili9488_draw_pixmap(x, y, current_char->image->width, current_char->image->height, current_char->image->data);
+      x += current_char->image->width + spacing;
+    }
+    p++;
+  }
+}
+
+
 void mxt_handler(struct mxt_device *device, uint *x, uint *y)
 {
 	/* USART tx buffer initialized to 0 */
@@ -382,8 +399,14 @@ void task_lcd(void){
   xQueueTouch = xQueueCreate( 10, sizeof( touchData ) );
 	configure_lcd();
   
+ 
+  
   draw_screen();
   draw_button(0);
+  
+   // Escreve HH:MM no LCD
+   font_draw_text(&digital52, "HH:MM", 0, 0, 1);
+  
   touchData touch;
     
   while (true) {  
