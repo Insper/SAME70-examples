@@ -105,7 +105,19 @@ const uint32_t BUTTON_H = 150;
 const uint32_t BUTTON_BORDER = 2;
 const uint32_t BUTTON_X = ILI9488_LCD_WIDTH/2;
 const uint32_t BUTTON_Y = ILI9488_LCD_HEIGHT/2;
-	
+
+/************************************************************************/
+/* ADC                                                                  */
+/************************************************************************/
+/** The conversion data is done flag */
+volatile bool g_is_conversion_done = false;
+
+/** The conversion data value */
+volatile uint32_t g_ul_value = 0;
+
+/* Canal do sensor de temperatura */
+#define AFEC_CHANNEL_TEMP_SENSOR 11
+
 /************************************************************************/
 /* RTOS                                                                  */
 /************************************************************************/
@@ -121,6 +133,19 @@ typedef struct {
 } touchData;
 
 QueueHandle_t xQueueTouch;
+
+/************************************************************************/
+/* handler/callbacks                                                    */
+/************************************************************************/
+
+/**
+ * \brief AFEC interrupt callback function.
+ */
+static void AFEC_Temp_callback(void)
+{
+	g_ul_value = afec_channel_get_value(AFEC0, AFEC_CHANNEL_TEMP_SENSOR);
+  printf("%d\n", g_ul_value);
+}
 
 /************************************************************************/
 /* RTOS hooks                                                           */
@@ -170,7 +195,6 @@ extern void vApplicationMallocFailedHook(void)
 /************************************************************************/
 /* init                                                                 */
 /************************************************************************/
-
 
 static void configure_lcd(void){
 	/* Initialize display parameter */
@@ -276,6 +300,52 @@ static void mxt_init(struct mxt_device *device)
 			+ MXT_GEN_COMMANDPROCESSOR_CALIBRATE, 0x01);
 }
 
+static void config_ADC_TEMP(void){
+/*************************************
+   * Ativa e configura AFEC
+   *************************************/
+  /* Ativa AFEC - 0 */
+	afec_enable(AFEC0);
+
+	/* struct de configuracao do AFEC */
+	struct afec_config afec_cfg;
+
+	/* Carrega parametros padrao */
+	afec_get_config_defaults(&afec_cfg);
+
+	/* Configura AFEC */
+	afec_init(AFEC0, &afec_cfg);
+
+	/* Configura trigger por software */
+	afec_set_trigger(AFEC0, AFEC_TRIG_SW);
+
+	/* configura call back */
+	afec_set_callback(AFEC0, AFEC_INTERRUPT_EOC_11,	AFEC_Temp_callback, 5);
+
+	/*** Configuracao específica do canal AFEC ***/
+	struct afec_ch_config afec_ch_cfg;
+	afec_ch_get_config_defaults(&afec_ch_cfg);
+	afec_ch_cfg.gain = AFEC_GAINVALUE_0;
+	afec_ch_set_config(AFEC0, AFEC_CHANNEL_TEMP_SENSOR, &afec_ch_cfg);
+
+	/*
+	* Calibracao:
+	* Because the internal ADC offset is 0x200, it should cancel it and shift
+	 down to 0.
+	 */
+	afec_channel_set_analog_offset(AFEC0, AFEC_CHANNEL_TEMP_SENSOR, 0x200);
+
+	/***  Configura sensor de temperatura ***/
+	struct afec_temp_sensor_config afec_temp_sensor_cfg;
+
+	afec_temp_sensor_get_config_defaults(&afec_temp_sensor_cfg);
+	afec_temp_sensor_set_config(AFEC0, &afec_temp_sensor_cfg);
+
+	/* Selecina canal e inicializa conversão */
+	afec_channel_enable(AFEC0, AFEC_CHANNEL_TEMP_SENSOR);
+}
+
+
 /************************************************************************/
 /* funcoes                                                              */
 /************************************************************************/
@@ -337,7 +407,6 @@ void font_draw_text(tFont *font, const char *text, int x, int y, int spacing) {
   }
 }
 
-
 void mxt_handler(struct mxt_device *device, uint *x, uint *y)
 {
 	/* USART tx buffer initialized to 0 */
@@ -398,9 +467,7 @@ void task_mxt(void){
 void task_lcd(void){
   xQueueTouch = xQueueCreate( 10, sizeof( touchData ) );
 	configure_lcd();
-  
- 
-  
+   
   draw_screen();
   draw_button(0);
   
@@ -416,6 +483,17 @@ void task_lcd(void){
      }     
   }	 
 }
+
+void task_afec(void){
+  config_ADC_TEMP();
+  
+  while (true) {
+    printf("Starting ADC\n");
+    afec_start_software_conversion(AFEC0);
+    vTaskDelay(1000);
+  }
+}
+
 
 /************************************************************************/
 /* main                                                                 */
@@ -446,6 +524,12 @@ int main(void)
   if (xTaskCreate(task_lcd, "lcd", TASK_LCD_STACK_SIZE, NULL, TASK_LCD_STACK_PRIORITY, NULL) != pdPASS) {
     printf("Failed to create test led task\r\n");
   }
+  
+   /* Create task to handler LCD */
+   if (xTaskCreate(task_afec, "afec", TASK_LCD_STACK_SIZE, NULL, TASK_LCD_STACK_PRIORITY, NULL) != pdPASS) {
+     printf("Failed to create test led task\r\n");
+   }
+   
 
   /* Start the scheduler. */
   vTaskStartScheduler();
