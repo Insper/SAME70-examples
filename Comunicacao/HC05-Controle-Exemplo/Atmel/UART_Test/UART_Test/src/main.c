@@ -63,7 +63,7 @@ void usart_put_string(Usart *usart, char str[]) {
 	usart_serial_write_packet(usart, str, strlen(str));
 }
 
-int usart_get_string(Usart *usart, char buffer[], int bufferlen, int timeout_ms) {
+mes	int usart_get_string(Usart *usart, char buffer[], int bufferlen, int timeout_ms) {
 	long timestart = g_systimer;
 	uint32_t rx;
 	uint32_t counter = 0;

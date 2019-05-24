@@ -48,7 +48,8 @@ extern "C" {
 #include "driver/include/m2m_wifi.h"
 
 /** Wi-Fi AP Settings. */
-#define MAIN_M2M_AP_SEC                      M2M_WIFI_SEC_OPEN
+
+#define MAIN_WLAN_AUTH                        M2M_WIFI_SEC_WPA_PSK /**< Security manner */
 #define MAIN_M2M_AP_WEP_KEY                  "1234567890"
 #define MAIN_M2M_AP_SSID_MODE                SSID_MODE_VISIBLE
 
