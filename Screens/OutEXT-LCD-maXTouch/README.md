@@ -5,7 +5,7 @@
 * Rafael Corsi
 * 06/06/2019
 
-![](imagem.jpeg)
+<img src="./imagem.jpeg" width="480" height="640">
 
 # Resumo :
 
