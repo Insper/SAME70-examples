@@ -9,11 +9,6 @@
   <img width="480" height="480" src="./imagem.jpeg">
 </p>
 
-<p align="center">
-<img src="./imagem.jpeg" width="480" height="480>
-</p>
-					     
-
 # Resumo :
 
 Esse exemplo faz o uso do maXTouch Xplained Pro via USART2 configurada como SPI, liberando o SPI0, permitindo a utilização do ATWINC1500-XPRO.
