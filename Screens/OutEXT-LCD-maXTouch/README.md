@@ -9,19 +9,19 @@
   <img width="480" height="480" src="./imagem.jpeg">
 </p>
 
-# Resumo :
+# Funcionamento :
 
 Esse exemplo faz o uso do maXTouch Xplained Pro via USART2 configurada como SPI, liberando o SPI0, permitindo a utilização do ATWINC1500-XPRO.
 
-Periféricos uC:
+# Periféricos uC:
 
 - USART2 como SPI
    
-Módulos : 
+# Módulos/Componentes: 
 
 - maXTouch Xplained Pro
 
-Montagem :
+# Montagem:
 
 	 maXTouch		SAME70
    
@@ -39,6 +39,6 @@ Montagem :
 	20 -- VCC		-> 3.3V
 
 
-## Diagrama
+# Diagrama
 
 
