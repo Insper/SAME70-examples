@@ -5,7 +5,7 @@
 * Rafael Corsi
 * 06/06/2019
 
-<img src="./imagem.jpeg" width="480" height="480">
+<img src="./imagem.jpeg" width="480" height="480" align=”middle”>
 
 # Resumo :
 
