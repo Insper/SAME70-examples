@@ -6,8 +6,13 @@
 * 06/06/2019
 
 <p align="center">
+  <img width="480" height="480" src="./imagem.jpeg">
+</p>
+
+<p align="center">
 <img src="./imagem.jpeg" width="480" height="480>
 </p>
+					     
 
 # Resumo :
 
