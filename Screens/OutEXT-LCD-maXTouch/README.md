@@ -19,7 +19,7 @@ Esse exemplo faz o uso do maXTouch Xplained Pro via USART2 configurada como SPI,
 - maXTouch Xplained Pro
 
 # Montagem:
-	maXTouch      SAME70
+	maXTouch       SAME70
 	
    	05 -- DCX	PA1
 	07 -- PWM	PA5
