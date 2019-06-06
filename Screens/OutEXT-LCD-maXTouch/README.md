@@ -15,12 +15,12 @@ Esse exemplo faz o uso do maXTouch Xplained Pro via USART2 configurada como SPI,
 # Periféricos uC:
 - USART2 como SPI
    
-# Módulos/Componentes: 
+# Módulos/Componentes:
 - maXTouch Xplained Pro
 
 # Montagem:
-	 maXTouch		SAME70
-   
+	maXTouch		SAME70
+
 	05 -- DCX		-> PA1
 	07 -- PWM		-> PA5
 	09 -- IRQ		-> PA2
