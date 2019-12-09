@@ -2,7 +2,7 @@
 
 Esse exemplo demonstra o uso do módulo BlueTooth HM-10/HC-06 em modo *Slave* com um RTOS
 
-- :exclamation: Seguir conexão igual ao do exemplo: (Bluetooth-HM10)[https://github.com/Insper/SAME70-examples/tree/master/Comunicacao/Bluetooth-HM10]
+:exclamation: Seguir conexão igual ao do exemplo: [Bluetooth-HM10](https://github.com/Insper/SAME70-examples/tree/master/Comunicacao/Bluetooth-HM10)
 
 ## Diagrama
 
