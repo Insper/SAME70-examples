@@ -1,9 +1,9 @@
-# BlueTooth HM-10
+# BlueTooth HM-10 e HC-06
 
 Esse exemplo demonstra o uso do módulo BlueTooth HM-10 em modo *Slave* 
 
 - Módulos: 
-    - BlueeTooth HM-10 (ou HC-05)
+    - BlueeTooth HM-10 (ou HC-06)
 
 - Periféricos:
     - Power Managment Controller (PMC)
