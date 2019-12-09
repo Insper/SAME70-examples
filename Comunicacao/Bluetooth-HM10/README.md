@@ -13,15 +13,15 @@ Esse exemplo demonstra o uso do módulo BlueTooth HM-10 em modo *Slave*
    
 - Pinos:
     - BlueeTooth HM-10
-        - PB0: UART0 TX 
-        - PB1: UART1 RX
-    - `stdio` Debug
-        - PB4: UART1 
-        - PD21: UART1
+        - `PB0`: UART0 TX 
+        - `PB1`: UART1 RX
+    - `stdio` / DEBUG
+        - `PB4`:  UART1 
+        - `PD21`: UART1
 
 ## Diagrama
 
-![Diagrama de blocos](doc/diagrama.png)
+![Diagrama de blocos](doc/diagrama.svg)
 
 ## HM-10
 
@@ -38,7 +38,8 @@ até via blueetooth ele são automaticamente encaminhados para o microcontrolado
 do microcontrolador são automaticamente encaminhados para o bluetooth. O dispositivo possui o seguinte 
 nome padrão:
 
-- **HMSof**
+> **HMSof**
+
 
 ### Módo de configuração
 
@@ -55,7 +56,6 @@ configurações podem ser por exemplo o nome do dispositivo blueetooth, sua form
 O HM-10 utiliza como interface de comunicação com o microcontrolador o protocolo assíncrono : 
 Universal asynchronous receiver/transmitter [UART](https://learn.sparkfun.com/tutorials/serial-communication/uarts).
 
-
 ## Conexão e configuração
 
 No exemplo, devemos conectar o módulo HM-10 ao kit de desenvolvimento via o conector EXT-1 
@@ -70,9 +70,7 @@ A conexão deve ser a seguinte :
 | TXD   | PIN 13             | PB0         | RXD0           |
 | RXD   | PIN 14             | PB1         | TXD0           |
 
-
 ![Conexão HM-10 com SAME70-XPLD](doc/hm10SamE70.jpg)
-
 
 ### Explicação 
 
@@ -82,6 +80,6 @@ o protocolo em questão.
 
 É necessário analisarmos simultaneamente o manual do microcontrolador para identificarmos:
 
-1 - O periférico capaz de se comunicar com esse protocolo
-2 - Os pinos que podem ser controlados por esse periférico
-3 - Os pinos litados em (2) disponíveis no kit de desenvolvimento/ placa acessíveis.
+1. O periférico capaz de se comunicar com esse protocolo
+1. Os pinos que podem ser controlados por esse periférico
+1. Os que estão disponíveis no kit de desenvolvimento/ placa.
