@@ -31,14 +31,13 @@ No exemplo, devemos conectar o módulo HM-10 ao kit de desenvolvimento via o con
 A conexão deve ser a seguinte :
 
 | HM-10 | EXT1 (SAME70-XPLD) | SAME70 (uC) | SAME70 (USART) |
-|-------+--------------------+-------------+----------------|
+|-------|--------------------|-------------|----------------|
 | VCC   | PIN 20             | VCC         | -              |
 | GND   | PIN 19             | GND         | -              |
 | TXD   | PIN 13             | PB0         | RXD0 (USART 0) |
 | RXD   | PIN 14             | PB1         | TXD0 (USART 0) |
 
 ![Conexão HM-10 com SAME70-XPLD](doc/hm10SamE70.jpg)
-
 
 ## HM-10
 
@@ -52,8 +51,7 @@ O HM-10 pode operar em diversos modos de operação, o modo padrão que vem de f
 o *Slave*, ou seja,ele a conexão de um outro dispositivo (como uma caixa de som bluetooth**.
 Uma vez um dispositivo conectado a ele, ele opera de modo transparente, onde todos os dados que chegam 
 até via blueetooth ele são automaticamente encaminhados para o microcontrolador e todos os dados que chegam
-do microcontrolador são automaticamente encaminhados para o bluetooth. O dispositivo possui o seguinte 
-nome padrão:
+do microcontrolador são automaticamente encaminhados para o bluetooth. O dispositivo possui o seguinte nome padrão:
 
 > **HMSof**
 
