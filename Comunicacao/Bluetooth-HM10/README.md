@@ -1,4 +1,4 @@
-# BlueTooth HM-10
+# BlueTooth HM-10 e HC-06
 
 Esse exemplo demonstra o uso do módulo BlueTooth HM-10 em modo *Slave* 
 
