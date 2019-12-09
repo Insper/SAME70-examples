@@ -663,7 +663,7 @@
 /** TWI interface for maXTouch XPRO */
 #define MAXTOUCH_XPRO_TWIHS       TWIHS0
 
-#define MAXTOUCH_XPRO_CHG_PIO     PIO_PA2_IDX
+#define MAXTOUCH_XPRO_CHG_PIO     PIO_PA26_IDX // era PA2
 
 /** BNO055 external interrupt pin definition */
 #define PIN_BNO055_EXT_INIERRUPT       {PIO_PD28, PIOD, ID_PIOD, PIO_INPUT, \
