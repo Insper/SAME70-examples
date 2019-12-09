@@ -54,7 +54,7 @@ static void configure_console(void)
 }
 
 
-/* 
+/*
  * Check whether "cp" is a valid ascii representation
  * of an Internet address and convert to a binary address.
  * Returns 1 if the address is valid, 0 if not.
@@ -113,7 +113,7 @@ int inet_aton(const char *cp, in_addr *ap)
 	  ap->s_addr = _htonl(addr);
   }
 
-  return 1;    
+  return 1;
 }
 
 
@@ -145,14 +145,14 @@ static void resolve_cb(uint8_t *hostName, uint32_t hostIp)
  */
 static void socket_cb(SOCKET sock, uint8_t u8Msg, void *pvMsg)
 {
-  
+
 	/* Check for socket event on TCP socket. */
 	if (sock == tcp_client_socket) {
-    
+
 		switch (u8Msg) {
 		case SOCKET_MSG_CONNECT:
 		{
-      printf("socket_msg_connect\n"); 
+      printf("socket_msg_connect\n");
 			if (gbTcpConnection) {
 				memset(gau8ReceivedBuffer, 0, sizeof(gau8ReceivedBuffer));
 				sprintf((char *)gau8ReceivedBuffer, "%s", MAIN_PREFIX_BUFFER);
@@ -173,7 +173,7 @@ static void socket_cb(SOCKET sock, uint8_t u8Msg, void *pvMsg)
 			}
 		}
 		break;
-    
+
 
 
 		case SOCKET_MSG_RECV:
@@ -184,7 +184,7 @@ static void socket_cb(SOCKET sock, uint8_t u8Msg, void *pvMsg)
 			tstrSocketRecvMsg *pstrRecv = (tstrSocketRecvMsg *)pvMsg;
 			if (pstrRecv && pstrRecv->s16BufferSize > 0) {
         printf(pstrRecv->pu8Buffer);
-				
+
 				memset(gau8ReceivedBuffer, 0, sizeof(gau8ReceivedBuffer));
 				recv(tcp_client_socket, &gau8ReceivedBuffer[0], MAIN_WIFI_M2M_BUFFER_SIZE, 0);
 			} else {
@@ -247,7 +247,7 @@ static void wifi_cb(uint8_t u8MsgType, void *pvMsg)
 		printf("wifi_cb: IP address is %u.%u.%u.%u\r\n",
 				pu8IPAddress[0], pu8IPAddress[1], pu8IPAddress[2], pu8IPAddress[3]);
 		wifi_connected = M2M_WIFI_CONNECTED;
-		
+
     /* Obtain the IP Address by network name */
 		//gethostbyname((uint8_t *)server_host_name);
 		break;
@@ -285,7 +285,7 @@ int main(void)
 
 	/* Initialize the BSP. */
 	nm_bsp_init();
-  
+
 	/* Initialize Wi-Fi parameters structure. */
 	memset((uint8_t *)&param, 0, sizeof(tstrWifiInitParam));
 
@@ -297,10 +297,10 @@ int main(void)
 		while (1) {
 		}
 	}
-  
+
 	/* Initialize socket module. */
 	socketInit();
-  
+
 	/* Register socket callback function. */
 	registerSocketCallback(socket_cb, resolve_cb);
 
@@ -316,7 +316,7 @@ int main(void)
   while(1){
  		m2m_wifi_handle_events(NULL);
 
-   	if (wifi_connected == M2M_WIFI_CONNECTED) {  
+   	if (wifi_connected == M2M_WIFI_CONNECTED) {
     	/* Open client socket. */
 			if (tcp_client_socket < 0) {
         printf("socket init \n");
@@ -327,7 +327,7 @@ int main(void)
 
 				/* Connect server */
         printf("socket connecting\n");
-        
+
 				if (connect(tcp_client_socket, (struct sockaddr *)&addr_in, sizeof(struct sockaddr_in)) != SOCK_ERR_NO_ERROR) {
 					close(tcp_client_socket);
 					tcp_client_socket = -1;
