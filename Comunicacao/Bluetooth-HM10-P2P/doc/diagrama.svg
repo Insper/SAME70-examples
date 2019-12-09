@@ -9,9 +9,9 @@
    xmlns="http://www.w3.org/2000/svg"
    xmlns:sodipodi="http://sodipodi.sourceforge.net/DTD/sodipodi-0.dtd"
    xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape"
-   width="79.422424mm"
-   height="120.49384mm"
-   viewBox="0 0 281.41804 426.94672"
+   width="180.40306mm"
+   height="146.33308mm"
+   viewBox="0 0 639.22345 518.50309"
    id="svg2"
    version="1.1"
    inkscape:version="0.92.3 (2405546, 2018-03-11)"
@@ -224,8 +224,8 @@
      inkscape:pageopacity="0.0"
      inkscape:pageshadow="2"
      inkscape:zoom="1.4"
-     inkscape:cx="347.52353"
-     inkscape:cy="49.46697"
+     inkscape:cx="190.40958"
+     inkscape:cy="107.49676"
      inkscape:document-units="px"
      inkscape:current-layer="layer1"
      showgrid="false"
@@ -255,7 +255,7 @@
      inkscape:label="Camada 1"
      inkscape:groupmode="layer"
      id="layer1"
-     transform="translate(190.60512,-245.00195)">
+     transform="translate(211.72597,-213.20563)">
     <g
        id="g4222"
        transform="translate(-17.277016)" />
@@ -861,7 +861,7 @@
          y="368.49753"
          style="font-size:16.25px;line-height:1.25;stroke-width:1px">HM-10</tspan></text>
     <path
-       style="fill:none;stroke:#000000;stroke-width:1.87500013;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-dasharray:11.25000079,11.25000079;stroke-dashoffset:0;stroke-opacity:1;marker-start:url(#Arrow1Mstart);marker-end:url(#Arrow1Mend)"
+       style="fill:none;stroke:#000000;stroke-width:1.87500012;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-dasharray:11.25000079, 11.25000079;stroke-dashoffset:0;stroke-opacity:1;marker-start:url(#Arrow1Mstart);marker-end:url(#Arrow1Mend)"
        d="m 340.84988,439.15754 v 22.43303 l 30.34796,17.52141 -45.94436,12.31075 19.75154,19.75154 v 14.53461"
        id="path2386"
        inkscape:connector-curvature="0" />
