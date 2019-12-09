@@ -40,4 +40,4 @@ no modo *ponto-a-ponto*.
 
 ## Diagrama
 
-![](doc/diagrama.svg)
+![](doc/diagrama.png)
