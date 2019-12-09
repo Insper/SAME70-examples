@@ -145,7 +145,7 @@ int usart_get_string(Usart *usart, char buffer[], int bufferlen, uint timeout_ms
   uint timecounter = timeout_ms;
   uint32_t rx;
   uint32_t counter = 0;
-  
+
   while( (timecounter > 0) && (counter < bufferlen - 1)) {
     if(usart_read(usart, &rx) == 0) {
       buffer[counter++] = rx;
@@ -153,7 +153,7 @@ int usart_get_string(Usart *usart, char buffer[], int bufferlen, uint timeout_ms
     else{
       timecounter--;
       vTaskDelay(1);
-    }    
+    }
   }
   buffer[counter] = 0x00;
   return counter;
@@ -164,7 +164,7 @@ void usart_send_command(Usart *usart, char buffer_rx[], int bufferlen, char buff
   usart_get_string(usart, buffer_rx, bufferlen, timeout);
 }
 
-void hc05_config_server(void) {
+void hc06_config_server(void) {
   sysclk_enable_peripheral_clock(USART_COM_ID);
   usart_serial_options_t config;
   config.baudrate = 9600;
@@ -174,13 +174,13 @@ void hc05_config_server(void) {
   usart_serial_init(USART_COM, &config);
   usart_enable_tx(USART_COM);
   usart_enable_rx(USART_COM);
-  
+
   // RX - PB0  TX - PB1
   pio_configure(PIOB, PIO_PERIPH_C, (1 << 0), PIO_DEFAULT);
   pio_configure(PIOB, PIO_PERIPH_C, (1 << 1), PIO_DEFAULT);
 }
 
-int hc05_server_init(void) {
+int hc06_server_init(void) {
   char buffer_rx[128];
   usart_send_command(USART0, buffer_rx, 1000, "AT", 100); printf("AT\n");
   usart_send_command(USART0, buffer_rx, 1000, "AT", 100);
@@ -194,12 +194,12 @@ int hc05_server_init(void) {
 /************************************************************************/
 
 void task_bluetooth(void){
-  
+
   printf("Bluetooth initializing \n");
-  hc05_config_server();
-  hc05_server_init();
+  hc06_config_server();
+  hc06_server_init();
   io_init();
-  
+
   while(1){
     printf("done\n");
     vTaskDelay( 500 / portTICK_PERIOD_MS);
@@ -220,7 +220,7 @@ int main(void){
 
 	/* Create task to make led blink */
 	xTaskCreate(task_bluetooth, "BLT", TASK_PROCESS_STACK_SIZE, NULL,	TASK_PROCESS_STACK_PRIORITY, NULL);
-  
+
 	/* Start the scheduler. */
 	vTaskStartScheduler();
 
