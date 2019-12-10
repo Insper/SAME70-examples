@@ -13,7 +13,7 @@
     <OutputFileExtension>.elf</OutputFileExtension>
     <OutputDirectory>$(MSBuildProjectDirectory)\$(Configuration)</OutputDirectory>
     <AssemblyName>MXT_EXAMPLE_USART1</AssemblyName>
-    <Name>OutEXT-LCD-maXTouch</Name>
+    <Name>maxTouch-EXT-V1</Name>
     <RootNamespace>MXT_EXAMPLE_USART1</RootNamespace>
     <ToolchainFlavour>Native</ToolchainFlavour>
     <KeepTimersRunning>true</KeepTimersRunning>
