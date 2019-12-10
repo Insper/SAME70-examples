@@ -55,7 +55,7 @@ void TC0_Handler(void){
 	* Devemos indicar ao TC que a interrupção foi satisfeita.
 	******************************************************************/
 	ul_dummy = tc_get_status(TC0, 0);
-	printf("kakaka \n");
+	printf("[Debug] TC0 IRQ \n");
 
 	/* Avoid compiler warning */
 	UNUSED(ul_dummy);
@@ -68,7 +68,7 @@ void TC0_Handler(void){
 static void AFEC_Temp_callback(void)
 {
 	g_ul_value = afec_channel_get_value(AFEC0, AFEC_CHANNEL_TEMP_SENSOR);
-	printf("Entrou \n");
+	printf("[Debug] AFEC done \n");
 	is_conversion_done = true;
 }
 
@@ -202,9 +202,10 @@ void TC_init(Tc * TC, int ID_TC, int TC_CHANNEL, int freq){
 
 	/* Configura e ativa interrupçcão no TC canal 0 */
 	/* Interrupção no C */
+#ifdef DEBUG
 	NVIC_EnableIRQ((IRQn_Type) ID_TC);
 	tc_enable_interrupt(TC, TC_CHANNEL, TC_IER_CPCS);
-
+#endif
 	/* Inicializa o canal 0 do TC */
 	tc_start(TC, TC_CHANNEL);
 }
@@ -218,8 +219,7 @@ void TC_init(Tc * TC, int ID_TC, int TC_CHANNEL, int freq){
  *
  * \return Unused (ANSI-C compatibility).
  */
-int main(void)
-{
+int main(void){
 
 	/* Initialize the SAM system. */
 	sysclk_init();
@@ -252,8 +252,6 @@ int main(void)
 			is_conversion_done = false;
 
 			printf("Temp : %d \r\n", convert_adc_to_temp(g_ul_value));
-			//afec_start_software_conversion(AFEC0);
-			delay_s(1);
 		}
 	}
 }
