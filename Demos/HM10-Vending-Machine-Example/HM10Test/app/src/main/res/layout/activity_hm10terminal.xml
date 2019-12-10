@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+              xmlns:app="http://schemas.android.com/apk/res-auto" xmlns:tools="http://schemas.android.com/tools" android:layout_width="match_parent"
+              android:layout_height="match_parent" android:orientation="vertical">
+    <EditText
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_margin="10dp"
+            android:inputType="textMultiLine"
+            android:lines="20"
+            android:padding="8dp"
+            android:background="#50c5c5c5"
+            android:gravity="top|left"
+            android:cursorVisible="false"
+            android:scrollbars="vertical"
+            android:enabled="false"
+            android:id="@+id/editText1" tools:layout_editor_absoluteX="10dp"/>
+    <LinearLayout android:orientation="horizontal" android:layout_width="match_parent" android:layout_height="match_parent">
+        <EditText
+                android:layout_width="wrap_content"
+                android:layout_weight="0.7"
+                android:inputType="textPersonName"
+                android:text=""
+                android:ems="10"
+                android:id="@+id/editText2"
+                app:layout_constraintTop_toBottomOf="@+id/editText3" app:layout_constraintStart_toStartOf="parent"
+                android:layout_height="wrap_content"/>
+        <Button
+                android:text="Enviar"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:id="@+id/button"
+                android:layout_weight="0.3"
+                app:layout_constraintTop_toBottomOf="@+id/editText3"
+                app:layout_constraintStart_toEndOf="@+id/editText2" app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintVertical_bias="1.0"
+                app:layout_constraintEnd_toEndOf="parent"/>
+    </LinearLayout>
+
+</LinearLayout>

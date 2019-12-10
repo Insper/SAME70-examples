@@ -1,21 +1,39 @@
-Periféricos envolvidos :
+# TC - RTC - IRQ
 
- - Power Managment Controller (PMC)
- - Parallel Input/Output Controller (PIO)
- - Real Time Clock (RTC)
- - Timer Counter (TC)
+Configura o Timer Counter (TC) para gerar uma interrupção a 4Hz (250 ms) e o Real Time Timer (RTC) para operar em modo alarme, gerando uma interrupção após um minuto de operação.
+
+- Módulos: 
+    - .
+    
+- Periféricos:
+    - TC0 - Timer Counter 0
+    - RTC - Real Time Timer
+    - USART1 (debug - para comunicação com o PC - `stdio` )
+    
+- Pinos:
+    - `PC8`: LED
+    - `PA11`: Botão
+
+- APIs:
+    - .
+
+## Conexão e configuração
+
+- Não é necessário
+
+## Explicação
 
 ![](imgs/TC/overview.png)
 
-OExemplo configura o TimerCounter (TC) e o RTC do mircontrolador. O TC0 canal 1 é configurado para gerar uma interrupção (**TC1_Handler**) a cada 250ms (f=1/T -> de 4Hz) já o RTC é configurado para operar em modo de alarme, gerando uma interrupção (**RTC_Handler**) em um determinado momento. Inicialmente o RTC está configurado para gerar uma interrupção um minuto após o início do microcontrolador.
+O exemplo configura o TimerCounter (TC) e o RTC do mircontrolador. O TC0 canal 1 é configurado para gerar uma interrupção (`TC1_Handler`) a cada 250ms (f=1/T -> de 4Hz) já o RTC é configurado para operar em modo de alarme, gerando uma interrupção (**RTC_Handler**) em um determinado momento. Inicialmente o RTC está configurado para gerar uma interrupção um minuto após o início do microcontrolador.
 
 O TimerCounter faz com o o led pisque na frequência de 4Hz enquanto não ocorrer o alarme do RTC, após o acontecimento do alarme (interrupção do RTC) o piscar do led é desligado.
 
-## Main
+### Main
 
-A função main desse programa é responsável por inicializar todos os periféricos envolvidos no projeto (PIO para os LEDs e botões, RTC e TC). Note que nenhuma lógica é implementada no código (while(1) é vazio), toda lógica desse projeto está contido nas interrupções.
+A função `main` desse programa é responsável por inicializar todos os periféricos envolvidos no projeto (PIO para os LEDs e botões, RTC e TC). Note que nenhuma lógica é implementada no código (`while(1)`) é vazio), toda lógica desse projeto está contido nas interrupções.
 
-```c
+``` c
 int main(void){
   /* Initialize the SAM system */
   sysclk_init();
@@ -45,7 +63,7 @@ int main(void){
 }
 ```
 
-## Timer Counter - TC
+### Timer Counter - TC
 
 O TC é um periférico de contagem de pulsos, esses pulsos podem ser provenientes do mundo externo (abrir e fechar de portas, encoder de um motor, pulsos de um PWM) ou interno ao próprio microcontrolador, utilizando o clock como sinal de entrada.
 Esse contador é formado por 16 bits, limitando o valor máximo que pode contar em : 2^16 -1 = 65535.
@@ -110,7 +128,7 @@ void TC_init(Tc * TC, int ID_TC, int TC_CHANNEL, int freq){
 }
 ```
 
-### Interrupção
+#### Interrupção
 
 Sempre que houver um reset no contador do TC, a interrupção referente ao canal é chamada, nessa interrupção fazemos a mudança no status do led.
 
@@ -137,13 +155,13 @@ Sempre que houver um reset no contador do TC, a interrupção referente ao canal
 
 Note que ao chamarmos a função `tc_get_status(TC0, 1)` estamos automaticamente realizando o **ACK** da interrupção.
 
-## Real Time Clock - RTC
+### Real Time Clock - RTC
 
 O RTC é um periférico do uC que serve para contar tempo com resolução de segundos, ele possui toda a lógica interna de um relógio, contando anos, meses, dias, horas, minutos e segundos (para ai!). 
 
 O RTC é configurado na função `RTC_init()`:
 
-```C
+``` c
 void RTC_init(){
     /* Configura o PMC */
     pmc_enable_periph_clk(ID_RTC);
@@ -166,7 +184,7 @@ void RTC_init(){
 }
 ```
  
-### Alarme
+#### Alarme
 
 O alarme é uma maneira de configurarmos o RTC para gerar uma interrupção em uma determinada data, no nosso caso, para um minuto após a inicialização do microcontrolador. 
 
@@ -181,7 +199,7 @@ O alarme é uma maneira de configurarmos o RTC para gerar uma interrupção em u
   }
 ```
 
-### Interrupção
+#### Interrupção
 
 Sempre que a situação do alarme for satisfeita, a função `RTC_Handler` será chamada. Na interrupção configura a variável global `flag_led0` para 0.
 

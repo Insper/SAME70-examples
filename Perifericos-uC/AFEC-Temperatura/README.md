@@ -42,7 +42,7 @@ Em sua grande maioria os sensores elétricos são transdutores, ou seja, convert
 
 O Analog Front-End Controller (AFEC) nesse exemplo é configurado para operar lendo o sensor de temperatura interno do microcontrolador, que está conectado na entrada 11 do MUX. 
 
-### `static int32_t convert_adc_to_temp(int32_t ADC_value)`c
+### `static int32_t convert_adc_to_temp(int32_t ADC_value)`
 
 Essa é uma função que converte o valor lido (`ADC_value`) pelo conversor analógico digital e converte para temperatura em graus célsius. Sua implementação são duas simples transformações:
 
@@ -66,7 +66,7 @@ main(){
   ...
 
   /* configura call back */
-  afec_set_callback(AFEC0, AFEC_INTERRUPT_EOC_11,	AFEC_Temp_callback, 1);
+  afec_set_callback(AFEC0, AFEC_INTERRUPT_EOC_11, AFEC_Temp_callback, 1);
   ...
 }
 ```

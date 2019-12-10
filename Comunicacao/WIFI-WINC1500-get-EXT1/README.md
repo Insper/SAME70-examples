@@ -28,6 +28,10 @@ Esse exemplo, demonstra como desenvolver um firmware que é capaz de realizar `g
  
 :exclamation: Pinos em conflito com EXT2
  
+## Diagrama
+
+![](doc/diagrama.svg)
+ 
 ## Conexão e configuração
 
 > Conectar o WINC1500 no `EXT1` do kit de desenvolvimento. É necessário ter uma rede wifi disponível.

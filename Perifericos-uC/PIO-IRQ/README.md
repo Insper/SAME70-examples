@@ -1,3 +1,30 @@
+# PIO - IRQ
+
+Exemplo que configura o pino do botão para gerar interrupção no microcontrolador. 
+
+- Módulos: 
+    - .
+    
+- Periféricos:
+    - PIOC e PIOA
+    
+- Pinos:
+    - `PC8`: LED
+    - `PA11`: Botão
+    - `stdio` / DEBUG
+        - `PB4`:  UART1 
+        - `PD21`: UART1
+ 
+- APIs:
+    - .
+
+## Conexão e configuração
+
+- Não é necessário
+
+
+# Explicação
+
 A seguir iremos ter uma breve explicação de como configurarmos uma interrupção para o PIO do SAME70, na verdade, iremos usar um driver que abstrai a parte mais baixa da interrupção e iremos conseguir configurar um [`callback`](https://en.wikipedia.org/wiki/Callback_(computer_programming)) para cada pino do PIO.
 
 ![](https://raw.githubusercontent.com/wiki/Insper/ComputacaoEmbarcada/imgs/PIO-IRQ/callback.png)
