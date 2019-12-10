@@ -27,5 +27,5 @@ O **Real Time Time** (RTT) é um timer similar ao TC, mas bem mais simples. Serv
 
 O RTT pode gerar interrupção por duas fontes distintas: `Alarme` ou `Mudança no valor do relógio`. O Alarme funciona similar ao alarme do RTC, podemos especificar um valor e quando o contador chegar nesse valor, gera uma interrupção, ou podemos gerar uma interrupção toda vez que o valor do timer mudar (tick). Isso vai depender da frequência na qual ele foi configurado (funcionando similar ao TC).
 
-![](rtt.png)
+![](doc/rtt.png)
 
