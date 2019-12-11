@@ -23,7 +23,7 @@ Esse exemplo faz o uso do maXTouch Xplained Pro via USART2 configurada como SPI,
 	
    	05 -- DCX	PA1
 	07 -- PWM	PA5
-	09 -- IRQ	PA2
+	09 -- IRQ	PA26
 	10 -- RS	PA29
 	11 -- SDA	PA3
 	12 -- SCL	PA4
