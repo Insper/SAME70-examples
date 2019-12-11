@@ -27,7 +27,7 @@ Repositório exemplo para o kit SAME70-XPLD utilizado na disciplina de Computaç
     - RTT: [AES](Perifericos-uC/RTT/)
     - AFEC lendo temperatura: [AFEC-Temperatura](Perifericos-uC/AFEC-Temperatura/)
     - AES Criptografia: [AES](Perifericos-uC/AES/)
-    - AES Criptografia: [AES](Perifericos-uC/AES/)
+ - AES Criptografia: [AES](Perifericos-uC/AES/)
     - AES Criptografia: [AES](Perifericos-uC/AES/)
     - AES Criptografia: [AES](Perifericos-uC/AES/)
 

@@ -1,7 +1,6 @@
 #include <asf.h>
 #include "conf_board.h"
 
-
 /************************************************************************/
 /* defines                                                              */
 /************************************************************************/
@@ -13,9 +12,9 @@
 #define TRIGGER_IDX_MASK (1 << TRIGGER_IDX)
 
 // Botão
-#define ECHO_PIO      PIOA
-#define ECHO_PIO_ID   ID_PIOA
-#define ECHO_IDX  11
+#define ECHO_PIO      PIOD
+#define ECHO_PIO_ID   ID_PIOD
+#define ECHO_IDX      20
 #define ECHO_IDX_MASK (1 << ECHO_IDX)
 
 // Timer
@@ -24,19 +23,12 @@
 #define TIMER         TC0
 #define TIMER_FREQ    42
 
-
 #define USART_COM_ID ID_USART1
 #define USART_COM    USART1
 
 /** RTOS  */
-#define TASK_TRIGGER_STACK_SIZE            (1024/sizeof(portSTACK_TYPE))
-#define TASK_TRIGGER_STACK_PRIORITY        (tskIDLE_PRIORITY)
-#define TASK_UARTTX_STACK_SIZE             (2048/sizeof(portSTACK_TYPE))
-#define TASK_UARTTX_STACK_PRIORITY         (tskIDLE_PRIORITY)
-#define TASK_UARTRX_STACK_SIZE             (2048/sizeof(portSTACK_TYPE))
-#define TASK_UARTRX_STACK_PRIORITY         (1)
-#define TASK_PROCESS_STACK_SIZE            (2048/sizeof(portSTACK_TYPE))
-#define TASK_PROCESS_STACK_PRIORITY        (2)
+#define TASK_SENSOR_STACK_SIZE            (1024/sizeof(portSTACK_TYPE))
+#define TASK_SENSOR_STACK_PRIORITY        (tskIDLE_PRIORITY)
 
 extern void vApplicationStackOverflowHook(xTaskHandle *pxTask,
 		signed char *pcTaskName);
@@ -45,18 +37,13 @@ extern void vApplicationTickHook(void);
 extern void vApplicationMallocFailedHook(void);
 extern void xPortSysTickHandler(void);
 
+QueueHandle_t xQueue1;
 
 /** prototypes */
 void but_callback(void);
 static void ECHO_init(void);
 static void USART1_init(void);
 uint32_t usart_puts(uint8_t *pstring);
-
-
-QueueHandle_t xQueue1;
-volatile uint32_t g_tcCv = 0;
-
-
 
 
 /************************************************************************/
@@ -109,22 +96,13 @@ extern void vApplicationMallocFailedHook(void)
 /************************************************************************/
 
 void signalCallback(void){
-
   if(!pio_get(ECHO_PIO, PIO_INPUT, ECHO_IDX_MASK)){
     tc_start(TIMER, TIMER_CHANNEL);
-  }else{ 
+  }else{
    tc_stop(TIMER, TIMER_CHANNEL);
    uint tcCv = tc_read_cv(TIMER, TIMER_CHANNEL);
    xQueueSendFromISR( xQueue1, &tcCv, NULL );
   }
-  
- 
-  /*
-  else{
-    BaseType_t xHigherPriorityTaskWoken = pdTRUE;
-    xSemaphoreGiveFromISR(xSemaphore, &xHigherPriorityTaskWoken);
-  }
-  */
 }
 
 
@@ -261,18 +239,18 @@ static void USART1_init(void){
 /************************************************************************/
 
 void task_sensor(void){
-  
+
   /* Create a queue capable of containing 10 unsigned long values. */
-  xQueue1 = xQueueCreate( 10, sizeof( uint ) ); 
-  
+  xQueue1 = xQueueCreate( 10, sizeof( uint ) );
+
   TC_init(TIMER, TIMER_ID, TIMER_CHANNEL, TIMER_FREQ);
   io_init();
-  
+
   uint tcCv;
   while(1){
-    
+
     pio_set(TRIGGER_PIO, TRIGGER_IDX_MASK);
-    delay_s(1);
+    delay_us(10);   // precisa ser esse delay, não pode trocar pelo vTaskDelay! 
     pio_clear(TRIGGER_PIO, TRIGGER_IDX_MASK);
     printf("Trigger \n");
    if( xQueueReceive( xQueue1, &(tcCv), ( TickType_t )  500 / portTICK_PERIOD_MS ) )
@@ -281,16 +259,14 @@ void task_sensor(void){
       float ts = (float) tcCv / 32000.0;
       float dm = ts * 340/2;
       printf("%d\n", (int) (dm*100));
-      g_tcCv = 0;
-   }   
+   }
    else{
      printf("Erro\n");
-   } 
-   
+   }
+
    vTaskDelay( 500 / portTICK_PERIOD_MS);
   }
 }
-
 
 
 /************************************************************************/
@@ -311,19 +287,15 @@ int main(void){
 	configure_console();
 
 	/* Create task to make led blink */
-	if (xTaskCreate(task_sensor, "Sensor", TASK_TRIGGER_STACK_SIZE, NULL,
-			TASK_TRIGGER_STACK_PRIORITY, NULL) != pdPASS) {
+	if (xTaskCreate(task_sensor, "Sensor", TASK_SENSOR_STACK_SIZE, NULL,
+			TASK_SENSOR_STACK_PRIORITY, NULL) != pdPASS) {
 		printf("Failed to create test led task\r\n");
 	}
-  
 
 	/* Start the scheduler. */
 	vTaskStartScheduler();
 
-	while(1){
-
-
-	}
+	while(1){	}
 
 	/* Will only get here if there was insufficient memory to create the idle task. */
 	return 0;
