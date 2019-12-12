@@ -25,6 +25,7 @@ Esse exemplo demonstra como desenvolver um firmware (com RTOS) que é capaz de r
  
 - APIs:
     - driver WINC1500
+    - freeRTOS
  
 :exclamation: Pinos em conflito com EXT2
 

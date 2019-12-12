@@ -1,16 +1,27 @@
-# HSMCI - High Speed Multimedia Card Interface - SDCARD
+# WIFI (WINC1500) - SDcard -  get - RTOS - EXT1
 
-Esse exemplo utiza o periférico MMC
+Esse firmware é um exemplo de como usar o WINC1500 e o SDCARD com RTOS
 
 - Módulos: 
+    - WINC1500 (módulo WIFI)
     - SDCARD
     
 - Periféricos:
+    - SPI
     - HSMCI - High Speed Multimedia Card Interface
     - XDMA - Direct Memmory Access 
     - USART1 (debug - para comunicação com o PC - `stdio` )
     
 - Pinos:
+    - WINC1500
+        - EXT1 5 - RESET_N  
+        - EXT1 6 - WAKE
+        - EXT1 9 - IRQ_N
+        - EXT1 10 - CHIP_EN
+        - EXT1 15 - SPI_SSN
+        - EXT1 16 - SPI_MOSI
+        - EXT1 17 - SPI_MISO
+        - EXT1 18 - SPI_CLK
     - HSMCI: 
         - `PA30`: SD_D0
         - `PA31`: SD_D1 
@@ -24,15 +35,18 @@ Esse exemplo utiza o periférico MMC
         - `PD21`: UART1
  
 - APIs:
+    - driver WINC1500
     - [FatFS](http://elm-chan.org/fsw/ff/00index_e.html)
-
+    - freeRTOS
+ 
 :exclamation: Pinos em conflito com EXT2
 
 ## Conexão e configuração
 
+- Igual ao do exemplo sem RTOS (`WIFI-WINC1500-get-EXT1`).
 - Formatar SDCARD como fat32.
 - Conectar SDCARD no kit quando indicano no terminal.
 
 ## Explicação
 
-Esse código utiliza o periférico HSMCI para escrever e ler do cartão de memória, a parte refente a partição (criar/ abrir/ escrever em arquivos) é realizada pela API opensource [FatFs](http://elm-chan.org/fsw/ff/00index_e.html). 
+

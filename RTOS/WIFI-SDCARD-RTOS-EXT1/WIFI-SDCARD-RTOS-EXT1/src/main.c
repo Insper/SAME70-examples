@@ -5,11 +5,6 @@
 #include "driver/include/m2m_wifi.h"
 #include "socket/include/socket.h"
 
-#define STRING_EOL    "\r\n"
-#define STRING_HEADER "-- WINC1500 weather client example --"STRING_EOL	\
-	"-- "BOARD_NAME " --"STRING_EOL	\
-	"-- Compiled: "__DATE__ " "__TIME__ " --"STRING_EOL
-
 /** IP address of host. */
 uint32_t gu32HostIp = 0;
 
@@ -26,7 +21,6 @@ static bool gbConnectedWifi = false;
 /** Wi-Fi connection state */
 static uint8_t wifi_connected;
 
-
 /** Instance of HTTP client module. */
 static bool gbHostIpByName = false;
 
@@ -35,7 +29,6 @@ static bool gbTcpConnection = false;
 
 /** Server host name. */
 static char server_host_name[] = MAIN_SERVER_NAME;
-
 
 #define TASK_WIFI_STACK_SIZE            (4096/sizeof(portSTACK_TYPE))
 #define TASK_WIFI_STACK_PRIORITY        (tskIDLE_PRIORITY)
@@ -47,13 +40,16 @@ extern void vApplicationTickHook(void);
 extern void vApplicationMallocFailedHook(void);
 extern void xPortSysTickHandler(void);
 
+/*****************************************
+ * freeRTOS hook
+ *****************************************/
 
 /**
  * \brief Called if stack overflow during execution
  */
+
 extern void vApplicationStackOverflowHook(xTaskHandle *pxTask,
-		signed char *pcTaskName)
-{
+		signed char *pcTaskName){
 	printf("stack overflow %x %s\r\n", pxTask, (portCHAR *)pcTaskName);
 	/* If the parameters have been corrupted then inspect pxCurrentTCB to
 	 * identify which task has overflowed its stack.
@@ -62,23 +58,13 @@ extern void vApplicationStackOverflowHook(xTaskHandle *pxTask,
 	}
 }
 
-/**
- * \brief This function is called by FreeRTOS idle task
- */
-extern void vApplicationIdleHook(void)
-{
+extern void vApplicationIdleHook(void){
 	
 }
 
-/**
- * \brief This function is called by FreeRTOS each tick
- */
-extern void vApplicationTickHook(void)
-{
-}
+extern void vApplicationTickHook(void){}
 
-extern void vApplicationMallocFailedHook(void)
-{
+extern void vApplicationMallocFailedHook(void){
 	/* Called if a call to pvPortMalloc() fails because there is insufficient
 	free memory available in the FreeRTOS heap.  pvPortMalloc() is called
 	internally by FreeRTOS API functions that create tasks, queues, software
@@ -89,12 +75,15 @@ extern void vApplicationMallocFailedHook(void)
 	configASSERT( ( volatile void * ) NULL );
 }
 
+/*****************************************
+ * Funcões 
+ ****************************************/
 
 /**
  * \brief Configure UART console.
  */
-static void configure_console(void)
-{
+
+static void configure_console(void){
 	const usart_serial_options_t uart_serial_options = {
 		.baudrate =		CONF_UART_BAUDRATE,
 		.charlength =	CONF_UART_CHAR_LENGTH,
@@ -107,17 +96,7 @@ static void configure_console(void)
 	stdio_serial_init(CONF_UART, &uart_serial_options);
 }
 
-
-/* 
- * Check whether "cp" is a valid ascii representation
- * of an Internet address and convert to a binary address.
- * Returns 1 if the address is valid, 0 if not.
- * This replaces inet_addr, the return value from which
- * cannot distinguish between failure and a local broadcast address.
- */
- /* http://www.cs.cmu.edu/afs/cs/academic/class/15213-f00/unpv12e/libfree/inet_aton.c */
-int inet_aton(const char *cp, in_addr *ap)
-{
+int inet_aton(const char *cp, in_addr *ap){
   int dots = 0;
   register u_long acc = 0, addr = 0;
 
@@ -170,17 +149,7 @@ int inet_aton(const char *cp, in_addr *ap)
   return 1;    
 }
 
-
-/**
- * \brief Callback function of IP address.
- *
- * \param[in] hostName Domain name.
- * \param[in] hostIp Server IP.
- *
- * \return None.
- */
-static void resolve_cb(uint8_t *hostName, uint32_t hostIp)
-{
+static void resolve_cb(uint8_t *hostName, uint32_t hostIp){
 	gu32HostIp = hostIp;
 	gbHostIpByName = true;
 	printf("resolve_cb: %s IP address is %d.%d.%d.%d\r\n\r\n", hostName,
@@ -188,17 +157,7 @@ static void resolve_cb(uint8_t *hostName, uint32_t hostIp)
 			(int)IPV4_BYTE(hostIp, 2), (int)IPV4_BYTE(hostIp, 3));
 }
 
-/**
- * \brief Callback function of TCP client socket.
- *
- * \param[in] sock socket handler.
- * \param[in] u8Msg Type of Socket notification
- * \param[in] pvMsg A structure contains notification informations.
- *
- * \return None.
- */
-static void socket_cb(SOCKET sock, uint8_t u8Msg, void *pvMsg)
-{
+static void socket_cb(SOCKET sock, uint8_t u8Msg, void *pvMsg) {
   
 	/* Check for socket event on TCP socket. */
 	if (sock == tcp_client_socket) {
@@ -255,8 +214,7 @@ static void socket_cb(SOCKET sock, uint8_t u8Msg, void *pvMsg)
 	}
 }
 
-static void set_dev_name_to_mac(uint8_t *name, uint8_t *mac_addr)
-{
+static void set_dev_name_to_mac(uint8_t *name, uint8_t *mac_addr) {
 	/* Name must be in the format WINC1500_00:00 */
 	uint16 len;
 
@@ -269,16 +227,7 @@ static void set_dev_name_to_mac(uint8_t *name, uint8_t *mac_addr)
 	}
 }
 
-/**
- * \brief Callback to get the Wi-Fi status update.
- *
- * \param[in] u8MsgType Type of Wi-Fi notification.
- * \param[in] pvMsg A pointer to a buffer containing the notification parameters.
- *
- * \return None.
- */
-static void wifi_cb(uint8_t u8MsgType, void *pvMsg)
-{
+static void wifi_cb(uint8_t u8MsgType, void *pvMsg){
 	switch (u8MsgType) {
 	case M2M_WIFI_RESP_CON_STATE_CHANGED:
 	{
@@ -314,24 +263,106 @@ static void wifi_cb(uint8_t u8MsgType, void *pvMsg)
 	}
 }
 
-/**
- * \brief This task, when activated, send every ten seconds on debug UART
- * the whole report of free heap and total tasks status
- */
-static void task_monitor(void *pvParameters)
-{
-	static portCHAR szList[256];
-	UNUSED(pvParameters);
+uint read_sdcard(void){
+  char test_file_name[] = "0:config.txt";
+  Ctrl_status status;
+  FRESULT res;
+  FATFS fs;
+  FIL file_object;
+  
+    printf("Please plug an SD, MMC or SDIO card in slot.\n\r");
 
-	for (;;) {
-		printf("--- task ## %u", (unsigned int)uxTaskGetNumberOfTasks());
-		vTaskList((signed portCHAR *)szList);
-		printf(szList);
-		vTaskDelay(1000);
-	}
+    /* Wait card present and ready */
+    do {
+      status = sd_mmc_test_unit_ready(0);
+      if (CTRL_FAIL == status) {
+        printf("Card install FAIL\n\r");
+        printf("Please unplug and re-plug the card.\n\r");
+        while (CTRL_NO_PRESENT != sd_mmc_check(0)) {
+          vTaskDelay(100);
+        }
+      }
+      vTaskDelay(100);
+    } while (CTRL_GOOD != status);
+
+    printf("Mount disk (f_mount)...\r\n");
+    memset(&fs, 0, sizeof(FATFS));
+    res = f_mount(LUN_ID_SD_MMC_0_MEM, &fs);
+    if (FR_INVALID_DRIVE == res) {
+      printf("[FAIL] res %d\r\n", res);
+      return 1;
+    }
+
+    test_file_name[0] = LUN_ID_SD_MMC_0_MEM + '0';
+    res = f_open(&file_object,	(char const *)test_file_name,	FA_READ);
+    if (res != FR_OK) {
+      printf("[FAIL] res %d\r\n", res);
+      return 1;
+    }
+        
+    uint buffer[1024];
+    
+    f_gets(buffer, 1024, &file_object);
+    printf("   %s",buffer);
+    
+    f_gets(buffer, 1024, &file_object);
+    printf("   %s",buffer);
+    
+    f_close(&file_object);
+    printf("Test is successful.\n");
+    return 0;
 }
 
+void write_sdcard(void){
+  char test_file_name[] = "0:config.txt";
+  Ctrl_status status;
+  FRESULT res;
+  FATFS fs;
+  FIL file_object;
+  
+   printf("Please plug an SD, MMC or SDIO card in slot.\n\r");
 
+    /* Wait card present and ready */
+    do {
+      status = sd_mmc_test_unit_ready(0);
+      if (CTRL_FAIL == status) {
+        printf("Card install FAIL\n\r");
+        printf("Please unplug and re-plug the card.\n\r");
+        while (CTRL_NO_PRESENT != sd_mmc_check(0)) {
+                vTaskDelay(100);
+        }
+      }
+      vTaskDelay(100);
+    } while (CTRL_GOOD != status);
+
+    printf("Mount disk (f_mount)...\r\n");
+    memset(&fs, 0, sizeof(FATFS));
+    res = f_mount(LUN_ID_SD_MMC_0_MEM, &fs);
+    if (FR_INVALID_DRIVE == res) {
+      printf("[FAIL] res %d\r\n", res);
+      return 0;
+    }
+
+    test_file_name[0] = LUN_ID_SD_MMC_0_MEM + '0';
+    res = f_open(&file_object,	(char const *)test_file_name, 	FA_CREATE_ALWAYS | FA_WRITE);
+    if (res != FR_OK) {
+      printf("[FAIL] res %d\r\n", res);
+      return 0;
+    }
+    
+    f_puts("OLA \r\n  OI \r\n", &file_object);
+    
+    f_close(&file_object);
+    printf("write is successful.\n\r");
+    printf("Please unplug the card.\n\r");
+    while (CTRL_NO_PRESENT != sd_mmc_check(0)) {
+      vTaskDelay(200);
+    }
+ }
+
+/****************************************
+ * TASK
+ *****************************************/
 
 static void task_wifi(void *pvParameters) {
 	tstrWifiInitParam param;
@@ -397,103 +428,17 @@ static void task_wifi(void *pvParameters) {
 	  }
 }
 
-void write_sdcard(void){
-  char test_file_name[] = "0:config.txt";
-  Ctrl_status status;
-  FRESULT res;
-  FATFS fs;
-  FIL file_object;
-  
-   printf("Please plug an SD, MMC or SDIO card in slot.\n\r");
+static void task_monitor(void *pvParameters){
+	static portCHAR szList[256];
+	UNUSED(pvParameters);
 
-    /* Wait card present and ready */
-    do {
-      status = sd_mmc_test_unit_ready(0);
-      if (CTRL_FAIL == status) {
-        printf("Card install FAIL\n\r");
-        printf("Please unplug and re-plug the card.\n\r");
-        while (CTRL_NO_PRESENT != sd_mmc_check(0)) {
-                vTaskDelay(100);
-        }
-      }
-      vTaskDelay(100);
-    } while (CTRL_GOOD != status);
-
-    printf("Mount disk (f_mount)...\r\n");
-    memset(&fs, 0, sizeof(FATFS));
-    res = f_mount(LUN_ID_SD_MMC_0_MEM, &fs);
-    if (FR_INVALID_DRIVE == res) {
-      printf("[FAIL] res %d\r\n", res);
-      return 0;
-    }
-
-    test_file_name[0] = LUN_ID_SD_MMC_0_MEM + '0';
-    res = f_open(&file_object,	(char const *)test_file_name, 	FA_CREATE_ALWAYS | FA_WRITE);
-    if (res != FR_OK) {
-      printf("[FAIL] res %d\r\n", res);
-      return 0;
-    }
-    
-    f_puts("OLA \r\n  OI \r\n", &file_object);
-    
-    f_close(&file_object);
-    printf("write is successful.\n\r");
-    printf("Please unplug the card.\n\r");
-    while (CTRL_NO_PRESENT != sd_mmc_check(0)) {
-      vTaskDelay(200);
-    }
- }
-
-uint read_sdcard(void){
-  char test_file_name[] = "0:config.txt";
-  Ctrl_status status;
-  FRESULT res;
-  FATFS fs;
-  FIL file_object;
-  
-    printf("Please plug an SD, MMC or SDIO card in slot.\n\r");
-
-    /* Wait card present and ready */
-    do {
-      status = sd_mmc_test_unit_ready(0);
-      if (CTRL_FAIL == status) {
-        printf("Card install FAIL\n\r");
-        printf("Please unplug and re-plug the card.\n\r");
-        while (CTRL_NO_PRESENT != sd_mmc_check(0)) {
-          vTaskDelay(100);
-        }
-      }
-      vTaskDelay(100);
-    } while (CTRL_GOOD != status);
-
-    printf("Mount disk (f_mount)...\r\n");
-    memset(&fs, 0, sizeof(FATFS));
-    res = f_mount(LUN_ID_SD_MMC_0_MEM, &fs);
-    if (FR_INVALID_DRIVE == res) {
-      printf("[FAIL] res %d\r\n", res);
-      return 1;
-    }
-
-    test_file_name[0] = LUN_ID_SD_MMC_0_MEM + '0';
-    res = f_open(&file_object,	(char const *)test_file_name,	FA_READ);
-    if (res != FR_OK) {
-      printf("[FAIL] res %d\r\n", res);
-      return 1;
-    }
-        
-    uint buffer[1024];
-    
-    f_gets(buffer, 1024, &file_object);
-    printf("   %s",buffer);
-    
-    f_gets(buffer, 1024, &file_object);
-    printf("   %s",buffer);
-    
-    f_close(&file_object);
-    printf("Test is successful.\n");
-    return 0;
+	for (;;) {
+		printf("--- task ## %u", (unsigned int)uxTaskGetNumberOfTasks());
+		vTaskList((signed portCHAR *)szList);
+		printf(szList);
+		vTaskDelay(1000);
+	}
 }
-
 
 static void task_sdcard(void *pvParameters){
      /* Initialize SD MMC stack */
@@ -516,25 +461,17 @@ static void task_sdcard(void *pvParameters){
      }  
 }
 
+/****************************************
+ * Main
+ *****************************************/
 
-
-/**
- * \brief Main application function.
- *
- * Initialize system, UART console, network then start weather client.
- *
- * \return Program return value.
- */
-int main(void)
-{
+int main(void){
 	/* Initialize the board. */
 	sysclk_init();
 	board_init();
 
 	/* Initialize the UART console. */
 	configure_console();
-	printf(STRING_HEADER);
-  
   
 	if (xTaskCreate(task_wifi, "Wifi", TASK_WIFI_STACK_SIZE, NULL,
 	TASK_WIFI_STACK_PRIORITY, NULL) != pdPASS) {

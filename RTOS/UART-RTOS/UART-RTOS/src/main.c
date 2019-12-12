@@ -1,36 +1,13 @@
 #include <asf.h>
 #include "conf_board.h"
 
-
 /************************************************************************/
-/* defines                                                              */
+/* RTOS                                                                */
 /************************************************************************/
-
-// TRIGGER
-#define TRIGGER_PIO      PIOC
-#define TRIGGER_PIO_ID   ID_PIOC
-#define TRIGGER_IDX      8
-#define TRIGGER_IDX_MASK (1 << TRIGGER_IDX)
-
-// Botão
-#define ECHO_PIO      PIOA
-#define ECHO_PIO_ID   ID_PIOA
-#define ECHO_IDX  11
-#define ECHO_IDX_MASK (1 << BUT_IDX)
-
-// Timer
-#define TC_CHANNEL 1
-#define TC_ID      ID_TC1
-#define TC         TC0
-#define TC_FREQ    42
-
-
-#define USART_COM_ID ID_USART1
-#define USART_COM    USART1
 
 /** RTOS  */
-#define TASK_TRIGGER_STACK_SIZE            (1024/sizeof(portSTACK_TYPE))
-#define TASK_TRIGGER_STACK_PRIORITY        (tskIDLE_PRIORITY)
+#define TASK_COUNTER_STACK_SIZE            (1024/sizeof(portSTACK_TYPE))
+#define TASK_COUNTER_STACK_PRIORITY        (tskIDLE_PRIORITY)
 #define TASK_UARTTX_STACK_SIZE             (2048/sizeof(portSTACK_TYPE))
 #define TASK_UARTTX_STACK_PRIORITY         (tskIDLE_PRIORITY)
 #define TASK_UARTRX_STACK_SIZE             (2048/sizeof(portSTACK_TYPE))
@@ -50,7 +27,6 @@ SemaphoreHandle_t xSemaphore;
 
 /** Queue for msg log send data */
 QueueHandle_t xQueueTx;
-char ucMessageTx[128];
 
 /** Queue for IRQ -> taskRx */
 QueueHandle_t xQueueRx;
@@ -62,7 +38,7 @@ char ucMessageMSG[128];
 
 /** prototypes */
 void but_callback(void);
-static void ECHO_init(void);
+static void BUT_init(void);
 static void USART1_init(void);
 uint32_t usart_puts(uint8_t *pstring);
 
@@ -115,18 +91,6 @@ extern void vApplicationMallocFailedHook(void)
 /* handlers / callbacks                                                 */
 /************************************************************************/
 
-void signalCallback(void){
-
-  if(pio_get(ECHO_PIO, ECHO_IDX_MASK)){
-    tc_start(TC, TC_CHANNEL);
-    // start timer
-  }
-  else{
-    BaseType_t xHigherPriorityTaskWoken = pdTRUE;
-    xSemaphoreGiveFromISR(xSemaphore, &xHigherPriorityTaskWoken);
-  }
-}
-
 void USART1_Handler(void){
 	uint32_t ret = usart_get_status(USART_COM);
 
@@ -139,8 +103,6 @@ void USART1_Handler(void){
 		usart_serial_getchar(USART_COM, &c);
 		xQueueSendFromISR(xQueueTx, (void *) &c, &xHigherPriorityTaskWoken);
 
-		//usart_serial_putchar(USART1,c);
-
 	// -  Transmissoa finalizada
 	} else if(ret & US_IER_TXRDY){
 
@@ -151,27 +113,22 @@ void USART1_Handler(void){
 /* TASKS                                                                */
 /************************************************************************/
 
-static void task_led(void *pvParameters){
-	/* Attempt to create a semaphore. */
-	xSemaphore = xSemaphoreCreateBinary();
-
+static void task_counter(void *pvParameters){
 	if (xSemaphore == NULL)
 		printf("falha em criar o semaforo \n");
 
 	uint8_t cnt = 0 ;
+  char ucMessageTx[128];
 
 	for (;;) {
-		if( xSemaphoreTake(xSemaphore, 500 / portTICK_PERIOD_MS) == pdTRUE ){
-			//TRIGGER_Toggle(TRIGGER0);
 			sprintf(ucMessageTx, "cnt = %d \n", cnt++);
-			TRIGGER_Toggle(TRIGGER0);
+			LED_Toggle(TRIGGER0);
 			xQueueSend(xQueueTx, (void *) &ucMessageTx, 10);
-		}
+			vTaskDelay(1000);
 	}
 }
 
 static void task_uartTx(void *pvParameters){
-	char rxMSG[128];
 
 	xQueueTx = xQueueCreate(32, sizeof(ucMessageTx) );
 	if(xQueueTx == NULL){
@@ -179,12 +136,10 @@ static void task_uartTx(void *pvParameters){
 		while(1){};
 	}
 
+	char rxMSG[128];
 	while(1){
-		if( xQueueReceive( xQueueTx, &rxMSG, ( TickType_t ) 1 )){
+		if( xQueueReceive( xQueueTx, &rxMSG, ( TickType_t ) 1000 )){
 			usart_puts(rxMSG);
-		}
-		else{
-			vTaskDelay(3000);
 		}
 	}
 }
@@ -232,121 +187,6 @@ static void task_Process(void *pvParameters){
 /* funcoes                                                              */
 /************************************************************************/
 
-/**
- * \brief Configure the console UART.
- */
-
-static void configure_console(void){
-	const usart_serial_options_t uart_serial_options = {
-		.baudrate = CONF_UART_BAUDRATE,
-#if (defined CONF_UART_CHAR_LENGTH)
-		.charlength = CONF_UART_CHAR_LENGTH,
-#endif
-		.paritytype = CONF_UART_PARITY,
-#if (defined CONF_UART_STOP_BITS)
-		.stopbits = CONF_UART_STOP_BITS,
-#endif
-	};
-
-	/* Configure console UART. */
-	stdio_serial_init(CONF_UART, &uart_serial_options);
-
-	/* Specify that stdout should not be buffered. */
-#if defined(__GNUC__)
-	setbuf(stdout, NULL);
-#else
-	/* Already the case in IAR's Normal DLIB default configuration: printf()
-	 * emits one character at a time.
-	 */
-#endif
-}
-
-uint32_t usart_puts(uint8_t *pstring){
-	uint32_t i ;
-
-	while(*(pstring + i))
-		if(uart_is_tx_empty(USART1))
-			usart_serial_putchar(USART1, *(pstring+i++));
-}
-
-void TC_init(Tc * TC, int ID_TC, int TC_CHANNEL, int freq){
-	uint32_t ul_div;
-	uint32_t ul_tcclks;
-	uint32_t ul_sysclk = sysclk_get_cpu_hz();
-
-	uint32_t channel = 1;
-
-	/* Configura o PMC */
-	/* O TimerCounter é meio confuso
-     o uC possui 3 TCs, cada TC possui 3 canais
-     TC0 : ID_TC0, ID_TC1, ID_TC2
-     TC1 : ID_TC3, ID_TC4, ID_TC5
-     TC2 : ID_TC6, ID_TC7, ID_TC8
-	*/
-	pmc_enable_periph_clk(ID_TC);
-
-	/** Configura o TC para operar em  4Mhz e interrupçcão no RC compare */
-	//tc_find_mck_divisor(freq, ul_sysclk, &ul_div, &ul_tcclks, ul_sysclk);
-	tc_init(TC, TC_CHANNEL, ul_tcclks | TC_CMR_CPCTRG);
-	//tc_write_rc(TC, TC_CHANNEL, (ul_sysclk / ul_div) / freq);
-
-	/* Configura e ativa interrupçcão no TC canal 0 */
-	/* Interrupção no C */
-	//NVIC_EnableIRQ((IRQn_Type) ID_TC);
-	//tc_enable_interrupt(TC, TC_CHANNEL, TC_IER_CPCS);
-
-	/* Inicializa o canal 0 do TC */
-}
-
-void io_init(void){
-
-  // Configura led
-	pmc_enable_periph_clk(TRIGGER_PIO_ID);
-	pio_configure(TRIGGER_PIO, PIO_OUTPUT_0, TRIGGER_IDX_MASK, PIO_DEFAULT);
-
-  // Inicializa clock do periférico PIO responsavel pelo botao
-	pmc_enable_periph_clk(ECHO_PIO_ID);
-
-  // Configura PIO para lidar com o pino do botão como entrada
-  // com pull-up
-	pio_configure(ECHO_PIO, PIO_INPUT, BUT_IDX_MASK, PIO_PULLUP);
-
-  // Configura interrupção no pino referente ao botao e associa
-  // função de callback caso uma interrupção for gerada
-  // a função de callback é a: but_callback()
-  pio_handler_set(ECHO_PIO,
-                  ECHO_PIO_ID,
-                  ECHO_IDX_MASK,
-                  PIO_IT_FALL_EDGE,
-                  signalCallback);
-
-  // Ativa interrupção
-  pio_enable_interrupt(ECHO_PIO, BUT_IDX_MASK);
-
-  // Configura NVIC para receber interrupcoes do PIO do botao
-  // com prioridade 4 (quanto mais próximo de 0 maior)
-  NVIC_EnableIRQ(ECHO_PIO_ID);
-  NVIC_SetPriority(ECHO_PIO_ID, 4); // Prioridade 4
-}
-
-/************************************************************************/
-/* inits                                                                */
-/************************************************************************/
-
-static void io_init(void){
-	/* configura prioridae */
-	NVIC_EnableIRQ(ECHO_PIO_ID);
-	NVIC_SetPriority(ECHO_PIO_ID, 4);
-
-	/* conf botão como entrada */
-	pio_configure(ECHO_PIO, PIO_INPUT, BUT_PIO_PIN_MASK, PIO_PULLUP | PIO_DEBOUNCE);
-	pio_set_debounce_filter(ECHO_PIO, BUT_PIO_PIN_MASK, 60);
-	pio_enable_interrupt(ECHO_PIO, BUT_PIO_PIN_MASK);
-	pio_handler_set(ECHO_PIO, BUT_PIO_ID, BUT_PIO_PIN_MASK, PIO_IT_FALL_EDGE , but_callback);
-
-	//printf("Prioridade %d \n", NVIC_GetPriority(ECHO_PIO_ID));
-}
-
 static void USART1_init(void){
 	/* Configura USART1 Pinos */
 	sysclk_enable_peripheral_clock(ID_PIOB);
@@ -385,6 +225,39 @@ static void USART1_init(void){
 
 }
 
+static void configure_console(void){
+	const usart_serial_options_t uart_serial_options = {
+		.baudrate = CONF_UART_BAUDRATE,
+#if (defined CONF_UART_CHAR_LENGTH)
+		.charlength = CONF_UART_CHAR_LENGTH,
+#endif
+		.paritytype = CONF_UART_PARITY,
+#if (defined CONF_UART_STOP_BITS)
+		.stopbits = CONF_UART_STOP_BITS,
+#endif
+	};
+
+	/* Configure console UART. */
+	stdio_serial_init(CONF_UART, &uart_serial_options);
+
+	/* Specify that stdout should not be buffered. */
+#if defined(__GNUC__)
+	setbuf(stdout, NULL);
+#else
+	/* Already the case in IAR's Normal DLIB default configuration: printf()
+	 * emits one character at a time.
+	 */
+#endif
+}
+
+uint32_t usart_puts(uint8_t *pstring){
+	uint32_t i ;
+
+	while(*(pstring + i))
+		if(uart_is_tx_empty(USART1))
+			usart_serial_putchar(USART1, *(pstring+i++));
+}
+
 /************************************************************************/
 /* main                                                                 */
 /************************************************************************/
@@ -403,60 +276,9 @@ int main(void){
 	configure_console();
 	USART1_init();
 
-  // inicializa TC
-	TC_init(TC, TC_ID, TC_CHANNEL, TC_FREQ);
-
-	/* iniciliza pinos */
-	io_init();
-
-
-  while(1){
-    /* - Gera trigger no pino
-     *                _____
-     * Trigger  _____|     |________
-     *                 10us
-    */
-    pio_set(TRIGGER_PIO, TRIGGER_IDX_MASK);
-    delay_us(10);
-    pio_clear(TRIGGER_PIO, TRIGGER_IDX_MASK);
-    tc_start(TC, TC_CHANNEL);
-
-
-    /* - Aguarda sinal do Echo
-     *                ____________
-     * Echo     _____|            |________
-     *               ^            ^
-     *               |            |
-     *           Inicializa TC  Faz leitura TC
-     */
-    while(!pio_get(ECHO_PIO, ECHO_IDX_MASK)){}
-    uint32_t tcCv = tc_read_cv(Tc *p_tc, uint32_t ul_channel);
-    tc_stop(TC, TC_CHANNEL);
-
-    /* D = t(s) * Vel Sound (m/s) / 2 */
-    float ts = (foat) tcCV / 32000.0;
-    float dm = ts * 340/2;
-
-    printf("%d", (int) (dm*100));
-
-    delay_s(1);
-  }
-
-  
-
-	// esse delay é necessário mas não entendo o porque !
-	// sem ele o freertos considera que a interrupcao
-	// do botao tem prioridade maior que a do systick
-	// entrando em modo configASSERT
-	// estudar :
-	//  - https://dzone.com/articles/arm-cortex-m-interrupts-and-freertos-part-1
-	//  - https://www.freertos.org/RTOS-Cortex-M3-M4.html
-	delay_ms(100);
-
-
 	/* Create task to make led blink */
-	if (xTaskCreate(task_led, "Led", TASK_TRIGGER_STACK_SIZE, NULL,
-			TASK_TRIGGER_STACK_PRIORITY, NULL) != pdPASS) {
+	if (xTaskCreate(task_counter, "Led", TASK_COUNTER_STACK_SIZE, NULL,
+			TASK_COUNTER_STACK_PRIORITY, NULL) != pdPASS) {
 		printf("Failed to create test led task\r\n");
 	}
 
@@ -473,19 +295,15 @@ int main(void){
 	}
 
 	/* Create task to monitor processor activity */
-	if (xTaskCreate(task_Process, "UartRx", TASK_PROCESS_STACK_SIZE, NULL,
+	if (xTaskCreate(task_Process, "process", TASK_PROCESS_STACK_SIZE, NULL,
 	TASK_PROCESS_STACK_PRIORITY, NULL) != pdPASS) {
 		printf("Failed to create UartRx task\r\n");
 	}
 
-
 	/* Start the scheduler. */
 	vTaskStartScheduler();
 
-	while(1){
-
-
-	}
+	while(1){	}
 
 	/* Will only get here if there was insufficient memory to create the idle task. */
 	return 0;
