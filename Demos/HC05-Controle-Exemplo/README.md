@@ -72,6 +72,10 @@
 - Se estiver OK com o passo anterior, tente agora executar o `game_controller.py` com os parametros `PORTA_COM -b BAUDRATE` para conectar via serial, o controle agora deve funcionar no emulador, aperte o botão da placa e veja se o botão é pressionado no jogo.
 
 ## Diagrama de conexao do HC05 ao Atmel
+
+# **ATENÇÃO**
+VCC = 5V
+
 ![](doc/diagrama_ligacao_hc05.png)
 
 ## Conectar ao HM10 via porta Serial Virtual
