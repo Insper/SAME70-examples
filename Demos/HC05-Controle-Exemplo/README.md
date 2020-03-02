@@ -20,7 +20,7 @@
 
 - Coloque um nome diferente dos outros grupos no nome do seu Bluetooth e altere a senha da padrão (trecho do código abaixo), compile e programe o projeto no Atmel.
 
-```python
+```c
 int hc05_server_init(void) {
 	char buffer_rx[128];
 	usart_send_command(USART0, buffer_rx, 1000, "AT", 1000);
