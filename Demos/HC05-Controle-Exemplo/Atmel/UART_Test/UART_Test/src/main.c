@@ -63,7 +63,7 @@ void usart_put_string(Usart *usart, char str[]) {
 	usart_serial_write_packet(usart, str, strlen(str));
 }
 
-mes	int usart_get_string(Usart *usart, char buffer[], int bufferlen, int timeout_ms) {
+int usart_get_string(Usart *usart, char buffer[], int bufferlen, int timeout_ms) {
 	long timestart = g_systimer;
 	uint32_t rx;
 	uint32_t counter = 0;
@@ -110,10 +110,10 @@ int hc05_server_init(void) {
 	char buffer_rx[128];
 	usart_send_command(USART0, buffer_rx, 1000, "AT", 1000);
 	usart_send_command(USART0, buffer_rx, 1000, "AT", 1000);	
-	usart_send_command(USART0, buffer_rx, 1000, "AT+NAMEServer", 1000);
+	usart_send_command(USART0, buffer_rx, 1000, "AT+NAMEMarcoMello", 1000);		//AT+NAMEnomedesejado
 	usart_log("hc05_server_init", buffer_rx);
 	usart_send_command(USART0, buffer_rx, 1000, "AT", 1000);
-	usart_send_command(USART0, buffer_rx, 1000, "AT+PIN0000", 1000);
+	usart_send_command(USART0, buffer_rx, 1000, "AT+PIN0000", 1000);			//AT+PINpindesejado	
 	usart_log("hc05_server_init", buffer_rx);
 }
 
@@ -140,9 +140,15 @@ int main (void)
 	while(1) {
 		if(pio_get(PIOA, PIO_INPUT, PIO_PA11) == 0) {
 			button1 = '1';
+			while(pio_get(PIOA, PIO_INPUT, PIO_PA11) == 0) {
+				delay_ms(100);
+				}
 		} else {
 			button1 = '0';
-		}
+			while(pio_get(PIOA, PIO_INPUT, PIO_PA11) == 1) {
+				delay_ms(100);
+				}
+			}
 		
 		while(!usart_is_tx_ready(UART_COMM));
 		usart_write(UART_COMM, button1);
