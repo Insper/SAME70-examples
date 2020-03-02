@@ -23,13 +23,20 @@
 	int hc05_server_init(void) {
 	char buffer_rx[128];
 	usart_send_command(USART0, buffer_rx, 1000, "AT", 1000);
-usart_send_command(USART0, buffer_rx, 1000, "AT", 1000);
+	usart_send_command(USART0, buffer_rx, 1000, "AT", 1000);
 	usart_send_command(USART0, buffer_rx, 1000, "AT+NAME**MarcoMello**", 1000);
 	usart_log("hc05_server_init", buffer_rx);
 	usart_send_command(USART0, buffer_rx, 1000, "AT", 1000);
 	usart_send_command(USART0, buffer_rx, 1000, "AT+PIN**4242**", 1000);
 	usart_log("hc05_server_init", buffer_rx);
 	}
+	
+	Here's a line for us to start with.
+
+This line is separated from the one above by two newlines, so it will be a *separate paragraph*.
+
+This line is also a separate paragraph, but...
+This line is only separated by a single newline, so it's a separate line in the *same paragraph*.
 	
 - Necessitamos agora parear o Bluetooth do computador com o HC05 do Atmel e criar uma porta serial virutal. Para isto siga o roteiro abaixo *Conectar ao HM10 via porta Serial Virtual*, depois retorne para este roteiro.
 
