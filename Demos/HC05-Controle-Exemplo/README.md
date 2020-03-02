@@ -6,11 +6,11 @@
 
 ### **Controle para Automação** (Aplicativos em gerais, Youtube, Chrome, Video Player)
 
-- Instale os pacotes necessários do Python via PIP. Os pacotes necessários estão no arquivo requeriments.txt
+- Instale os pacotes necessários do Python via PIP. Os pacotes necessários estão no arquivo requeriments.txt (dentro da pasta **PC_Python**)
 
-- Utilize o arquivo `youtube_controller.py` como base para o seu controle, ele já vem configurado para usar no Youtube com um botão configurado (botão A do controle ->  tecla L do Youtube para adiantar o vídeo em 10 segundos).
+- Utilizaremos o arquivo `youtube_controller.py` como base para o seu controle, ele já vem configurado para usar no Youtube com um botão configurado (botão A do controle ->  tecla L do Youtube para adiantar o vídeo em 10 segundos).
 
-- Primeiro vamos testar se o computador instalou a biblioteca de automação corretamente (`pyautogui`). Execute o arquivo `youtube_controller.py` com os parametros `none -c dummy`. 
+- **Primeiro:** vamos testar se o computador instalou a biblioteca de automação corretamente (`pyautogui`). Execute o arquivo `youtube_controller.py` com os parametros `none -c dummy`. 
 
 - Isto fará com que o aplicativo em Python, inicie sem comunicar com o Bluetooth e irá simular o aperto da tecla A do controle a cada 1seg. 
 
@@ -18,7 +18,18 @@
 
 - Vamos agora testar com a placa do Atmel, abra o `Atmel Studio` e o projeto exemplo do controle
 
-- Coloque um nome diferente dos outros grupos no nome do seu Bluetooth e altere a senha da padrão, compile e programe o projeto no Atmel.
+- Coloque um nome diferente dos outros grupos no nome do seu Bluetooth e altere a senha da padrão (trecho do código abaixo), compile e programe o projeto no Atmel.
+
+`int hc05_server_init(void) {
+	char buffer_rx[128];
+	usart_send_command(USART0, buffer_rx, 1000, "AT", 1000);
+	usart_send_command(USART0, buffer_rx, 1000, "AT", 1000);	
+	usart_send_command(USART0, buffer_rx, 1000, "AT+NAME**MarcoMello**", 1000);
+	usart_log("hc05_server_init", buffer_rx);
+	usart_send_command(USART0, buffer_rx, 1000, "AT", 1000);
+	usart_send_command(USART0, buffer_rx, 1000, "AT+PIN**4242**", 1000);
+	usart_log("hc05_server_init", buffer_rx);
+}`
 
 - Necessitamos agora parear o Bluetooth do computador com o HC05 do Atmel e criar uma porta serial virutal. Para isto siga o roteiro abaixo *Conectar ao HM10 via porta Serial Virtual*, depois retorne para este roteiro.
 
