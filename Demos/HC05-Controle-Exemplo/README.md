@@ -31,6 +31,8 @@ usart_send_command(USART0, buffer_rx, 1000, "AT+PIN**4242**", 1000);
 usart_log("hc05_server_init", buffer_rx);
 }
 
+
+
 	
 	Here's a line for us to start with.
 
