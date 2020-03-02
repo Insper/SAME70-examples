@@ -77,12 +77,12 @@
 ## Conectar ao HM10 via porta Serial Virtual
 
 - Procure no Windows 10, as configurações de Bluetooth igual a imagem abaixo. Realize o pareamento com o HC05 do seu grupo. Em seguida, clique em "Mais configurações de Bluetooth" conforme marcado em amarelo.    
-![](Imagens/bluetooth1.png)
+![](doc/bluetooth1.png)
 
 - Procure por "Portas COM" e clique em adicionar    
-![](Imagens/bluetooth2.png)
+![](doc/bluetooth2.png)
 
 - Selecione como porta de saída e o HC05 do seu grupo. E o serviço Dev B.  
-![](Imagens/bluetooth3.png)
+![](doc/bluetooth3.png)
 
 - Tente testar a conexão atráves do `PuTTY` ou qualquer outro aplicativo de terminal serial.
