@@ -21,16 +21,16 @@
 - Coloque um nome diferente dos outros grupos no nome do seu Bluetooth e altere a senha da padrão (trecho do código abaixo), compile e programe o projeto no Atmel.
 
 ```c
-109 int hc05_server_init(void) {
-110	char buffer_rx[128];
-111	usart_send_command(USART0, buffer_rx, 1000, "AT", 1000);
-112	usart_send_command(USART0, buffer_rx, 1000, "AT", 1000);	
-113	usart_send_command(USART0, buffer_rx, 1000, "AT+NAMEMarcoMello", 1000);
-114	usart_log("hc05_server_init", buffer_rx);
-115	usart_send_command(USART0, buffer_rx, 1000, "AT", 1000);
-116	usart_send_command(USART0, buffer_rx, 1000, "AT+PIN0000", 1000);
-117	usart_log("hc05_server_init", buffer_rx);
-118 }
+|109| int hc05_server_init(void) {
+|110|	char buffer_rx[128];
+|111|	usart_send_command(USART0, buffer_rx, 1000, "AT", 1000);
+|112|	usart_send_command(USART0, buffer_rx, 1000, "AT", 1000);	
+|113|	usart_send_command(USART0, buffer_rx, 1000, "AT+NAMEMarcoMello", 1000);
+|114|	usart_log("hc05_server_init", buffer_rx);
+|115|	usart_send_command(USART0, buffer_rx, 1000, "AT", 1000);
+|116|	usart_send_command(USART0, buffer_rx, 1000, "AT+PIN0000", 1000);
+|117|	usart_log("hc05_server_init", buffer_rx);
+|118| }
 ```
 	
 - Necessitamos agora parear o Bluetooth do computador com o HC05 do Atmel e criar uma porta serial virutal. Para isto siga o roteiro abaixo *Conectar ao HM10 via porta Serial Virtual*, depois retorne para este roteiro.
