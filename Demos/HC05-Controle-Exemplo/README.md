@@ -73,9 +73,7 @@
 
 ## Diagrama de conexao do HC05 ao Atmel
 
-# **ATENÇÃO**
-VCC = 5V
-
+# **ATENÇÃO -> VCC = 5V**
 ![](doc/diagrama_ligacao_hc05.png)
 
 ## Conectar ao HM10 via porta Serial Virtual
