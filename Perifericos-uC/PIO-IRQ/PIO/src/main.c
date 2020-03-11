@@ -47,6 +47,12 @@
 /************************************************************************/
 
 /************************************************************************/
+/* prototype                                                            */
+/************************************************************************/
+void io_init(void);
+void pisca_led(int n, int t);
+
+/************************************************************************/
 /* handler / callbacks                                                  */
 /************************************************************************/
 
@@ -59,18 +65,22 @@
  */
 void but_callback(void)
 {
-  for (int i=0;i<5;i++)
-  {
-    pio_clear(LED_PIO, LED_IDX_MASK);
-    delay_ms(200);
-    pio_set(LED_PIO, LED_IDX_MASK);
-    delay_ms(200);
-  }
+  pisca_led(5, 200)
 }
 
 /************************************************************************/
 /* funções                                                              */
 /************************************************************************/
+
+// pisca led N vez no periodo T
+void pisca_led(int n, int t){
+  for (int i=0;i<n;i++){
+    pio_clear(LED_PIO, LED_IDX_MASK);
+    delay_ms(t);
+    pio_set(LED_PIO, LED_IDX_MASK);
+    delay_ms(t);
+  }
+}
 
 // Inicializa botao SW0 do kit com interrupcao
 void io_init(void)
