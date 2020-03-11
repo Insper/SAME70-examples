@@ -69,7 +69,7 @@ A Atmel disponibiliza a função `pio_enable_interrupt()` que ativa e configura 
 
 O PIO gera somente uma interrupção: independente de qual pino do PIO foi ativado o código irá para a função `void PIO_Handler(void)` em questão. Porém a ASF fornece uma camada de abstração ([`pio_handler.c`](https://github.com/Insper/SAME70-examples/blob/master/Perifericos-uC/PIO-IRQ/PIO/src/ASF/sam/drivers/pio/pio_handler.c)) que possibilita que uma função seja atribuída por pino, dando a sensação que existe uma interrupção por pino quando na verdade isso é tratamento de software.
 
-Uma vez ativada a interrupção em um determinado periférico, será necessário configurar o tipo de sinal que dará origem a essa interrupção, esses atributos estao definidos no arquivo `[/src/ASF/sam/drivers/pio.h](https://github.com/Insper/SAME70-examples/blob/master/Perifericos-uC/PIO-IRQ/PIO/src/ASF/sam/drivers/pio/pio.h)`:
+Uma vez ativada a interrupção em um determinado PIO, será necessário configurar o tipo de sinal que dará origem a essa interrupção, esses atributos estao definidos no arquivo [`/src/ASF/sam/drivers/pio.h`](https://github.com/Insper/SAME70-examples/blob/master/Perifericos-uC/PIO-IRQ/PIO/src/ASF/sam/drivers/pio/pio.h):
 
 ``` c
 /*  Low level interrupt is active */
@@ -84,8 +84,9 @@ Uma vez ativada a interrupção em um determinado periférico, será necessário
 
 Além do PIO, pino e atributo, a função `pio_handler_set()` recebe como parâmetro um ponteiro de função que será chamado sempre que a interrupção em um determinado **pino** ocorrer. 
 
-> Note que podemos concaternar mais de um atributo por pino, possibilitando que ele gere uma interrupção por exemplo tanto em borda de descida quanto em borda de subida. Além do PIO, pino e atributo, a função `[pio_handler_set](https://github.com/Insper/SAME70-examples/blob/master/Perifericos-uC/PIO-IRQ/PIO/src/ASF/sam/drivers/pio/pio_handler.c#L142)` recebe como parâmetro um ponteiro de função que será chamado sempre que a interrupção em um determinado **pino** ocorrer. 
+> Note que podemos concaternar mais de um atributo por pino, possibilitando que ele gere uma interrupção por exemplo tanto em borda de descida quanto em borda de subida. Além do PIO, pino e atributo, a função [`pio_handler_set`](https://github.com/Insper/SAME70-examples/blob/master/Perifericos-uC/PIO-IRQ/PIO/src/ASF/sam/drivers/pio/pio_handler.c#L142) recebe como parâmetro um ponteiro de função que será chamado sempre que a interrupção em um determinado **pino** ocorrer. 
 
+> Ponteiro de função? É pegar o endereço que a função está salva na ROM, para fazer isso basta passar o nome da função sem nenhum argumento.
 
 ```c
  // Set an interrupt handler for the provided pins.
@@ -120,7 +121,7 @@ pio_handler_set(BUT_PIO,
 O [Nested Vectored Interrupt Controller (NVIC)](http://infocenter.arm.com/help/topic/com.arm.doc.dai0179b/ar01s01s01.html) é a parte do núcleo ARM que lida com interrupções, nele podemos configurar se uma interrupção está ativa ou não, sua prioridade via duas funções definidas no [`CMSIS`](https://www.keil.com/pack/doc/CMSIS/Core/html/group__NVIC__gr.html):
 
 ``` c
-VIC_EnableIRQ (IRQn_Type IRQn)
+NVIC_EnableIRQ (IRQn_Type IRQn)
 NVIC_SetPriority (IRQn_Type IRQn, uint32_t priority)
 ```
 
