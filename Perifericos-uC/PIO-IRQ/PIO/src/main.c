@@ -65,7 +65,7 @@ void pisca_led(int n, int t);
  */
 void but_callback(void)
 {
-  pisca_led(5, 200)
+  pisca_led(5, 200);
 }
 
 /************************************************************************/
