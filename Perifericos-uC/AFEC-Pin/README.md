@@ -21,7 +21,7 @@ Componentes :
 
 ## Diagrama
 
-![](Diagrama_AFEC-Pin.PNG)
+![](Diagrama_AFEC-Pin.png)
 
 
 
