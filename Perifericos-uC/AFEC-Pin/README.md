@@ -13,7 +13,8 @@ Periféricos uC:
     - USART
 
 Componentes : 
-
+    
+    - SAME70-XPLD
     - 1x Potenciômetro 10k
     - Jumpers
 
