@@ -4,17 +4,17 @@
 
 src\ASF\sam\drivers\spi\spi.c
 
-src\gfx_mono_framebuffer.c
+src\oled\gfx_mono_framebuffer.c
 
-src\gfx_mono_generic.c
+src\oled\gfx_mono_generic.c
 
-src\gfx_mono_text.c
+src\oled\gfx_mono_text.c
 
-src\gfx_mono_ug_2832hsweg04.c
+src\oled\gfx_mono_ug_2832hsweg04.c
 
-src\ssd1306.c
+src\oled\ssd1306.c
 
-src\sysfont.c
+src\oled\sysfont.c
 
 src\ASF\common\services\delay\sam\cycle_counter.c
 
