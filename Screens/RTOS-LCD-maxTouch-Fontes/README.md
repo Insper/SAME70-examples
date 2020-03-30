@@ -8,9 +8,11 @@ As fontes inclusas são:
 - Arial, tamanho 72
 
 O uso de cada fonte pode ser feito utilizando a função:
+
 ```font_draw_text(Font *font, const char* texto, int x, int y, int spacing)```
 
 Parametrôs:
+
 `*font - ponteiro para o struct de cada fonte`
 `texto - texto a ser desenhado na tela usando a fonte`
 `x, y - coordenadas para o desenho do texto no LCD`
@@ -30,8 +32,20 @@ Um dos motivos para a restrição de caracteres disponíveis é para reduzir o c
 
 Neste exemplo, as fontes na realidade são fontes `Bitmap`, que não passam de uma imagem de cada caractere já renderizado num tamanho, cor e fundo especificados previamente. 
 
-Você pode observar cada letra armazenada como imagens nos arquivos `calibri_36.h`, `sourcecodepro_28.h` e `arial_72.h`.
+Você pode observar cada letra armazenada como imagens na pasta `font/` :
 
+    - `calibri_36.h`
+    - `sourcecodepro_28.h` 
+    - `arial_72.h`
+
+Note que incluímos no `main.c` esses arquivos 
+
+```c
+#include "fonts/tfont.h"
+#include "fonts/sourcecodepro_28.h"
+#include "fonts/calibri_36.h"
+#include "fonts/arial_72.h"
+```
 
 ## Criando sua própria fonte
 
