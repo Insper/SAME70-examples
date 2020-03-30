@@ -10,7 +10,9 @@ As fontes inclusas são:
 
 O uso de cada fonte pode ser feito utilizando a função:
 
-```font_draw_text(Font *font, const char* texto, int x, int y, int spacing)```
+```c
+font_draw_text(Font *font, const char* texto, int x, int y, int spacing)
+```
 
 Parametrôs:
 
@@ -70,16 +72,16 @@ Em dúvidas consulte a tabela ASCII.
 - Clique em OK, e o aplicativo permitirá voce editar cada letra manualmente se desejado (no entanto não iremos fazer). Vamos utilizar a opção `Font->Optimize Height` e clique em OK na janela que abrir. Esta opção irá remover espaços em branco em excesso (auxilia na redução de memória utilizada pela fonte)
 
 
-- Em seguida clique em `Options` e verifique se o `Preset` está em `Color R8G8B8` (modo suportado pela biblioteca do LCD). Clique na aba `Image` e verifique se o prefix está como `0x`, o suffix em branco e o delimiter com `,` e clique em OK.
+- Em seguida clique em `Options` e verifique se o `Preset` está em [`Color R8G8B8`](https://github.com/Insper/SAME70-examples/blob/master/Screens/RTOS-LCD-maxTouch-Images/Color%20R8G8B8.xml) (modo suportado pela biblioteca do LCD). Clique na aba `Image` e verifique se o prefix está como `0x`, o suffix em branco e o delimiter com `,` e clique em OK.
 
 
 - Agora, basta salvar a nossa nova fonte, vá em `File->Convert...` e entra na pasta do projeto, na pasta `src` onde está o arquivo `main.c`. Coloque o nome do arquivo como colocou na fonte `nome_da_fonte_TAMANHO.h` e certifique-se que o tipo está como `C header file (.h)`.
 
 
-- Com o projeto aberto no `Atmel Studio`, no `Solution Explorer` (onde pode se ver os arquivos do projeto), clique em `src` com o botão direito e `Add->Existing Item..` e escolha o arquivo da fonte gerado.
+- Com o projeto aberto no *Atmel Studio*, no *Solution Explorer* (onde pode se ver os arquivos do projeto), clique em `src` com o botão direito e `Add->Existing Item..` e escolha o arquivo da fonte gerado.
 
 
-- Abra o arquivo da fonte no `Atmel Studio`, procura pela primeira linha, onde temos ```#include <stdint.h>``` e inclua em baixo `#include "tfont.h"`. O arquivo `tfont.h` possui definições das padrões de fontes para podermos utilizar em nosso código.
+- Abra o arquivo da fonte no *Atmel Studio*, procura pela primeira linha, onde temos ```#include <stdint.h>``` e inclua em baixo `#include "tfont.h"`. O arquivo `tfont.h` possui definições das padrões de fontes para podermos utilizar em nosso código.
 
 
 - Neste mesmo arquivo, procure a última linha, onde deverá ter algo similar a ```const tFont nome_da_sua_fonte_TAM = { TAM, nome_da_sua_fonte_TAM_array };```
