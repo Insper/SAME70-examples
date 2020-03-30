@@ -14,10 +14,10 @@ O uso de cada fonte pode ser feito utilizando a função:
 
 Parametrôs:
 
-`*font - ponteiro para o struct de cada fonte`
-`texto - texto a ser desenhado na tela usando a fonte`
-`x, y - coordenadas para o desenho do texto no LCD`
-`spacing - espaçamento horizontal em pixels entre cada letra da fonte`
+1. `*font`: ponteiro para o struct de cada fonte
+1. `texto`: texto a ser desenhado na tela usando a fonte
+1. `x, y` : coordenadas para o desenho do texto no LCD`
+1. `spacing`: espaçamento horizontal em pixels entre cada letra da fonte`
 
 Observe no entanto, que nem todas fontes inclusas possuem todos caracteres ASCII printáveis.
 
@@ -35,9 +35,9 @@ Neste exemplo, as fontes na realidade são fontes `Bitmap`, que não passam de u
 
 Você pode observar cada letra armazenada como imagens na pasta `font/` :
 
-    - `calibri_36.h`
-    - `sourcecodepro_28.h` 
-    - `arial_72.h`
+- `calibri_36.h`
+- `sourcecodepro_28.h` 
+- `arial_72.h`
 
 Note que incluímos no `main.c` esses arquivos 
 
