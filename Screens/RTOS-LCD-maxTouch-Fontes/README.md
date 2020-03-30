@@ -3,6 +3,7 @@
 Este exemplo utiliza 3 tipos de fontes diferentes para criação de textos na tela LCD do kit `Atmel SAME70 Xplained`.
 
 As fontes inclusas são:
+
 - Source Code Pro, tamanho 28
 - Calibri, tamanho 36
 - Arial, tamanho 72
