@@ -52,11 +52,15 @@ void RTT_Handler(void)
   ul_status = rtt_get_status(RTT);
 
   /* IRQ due to Time has changed */
-  if ((ul_status & RTT_SR_RTTINC) == RTT_SR_RTTINC) {  }
+  if ((ul_status & RTT_SR_RTTINC) == RTT_SR_RTTINC) {
+    //f_rtt_alarme = false;  
+     pin_toggle(LED_PIO, LED_IDX_MASK);    // BLINK Led
+  
+    }
 
   /* IRQ due to Alarm */
   if ((ul_status & RTT_SR_ALMS) == RTT_SR_ALMS) {
-      pin_toggle(LED_PIO, LED_IDX_MASK);    // BLINK Led
+     // pin_toggle(LED_PIO, LED_IDX_MASK);    // BLINK Led
       f_rtt_alarme = true;                  // flag RTT alarme
    }  
 }
@@ -100,7 +104,7 @@ static void RTT_init(uint16_t pllPreScale, uint32_t IrqNPulses)
   NVIC_ClearPendingIRQ(RTT_IRQn);
   NVIC_SetPriority(RTT_IRQn, 0);
   NVIC_EnableIRQ(RTT_IRQn);
-  rtt_enable_interrupt(RTT, RTT_MR_ALMIEN);
+  rtt_enable_interrupt(RTT, RTT_MR_ALMIEN | RTT_MR_RTTINCIEN);
 }
 
 /************************************************************************/
