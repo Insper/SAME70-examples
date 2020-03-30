@@ -79,7 +79,7 @@ Em dúvidas consulte a tabela ASCII.
 - Com o projeto aberto no `Atmel Studio`, no `Solution Explorer` (onde pode se ver os arquivos do projeto), clique em `src` com o botão direito e `Add->Existing Item..` e escolha o arquivo da fonte gerado.
 
 
-- Abra o arquivo da fonte no `Atmel Studio`, procura pela primeira linha, onde temos ```#include <stdint.h>``` e inclua em baixo ```#include "tfont.h"```. O arquivo `tfont.h` possui definições das padrões de fontes para podermos utilizar em nosso código.
+- Abra o arquivo da fonte no `Atmel Studio`, procura pela primeira linha, onde temos ```#include <stdint.h>``` e inclua em baixo `#include "tfont.h"`. O arquivo `tfont.h` possui definições das padrões de fontes para podermos utilizar em nosso código.
 
 
 - Neste mesmo arquivo, procure a última linha, onde deverá ter algo similar a ```const tFont nome_da_sua_fonte_TAM = { TAM, nome_da_sua_fonte_TAM_array };```
@@ -87,19 +87,19 @@ Após o último paramêtro, coloque mais dois parametros, no caso, o caractere i
 Se a sua fonte for ASCII printável completo, deverá ser ' ' e '~'. Se for apenas números seria '0' e '9'.
 Exemplos: 
 
-```const tFont sourcecodepro_28 = { 26, sourcecodepro_28_array, 'A', 'Z' };```
-
-```const tFont calibri_36 = { 95, calibri_36_array, ' ', '~' };```
+```c
+const tFont sourcecodepro_28 = { 26, sourcecodepro_28_array, 'A', 'Z' };
+const tFont calibri_36 = { 95, calibri_36_array, ' ', '~' };
+```
 
 
 - Agora no arquivo principal `main.c`, devemos incluir as fontes que desejamos utilizar.
 Exemplos:
 
-```#include "sourcecodepro_28.h"```
-
-```#include "calibri_36.h"```
-
-``#include "arial_72.h"``
-
+```c
+#include "fonts/sourcecodepro_28.h"
+#include "fonts/calibri_36.h"
+#include "fonts/arial_72.h"
+```
 
 - Agora basta utilizar a função `font_draw_text(Font *font, const char* texto, int x, int y, int spacing)` indicando a nova fonte.
