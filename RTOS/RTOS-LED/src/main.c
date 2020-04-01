@@ -67,7 +67,7 @@ static void task_monitor(void *pvParameters)
 	UNUSED(pvParameters);
 
 	for (;;) {
-		printf("--- task ## %u", (unsigned int)uxTaskGetNumberOfTasks());
+		printf("--- task ## %u\n", (unsigned int)uxTaskGetNumberOfTasks());
 		vTaskList((signed portCHAR *)szList);
 		printf(szList);
 		vTaskDelay(1000);
