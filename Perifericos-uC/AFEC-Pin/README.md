@@ -27,9 +27,9 @@ Esse exemplo efetua a leitura de um potenciômetro e imprime o valor lido na ser
 ## Explicação
 
 ``` c
-#define AFEC_POT AFEC0
-#define AFEC_POT_ID ID_AFEC0
-#define AFEC_POT_CHANNEL 0 // Canal do pino PD30
+#define AFEC_POT AFEC1
+#define AFEC_POT_ID ID_AFEC1
+#define AFEC_POT_CHANNEL 6 // Canal do pino PC31
 ```
 
 No uC utilizado no curso possuímos dois AFEC: AFEC0 e AFEC1. Esses periféricos são responsáveis por digitalizar um valor analógico e transforma em um valor digital. Os AFECs do nosso uC possui resolução de `12` bits (impacta que o valor convertido está entre `0` e `4095`). 
@@ -48,9 +48,9 @@ O AFEC possui o diagrama interno a seguir (simplificado):
 
 ### firmware
 
-O firmware exemplo configura o `AFEC0` canal `0`, esse canal é que está conectado o pino `PD30`, para gerar uma interrupção e chamar a função de `AFEC_pot_Callback()` sempre que um valor novo estiver disponível (conversão finalizada).
+O firmware exemplo configura o `AFEC0` canal `0`, esse canal é que está conectado o pino `PC31`, para gerar uma interrupção e chamar a função de `AFEC_pot_Callback()` sempre que um valor novo estiver disponível (conversão finalizada).
 
-![](doc/pd30.png)
+![](doc/PC31.png)
 
 A configuração do AFEC só é necessário uma única vez, por isso é realizada fora do `while`
 
@@ -100,8 +100,8 @@ No nosso `while(1)` do `main`, ficamos verificando esse flag, e quando o valor f
 A configuração do AFEC é realizado pela função: `config_AFEC()`, que recebe como parâmetros:
 
 -  `Afec *afec`:  `POT_AFEC` indica qual AFEC será utilizado
-    - No nosso caso `AFEC0`
+    - No nosso caso `AFEC1`
 - `uint32_t afec_id`:  `POT_AFEC_ID` ID do afec (para usar no PMC e NVIC)
 - `uint32_t afec_channel`: `POT_AFEC_CHANNEL` canal do afec que será realizado a conversão
-    - No nosso cado `0`
+    - No nosso caso `6`
 - `callback` `AFEC_pot_Callback` função a ser chamada quando a conversão estiver pronta.

@@ -16,7 +16,8 @@ Em sua grande maioria os sensores elétricos são transdutores, ou seja, convert
     - `stdio` / DEBUG
         - `PB4`:  UART1 
         - `PD21`: UART1
- 
+    - `EXT-2` 
+        - pinn 3: `PD30` : AFEC0
 - APIs:
     - .
 
