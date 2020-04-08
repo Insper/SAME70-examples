@@ -7,7 +7,7 @@ Esse exemplo efetua a leitura de um potenciômetro e imprime o valor lido na ser
     - USART1 (debug - para comunicação com o PC - `stdio` )
     
 - Pinos:
-    - EXT-2: pin 3
+    - EXT-1: pin 3
         - `PC31`: AFEC0
 
 - Componentes: 
