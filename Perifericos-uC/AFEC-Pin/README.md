@@ -26,7 +26,7 @@ Esse exemplo efetua a leitura de um potenciômetro e imprime o valor lido na ser
 
 ### resultado
 
-![](doc/atmel.png)
+![](doc/atmel.PNG)
 
 ## Explicação
 
