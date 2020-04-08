@@ -37,7 +37,6 @@
 /* Globals                                                              */
 /************************************************************************/
 
-
 /** The conversion data is done flag */
 volatile bool g_is_conversion_done = false;
 
