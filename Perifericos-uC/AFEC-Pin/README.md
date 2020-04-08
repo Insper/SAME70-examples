@@ -8,7 +8,7 @@ Esse exemplo efetua a leitura de um potenciômetro e imprime o valor lido na ser
     
 - Pinos:
     - EXT-2: pin 3
-        - `PD30`: AFEC0
+        - `PC31`: AFEC0
 
 - Componentes: 
     
