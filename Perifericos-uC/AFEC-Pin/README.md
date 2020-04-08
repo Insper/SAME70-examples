@@ -26,6 +26,12 @@ Esse exemplo efetua a leitura de um potenciômetro e imprime o valor lido na ser
 
 ## Explicação
 
+``` c
+#define AFEC_POT AFEC0
+#define AFEC_POT_ID ID_AFEC0
+#define AFEC_POT_CHANNEL 0 // Canal do pino PD30
+```
+
 No uC utilizado no curso possuímos dois AFEC: AFEC0 e AFEC1. Esses periféricos são responsáveis por digitalizar um valor analógico e transforma em um valor digital. Os AFECs do nosso uC possui resolução de `12` bits (impacta que o valor convertido está entre `0` e `4095`). 
 
 Ao realizar uma conversão analógica digital (ADC), o AFEC necessita realizar uma amostragem do pino (`sample and hold`) e então converter o valor que foi amostrado (`digitalização`). Esse processo é chamado de digitalização:
@@ -49,8 +55,8 @@ O firmware exemplo configura o `AFEC0` canal `0`, esse canal é que está conect
 A configuração do AFEC só é necessário uma única vez, por isso é realizada fora do `while`
 
 ``` c
-  /* inicializa e configura adc */
-  config_AFEC_pot(AFEC_POT, AFEC_POT_ID, AFEC_POT_CHANNEL, AFEC_pot_Callback);
+/* inicializa e configura adc */
+config_AFEC_pot(AFEC_POT, AFEC_POT_ID, AFEC_POT_CHANNEL, AFEC_pot_Callback);
 ```
 
 Uma vez configurado o AFEC, é necessário inicializarmos a conversão, para isso precisamos selecionar o canal e mandar o `AFEC` iniciar a conversão:
@@ -64,8 +70,7 @@ afec_start_software_conversion(AFEC_POT);
 Uma vez inicializado a conversão, precisamos esperar pela interrupção do AFEC indicando que o valor está pronto, sempre que isso ocorrer a função `AFEC_pot_Callback()` será chamada:
 
 ```c
-static void AFEC_pot_Callback(void)
-{
+static void AFEC_pot_Callback(void){
   g_ul_value = afec_channel_get_value(AFEC_POT, AFEC_POT_CHANNEL);
   g_is_conversion_done = true;
 }
@@ -100,15 +105,3 @@ A configuração do AFEC é realizado pela função: `config_AFEC()`, que recebe
 - `uint32_t afec_channel`: `POT_AFEC_CHANNEL` canal do afec que será realizado a conversão
     - No nosso cado `0`
 - `callback` `AFEC_pot_Callback` função a ser chamada quando a conversão estiver pronta.
-
-
-1. configura o AFEC `config_AFEC_pot()`
-1. configura a uart para servir como console `configure_console()`
-1. inicializa uma conversão `afec_start_software_conversion(AFEC0)` 
-1. No while(1)
-    - verifica a flag que indica o fim da conversão `g_is_conversion_done`
-        - configurada na interrupção/callback do ADC `AFEC_Temp_callback`
-        - converte valor de bits em tensão e então em temperatura `convert_adc_to_temp`
-        - envia pela serial o resultado `printf`
-        - inicializa uma nova conversão `afec_start_software_conversion(AFEC0)` 
-        - espera 1 segundo `delay_s(1)`
