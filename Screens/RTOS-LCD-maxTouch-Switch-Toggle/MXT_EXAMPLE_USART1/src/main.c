@@ -237,7 +237,7 @@ void task_lcd(void){
   draw_screen();
   draw_button(0);
   
-  // Escreve HH:MM no LCD
+  // Escreve DEMO - BUT no LCD
   font_draw_text(&digital52, "DEMO - BUT", 0, 0, 1);
   
   // strut local para armazenar msg enviada pela task do mxt
