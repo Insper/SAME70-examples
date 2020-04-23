@@ -22,12 +22,12 @@ Módulos :
 
 ## Como funciona esse exemplo?
 
-Ao iniciar o programa, no LCD é desenhado um botão, o seu inicial é LIGADO (Verde):
+Ao iniciar o programa, no LCD é desenhado um botão, o seu estado inicial é LIGADO (Verde):
 ![LCD_ON](./doc/LCD_ON.jpeg)
 
 
 
-Ao clicar no botão verde, o mesmo troca o seu estado indo para DESLIGADO (Vermelho):
+Ao clicar no botão, o mesmo troca o seu estado para DESLIGADO (Vermelho):
 ![LCD_OFF](./doc/LCD_OFF.jpeg)
 
 
