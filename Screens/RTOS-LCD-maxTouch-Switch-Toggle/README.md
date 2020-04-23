@@ -24,13 +24,13 @@ Módulos :
 
 Ao iniciar o programa, no LCD é desenhado um botão, o seu inicial é LIGADO (Verde):
 
-![LCD_ON](C:\Users\MarcoASMA.INSPER\Desktop\SAME70-examples\Screens\RTOS-LCD-maxTouch-Switch-Toggle\doc\LCD_ON.jpeg)
+![LCD_ON](.doc/LCD_ON.jpeg)
 
 
 
 Ao clicar no botão verde, o mesmo troca o seu estado indo para DESLIGADO (Vermelho):
 
-![LCD_OFF](C:\Users\MarcoASMA.INSPER\Desktop\SAME70-examples\Screens\RTOS-LCD-maxTouch-Switch-Toggle\doc\LCD_OFF.jpeg)
+![LCD_OFF](./doc/LCD_OFF.jpeg)
 
 
 
