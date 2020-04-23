@@ -48,7 +48,7 @@ Utilizado como debug do programa, deve-se utilizar um terminal (exe. putty) no c
 O Serial Peripheral Interface Bus (SPI) é uma maneira serial de dois dispositivos (ou chips) se comunicarem, o SPI é amplamente
 utilizado pela industria e diversos sensores e atuadores o utilizam com forma de comunicação. 
 
-![Comunicação SPI - (ref. sparkfun)](./doc/spiSpark.png)
+![Comunicação SPI - (ref. sparkfun)](/doc/spiSpark.png)
 
 O SPI possui as seguintes configurações :
 
