@@ -338,7 +338,7 @@ void task_lcd(void){
       
      if(xQueueReceive( xQueueADC, &(adc), 100)){
        plot.raw = (int) adc.value;
-       plot.filtrado = (int) 0;
+       plot.filtrado = (int) adc.value+100;
        xQueueSend(xQueuePlot, &plot, 0);
       }
     }
