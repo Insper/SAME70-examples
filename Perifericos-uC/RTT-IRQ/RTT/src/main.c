@@ -102,7 +102,7 @@ static void RTT_init(uint16_t pllPreScale, uint32_t IrqNPulses)
   /* Enable RTT interrupt */
   NVIC_DisableIRQ(RTT_IRQn);
   NVIC_ClearPendingIRQ(RTT_IRQn);
-  NVIC_SetPriority(RTT_IRQn, 0);
+  NVIC_SetPriority(RTT_IRQn, 4);
   NVIC_EnableIRQ(RTT_IRQn);
   rtt_enable_interrupt(RTT, RTT_MR_ALMIEN | RTT_MR_RTTINCIEN);
 }

@@ -102,6 +102,7 @@ void TC_init(Tc * TC, int ID_TC, int TC_CHANNEL, int freq){
 
 	/* Configura e ativa interrupçcão no TC canal 0 */
 	/* Interrupção no C */
+  NVIC_SetPriority(ID_TC, 4);
 	NVIC_EnableIRQ((IRQn_Type) ID_TC);
 	tc_enable_interrupt(TC, TC_CHANNEL, TC_IER_CPCS);
 

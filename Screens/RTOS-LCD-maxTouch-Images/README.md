@@ -8,11 +8,11 @@ Periféricos uC:
   - Power Managment Controller (PMC)
   - USART
   - Serial Protocol Interface (SPI)
- 
+
 APIs :
 
   - Driver ili9488
- 
+
 Módulos : 
 
   - LCD maX Touch X PLAINED PRO 
@@ -48,7 +48,7 @@ Utilizado como debug do programa, deve-se utilizar um terminal (exe. putty) no c
 O Serial Peripheral Interface Bus (SPI) é uma maneira serial de dois dispositivos (ou chips) se comunicarem, o SPI é amplamente
 utilizado pela industria e diversos sensores e atuadores o utilizam com forma de comunicação. 
 
-![Comunicação SPI - (ref. sparkfun)](./doc/spiSpark.png)
+![Comunicação SPI - (ref. sparkfun)](/doc/spiSpark.png)
 
 O SPI possui as seguintes configurações :
 
@@ -142,7 +142,7 @@ Salve o arquivo no PC: `lavagens.png`, repare que essa imagem possui dimissão d
 
 ### 2 Gerando `.h`
 
-![](doc/gerando-h.gif)
+![](./doc/gerando-h.gif)
 
 1. Abra o `lcd-image-converter` -> `File` -> `New image`
     - name: `lavagens`
@@ -152,7 +152,7 @@ Salve o arquivo no PC: `lavagens.png`, repare que essa imagem possui dimissão d
     - Arquivo de config. fornecido nesse tutorial
 1. `File` -> `Convert...`
     - name: `lavagens.h`
-  
+
 Os passos anteriores convertem a imagem (`lavagens.png`) para um vetor de pixels (`lavagens.h`) utilizando a configuração `R8G8B8`. O arquivo `lavagens.h` possui:
 
 #### tImage
@@ -223,7 +223,7 @@ const tImage lavagem = { image_data_lavagem, 93, 93,  8 };
 
 Agora é necessário adicionarmos o arquivo `lavagens.h` ao projeto. Com o exemplo do LCD aberto no Atmel Studio:
 
-![](doc/inserindo-h.gif)
+![](./doc/inserindo-h.gif)
 
 1. `Solution Explorer` -> `Botão Direito` em `src` -> `Add` -> `New Folder`
     - Nome: `icones`
@@ -253,10 +253,10 @@ Temos algumas opções para desenhar a imagem no LCD:
    
 2. Fazermos uma transferência direta de memória entre o uc e o ili9488 (burst)
    - mais eficiente e melhor método.
- 
+
  Para implementarmos a transferência direta de memória é necessário configurarmos a região do LCD que será atualizado, para isso
  utilizaremos a função `ili9488\_draw\_pixmap` que possui implementa uma atualização parcial de uma região de memória do LCD. A implementação da funcão está na biblioteca do `ili9488` e copiado a baixo:
- 
+
 ```C
  /**
  * \brief Draw a pixmap on LCD.
@@ -289,10 +289,10 @@ void ili9488_draw_pixmap(uint32_t ul_x, uint32_t ul_y, uint32_t ul_width,
   /* Reset the refresh window area */
   ili9488_set_window(0, 0, ILI9488_LCD_WIDTH, ILI9488_LCD_HEIGHT);
 }
- ```
- 
+```
+
 Para usarmos essa função, basta a chamarmos com os parâmetros da imagem que desejamos desenhar. Insira no main logo antes do while(1):
- 
+
  ```diff
   ili9488_set_foreground_color(COLOR_CONVERT(COLOR_BLACK));
   sprintf(stingLCD, "Computacao Embarcada %d", 2018);
@@ -301,6 +301,6 @@ Para usarmos essa função, basta a chamarmos com os parâmetros da imagem que d
 + // desenha imagem lavagem na posicao X=80 e Y=150
 + ili9488_draw_pixmap(80, 150, lavagem.width, lavagem.height, lavagem.data);
  ```
- 
+
 
 

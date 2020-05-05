@@ -151,6 +151,8 @@ static void config_ADC_TEMP(void){
 
 	/* Selecina canal e inicializa conversão */
 	afec_channel_enable(AFEC0, AFEC_CHANNEL_TEMP_SENSOR);
+
+  NVIC_SetPriority(ID_AFEC0, 4);
 }
 
 

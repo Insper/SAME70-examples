@@ -113,7 +113,7 @@ void RTC_init(Rtc *rtc, uint32_t id_rtc, calendar t, uint32_t irq_type){
 	/* Configure RTC interrupts */
 	NVIC_DisableIRQ(id_rtc);
 	NVIC_ClearPendingIRQ(id_rtc);
-	NVIC_SetPriority(id_rtc, 0);
+	NVIC_SetPriority(id_rtc, 4);
 	NVIC_EnableIRQ(id_rtc);
 
 	/* Ativa interrupcao via alarme */
