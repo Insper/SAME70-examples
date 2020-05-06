@@ -317,7 +317,9 @@ void task_lcd(void){
     
     if (xQueueReceive( xQueuePlot, &(plot), ( TickType_t )  100 / portTICK_PERIOD_MS)) {     
       sprintf(buffer, "%04d", plot.raw);
-      	font_draw_text(&calibri_36, buffer, 0, 0, 2);
+      font_draw_text(&calibri_36, buffer, 0, 0, 2);
+      
+      printf("%d\n",plot.raw); //printa no terminal o valor de plo.raw
 
     }
   }    
