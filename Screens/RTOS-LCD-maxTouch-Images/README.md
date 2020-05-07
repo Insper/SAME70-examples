@@ -294,8 +294,9 @@ void ili9488_draw_pixmap(uint32_t ul_x, uint32_t ul_y, uint32_t ul_width,
 Para usarmos essa função, basta a chamarmos com os parâmetros da imagem que desejamos desenhar. Insira no main logo antes do while(1) da `task_lcd()`:
 
  ```diff
+  char stringLCD[40];
+  sprintf(stringLCD, "Computacao Embarcada %d", 2018);
   ili9488_set_foreground_color(COLOR_CONVERT(COLOR_BLACK));
-  sprintf(stingLCD, "Computacao Embarcada %d", 2018);
   ili9488_draw_string(0, 50, stingLCD);
 
 + // desenha imagem lavagem na posicao X=80 e Y=150
