@@ -291,7 +291,7 @@ void ili9488_draw_pixmap(uint32_t ul_x, uint32_t ul_y, uint32_t ul_width,
 }
 ```
 
-Para usarmos essa função, basta a chamarmos com os parâmetros da imagem que desejamos desenhar. Insira no main logo antes do while(1):
+Para usarmos essa função, basta a chamarmos com os parâmetros da imagem que desejamos desenhar. Insira no main logo antes do while(1) da 'task_lcd()':
 
  ```diff
   ili9488_set_foreground_color(COLOR_CONVERT(COLOR_BLACK));
