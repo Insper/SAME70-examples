@@ -299,7 +299,7 @@ Para usarmos essa função, basta a chamarmos com os parâmetros da imagem que d
   ili9488_draw_string(0, 50, stingLCD);
 
 + // desenha imagem lavagem na posicao X=80 e Y=150
-+ ili9488_draw_pixmap(80, 150, lavagem.width, lavagem.height, lavagem.data);
++ ili9488_draw_pixmap(80, 150, lavagens.width, lavagens.height, lavagens.data);
  ```
 
 
