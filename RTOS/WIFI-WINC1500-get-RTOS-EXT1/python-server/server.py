@@ -8,7 +8,7 @@ todos = {}
 
 class HelloWorld(Resource):
     def get(self):
-        return {'hello': 'world'}
+        return {'hello' : 'world'}
 
 #class TodoSimple(Resource):
 #    def get(self, todo_id):
