@@ -289,7 +289,7 @@ static void wifi_cb(uint8_t u8MsgType, void *pvMsg)
 /* TASKS                                                                */
 /************************************************************************/
 
-static void task_process(void *pvParameters){
+static void task_process(void *pvParameters) {
 
   printf("task process created \n");
   vTaskDelay(1000);
@@ -300,20 +300,12 @@ static void task_process(void *pvParameters){
     
     // aguarda task_wifi conectar no wifi e socket estar pronto
     while(gbTcpConnection == false && tcp_client_socket >= 0){
-      vTaskDelay(100);
+      vTaskDelay(10);
     }
     
     // faz nova requisicao get ao socket
     // e espera por duas mensagens!
     // comunicacao tcp/ip possui ack
-    //
-    //  uC   get   pc
-    //   x--------->
-    //       ack (HTTP/ 200 OK)
-    //   < --------x
-    //       msg (HTTP CONTENT)
-    //   < --------x
-    //
     if(msg_counter == 0){
       // faz nova requisicao
       msg_counter = 2;
@@ -321,107 +313,110 @@ static void task_process(void *pvParameters){
       send(tcp_client_socket, g_sendBuffer, strlen((char *)g_sendBuffer), 0);
       
       // requisita primeira primeira resposta!
-      memset(g_sendBuffer, 0, MAIN_WIFI_M2M_BUFFER_SIZE);
+      memset(g_receivedBuffer, 0, MAIN_WIFI_M2M_BUFFER_SIZE);
       recv(tcp_client_socket, &g_receivedBuffer[0], MAIN_WIFI_M2M_BUFFER_SIZE, 0);
     }
     
     if(xQueueReceive(xQueueMsg, &p_recvMsg, 5000) == pdTRUE){
       printf(STRING_LINE);
       printf(p_recvMsg->pu8Buffer);
-      printf(STRING_EOL);
+      printf(STRING_EOL);  printf(STRING_LINE);
       msg_counter--;
       // ainda espera por mais dados?
       if(msg_counter > 0 ){
-        memset(g_sendBuffer, 0, MAIN_WIFI_M2M_BUFFER_SIZE);
+        memset(g_receivedBuffer, 0, MAIN_WIFI_M2M_BUFFER_SIZE);
         recv(tcp_client_socket, &g_receivedBuffer[0], MAIN_WIFI_M2M_BUFFER_SIZE, 0);
       }
-      } else{ msg_counter = 0;}
-      vTaskDelay(500);
     }
+    else{
+      msg_counter = 0;
+    }
+    vTaskDelay(100);
+  }
+}
+
+static void task_wifi(void *pvParameters) {
+  tstrWifiInitParam param;
+  int8_t ret;
+  struct sockaddr_in addr_in;
+
+  xSemaphore = xSemaphoreCreateCounting(20,0);
+  xQueueMsg = xQueueCreate(10, sizeof(tstrSocketRecvMsg));
+
+  /* Initialize the BSP. */
+  nm_bsp_init();
+
+  /* Initialize Wi-Fi parameters structure. */
+  memset((uint8_t *)&param, 0, sizeof(tstrWifiInitParam));
+
+  /* Initialize Wi-Fi driver with data and status callbacks. */
+  param.pfAppWifiCb = wifi_cb;
+  ret = m2m_wifi_init(&param);
+  if (M2M_SUCCESS != ret) {
+    printf("main: m2m_wifi_init call error!(%d)\r\n", ret);
+    while (1) { }
   }
 
-  static void task_wifi(void *pvParameters) {
-    tstrWifiInitParam param;
-    int8_t ret;
-    struct sockaddr_in addr_in;
+  /* Initialize socket module. */
+  socketInit();
 
-    xSemaphore = xSemaphoreCreateBinary();
-    xQueueMsg = xQueueCreate(10, sizeof(tstrSocketRecvMsg));
+  /* Register socket callback function. */
+  registerSocketCallback(socket_cb, resolve_cb);
 
-    /* Initialize the BSP. */
-    nm_bsp_init();
+  /* Connect to router. */
+  printf("main: connecting to WiFi AP %s...\r\n", (char *)MAIN_WLAN_SSID);
+  m2m_wifi_connect((char *)MAIN_WLAN_SSID, sizeof(MAIN_WLAN_SSID), MAIN_WLAN_AUTH, (char *)MAIN_WLAN_PSK, M2M_WIFI_CH_ALL);
 
-    /* Initialize Wi-Fi parameters structure. */
-    memset((uint8_t *)&param, 0, sizeof(tstrWifiInitParam));
+  /* formata ip */
+  addr_in.sin_family = AF_INET;
+  addr_in.sin_port = _htons(MAIN_SERVER_PORT);
+  inet_aton(MAIN_SERVER_NAME, &addr_in.sin_addr);
 
-    /* Initialize Wi-Fi driver with data and status callbacks. */
-    param.pfAppWifiCb = wifi_cb;
-    ret = m2m_wifi_init(&param);
-    if (M2M_SUCCESS != ret) {
-      printf("main: m2m_wifi_init call error!(%d)\r\n", ret);
-      while (1) { }
-    }
+  while(1){
+    if(xSemaphoreTake(xSemaphore, 500)){
+      m2m_wifi_handle_events(NULL);
 
-    /* Initialize socket module. */
-    socketInit();
+      if (wifi_connected == M2M_WIFI_CONNECTED) {
+        /* Open client socket. */
+        if (tcp_client_socket < 0) {
+          printf("socket init \n");
+          if ((tcp_client_socket = socket(AF_INET, SOCK_STREAM, 0)) < 0) {
+            printf("main: failed to create TCP client socket error!\r\n");
+            continue;
+          }
 
-    /* Register socket callback function. */
-    registerSocketCallback(socket_cb, resolve_cb);
-
-    /* Connect to router. */
-    printf("main: connecting to WiFi AP %s...\r\n", (char *)MAIN_WLAN_SSID);
-    m2m_wifi_connect((char *)MAIN_WLAN_SSID, sizeof(MAIN_WLAN_SSID), MAIN_WLAN_AUTH, (char *)MAIN_WLAN_PSK, M2M_WIFI_CH_ALL);
-
-    /* formata ip */
-    addr_in.sin_family = AF_INET;
-    addr_in.sin_port = _htons(MAIN_SERVER_PORT);
-    inet_aton(MAIN_SERVER_NAME, &addr_in.sin_addr);
-
-    while(1){
-      if(xSemaphoreTake(xSemaphore, 500)){
-        m2m_wifi_handle_events(NULL);
-
-        if (wifi_connected == M2M_WIFI_CONNECTED) {
-          /* Open client socket. */
-          if (tcp_client_socket < 0) {
-            printf("socket init \n");
-            if ((tcp_client_socket = socket(AF_INET, SOCK_STREAM, 0)) < 0) {
-              printf("main: failed to create TCP client socket error!\r\n");
-              continue;
-            }
-
-            /* Connect server */
-            printf("socket connecting\n");
-            if (connect(tcp_client_socket, (struct sockaddr *)&addr_in,
-            sizeof(struct sockaddr_in)) != SOCK_ERR_NO_ERROR) {
-              close(tcp_client_socket);
-              tcp_client_socket = -1;
-              printf("main: error connect to socket\n");
-              }else{
-              gbTcpConnection = true;
-            }
+          /* Connect server */
+          printf("socket connecting\n");
+          if (connect(tcp_client_socket, (struct sockaddr *)&addr_in,
+          sizeof(struct sockaddr_in)) != SOCK_ERR_NO_ERROR) {
+            close(tcp_client_socket);
+            tcp_client_socket = -1;
+            printf("main: error connect to socket\n");
+            }else{
+            gbTcpConnection = true;
           }
         }
       }
     }
   }
+}
 
-  int main(void)
-  {
-    /* Initialize the board. */
-    sysclk_init();
-    board_init();
+int main(void)
+{
+  /* Initialize the board. */
+  sysclk_init();
+  board_init();
 
-    /* Initialize the UART console. */
-    configure_console();
-    printf(STRING_HEADER);
+  /* Initialize the UART console. */
+  configure_console();
+  printf(STRING_HEADER);
 
-    xTaskCreate(task_wifi, "Wifi", TASK_WIFI_STACK_SIZE, NULL, TASK_WIFI_PRIORITY, NULL);
-    xTaskCreate( task_process, "process", TASK_PROCESS_STACK_SIZE, NULL, TASK_PROCESS_PRIORITY,  NULL );
+  xTaskCreate(task_wifi, "Wifi", TASK_WIFI_STACK_SIZE, NULL, TASK_WIFI_PRIORITY, NULL);
+  xTaskCreate( task_process, "process", TASK_PROCESS_STACK_SIZE, NULL, TASK_PROCESS_PRIORITY,  NULL );
 
-    vTaskStartScheduler();
+  vTaskStartScheduler();
 
-    while(1) {};
-    return 0;
+  while(1) {};
+  return 0;
 
-  }
+}
