@@ -43,11 +43,20 @@
 #include "common/include/nm_common.h"
 #include "asf.h"
 #include "conf_winc.h"
+//CORSI freertos
+#include "semphr.h"
 
 static tpfNmBspIsr gpfIsr;
 
+//CORSI freertos
+extern SemaphoreHandle_t xSemaphore;
+
 static void chip_isr(uint32_t id, uint32_t mask)
 {
+  //CORSI acorda task wifi freertos
+  BaseType_t xHigherPriorityTaskWoken = pdTRUE;
+  xSemaphoreGiveFromISR(xSemaphore, &xHigherPriorityTaskWoken);
+  
 	if ((id == CONF_WINC_SPI_INT_PIO_ID) && (mask == CONF_WINC_SPI_INT_MASK)) {
 		if (gpfIsr) {
 			gpfIsr();
@@ -143,7 +152,7 @@ void nm_bsp_register_isr(tpfNmBspIsr pfIsr)
   // corsi: clear PIO IRQ before enable nvic
   pio_get_interrupt_status(CONF_WINC_SPI_INT_PIO);
   // corsi: for use with RTOS priority shall be < configLIBRARY_MAX_SYSCALL_INTERRUPT_PRIORITY 
- 	NVIC_SetPriority((IRQn_Type) CONF_WINC_SPI_INT_PIO_ID, 4);
+ 	NVIC_SetPriority((IRQn_Type) CONF_WINC_SPI_INT_PIO_ID, 5);
  	NVIC_EnableIRQ((IRQn_Type) CONF_WINC_SPI_INT_PIO_ID);
 	pio_handler_set_priority(CONF_WINC_SPI_INT_PIO, (IRQn_Type)CONF_WINC_SPI_INT_PIO_ID,
 			CONF_WINC_SPI_INT_PRIORITY);

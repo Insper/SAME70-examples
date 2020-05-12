@@ -90,7 +90,7 @@ extern "C" {
 #define CONF_WINC_SPI_INT_PIO			PIOD
 #define CONF_WINC_SPI_INT_PIO_ID		ID_PIOD
 #define CONF_WINC_SPI_INT_MASK			PIO_PD28
-#define CONF_WINC_SPI_INT_PRIORITY		(0)
+#define CONF_WINC_SPI_INT_PRIORITY		(5)
 
 /** Clock polarity & phase. */
 #define CONF_WINC_SPI_POL				(0)
