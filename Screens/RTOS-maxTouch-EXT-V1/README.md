@@ -2,7 +2,7 @@
 - Marco Mello
 - 13/05/2020
 
-OBS: Arquivos que foram alterados a parte do exemplo `https://github.com/Insper/SAME70-examples/tree/master/Screens/maxTouch-EXT-V1`: 
+OBS: Arquivos que foram alterados a parte do exemplo `https://github.com/Insper/SAME70-examples/tree/master/Screens/RTOS-LCD-maxTouch-Switch-Toggle`: 
 
 ```
 init.c
