@@ -4,13 +4,7 @@
 #include "bsp/include/nm_bsp.h"
 #include "driver/include/m2m_wifi.h"
 #include "socket/include/socket.h"
-
-#define STRING_EOL  "\r\n"
-#define STRING_LINE "--------------------------------------------"STRING_EOL
-#define STRING_HEADER "-- WINC1500 client example --"STRING_EOL	\
-"-- "BOARD_NAME " --"STRING_EOL	\
-"-- Compiled: "__DATE__ " "__TIME__ " --"STRING_EOL \
-STRING_LINE
+#include "util.h"
 
 /************************************************************************/
 /* WIFI                                                                 */
@@ -84,86 +78,6 @@ extern void vApplicationMallocFailedHook(void){
 /************************************************************************/
 /* funcoes                                                              */
 /************************************************************************/
-
-/**
-* \brief Configure UART console.
-*/
-static void configure_console(void)
-{
-  const usart_serial_options_t uart_serial_options = {
-    .baudrate =		CONF_UART_BAUDRATE,
-    .charlength =	CONF_UART_CHAR_LENGTH,
-    .paritytype =	CONF_UART_PARITY,
-    .stopbits =		CONF_UART_STOP_BITS,
-  };
-
-  /* Configure UART console. */
-  sysclk_enable_peripheral_clock(CONSOLE_UART_ID);
-  stdio_serial_init(CONF_UART, &uart_serial_options);
-}
-
-/*
-* corsi
-* Check whether "cp" is a valid ascii representation
-* of an Internet address and convert to a binary address.
-* Returns 1 if the address is valid, 0 if not.
-* This replaces inet_addr, the return value from which
-* cannot distinguish between failure and a local broadcast address.
-* http://www.cs.cmu.edu/afs/cs/academic/class/15213-f00/unpv12e/libfree/inet_aton.c
-*/
-int inet_aton(const char *cp, in_addr *ap)
-{
-  int dots = 0;
-  register u_long acc = 0, addr = 0;
-
-  do {
-    register char cc = *cp;
-
-    switch (cc) {
-      case '0':
-      case '1':
-      case '2':
-      case '3':
-      case '4':
-      case '5':
-      case '6':
-      case '7':
-      case '8':
-      case '9':
-      acc = acc * 10 + (cc - '0');
-      break;
-
-      case '.':
-      if (++dots > 3) {
-        return 0;
-      }
-      /* Fall through */
-
-      case '\0':
-      if (acc > 255) {
-        return 0;
-      }
-      addr = addr << 8 | acc;
-      acc = 0;
-      break;
-
-      default:
-      return 0;
-    }
-  } while (*cp++) ;
-
-  /* Normalize the address */
-  if (dots < 3) {
-    addr <<= 8 * (3 - dots) ;
-  }
-
-  /* Store it if requested */
-  if (ap) {
-    ap->s_addr = _htonl(addr);
-  }
-
-  return 1;
-}
 
 /************************************************************************/
 /* callbacks                                                            */
@@ -289,139 +203,176 @@ static void wifi_cb(uint8_t u8MsgType, void *pvMsg)
 /* TASKS                                                                */
 /************************************************************************/
 
-static void task_process(void *pvParameters){
+static void task_process(void *pvParameters) {
 
   printf("task process created \n");
   vTaskDelay(1000);
   
   uint msg_counter = 0;
   tstrSocketRecvMsg *p_recvMsg;
+  
+  enum states {
+    WAIT = 0,
+    GET,
+    ACK_REQ,
+    ACK,
+    MSG_REQ,
+    MSG,
+    TIMEOUT,
+    DONE,
+  };
+  
+  enum states state = WAIT;
+  
   while(1){
     
-    // aguarda task_wifi conectar no wifi e socket estar pronto
-    while(gbTcpConnection == false && tcp_client_socket >= 0){
-      vTaskDelay(100);
-    }
-    
-    // faz nova requisicao get ao socket
-    // e espera por duas mensagens!
-    // comunicacao tcp/ip possui ack
-    //
-    //  uC   get   pc
-    //   x--------->
-    //       ack (HTTP/ 200 OK)
-    //   < --------x
-    //       msg (HTTP CONTENT)
-    //   < --------x
-    //
-    if(msg_counter == 0){
-      // faz nova requisicao
-      msg_counter = 2;
-      sprintf((char *)g_sendBuffer, "%s", MAIN_PREFIX_BUFFER);
-      send(tcp_client_socket, g_sendBuffer, strlen((char *)g_sendBuffer), 0);
-      
-      // requisita primeira primeira resposta!
-      memset(g_sendBuffer, 0, MAIN_WIFI_M2M_BUFFER_SIZE);
-      recv(tcp_client_socket, &g_receivedBuffer[0], MAIN_WIFI_M2M_BUFFER_SIZE, 0);
-    }
-    
-    if(xQueueReceive(xQueueMsg, &p_recvMsg, 5000) == pdTRUE){
-      printf(STRING_LINE);
-      printf(p_recvMsg->pu8Buffer);
-      printf(STRING_EOL);
-      msg_counter--;
-      // ainda espera por mais dados?
-      if(msg_counter > 0 ){
-        memset(g_sendBuffer, 0, MAIN_WIFI_M2M_BUFFER_SIZE);
-        recv(tcp_client_socket, &g_receivedBuffer[0], MAIN_WIFI_M2M_BUFFER_SIZE, 0);
+    switch(state){
+      case WAIT:
+      // aguarda task_wifi conectar no wifi e socket estar pronto
+      printf("STATE: WAIT \n");
+      while(gbTcpConnection == false && tcp_client_socket >= 0){
+        vTaskDelay(10);
       }
-      } else{ msg_counter = 0;}
-      vTaskDelay(500);
+      state = GET;
+      break;
+      
+      case GET:
+      printf("STATE: GET \n");
+      sprintf((char *)g_sendBuffer, MAIN_PREFIX_BUFFER);
+      send(tcp_client_socket, g_sendBuffer, strlen((char *)g_sendBuffer), 0);
+      state = ACK;
+      break;
+      
+      case ACK:
+      printf("STATE: ACK \n");
+      // requisita primeira primeira resposta!
+      memset(g_receivedBuffer, 0, MAIN_WIFI_M2M_BUFFER_SIZE);
+      recv(tcp_client_socket, &g_receivedBuffer[0], MAIN_WIFI_M2M_BUFFER_SIZE, 0);
+
+      if(xQueueReceive(xQueueMsg, &p_recvMsg, 5000) == pdTRUE){
+        printf(STRING_LINE);
+        printf(p_recvMsg->pu8Buffer);
+        printf(STRING_EOL);  printf(STRING_LINE);
+        state = MSG;
+      }
+      else {
+        state = TIMEOUT;
+      };
+      break;
+      
+      case MSG:
+      printf("STATE: MSG \n");
+      // requisita primeira primeira resposta!
+      memset(g_receivedBuffer, 0, MAIN_WIFI_M2M_BUFFER_SIZE);
+      recv(tcp_client_socket, &g_receivedBuffer[0], MAIN_WIFI_M2M_BUFFER_SIZE, 0);
+ 
+      if(xQueueReceive(xQueueMsg, &p_recvMsg, 5000) == pdTRUE){
+        printf(STRING_LINE);
+        printf(p_recvMsg->pu8Buffer);
+        printf(STRING_EOL);  printf(STRING_LINE);
+        state = DONE;
+      }
+      else {
+        state = TIMEOUT;
+      };
+      break;
+      
+      case DONE:
+      state = WAIT;
+      break;
+      
+      case TIMEOUT:
+      state = WAIT;
+      break;
+      
+      default: state = WAIT;
     }
   }
+}
 
-  static void task_wifi(void *pvParameters) {
-    tstrWifiInitParam param;
-    int8_t ret;
-    struct sockaddr_in addr_in;
+static void task_wifi(void *pvParameters) {
+  tstrWifiInitParam param;
+  struct sockaddr_in addr_in;
 
-    xSemaphore = xSemaphoreCreateBinary();
-    xQueueMsg = xQueueCreate(10, sizeof(tstrSocketRecvMsg));
+  xSemaphore = xSemaphoreCreateCounting(20,0);
+  xQueueMsg = xQueueCreate(10, sizeof(tstrSocketRecvMsg));
 
-    /* Initialize the BSP. */
-    nm_bsp_init();
+  /* Initialize the BSP. */
+  nm_bsp_init();
 
-    /* Initialize Wi-Fi parameters structure. */
-    memset((uint8_t *)&param, 0, sizeof(tstrWifiInitParam));
+  /* Initialize Wi-Fi parameters structure. */
+  memset((uint8_t *)&param, 0, sizeof(tstrWifiInitParam));
 
-    /* Initialize Wi-Fi driver with data and status callbacks. */
-    param.pfAppWifiCb = wifi_cb;
-    ret = m2m_wifi_init(&param);
-    if (M2M_SUCCESS != ret) {
-      printf("main: m2m_wifi_init call error!(%d)\r\n", ret);
-      while (1) { }
-    }
+  /* Initialize Wi-Fi driver with data and status callbacks. */
+  param.pfAppWifiCb = wifi_cb;
+  int8_t ret = m2m_wifi_init(&param);
+  if (M2M_SUCCESS != ret) {
+    printf("main: m2m_wifi_init call error!(%d)\r\n", ret);
+    while (1) { }
+  }
 
-    /* Initialize socket module. */
-    socketInit();
+  /* Initialize socket module. */
+  socketInit();
 
-    /* Register socket callback function. */
-    registerSocketCallback(socket_cb, resolve_cb);
+  /* Register socket callback function. */
+  registerSocketCallback(socket_cb, resolve_cb);
 
-    /* Connect to router. */
-    printf("main: connecting to WiFi AP %s...\r\n", (char *)MAIN_WLAN_SSID);
-    m2m_wifi_connect((char *)MAIN_WLAN_SSID, sizeof(MAIN_WLAN_SSID), MAIN_WLAN_AUTH, (char *)MAIN_WLAN_PSK, M2M_WIFI_CH_ALL);
+  /* Connect to router. */
+  printf("main: connecting to WiFi AP %s...\r\n", (char *)MAIN_WLAN_SSID);
+  m2m_wifi_connect((char *)MAIN_WLAN_SSID, sizeof(MAIN_WLAN_SSID), MAIN_WLAN_AUTH, (char *)MAIN_WLAN_PSK, M2M_WIFI_CH_ALL);
 
-    /* formata ip */
-    addr_in.sin_family = AF_INET;
-    addr_in.sin_port = _htons(MAIN_SERVER_PORT);
-    inet_aton(MAIN_SERVER_NAME, &addr_in.sin_addr);
+  /* formata ip */
+  addr_in.sin_family = AF_INET;
+  addr_in.sin_port = _htons(MAIN_SERVER_PORT);
+  inet_aton(MAIN_SERVER_NAME, &addr_in.sin_addr);
 
-    while(1){
-      if(xSemaphoreTake(xSemaphore, 500)){
-        m2m_wifi_handle_events(NULL);
+  printf(STRING_LINE);
+  while(1){
+    if(xSemaphoreTake(xSemaphore, 500)){
+      m2m_wifi_handle_events(NULL);
 
-        if (wifi_connected == M2M_WIFI_CONNECTED) {
-          /* Open client socket. */
-          if (tcp_client_socket < 0) {
-            printf("socket init \n");
-            if ((tcp_client_socket = socket(AF_INET, SOCK_STREAM, 0)) < 0) {
-              printf("main: failed to create TCP client socket error!\r\n");
-              continue;
-            }
+      if (wifi_connected == M2M_WIFI_CONNECTED) {
+        /* Open client socket. */
+        if (tcp_client_socket < 0) {
+          printf(STRING_LINE);
+          printf("socket init \n");
+          if ((tcp_client_socket = socket(AF_INET, SOCK_STREAM, 0)) < 0) {
+            printf("main: failed to create TCP client socket error!\r\n");
+            continue;
+          }
 
-            /* Connect server */
-            printf("socket connecting\n");
-            if (connect(tcp_client_socket, (struct sockaddr *)&addr_in,
-            sizeof(struct sockaddr_in)) != SOCK_ERR_NO_ERROR) {
-              close(tcp_client_socket);
-              tcp_client_socket = -1;
-              printf("main: error connect to socket\n");
-              }else{
-              gbTcpConnection = true;
-            }
+          /* Connect server */
+          printf("socket connecting\n");
+          if (connect(tcp_client_socket, (struct sockaddr *)&addr_in,
+          sizeof(struct sockaddr_in)) != SOCK_ERR_NO_ERROR) {
+            close(tcp_client_socket);
+            tcp_client_socket = -1;
+            printf("main: error connect to socket\n");
+            }else{
+            gbTcpConnection = true;
           }
         }
       }
     }
   }
+}
 
-  int main(void)
-  {
-    /* Initialize the board. */
-    sysclk_init();
-    board_init();
+int main(void)
+{
+  /* Initialize the board. */
+  sysclk_init();
+  board_init();
 
-    /* Initialize the UART console. */
-    configure_console();
-    printf(STRING_HEADER);
+  /* Initialize the UART console. */
+  configure_console();
+  printf(STRING_HEADER);
 
-    xTaskCreate(task_wifi, "Wifi", TASK_WIFI_STACK_SIZE, NULL, TASK_WIFI_PRIORITY, NULL);
-    xTaskCreate( task_process, "process", TASK_PROCESS_STACK_SIZE, NULL, TASK_PROCESS_PRIORITY,  NULL );
+  xTaskCreate(task_wifi, "Wifi", TASK_WIFI_STACK_SIZE, NULL, TASK_WIFI_PRIORITY, NULL);
+  xTaskCreate(task_process, "process", TASK_PROCESS_STACK_SIZE, NULL, TASK_PROCESS_PRIORITY,  NULL );
 
-    vTaskStartScheduler();
+  vTaskStartScheduler();
 
-    while(1) {};
-    return 0;
+  while(1) {};
+  return 0;
 
-  }
+}
