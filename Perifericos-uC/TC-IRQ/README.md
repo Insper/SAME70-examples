@@ -1,4 +1,4 @@
-# TC - RTC - IRQ
+# TC - IRQ
 
 Configura o Timer Counter (TC) para gerar uma interrupção a 4Hz (250 ms) e o Real Time Timer (RTC) para operar em modo alarme, gerando uma interrupção após um minuto de operação.
 
@@ -7,7 +7,6 @@ Configura o Timer Counter (TC) para gerar uma interrupção a 4Hz (250 ms) e o R
     
 - Periféricos:
     - TC0 - Timer Counter 0
-    - RTC - Real Time Timer
     - USART1 (debug - para comunicação com o PC - `stdio` )
     
 - Pinos:
@@ -154,71 +153,3 @@ Sempre que houver um reset no contador do TC, a interrupção referente ao canal
 ```
 
 Note que ao chamarmos a função `tc_get_status(TC0, 1)` estamos automaticamente realizando o **ACK** da interrupção.
-
-### Real Time Clock - RTC
-
-O RTC é um periférico do uC que serve para contar tempo com resolução de segundos, ele possui toda a lógica interna de um relógio, contando anos, meses, dias, horas, minutos e segundos (para ai!). 
-
-O RTC é configurado na função `RTC_init()`:
-
-``` c
-void RTC_init(){
-    /* Configura o PMC */
-    pmc_enable_periph_clk(ID_RTC);
-        
-    /* Default RTC configuration, 24-hour mode */
-    rtc_set_hour_mode(RTC, 0);
-
-    /* Configura data e hora manualmente */
-    rtc_set_date(RTC, YEAR, MOUNTH, DAY, WEEK);
-    rtc_set_time(RTC, HOUR, MINUTE, SECOND);
-
-    /* Configure RTC interrupts */
-    NVIC_DisableIRQ(RTC_IRQn);
-    NVIC_ClearPendingIRQ(RTC_IRQn);
-    NVIC_SetPriority(RTC_IRQn, 0);
-    NVIC_EnableIRQ(RTC_IRQn);
-    
-    /* Ativa interrupcao via alarme */
-    rtc_enable_interrupt(RTC,  RTC_IER_ALREN);   
-}
-```
- 
-#### Alarme
-
-O alarme é uma maneira de configurarmos o RTC para gerar uma interrupção em uma determinada data, no nosso caso, para um minuto após a inicialização do microcontrolador. 
-
-```C
-  main(){
-  ...
-  
-  /* configura alarme do RTC */    
-  rtc_set_date_alarm(RTC, 1, MOUNTH, 1, DAY);
-  rtc_set_time_alarm(RTC, 1, HOUR, 1, MINUTE+1, 1, SECOND);
-  
-  }
-```
-
-#### Interrupção
-
-Sempre que a situação do alarme for satisfeita, a função `RTC_Handler` será chamada. Na interrupção configura a variável global `flag_led0` para 0.
-
-```C
-/**
- * \brief Interrupt handler for the RTC. 
- */
-void RTC_Handler(void)
-{
-  /* Qual parte do RTC gerou interrupção ? */
-  /* IRQ */
-  uint32_t ul_status = rtc_get_status(RTC);
-  
-  /* seta led para parar de piscar */
-  flag_led0 = 0;
-  
-  /* Informa que interrupção foi tratada */
-  rtc_clear_status(RTC, RTC_SCCR_ALRCLR);
-}
-```
-
-Note que ao chamarmos a função `rtc_get_status(RTC)` estamos automaticamente realizando o `ACK` da interrupção.
