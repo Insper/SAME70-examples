@@ -8,6 +8,68 @@
 #include "tfont.h"
 #include "digital521.h"
 
+
+typedef struct {
+  uint32_t width;     // largura (px)
+  uint32_t height;    // altura  (px)
+  uint32_t colorOn;   // cor do botão acionado
+  uint32_t colorOff;  // cor do botão desligado
+  uint32_t x;         // posicao x 
+  uint32_t y;         // posicao y
+  uint8_t status;
+} t_but;
+
+#define BUT_SIZE 100
+#define BUT_SPACE 3
+
+t_but but1 = {.width = BUT_SIZE, .height = BUT_SIZE,
+              .colorOn = COLOR_GRAY, .colorOff = COLOR_GRAY,
+              .x = 1*BUT_SPACE + BUT_SIZE/2, .y = BUT_SPACE+ BUT_SIZE/2, .status = 0};
+t_but but2 = {.width = BUT_SIZE, .height = BUT_SIZE,
+              .colorOn = COLOR_GRAY, .colorOff = COLOR_GRAY,
+              .x = 2*BUT_SPACE + BUT_SIZE/2 + BUT_SIZE, .y = BUT_SPACE + BUT_SIZE/2,
+              .status = 0};
+t_but but3 = {.width = BUT_SIZE, .height = BUT_SIZE,
+              .colorOn = COLOR_GRAY, .colorOff = COLOR_GRAY,
+              .x = 3*BUT_SPACE + BUT_SIZE/2 + BUT_SIZE*2, .y = BUT_SPACE + BUT_SIZE/2,
+              .status = 0};
+
+t_but but4 = {.width = BUT_SIZE, .height = BUT_SIZE,
+              .colorOn = COLOR_GRAY, .colorOff = COLOR_GRAY,
+              .x = 1*BUT_SPACE + BUT_SIZE/2, .y = 2*BUT_SPACE + BUT_SIZE + BUT_SIZE/2,
+              .status = 0};
+t_but but5 = {.width = BUT_SIZE, .height = BUT_SIZE,
+              .colorOn = COLOR_GRAY, .colorOff = COLOR_GRAY,
+              .x = 2*BUT_SPACE + BUT_SIZE/2 + BUT_SIZE, .y = 2*BUT_SPACE + BUT_SIZE + BUT_SIZE/2,
+              .status = 0};
+t_but but6 = {.width = BUT_SIZE, .height = BUT_SIZE,
+              .colorOn = COLOR_GRAY, .colorOff = COLOR_GRAY,
+              .x = 3*BUT_SPACE + BUT_SIZE/2 + BUT_SIZE*2, .y = 2*BUT_SPACE + BUT_SIZE + BUT_SIZE/2,
+              .status = 0};
+
+t_but but7 = {.width = BUT_SIZE, .height = BUT_SIZE,
+              .colorOn = COLOR_GRAY, .colorOff = COLOR_GRAY,
+              .x = 1*BUT_SPACE + BUT_SIZE/2, .y = 3*BUT_SPACE + 2*BUT_SIZE + BUT_SIZE/2,
+              .status = 0};
+t_but but8 = {.width = BUT_SIZE, .height = BUT_SIZE,
+              .colorOn = COLOR_GRAY, .colorOff = COLOR_GRAY,
+              .x = 2*BUT_SPACE + BUT_SIZE/2 + BUT_SIZE, .y = 3*BUT_SPACE + 2*BUT_SIZE + BUT_SIZE/2,
+              .status = 0};
+t_but but9 = {.width = BUT_SIZE, .height = BUT_SIZE,
+              .colorOn = COLOR_GRAY, .colorOff = COLOR_GRAY,
+              .x = 3*BUT_SPACE + BUT_SIZE/2 + BUT_SIZE*2, .y = 3*BUT_SPACE + 2*BUT_SIZE + BUT_SIZE/2,
+              .status = 0};
+
+t_but but0 = {.width = BUT_SIZE, .height = BUT_SIZE,
+              .colorOn = COLOR_GRAY, .colorOff = COLOR_GRAY,
+              .x = 2*BUT_SPACE + BUT_SIZE/2 + BUT_SIZE, .y = 4*BUT_SPACE + 3*BUT_SIZE + BUT_SIZE/2,
+              .status = 0};
+t_but butx = {.width = BUT_SIZE, .height = BUT_SIZE,
+              .colorOn = COLOR_GRAY, .colorOff = COLOR_GRAY,
+              .x = 3*BUT_SPACE + BUT_SIZE/2 + BUT_SIZE*2, .y = 4*BUT_SPACE + 3*BUT_SIZE + BUT_SIZE/2,
+              .status = 0};
+
+
 /************************************************************************/
 /* prototypes                                                           */
 /************************************************************************/
@@ -121,20 +183,16 @@ void draw_screen(void) {
   ili9488_draw_filled_rectangle(0, 0, ILI9488_LCD_WIDTH-1, ILI9488_LCD_HEIGHT-1);
 }
 
-void draw_button(uint32_t clicked) {
-  static uint32_t last_state = 255; // undefined
-  if(clicked == last_state) return;
-  
-  ili9488_set_foreground_color(COLOR_CONVERT(COLOR_BLACK));
-  ili9488_draw_filled_rectangle(BUTTON_X-BUTTON_W/2, BUTTON_Y-BUTTON_H/2, BUTTON_X+BUTTON_W/2, BUTTON_Y+BUTTON_H/2);
-  if(clicked) {
-    ili9488_set_foreground_color(COLOR_CONVERT(COLOR_TOMATO));
-    ili9488_draw_filled_rectangle(BUTTON_X-BUTTON_W/2+BUTTON_BORDER, BUTTON_Y+BUTTON_BORDER, BUTTON_X+BUTTON_W/2-BUTTON_BORDER, BUTTON_Y+BUTTON_H/2-BUTTON_BORDER);
-    } else {
-    ili9488_set_foreground_color(COLOR_CONVERT(COLOR_GREEN));
-    ili9488_draw_filled_rectangle(BUTTON_X-BUTTON_W/2+BUTTON_BORDER, BUTTON_Y-BUTTON_H/2+BUTTON_BORDER, BUTTON_X+BUTTON_W/2-BUTTON_BORDER, BUTTON_Y-BUTTON_BORDER);
-  }
-  last_state = clicked;
+void draw_button_new(t_but but, int status){
+	uint32_t color;
+	if(status)
+	color = but.colorOn;
+	else
+	color = but.colorOff;
+
+	ili9488_set_foreground_color(COLOR_CONVERT(color));
+	ili9488_draw_filled_rectangle(but.x-but.width/2, but.y-but.height/2,
+	but.x+but.width/2, but.y+but.height/2);
 }
 
 uint32_t convert_axis_system_x(uint32_t touch_y) {
@@ -152,9 +210,9 @@ uint32_t convert_axis_system_y(uint32_t touch_x) {
 void update_screen(uint32_t tx, uint32_t ty) {
   if(tx >= BUTTON_X-BUTTON_W/2 && tx <= BUTTON_X + BUTTON_W/2) {
     if(ty >= BUTTON_Y-BUTTON_H/2 && ty <= BUTTON_Y) {
-      draw_button(1);
+      draw_button_new(1);
       } else if(ty > BUTTON_Y && ty < BUTTON_Y + BUTTON_H/2) {
-      draw_button(0);
+      draw_button_new(0);
     }
   }
 }
@@ -239,24 +297,28 @@ void task_mxt(void){
 }
 
 void task_lcd(void){
-  xQueueTouch = xQueueCreate( 10, sizeof( touchData ) );
-  configure_lcd();
-  
-  draw_screen();
-  draw_button(0);
-  
-  // Escreve DEMO - BUT no LCD
-  font_draw_text(&digital52, "DEMO - BUT", 0, 0, 1);
-  
-  // strut local para armazenar msg enviada pela task do mxt
-  touchData touch;
-  
-  while (true) {
-    if (xQueueReceive( xQueueTouch, &(touch), ( TickType_t )  500 / portTICK_PERIOD_MS)) {
-      update_screen(touch.x, touch.y);
-      printf("x:%d y:%d\n", touch.x, touch.y);
-    }
-  }
+	xQueueTouch = xQueueCreate( 10, sizeof( touchData ) );
+	configure_lcd();
+	draw_screen();
+	font_draw_text(&digital52, "DEMO - BUT", 0, 0, 1);
+
+	t_but but0 = {.width = 120, .height = 75,
+		.colorOn = COLOR_TOMATO, .colorOff = COLOR_BLACK,
+	.x = ILI9488_LCD_WIDTH/2, .y = 40 };
+	uint8_t but0_status = 1;
+	draw_button_new(but0, but0_status);
+
+	// struct local para armazenar msg enviada pela task do mxt
+	touchData touch;
+
+	while (true) {
+		if (xQueueReceive( xQueueTouch, &(touch), ( TickType_t )  500 / portTICK_PERIOD_MS)) {
+			//update_screen(touch.x, touch.y);
+			but0_status = ! but0_status;
+			draw_button_new(but0, but0_status);
+			printf("x:%d y:%d\n", touch.x, touch.y);
+		}
+	}
 }
 
 /************************************************************************/
