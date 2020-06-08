@@ -267,7 +267,7 @@ static void task_process(void *pvParameters) {
 	  case POST:
 	  printf("STATE: POST \n");
 	  contentLength = strlen(POSTDATA);
-	  sprintf((char *)g_sendBuffer, "POST / HTTP/1.0\nContent-Type: application/x-www-form-urlencoded\nContent-Length: %d\n\n%s",
+	  sprintf((char *)g_sendBuffer, "POST /status HTTP/1.0\nContent-Type: application/x-www-form-urlencoded\nContent-Length: %d\n\n%s",
 	  contentLength, POSTDATA);
 	  send(tcp_client_socket, g_sendBuffer, strlen((char *)g_sendBuffer), 0);
 	  state = ACK;
