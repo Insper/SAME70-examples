@@ -16,7 +16,7 @@ typedef struct  {
   uint32_t week;
   uint32_t hour;
   uint32_t minute;
-  uint32_t seccond;
+  uint32_t second;
 } calendar;
 
 /**
@@ -108,7 +108,7 @@ void RTC_init(Rtc *rtc, uint32_t id_rtc, calendar t, uint32_t irq_type){
 
 	/* Configura data e hora manualmente */
 	rtc_set_date(rtc, t.year, t.month, t.day, t.week);
-	rtc_set_time(rtc, t.hour, t.minute, t.seccond);
+	rtc_set_time(rtc, t.hour, t.minute, t.second);
 
 	/* Configure RTC interrupts */
 	NVIC_DisableIRQ(id_rtc);
@@ -139,7 +139,7 @@ int main(void){
 
 	/* configura alarme do RTC */
 	rtc_set_date_alarm(RTC, 1, rtc_initial.month, 1, rtc_initial.day);
-	rtc_set_time_alarm(RTC, 1, rtc_initial.hour, 1, rtc_initial.minute, 1, rtc_initial.seccond + 20);
+	rtc_set_time_alarm(RTC, 1, rtc_initial.hour, 1, rtc_initial.minute, 1, rtc_initial.second + 20);
 	
 	while (1) {
 		/* Entrar em modo sleep */
