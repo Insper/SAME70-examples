@@ -52,21 +52,18 @@ void RTC_Handler(void)
 {
 	uint32_t ul_status = rtc_get_status(RTC);
 
-	/*
-	*  Verifica por qual motivo entrou
-	*  na interrupcao, se foi por segundo
-	*  ou Alarm
-	*/
+	/* seccond tick	*/
 	if ((ul_status & RTC_SR_SEC) == RTC_SR_SEC) {
-		rtc_clear_status(RTC, RTC_SCCR_SECCLR);
+		
 	}
 	
 	/* Time or date alarm */
 	if ((ul_status & RTC_SR_ALARM) == RTC_SR_ALARM) {
-			rtc_clear_status(RTC, RTC_SCCR_ALRCLR);
-      flag_rtc = 1;
+           flag_rtc = 1;
 	}
 	
+	rtc_clear_status(RTC, RTC_SCCR_SECCLR);
+	rtc_clear_status(RTC, RTC_SCCR_ALRCLR);
 	rtc_clear_status(RTC, RTC_SCCR_ACKCLR);
 	rtc_clear_status(RTC, RTC_SCCR_TIMCLR);
 	rtc_clear_status(RTC, RTC_SCCR_CALCLR);
@@ -124,28 +121,28 @@ void RTC_init(Rtc *rtc, uint32_t id_rtc, calendar t, uint32_t irq_type){
 /* Main Code	                                                        */
 /************************************************************************/
 int main(void){
-	/* Initialize the SAM system */
-	sysclk_init();
-
-	/* Disable the watchdog */
-	WDT->WDT_MR = WDT_MR_WDDIS;
-
-	/* Configura Leds */
-	LED_init(0);
-
-	/** Configura RTC */
-  calendar rtc_initial = {2018, 3, 19, 12, 15, 45 ,1};
-	RTC_init(RTC, ID_RTC, rtc_initial, RTC_IER_ALREN);
-
-	/* configura alarme do RTC */
-	rtc_set_date_alarm(RTC, 1, rtc_initial.month, 1, rtc_initial.day);
-	rtc_set_time_alarm(RTC, 1, rtc_initial.hour, 1, rtc_initial.minute, 1, rtc_initial.second + 20);
-	
-	while (1) {
-		/* Entrar em modo sleep */
-    if(flag_rtc){
-      pisca_led(5, 200);
-      flag_rtc = 0;
-    }    
-	}
+    /* Initialize the SAM system */                                                                 
+    sysclk_init();                                                                                  
+                                                                                                    
+    /* Disable the watchdog */                                                                      
+    WDT->WDT_MR = WDT_MR_WDDIS;                                                                     
+                                                                                                    
+    /* Configura Leds */                                                                            
+    LED_init(0);                                                                                    
+                                                                                                    
+    /** Configura RTC */                                                                            
+    calendar rtc_initial = {2018, 3, 19, 12, 15, 45 ,1};                                            
+    RTC_init(RTC, ID_RTC, rtc_initial, RTC_IER_ALREN);                                              
+                                                                                                    
+    /* configura alarme do RTC */                                                                   
+    rtc_set_date_alarm(RTC, 1, rtc_initial.month, 1, rtc_initial.day);                              
+    rtc_set_time_alarm(RTC, 1, rtc_initial.hour, 1, rtc_initial.minute, 1, rtc_initial.second + 20);
+                                                                                                    
+    while (1) {                                                                                     
+       /* Entrar em modo sleep */                                                                   
+      if(flag_rtc){                                                                                 
+           pisca_led(5, 200);                                                                       
+          flag_rtc = 0;                                                                             
+       }                                                                                            
+    }                                                                                               
 }
