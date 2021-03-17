@@ -1,5 +1,5 @@
 /**
- * 5 semestre - Eng. da Computação - Insper
+ * 5 semestre - Eng. da ComputaÃ§Ã£o - Insper
  * Rafael Corsi - rafael.corsi@insper.edu.br
  *
  * Projeto 0 para a placa SAME70-XPLD
@@ -124,15 +124,15 @@ int main(void){
   f_rtt_alarme = true;
     
   // super loop
-  // aplicacoes embarcadas não devem sair do while(1).
+  // aplicacoes embarcadas nÃ£o devem sair do while(1).
   while (1){
     if (f_rtt_alarme){
       
       /*
-       * IRQ apos 4s -> 8*0.5
+       * IRQ apos 4s: 4 pulsos por sengundo -> 16 pulsos para dar 4
        */
       uint16_t pllPreScale = (int) (((float) 32768) / 4.0);
-      uint32_t irqRTTvalue = 8;
+      uint32_t irqRTTvalue = 16;
       
       // reinicia RTT para gerar um novo IRQ
       RTT_init(pllPreScale, irqRTTvalue);         
