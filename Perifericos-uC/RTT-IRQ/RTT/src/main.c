@@ -129,7 +129,8 @@ int main(void){
     if (f_rtt_alarme){
       
       /*
-       * IRQ apos 4s: 4 pulsos por sengundo -> 16 pulsos para dar 4
+       * IRQ (interrupção ocorre) apos 4s => 4 pulsos por sengundo (0,25s) -> 16 pulsos são necessários para dar 4s
+       * tempo[s] = 0,25 * 16 = 4s
        */
       uint16_t pllPreScale = (int) (((float) 32768) / 4.0);
       uint32_t irqRTTvalue = 16;
