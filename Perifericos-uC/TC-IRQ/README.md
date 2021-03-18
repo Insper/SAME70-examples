@@ -139,7 +139,7 @@ void TC_init(Tc * TC, int ID_TC, int TC_CHANNEL, int freq){
 	*/
 	pmc_enable_periph_clk(ID_TC);
 
-	/** Configura o TC para operar em  4Mhz e interrupçcão no RC compare */
+	/** Configura o TC para operar em  freq hz e interrupçcão no RC compare */
 	tc_find_mck_divisor(freq, ul_sysclk, &ul_div, &ul_tcclks, ul_sysclk);
 	tc_init(TC, TC_CHANNEL, ul_tcclks | TC_CMR_CPCTRG);
 	tc_write_rc(TC, TC_CHANNEL, (ul_sysclk / ul_div) / freq);
