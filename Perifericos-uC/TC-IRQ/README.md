@@ -30,37 +30,64 @@ O TimerCounter faz com o o led pisque na frequência de 4Hz enquanto não ocorre
 
 ### Main
 
-A função `main` desse programa é responsável por inicializar todos os periféricos envolvidos no projeto (PIO para os LEDs e botões, RTC e TC). Note que nenhuma lógica é implementada no código (`while(1)`) é vazio), toda lógica desse projeto está contido nas interrupções.
+A função `main` desse programa é responsável por inicializar todos os periféricos envolvidos no projeto (PIO para os LEDs e botões, RTC e TC). 
+O `while(1)` fica verificando a `flag_tc` que será a forma de comunicação do handler do TC com o main. 
 
 ``` c
+/************************************************************************/
+/* VAR globais                                                          */
+/************************************************************************/
+volatile char flag_tc = 0;
+
+/************************************************************************/
+/* Main Code	                                                        */
+/************************************************************************/
 int main(void){
-  /* Initialize the SAM system */
-  sysclk_init();
+	/* Initialize the SAM system */
+	sysclk_init();
 
-  /* Disable the watchdog */
-  WDT->WDT_MR = WDT_MR_WDDIS;
- 
-  /* Configura Leds */
-  LED_init(0);
+	/* Disable the watchdog */
+	WDT->WDT_MR = WDT_MR_WDDIS;
 
-  /* Configura os botões */
-  BUT_init();
+	/* Configura Leds */
+	LED_init(0);
 
-  /** Configura timer TC0, canal 1 com 4Hz */
-  TC_init(4, TC0, ID_TC1, 1);
-
-  /** Configura RTC */
-  RTC_init();
-
-  /* configura alarme do RTC */
-  rtc_set_date_alarm(RTC, 1, MOUNTH, 1, DAY);
-  rtc_set_time_alarm(RTC, 1, HOUR, 1, MINUTE+1, 1, SECOND);
-
-  while (1) {
-		/* Entrar em modo sleep */
+        /** Configura timer TC0, canal 1 */
+	TC_init(TC0, ID_TC1, 1, 2);
+  
+	while (1) {
+            if(flag_tc){
+                pisca_led(1,10);
+                flag_tc = 0;
+            }
+            pmc_sleep(SAM_PM_SMODE_SLEEP_WFI);
 	}
 }
 ```
+
+#### Interrupção
+
+Sempre que houver um reset no contador do TC, a interrupção referente ao canal é chamada, nessa interrupção configuramos a `flag_tc=1` para
+ser processada no `while(1)` do main.
+
+```C
+void TC1_Handler(void){
+	volatile uint32_t ul_dummy;
+
+	/****************************************************************
+	* Devemos indicar ao TC que a interrupção foi satisfeita.
+	******************************************************************/
+	ul_dummy = tc_get_status(TC0, 1);
+
+	/* Avoid compiler warning */
+	UNUSED(ul_dummy);
+
+	/** Muda o estado do LED */
+	flag_tc = 1;
+}
+```
+
+Note que ao chamarmos a função `tc_get_status(TC0, 1)` estamos automaticamente realizando o **ACK** da interrupção.
 
 ### Timer Counter - TC
 
@@ -112,7 +139,7 @@ void TC_init(Tc * TC, int ID_TC, int TC_CHANNEL, int freq){
 	*/
 	pmc_enable_periph_clk(ID_TC);
 
-	/** Configura o TC para operar em  4Mhz e interrupçcão no RC compare */
+	/** Configura o TC para operar em  freq hz e interrupçcão no RC compare */
 	tc_find_mck_divisor(freq, ul_sysclk, &ul_div, &ul_tcclks, ul_sysclk);
 	tc_init(TC, TC_CHANNEL, ul_tcclks | TC_CMR_CPCTRG);
 	tc_write_rc(TC, TC_CHANNEL, (ul_sysclk / ul_div) / freq);
@@ -127,29 +154,3 @@ void TC_init(Tc * TC, int ID_TC, int TC_CHANNEL, int freq){
 }
 ```
 
-#### Interrupção
-
-Sempre que houver um reset no contador do TC, a interrupção referente ao canal é chamada, nessa interrupção fazemos a mudança no status do led.
-
-```C
-/**
- *  Interrupt handler for TC1 interrupt. 
- */
-  void TC1_Handler(void){
-  volatile uint32_t ul_dummy;
-  
-  /****************************************************************
-  * Devemos indicar ao TC que a interrupção foi satisfeita.
-  ******************************************************************/
-  ul_dummy = tc_get_status(TC0, 1);
-  
-  /* Avoid compiler warning */
-  UNUSED(ul_dummy);
-  
-  /** Muda o estado do LED */
-  if(flag_led0)
-      pin_toggle(LED_PIO, LED_PIN_MASK);
-}
-```
-
-Note que ao chamarmos a função `tc_get_status(TC0, 1)` estamos automaticamente realizando o **ACK** da interrupção.

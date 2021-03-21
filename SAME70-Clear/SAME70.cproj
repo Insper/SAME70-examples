@@ -5,7 +5,7 @@
     <ProjectVersion>7.0</ProjectVersion>
     <ToolchainName>com.Atmel.ARMGCC.C</ToolchainName>
     <ProjectGuid>dce6c7e3-ee26-4d79-826b-08594b9ad897</ProjectGuid>
-    <avrdevice>ATSAME70Q21</avrdevice>
+    <avrdevice>ATSAME70Q21B</avrdevice>
     <avrdeviceseries>same70</avrdeviceseries>
     <OutputType>Executable</OutputType>
     <Language>C</Language>
@@ -214,7 +214,7 @@
   <documentation help="http://asf.atmel.com/docs/3.32.0/sam.applications.same70_xplained_demo.same70_xplained/html/index.html" />
   <offline-documentation help="" />
   <dependencies>
-    <content-extension eid="atmel.asf" uuidref="Atmel.ASF" version="3.32.0" />
+    <content-extension eid="atmel.asf" uuidref="Atmel.ASF" version="3.42.0" />
   </dependencies>
   <project id="sam.applications.same70_xplained_demo.same70_xplained" value="Add" config="" content-id="Atmel.ASF" />
   <board id="board.same70_xplained" value="Add" config="" content-id="Atmel.ASF" />
@@ -222,7 +222,7 @@
     </AsfFrameworkConfig>
     <avrtool>com.atmel.avrdbg.tool.edbg</avrtool>
     <avrtoolserialnumber>ATML2637010000000000</avrtoolserialnumber>
-    <avrdeviceexpectedsignature>0xA1020E00</avrdeviceexpectedsignature>
+    <avrdeviceexpectedsignature>0xA1020E01</avrdeviceexpectedsignature>
     <avrtoolinterface>SWD</avrtoolinterface>
     <com_atmel_avrdbg_tool_edbg>
       <ToolOptions>
