@@ -35,7 +35,7 @@ O RTT pode gerar interrupção por duas fontes distintas: `Alarme` ou `Mudança 
 
 O clock base do RTT é 32678Hz Para gerar outra base de tempo é necessário usar o PLL pre scale, que divide o clock base.
 
-Nesse exemplo, estamos operando com um clock base de `pllPreScale = 32768/32768/4 = 2Hz`
+Nesse exemplo, estamos operando com um clock base de `pllPreScale = 32768/32768/4 = 0,25 => 4Hz`
 
 Quanto maior a frequência maior a resolução, porém menor o tempo máximo que conseguimos contar.
     
@@ -47,10 +47,10 @@ Podemos configurar uma IRQ para acontecer quando o contador do RTT atingir um de
 ### `irqRTTvalue`
 
 ``` c
- uint32_t irqRTTvalue = 8;
+ uint32_t irqRTTvalue = 16;
 ```
 
-Nesse exemplo o `irqRTTvalue = 8`, causando uma interrupção a cada 4 segundos (lembre que usamos o      pllPreScale, cada incremento do RTT leva 500ms (2Hz).  
+Nesse exemplo o `irqRTTvalue = 16`, causando uma interrupção a cada 4 segundos. Lembre que usamos o `pllPreScale` para contar cada incremento do RTT, os incrementos foram configurados para ocorrer a cada 250ms (4Hz), ou seja precisamos contar 16 pulsos para dar 4 segundos.  
 
 ### Periódo da interrupcao
 
@@ -59,7 +59,7 @@ O período da interrupcao será 4s, devido a conta a seguir:
 ```
     | pllPreScale
     v
- 8*0.5 = 4s
+ 16*0.25 = 4s
  ^
  | irqRTTvalue
 ```    
