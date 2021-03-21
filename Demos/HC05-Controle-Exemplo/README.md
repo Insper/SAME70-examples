@@ -1,54 +1,140 @@
-## Diagrama de conexao do HC05 ao Atmel
+# Bluetooth HC-05
 
-### **ATENÇÃO -> VCC = 5V**
-![](doc/diagrama_ligacao_hc06.png)
+Exemplo de como usar o bluetooth HC-05 com o kit de desenvolvimento
+SAME70-XPLD.
 
-# Controle
+O [HC-05](https://www.itead.cc/wiki/Serial_Port_Bluetooth_Module_(Master/Slave)_:_HC-05)
+é um módulo bluetooth popular (R$15) que pode funcionar como
+device ou host, neste exemplo usaremos como device (conectando-se ao
+computador). O Computador (windows) verá o módulo HC-05 como um dispositivo
+bluetooth, e uma vez pareado e conectado o Windows irá criar uma porta
+COM (serial) associado a conexão, nessa porta faremos a recepção e 
+envio dos dados via bluetooth.
 
-- **Roteiro apenas para sistemas operacionais Windows**
+O modulo será conectado ao microcontrolador através de uma comunicação
+UART (a mesma que vocês implementaram em camada física), o microcontrolador
+pode enviar dados para o computador por esta porta (TX) ou receber
+dados do computador (RX), conforme diagrama a seguir:
 
-## Escolha o tipo de controle
-
-### **Controle para Automação** (Aplicativos em gerais, Youtube, Chrome, Video Player)
-
-- Instale os pacotes necessários do Python via PIP. Os pacotes necessários estão no arquivo requeriments.txt (dentro da pasta **PC_Python**)
-
-- Utilizaremos o arquivo `youtube_controller.py` como base para o seu controle, ele já vem configurado para usar no Youtube com um botão configurado (botão A do controle ->  tecla L do Youtube para adiantar o vídeo em 10 segundos).
-
-- **Primeiro:** vamos testar se o computador instalou a biblioteca de automação corretamente (`pyautogui`). Execute o arquivo `youtube_controller.py` com os parametros `none -c dummy`. 
-
-- Isto fará com que o aplicativo em Python, inicie sem comunicar com o Bluetooth e irá simular o aperto da tecla A do controle a cada 1seg. 
-
-- Abra um vídeo no Youtube e verifique se o vídeo fica pulando 10segs a cada segundo. Dica: para debugar quando ocorre o botão, adicione a flag `-d` no final dos parametros para mostrar mensagens de debug
-
-- Vamos agora testar com a placa do Atmel, abra o `Atmel Studio` e o projeto exemplo do controle
-
-- Coloque um nome diferente dos outros grupos no nome do seu Bluetooth e altere a senha da padrão (trecho do código entre as linhas **109** e **118**):
-
-```c
-|109| int hc05_server_init(void) {
-|110|	char buffer_rx[128];
-|111|	usart_send_command(USART0, buffer_rx, 1000, "AT", 1000);
-|112|	usart_send_command(USART0, buffer_rx, 1000, "AT", 1000);	
-|113|	usart_send_command(USART0, buffer_rx, 1000, "AT+NAMEMarcoMello", 1000);		//AT+NAMEnomedesejado
-|114|	usart_log("hc05_server_init", buffer_rx);
-|115|	usart_send_command(USART0, buffer_rx, 1000, "AT", 1000);			//AT+PINpindesejado	
-|116|	usart_send_command(USART0, buffer_rx, 1000, "AT+PIN0000", 1000);
-|117|	usart_log("hc05_server_init", buffer_rx);
-|118| }
+``` 
+    +----------+            +-------+             +----------+
+    |    +-----|            |       |   <---->    |    +-----|
+    |    |USART| ----tx---> |       |             |    | COM <---> python
+    |    +-----| <---rx---- |       |  BLUETOOTH  |    +-----|
+    | uc       |            | HC-05 |             | PC       |
+    +----------+            +-------+             +----------+
 ```
 
-- **Compile e programe o projeto no Atmel.**
+No microcontrolador iremos usar um periférico chamado de USART para
+realizar a serialização e desserialização do dado no protocolo UART.
+A comunicação com o módulo HC-05 segue um protocolo chamado de 
+[**AT Command**](https://www.itead.cc/wiki/Serial_Port_Bluetooth_Module_(Master/Slave)_:_HC-05).
 
-- Necessitamos agora parear o Bluetooth do computador com o HC05 do Atmel e criar uma porta serial virutal. Para isto siga o roteiro abaixo *Conectar ao HM10 via porta Serial Virtual*, depois retorne para este roteiro.
+Já no computador iremos usar um programa em python que acessará 
+a porta COM criada pelo windows para enviar e receber dados do
+microcontrolador via protocolo bluetooth.
 
-- Verifique se o Atmel conecta com o computador na porta COM configurada anteriormente, isto pode ser verificado utilizando o `Putty`, conecte na COM configurada. Se estiver conectado e funcionando você deverá ver vários (`X0` ou `X1` dependendo se o botão da placa está apertado ou não).
+Note que estamos lidando com o bluetooth de forma "transparente",
+apenas como 'usuários', toda a mágica acontece dentro do HC-05.
 
-- Se estiver OK com o passo anterior, tente agora executar o `youtube_controller.py` com os parametros `PORTA_COM -b BAUDRATE` para conectar via serial, o controle agora deve funcionar no Youtube, aperte o botão da placa e veja se o vídeo vai para frente
+## Exemplo
 
+Esse exemplo é composto de duas partes:
 
-### **Controle para Jogos** (Emuladores, Jogos com suporte a DirectInput/Joystick)
+- **/firmware**: Código C para executar no microcontrolador
+- **/python**: Código python para executar no computador
 
+O firmware pode operar de duas maneira: conectado ao bluetooth ou não. 
+Isso é definido no firmware descomentando o define: 
+
+```c
+#define DEBUG_SERIAL
+```
+
+Já o exemplo em `python` é para ser executado no computador, e temos
+dois exemplos disponíveis: 
+
+1. `game_controller` : emula um teclado
+1. `youtube_controller` : emula um joystick 
+
+## Conectando
+
+**ATENÇÃO -> VCC = 5V**
+
+![](doc/diagrama_ligacao_hc06.png)
+
+### firmware
+
+Abra o projeto `firmware` no MicrochipStudio. Antes lembre de conectar o bluetooth como indicado anteriormente.
+
+Vamos modificar o firmware alterando o nome e a senha do bluetooth. 
+Para isso será necessário alterar a função `hc05_init` nos comandos de configuração
+que configuram o nome e a senha do device: `AT+NAME` e `AT+PIN`.
+
+O exemplo configura o bluetooth com o nome `MarcoMello` e senha `0000`:
+
+- `AT+NAMEMarcoMello`
+- `AT+PIN0000`
+
+Para alterar o nome e a senha (4 digitos) basta alterar:
+
+- `AT+NAMExxxxxxxx`
+- `AT+PINyyyy`
+
+Tudo isso na função `hc05_init`:
+
+```c
+int hc05_init(void) {
+    // ....
+	usart_send_command(USART0, buffer_rx, 1000, "AT+NAMEMarcoMello", 1000); 
+    // ....
+	usart_send_command(USART0, buffer_rx, 1000, "AT+PIN0000", 1000);
+ }
+```
+
+**Compile e programe o projeto**
+
+## PC - **Controle para Automação** 
+
+Você deve escolher esse exemplo se quiser fazer um controle para aplicativos em geral, exemplo: Youtube, Chrome, Video Player.
+
+Siga os passos a seguir:
+
+- Instale os pacotes necessários do Python via PIP. Os pacotes necessários estão no arquivo `requeriments.txt` (dentro da pasta `python/`):
+
+``` bash
+pip3 install -r requirements.txt
+```
+
+- Utilize o arquivo `youtube_controller.py` como base para o seu controle, ele já vem configurado para usar no Youtube com um botão configurado (botão A do controle ->  tecla L do Youtube para adiantar o vídeo em 10 segundos).
+
+**Primeiro:** vamos testar se o computador instalou a biblioteca de automação corretamente (`pyautogui`).
+
+- Execute o arquivo `youtube_controller.py` com os parametros `none -c dummy`. 
+
+``` bash
+python3 youtube_controller.py none -c dummy
+```
+
+Isto fará com que o aplicativo em Python, inicie sem comunicar com o Bluetooth e irá simular o aperto da tecla A do controle a cada 1 seg. 
+
+Abra um vídeo no Youtube e verifique se o vídeo fica pulando 10s a cada segundo. Dica: para debugar quando ocorre o botão, adicione a flag `-d` no final dos parametros para mostrar mensagens de debug.
+
+### Testando com a placa
+
+Necessitamos agora parear o Bluetooth do computador com o HC05 do Atmel e criar uma porta serial virutal. Para isto siga o roteiro abaixo *Conectar o HC-05 via porta Serial Virtual*, depois retorne para este roteiro.
+
+Verifique se placa conecta com o computador na porta COM configurada anteriormente, isto pode ser verificado utilizando o software [PuTTy](https://www.putty.org), conecte na COM configurada. Se estiver conectado e funcionando você deverá ver vários (`X0` ou `X1` dependendo se o botão da placa está apertado ou não).
+
+Se estiver tudo certo com o passo anterior, tente agora executar o `youtube_controller.py` com os parametros `PORTA_COM -b 9600` para conectar via serial, o controle agora deve funcionar no Youtube, aperte o botão da placa e veja se o vídeo vai para frente
+
+- `PORTA_COM `: porta do windows que o bluetooth conectou
+
+## PC - **Controle para Jogos**
+
+Você deve escolher esse exemplo se quiser desenvolver um controle para emuladores, Jogos com suporte a DirectInput/Joystick. 
+
+Siga os passos a seguir:
 
 - Instale os pacotes necessários do Python via PIP. Os pacotes necessários estão no arquivo requeriments.txt
 
@@ -77,8 +163,7 @@
 - Se estiver OK com o passo anterior, tente agora executar o `game_controller.py` com os parametros `PORTA_COM -b BAUDRATE` para conectar via serial, o controle agora deve funcionar no emulador, aperte o botão da placa e veja se o botão é pressionado no jogo.
 
 
-
-## Conectar ao HM10 via porta Serial Virtual
+## Conectar ao HC-05 via porta Serial Virtual
 
 - Procure no Windows 10, as configurações de Bluetooth igual a imagem abaixo. Realize o pareamento com o HC05 do seu grupo. Em seguida, clique em "Mais configurações de Bluetooth" conforme marcado em amarelo.    
 ![](doc/bluetooth1.png)
