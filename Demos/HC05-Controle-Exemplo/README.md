@@ -35,7 +35,7 @@ a porta COM criada pelo windows para enviar e receber dados do
 microcontrolador via protocolo bluetooth.
 
 Note que estamos lidando com o bluetooth de forma "transparente",
-apenas como 'usuários', toda a mágica acontece dentro do HC-05.
+apenas como "usuários", toda a mágica acontece dentro do HC-05.
 
 ## Exemplo
 
@@ -76,7 +76,7 @@ O exemplo configura o bluetooth com o nome `MarcoMello` e senha `0000`:
 - `AT+NAMEMarcoMello`
 - `AT+PIN0000`
 
-Para alterar o nome e a senha (4 digitos) basta alterar:
+Para alterar o nome e a senha (4 dígitos) basta alterar:
 
 - `AT+NAMExxxxxxxx`
 - `AT+PINyyyy`
