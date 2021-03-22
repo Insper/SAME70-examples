@@ -166,9 +166,15 @@ Siga os passos a seguir:
 pip3 install -r requirements.txt
 ```
 
-Instale o `VJoy` para Windows, no qual permite criarmos um controle virtual programável para comunicarmos via Python: http://vjoystick.sourceforge.net/site/
+Instale o [`VJoy`](http://vjoystick.sourceforge.net/site/) para Windows, no qual permite criarmos um controle virtual programável para comunicarmos via Python: https://sourceforge.net/projects/vjoystick/files/Beta%202.x/2.1.9.1-160719/vJoySetup.exe/download
 
-Copie os arquivos `vJoyInterface.dll` e `vJoyInterfaceWrap.dll` da pasta `Program Files/VJoy` ou `Arquivos de Programas/VJoy` e pasta `x86` ou `x64` (depenendo do seu sistema operacional) para a `pasta do projeto/PC_Python/pyvjoy` 
+Copie os arquivos `vJoyInterface.dll` e `vJoyInterfaceWrap.dll` da pasta `Program Files/VJoy` ou `Arquivos de Programas/VJoy` e pasta `x86` ou `x64` (depenendo da sua instalação python) para a `pasta do projeto/PC_Python/pyvjoy`. Para verificar qual versão python instalado execute no cmd do windows:
+
+```bash
+python3
+```
+
+Deve aparecer algo com x86 ou x64.
 
 Utilize o arquivo `game_controller.py` como base para o seu controle, ele já vem configurado para usar em um emulador com um botão configurado (botão A do controle -> botão 1 do controle virtual).
 
