@@ -10,12 +10,20 @@
 #define TASK_LED_STACK_SIZE                (1024/sizeof(portSTACK_TYPE))
 #define TASK_LED_STACK_PRIORITY            (tskIDLE_PRIORITY)
 
+
+#define LED_PIO       PIOC
+#define LED_PIO_ID    ID_PIOC
+#define LED_IDX       8u
+#define LED_IDX_MASK  (1u << LED_IDX)
+
 extern void vApplicationStackOverflowHook(xTaskHandle *pxTask,
 		signed char *pcTaskName);
 extern void vApplicationIdleHook(void);
 extern void vApplicationTickHook(void);
 extern void vApplicationMallocFailedHook(void);
 extern void xPortSysTickHandler(void);
+
+void pin_toggle(Pio *pio, uint32_t mask);
 
 /**
  * \brief Called if stack overflow during execution
@@ -57,6 +65,14 @@ extern void vApplicationMallocFailedHook(void)
 	configASSERT( ( volatile void * ) NULL );
 }
 
+
+void pin_toggle(Pio *pio, uint32_t mask){
+	if(pio_get_output_data_status(pio, mask))
+	pio_clear(pio, mask);
+	else
+	pio_set(pio,mask);
+}
+
 /**
  * \brief This task, when activated, send every ten seconds on debug UART
  * the whole report of free heap and total tasks status
@@ -81,7 +97,7 @@ static void task_led(void *pvParameters)
 {
 	UNUSED(pvParameters);
 	for (;;) {
-		LED_Toggle(LED0);
+		pin_toggle(LED_PIO, LED_IDX_MASK);
 		vTaskDelay(1000);
 	}
 }

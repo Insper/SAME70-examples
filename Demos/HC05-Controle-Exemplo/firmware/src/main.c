@@ -206,6 +206,7 @@ int hc05_init(void) {
 	usart_send_command(USART_COM, buffer_rx, 1000, "AT", 100);
 	vTaskDelay( 500 / portTICK_PERIOD_MS);
 	usart_send_command(USART_COM, buffer_rx, 1000, "AT+PIN0000", 100);
+	vTaskDelay( 500 / portTICK_PERIOD_MS);
 }
 
 /************************************************************************/
