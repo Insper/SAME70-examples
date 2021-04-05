@@ -188,7 +188,7 @@ Isto fará com que o aplicativo em Python, inicie **sem comunicar** com o Blueto
 
 Abra um emulador com um jogo (exemplo: ZSNES), e lembre-se de configurar o controle no emulador, que deve reconhecer o `VJoy 1`, como controle e clique na opção para trocar um dos botões, ao fazer isto com o aplicativo rodando, o emulador deve configurar aquele botão corretamente:
 
-![](doc/zsnesL.bmp)
+![](doc/zsnesL.jpg)
 
 Dica: para debugar quando ocorre o botão, adicione a flag `-d` no final dos parametros ao rodar o python para mostrar mensagens de debug. 
 
