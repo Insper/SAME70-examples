@@ -186,7 +186,11 @@ python3 youtube_controller.py none -c dummy
 
 Isto fará com que o aplicativo em Python, inicie **sem comunicar** com o Bluetooth e irá simular o aperto da tecla A do controle a cada 1seg. 
 
-Abra um emulador com um jogo (exemplo: NEStopia), lembre-se de configurar o controle, o emulador deve reconhecer o `VJoy 1`, como controle e clique na opção para trocar um dos botões, ao fazer isto com o aplicativo rodando, o emulador deve configurar aquele botão corretamente. Dica: para debugar quando ocorre o botão, adicione a flag `-d` no final dos parametros ao rodar o python para mostrar mensagens de debug. 
+Abra um emulador com um jogo (exemplo: ZSNES), e lembre-se de configurar o controle no emulador, que deve reconhecer o `VJoy 1`, como controle e clique na opção para trocar um dos botões, ao fazer isto com o aplicativo rodando, o emulador deve configurar aquele botão corretamente:
+
+![](doc/zsnesL.bmp)
+
+Dica: para debugar quando ocorre o botão, adicione a flag `-d` no final dos parametros ao rodar o python para mostrar mensagens de debug. 
 
 O VJoy instala um monitor para verificar o funcionamento, isto pode te auxiliar a detectar erros, você pode encontra-lo no menu Iniciar em VJoy.
 
