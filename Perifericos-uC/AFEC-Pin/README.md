@@ -54,7 +54,7 @@ O AFEC possui o diagrama interno a seguir (simplificado):
 
 O firmware exemplo configura o `AFEC0` canal `0`, esse canal é que está conectado o pino `PD30`, para gerar uma interrupção e chamar a função de `AFEC_pot_Callback()` sempre que um valor novo estiver disponível (conversão finalizada).
 
-![](doc/PC31.png)
+![](doc/PD30.png)
 
 A configuração do AFEC só é necessário uma única vez, por isso é realizada fora do `while`
 
