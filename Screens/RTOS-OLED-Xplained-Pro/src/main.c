@@ -56,7 +56,10 @@ void but_callback(void) {
 static void task_oled(void *pvParameters) {
 	gfx_mono_ssd1306_init();
   gfx_mono_draw_string("Exemplo RTOS", 0, 0, &sysfont);
+  gfx_mono_draw_string("oii", 0, 20, &sysfont);
+
 	for (;;)  {
+    
 
 	}
 }
