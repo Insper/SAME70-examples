@@ -49,6 +49,7 @@
 /* Enable ICache and DCache */
 #define CONF_BOARD_ENABLE_CACHE
 
+#define CONF_BOARD_UART_CONSOLE
 
 #define SSD1306_DC_PIN               PIO_PB3_IDX
 #define SSD1306_RES_PIN              PIO_PC17_IDX
