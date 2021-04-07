@@ -8,7 +8,7 @@ Esse exemplo efetua a leitura de um potenciômetro e imprime o valor lido na ser
     
 - Pinos:
     - EXT-1: pin 3
-        - `PC31`: AFEC0
+        - `PD30`: AFEC0
 
 - Componentes: 
     
@@ -31,9 +31,9 @@ Esse exemplo efetua a leitura de um potenciômetro e imprime o valor lido na ser
 ## Explicação
 
 ``` c
-#define AFEC_POT AFEC1
-#define AFEC_POT_ID ID_AFEC1
-#define AFEC_POT_CHANNEL 6 // Canal do pino PC31
+#define AFEC_POT AFEC0
+#define AFEC_POT_ID ID_AFEC0
+#define AFEC_POT_CHANNEL 0 // Canal do pino PD30
 ```
 
 No uC utilizado no curso possuímos dois AFEC: AFEC0 e AFEC1. Esses periféricos são responsáveis por digitalizar um valor analógico e transforma em um valor digital. Os AFECs do nosso uC possui resolução de `12` bits (impacta que o valor convertido está entre `0` e `4095`). 
@@ -52,7 +52,7 @@ O AFEC possui o diagrama interno a seguir (simplificado):
 
 ### firmware
 
-O firmware exemplo configura o `AFEC0` canal `0`, esse canal é que está conectado o pino `PC31`, para gerar uma interrupção e chamar a função de `AFEC_pot_Callback()` sempre que um valor novo estiver disponível (conversão finalizada).
+O firmware exemplo configura o `AFEC0` canal `0`, esse canal é que está conectado o pino `PD30`, para gerar uma interrupção e chamar a função de `AFEC_pot_Callback()` sempre que um valor novo estiver disponível (conversão finalizada).
 
 ![](doc/PC31.png)
 
