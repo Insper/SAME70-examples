@@ -131,6 +131,7 @@ int main(void)
   
   while(1){
     if(g_is_conversion_done){
+      g_is_conversion_done = 0;
       printf("%d\n", g_ul_value);               
       delay_ms(500);                          
       
