@@ -1,11 +1,11 @@
 /**
-* Março - 2020
+* Abril - 2021
 * 5 semestre - Eng. da Computação - Insper
 * Rafael Corsi - rafael.corsi@insper.edu.br
 * Marco Mello - macoasma@insper.edu.br
 *
 * Configura o ADC do SAME70 para fazer leitura de
-* um potenciômetro através do pino PC31
+* um potenciômetro através do pino PD30
 *
 * Material :
 *  - Kit: ATMEL SAME70-XPLD - ARM CORTEX M7
@@ -27,9 +27,9 @@
 /* Defines                                                              */
 /************************************************************************/
 
-#define AFEC_POT AFEC1
-#define AFEC_POT_ID ID_AFEC1
-#define AFEC_POT_CHANNEL 6 // Canal do pino PC31
+#define AFEC_POT AFEC0
+#define AFEC_POT_ID ID_AFEC0
+#define AFEC_POT_CHANNEL 0 // Canal do pino PD30
 
 /************************************************************************/
 /* Globals                                                              */
@@ -131,6 +131,7 @@ int main(void)
   
   while(1){
     if(g_is_conversion_done){
+      g_is_conversion_done = 0;
       printf("%d\n", g_ul_value);               
       delay_ms(500);                          
       

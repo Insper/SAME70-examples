@@ -19,9 +19,7 @@ O LCD possui uma tela resistiva que fornece a posição e intensidade do toque p
 
 ## Conectando LCD
 
-Para conectar a parte de controle do display ao kit, faça as seguintes conexões:
-
-![](pinos.png)
+Para conectar a parte de controle do display ao kit, faça as conexões listadas a seguir, note que usamos apenas pinos do EXT2:
 
 | LCD  | EXT2  | SAME70 |
 | ---- | ----- | ------ |
@@ -36,6 +34,9 @@ Para conectar a parte de controle do display ao kit, faça as seguintes conexõe
 | x+   | 7     | PC19   |
 | y-   | 6     | PD11   |
 | x-   | 4     | PC13   |
+
+![](pinos.png)
+
 
 Vocês podem ou não usar uma protoboard para a montagem, conforme a seguir:
 
