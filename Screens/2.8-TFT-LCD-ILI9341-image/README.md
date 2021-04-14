@@ -8,4 +8,6 @@ Antes de seguir você deve ter montando o hadware como explicado em:
 
 O resultado obtido deve ser:
 
+<img src="foto.jpeg" width="200">
+
 ![](foto.jpeg =250x)
