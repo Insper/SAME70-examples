@@ -8,7 +8,9 @@ Antes de seguir você deve ter montando o hadware como explicado em:
 
 ## testando
 
-Para validar embarque o código, abra o terminal e encoste na tela, o programa deve exibir no terminal o valor X e Y lido. Você pode alterar a sensibilidade do toque no arquivo `config/touch.h` no `#define TOUCH_PRESSURE_DETECT`, quanto maior o valor menor a sensibilidade.
+![](touch.jpeg)
+
+Para validar embarque o código, abra o terminal e encoste na tela, o programa deve exibir no terminal o valor X e Y lido, conforme a imagem acima. Você pode alterar a sensibilidade do toque no arquivo `config/touch.h` no `#define TOUCH_PRESSURE_DETECT`, quanto maior o valor menor a sensibilidade.
 
 O resultado obtido deve ser:
 
