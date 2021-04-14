@@ -62,9 +62,6 @@
 // From module: Delay routines
 #include <delay.h>
 
-// From module: Display - ILI9488 LCD Controller (SPI)
-#include <ili9488.h>
-
 // From module: GPIO - General purpose Input/Output
 #include <gpio.h>
 
@@ -113,15 +110,6 @@
 // From module: System Clock Control - SAME70 implementation
 #include <sysclk.h>
 
-// From module: TWI - Two-wire Interface High Speed
-#include <twihs.h>
-
-// From module: TWIHS - Two-Wire Interface High Speed- SAM implementation
-#include <sam_twihs/twihs_master.h>
-#include <sam_twihs/twihs_slave.h>
-#include <twihs_master.h>
-#include <twihs_slave.h>
-
 // From module: UART - Univ. Async Rec/Trans
 #include <uart.h>
 
@@ -130,9 +118,6 @@
 
 // From module: USART - Univ. Syn Async Rec/Trans
 #include <usart.h>
-
-// From module: maXTouch - ATMXT122S Controller
-#include <mxt_device_1.h>
 
 // From module: pio_handler support enabled
 #include <pio_handler.h>
