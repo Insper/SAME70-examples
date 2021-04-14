@@ -12,4 +12,4 @@ Para validar embarque o código, abra o terminal e encoste na tela, o programa d
 
 O resultado obtido deve ser:
 
-TODO: INSERIR FOTO
+![](touch.jpeg)
