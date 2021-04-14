@@ -8,4 +8,4 @@ Antes de seguir você deve ter montando o hadware como explicado em:
 
 O resultado obtido deve ser:
 
-![](foto.jpeg)
+![](foto.jpeg =250x)
