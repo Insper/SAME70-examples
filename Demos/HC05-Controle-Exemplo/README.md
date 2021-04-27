@@ -205,3 +205,17 @@ Se estiver tudo certo com o passo anterior, tente agora executar o `game_control
 ### Pronto!
 
 Agora você pode seguir o desenvolvimento do seu projeto!
+
+## OLED + Bluetooth?
+
+A pasta `RTOS-OLED-Xplained-Pro-Bluetooth` possui um exemplo de como usar o OLED com o bluetooth, para isso conecte a OLED no EXT1 e o bluetooth em novos pinos do EXT2:
+
+- TX do bluetooth no pino PA21
+- RX do bluetooth no pino PB4
+
+> Atenção:
+>
+> 1. estamos usando os mesmos pinos da UART que são usados no printf.
+> 1. Alteramos o baudrate do terminal para 9600, devido a taxa de comunicação com o módulo HC05
+
+
