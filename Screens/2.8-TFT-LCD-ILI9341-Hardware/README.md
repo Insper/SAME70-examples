@@ -38,7 +38,7 @@ Para conectar a parte de controle do display ao kit, faça as conexões listadas
 ![](pinos.png)
 
 
-Vocês podem ou não usar uma protoboard para a montagem, conforme a seguir:
+Vocês podem ou não usar uma protoboard para a montagem, abaixo foram utilizados apenas jumpers F-F:
 
 ![](montagem_lcd_jumpers.jpeg)
 
