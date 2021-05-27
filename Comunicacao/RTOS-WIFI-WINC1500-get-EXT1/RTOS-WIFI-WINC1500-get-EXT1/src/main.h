@@ -55,14 +55,14 @@ extern "C" {
 /** Using broadcast address for simplicity. */
 #define MAIN_SERVER_PORT                    (5000)
 
+/** Weather information provider server. */
+#define MAIN_SERVER_NAME                    "192.168.0.138"
+
 /** IP address parsing. */
 #define IPV4_BYTE(val, index)               ((val >> (index * 8)) & 0xFF)
 
 /** Send buffer of TCP socket. */
 #define MAIN_PREFIX_BUFFER                  "GET /status HTTP/1.1\r\n Accept: */*\r\n\r\n"
-
-/** Weather information provider server. */
-#define MAIN_SERVER_NAME                    "192.168.0.138"
 
 /** Receive buffer size. */
 #define MAIN_WIFI_M2M_BUFFER_SIZE           1400
