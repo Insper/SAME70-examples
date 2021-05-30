@@ -29,7 +29,7 @@ Para conectar a parte de controle do display ao kit, faça as conexões listadas
 | MISO | 17    | PD20   |
 | MOSI | 16    | PD21   |
 | CS   | 15    | PD27   |
-| D/C  | 5     | PAC    |
+| D/C  | 5     | PA6    |
 | y+   | 3     | PD30   |
 | x+   | 7     | PC19   |
 | y-   | 6     | PD11   |
