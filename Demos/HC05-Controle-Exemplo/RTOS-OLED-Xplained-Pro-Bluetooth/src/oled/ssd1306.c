@@ -91,7 +91,7 @@ static void ssd1306_interface_init(void)
 		spi_disable_loopback(SPI0);
 
 		spi_disable_mode_fault_detect(SPI0);
-		int div = spi_calc_baudrate_div(1000000, sysclk_get_peripheral_hz());
+		int div = spi_calc_baudrate_div(2000000, sysclk_get_peripheral_hz());
 		spi_set_baudrate_div(SPI0,1, div);
 		spi_enable_clock(SPI0);
 		
