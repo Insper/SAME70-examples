@@ -106,9 +106,10 @@ void io_init(void)
                   PIO_IT_FALL_EDGE,
                   but_callback);
 
-  // Ativa interrupção
+  // Ativa interrupção e limpa primeira IRQ gerada na ativacao
   pio_enable_interrupt(BUT_PIO, BUT_IDX_MASK);
-
+  pio_get_interrupt_status(BUT_PIO);
+  
   // Configura NVIC para receber interrupcoes do PIO do botao
   // com prioridade 4 (quanto mais próximo de 0 maior)
   NVIC_EnableIRQ(BUT_PIO_ID);
