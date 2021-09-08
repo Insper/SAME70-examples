@@ -20,10 +20,10 @@ typedef struct  {
 } calendar;
 
 /* LEDs */
-#define LED_PIO_ID      ID_PIOC
 #define LED_PIO         PIOC
-#define LED_PIN		8
-#define LED_IDX_MASK    (1<<LED_PIN)
+#define LED_PIO_ID      ID_PIOC
+#define LED_PIO_IDX	8
+#define LED_IDX_MASK    (1<<LED_PIO_IDX)
 
 /************************************************************************/
 /* VAR globais                                                          */
