@@ -53,7 +53,7 @@ int main(void){
 	LED_init(0);
 
         /** Configura timer TC0, canal 1 */
-	TC_init(TC0, ID_TC1, 1, 2);
+	TC_init(TC0, ID_TC1, 1, 4);
   
 	while (1) {
             if(flag_tc){
