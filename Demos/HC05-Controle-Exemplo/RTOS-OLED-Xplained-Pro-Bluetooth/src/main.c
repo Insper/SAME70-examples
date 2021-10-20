@@ -22,7 +22,7 @@
 #define LED_IDX      8
 #define LED_IDX_MASK (1 << LED_IDX)
 
-// Botão
+// BotÃ£o
 #define BUT_PIO      PIOA
 #define BUT_PIO_ID   ID_PIOA
 #define BUT_IDX      11
@@ -160,7 +160,7 @@ int hc05_init(void) {
   vTaskDelay( 500 / portTICK_PERIOD_MS);
   usart_send_command(USART_COM, buffer_rx, 1000, "AT", 100);
   vTaskDelay( 500 / portTICK_PERIOD_MS);
-  usart_send_command(USART_COM, buffer_rx, 1000, "AT+NAMEagoravai", 100);
+  usart_send_command(USART_COM, buffer_rx, 1000, "AT+NAMEnomedoprojeto", 100);
   vTaskDelay( 500 / portTICK_PERIOD_MS);
   usart_send_command(USART_COM, buffer_rx, 1000, "AT", 100);
   vTaskDelay( 500 / portTICK_PERIOD_MS);
@@ -190,22 +190,22 @@ void task_bluetooth(void) {
   #endif
   hc05_init();
 
-  // configura LEDs e Botões
+  // configura LEDs e BotÃµes
   io_init();
 
   char button1 = '0';
   char eof = 'X';
 
-  // Task não deve retornar.
+  // Task nÃ£o deve retornar.
   while(1) {
-    // atualiza valor do botão
+    // atualiza valor do botÃ£o
     if(pio_get(BUT_PIO, PIO_INPUT, BUT_IDX_MASK) == 0) {
       button1 = '1';
       } else {
       button1 = '0';
     }
 
-    // envia status botão
+    // envia status botÃ£o
     while(!usart_is_tx_ready(USART_COM)) {
       vTaskDelay(10 / portTICK_PERIOD_MS);
     }
@@ -246,7 +246,7 @@ int main(void) {
 	/* Start the scheduler. */
 	vTaskStartScheduler();
 
-  /* RTOS não deve chegar aqui !! */
+  /* RTOS nÃ£o deve chegar aqui !! */
 	while(1){}
 
 	/* Will only get here if there was insufficient memory to create the idle task. */
