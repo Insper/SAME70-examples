@@ -548,7 +548,7 @@
       <Value>../src/ASF/sam/drivers/afec</Value>
       <Value>../src/ASF/common/services/sleepmgr</Value>
       <Value>../src/ASF/sam/components/display/ili9341</Value>
-      <Value>../src/ASF/thirdparty/lvgl</Value>
+      <Value>../src/ASF/thirdparty/lvgl8</Value>
       <Value>../src/ASF/thirdparty/freertos/freertos-8.2.3/Source/include</Value>
       <Value>../src/ASF/thirdparty/freertos/freertos-8.2.3/Source/portable/GCC/ARM_CM7/r0p1</Value>
       <Value>../src/ASF/common/services/spi/sam_spi</Value>
@@ -741,35 +741,1529 @@
     <Folder Include="src\ASF\thirdparty\freertos\freertos-8.2.3\Source\portable\GCC\ARM_CM7\" />
     <Folder Include="src\ASF\thirdparty\freertos\freertos-8.2.3\Source\portable\GCC\ARM_CM7\r0p1\" />
     <Folder Include="src\ASF\thirdparty\freertos\freertos-8.2.3\Source\portable\MemMang\" />
-    <Folder Include="src\ASF\thirdparty\lvgl\" />
-    <Folder Include="src\ASF\thirdparty\lvgl\.github\" />
-    <Folder Include="src\ASF\thirdparty\lvgl\.github\ISSUE_TEMPLATE\" />
-    <Folder Include="src\ASF\thirdparty\lvgl\.github\workflows\" />
-    <Folder Include="src\ASF\thirdparty\lvgl\docs\" />
-    <Folder Include="src\ASF\thirdparty\lvgl\examples\" />
-    <Folder Include="src\ASF\thirdparty\lvgl\examples\porting\" />
-    <Folder Include="src\ASF\thirdparty\lvgl\scripts\" />
-    <Folder Include="src\ASF\thirdparty\lvgl\scripts\built_in_font\" />
-    <Folder Include="src\ASF\thirdparty\lvgl\scripts\release\" />
-    <Folder Include="src\ASF\thirdparty\lvgl\src\" />
-    <Folder Include="src\ASF\thirdparty\lvgl\src\lv_core\" />
-    <Folder Include="src\ASF\thirdparty\lvgl\src\lv_draw\" />
-    <Folder Include="src\ASF\thirdparty\lvgl\src\lv_font\" />
-    <Folder Include="src\ASF\thirdparty\lvgl\src\lv_gpu\" />
-    <Folder Include="src\ASF\thirdparty\lvgl\src\lv_hal\" />
-    <Folder Include="src\ASF\thirdparty\lvgl\src\lv_misc\" />
-    <Folder Include="src\ASF\thirdparty\lvgl\src\lv_themes\" />
-    <Folder Include="src\ASF\thirdparty\lvgl\src\lv_widgets\" />
-    <Folder Include="src\ASF\thirdparty\lvgl\tests\" />
-    <Folder Include="src\ASF\thirdparty\lvgl\tests\lv_test_core\" />
-    <Folder Include="src\ASF\thirdparty\lvgl\tests\lv_test_fonts\" />
-    <Folder Include="src\ASF\thirdparty\lvgl\tests\lv_test_ref_imgs\" />
-    <Folder Include="src\ASF\thirdparty\lvgl\tests\lv_test_widgets\" />
-    <Folder Include="src\ASF\thirdparty\lvgl\zephyr\" />
+    <Folder Include="src\ASF\thirdparty\lvgl8\" />
+    <Folder Include="src\ASF\thirdparty\lvgl8\examples\" />
+    <Folder Include="src\ASF\thirdparty\lvgl8\examples\anim\" />
+    <Folder Include="src\ASF\thirdparty\lvgl8\examples\arduino\" />
+    <Folder Include="src\ASF\thirdparty\lvgl8\examples\arduino\LVGL_Arduino\" />
+    <Folder Include="src\ASF\thirdparty\lvgl8\examples\assets\" />
+    <Folder Include="src\ASF\thirdparty\lvgl8\examples\assets\font\" />
+    <Folder Include="src\ASF\thirdparty\lvgl8\examples\event\" />
+    <Folder Include="src\ASF\thirdparty\lvgl8\examples\get_started\" />
+    <Folder Include="src\ASF\thirdparty\lvgl8\examples\layouts\" />
+    <Folder Include="src\ASF\thirdparty\lvgl8\examples\layouts\flex\" />
+    <Folder Include="src\ASF\thirdparty\lvgl8\examples\layouts\grid\" />
+    <Folder Include="src\ASF\thirdparty\lvgl8\examples\libs\" />
+    <Folder Include="src\ASF\thirdparty\lvgl8\examples\libs\bmp\" />
+    <Folder Include="src\ASF\thirdparty\lvgl8\examples\libs\freetype\" />
+    <Folder Include="src\ASF\thirdparty\lvgl8\examples\libs\gif\" />
+    <Folder Include="src\ASF\thirdparty\lvgl8\examples\libs\png\" />
+    <Folder Include="src\ASF\thirdparty\lvgl8\examples\libs\qrcode\" />
+    <Folder Include="src\ASF\thirdparty\lvgl8\examples\libs\sjpg\" />
+    <Folder Include="src\ASF\thirdparty\lvgl8\examples\others\" />
+    <Folder Include="src\ASF\thirdparty\lvgl8\examples\others\snapshot\" />
+    <Folder Include="src\ASF\thirdparty\lvgl8\examples\porting\" />
+    <Folder Include="src\ASF\thirdparty\lvgl8\examples\scroll\" />
+    <Folder Include="src\ASF\thirdparty\lvgl8\examples\styles\" />
+    <Folder Include="src\ASF\thirdparty\lvgl8\examples\widgets\" />
+    <Folder Include="src\ASF\thirdparty\lvgl8\examples\widgets\animimg\" />
+    <Folder Include="src\ASF\thirdparty\lvgl8\examples\widgets\arc\" />
+    <Folder Include="src\ASF\thirdparty\lvgl8\examples\widgets\bar\" />
+    <Folder Include="src\ASF\thirdparty\lvgl8\examples\widgets\btnmatrix\" />
+    <Folder Include="src\ASF\thirdparty\lvgl8\examples\widgets\btn\" />
+    <Folder Include="src\ASF\thirdparty\lvgl8\examples\widgets\calendar\" />
+    <Folder Include="src\ASF\thirdparty\lvgl8\examples\widgets\canvas\" />
+    <Folder Include="src\ASF\thirdparty\lvgl8\examples\widgets\chart\" />
+    <Folder Include="src\ASF\thirdparty\lvgl8\examples\widgets\checkbox\" />
+    <Folder Include="src\ASF\thirdparty\lvgl8\examples\widgets\colorwheel\" />
+    <Folder Include="src\ASF\thirdparty\lvgl8\examples\widgets\dropdown\" />
+    <Folder Include="src\ASF\thirdparty\lvgl8\examples\widgets\imgbtn\" />
+    <Folder Include="src\ASF\thirdparty\lvgl8\examples\widgets\img\" />
+    <Folder Include="src\ASF\thirdparty\lvgl8\examples\widgets\keyboard\" />
+    <Folder Include="src\ASF\thirdparty\lvgl8\examples\widgets\label\" />
+    <Folder Include="src\ASF\thirdparty\lvgl8\examples\widgets\led\" />
+    <Folder Include="src\ASF\thirdparty\lvgl8\examples\widgets\line\" />
+    <Folder Include="src\ASF\thirdparty\lvgl8\examples\widgets\list\" />
+    <Folder Include="src\ASF\thirdparty\lvgl8\examples\widgets\meter\" />
+    <Folder Include="src\ASF\thirdparty\lvgl8\examples\widgets\msgbox\" />
+    <Folder Include="src\ASF\thirdparty\lvgl8\examples\widgets\obj\" />
+    <Folder Include="src\ASF\thirdparty\lvgl8\examples\widgets\roller\" />
+    <Folder Include="src\ASF\thirdparty\lvgl8\examples\widgets\slider\" />
+    <Folder Include="src\ASF\thirdparty\lvgl8\examples\widgets\span\" />
+    <Folder Include="src\ASF\thirdparty\lvgl8\examples\widgets\spinbox\" />
+    <Folder Include="src\ASF\thirdparty\lvgl8\examples\widgets\spinner\" />
+    <Folder Include="src\ASF\thirdparty\lvgl8\examples\widgets\switch\" />
+    <Folder Include="src\ASF\thirdparty\lvgl8\examples\widgets\table\" />
+    <Folder Include="src\ASF\thirdparty\lvgl8\examples\widgets\tabview\" />
+    <Folder Include="src\ASF\thirdparty\lvgl8\examples\widgets\textarea\" />
+    <Folder Include="src\ASF\thirdparty\lvgl8\examples\widgets\tileview\" />
+    <Folder Include="src\ASF\thirdparty\lvgl8\examples\widgets\win\" />
+    <Folder Include="src\ASF\thirdparty\lvgl8\rt-thread\" />
+    <Folder Include="src\ASF\thirdparty\lvgl8\scripts\" />
+    <Folder Include="src\ASF\thirdparty\lvgl8\scripts\built_in_font\" />
+    <Folder Include="src\ASF\thirdparty\lvgl8\scripts\release\" />
+    <Folder Include="src\ASF\thirdparty\lvgl8\src\" />
+    <Folder Include="src\ASF\thirdparty\lvgl8\src\core\" />
+    <Folder Include="src\ASF\thirdparty\lvgl8\src\draw\" />
+    <Folder Include="src\ASF\thirdparty\lvgl8\src\extra\" />
+    <Folder Include="src\ASF\thirdparty\lvgl8\src\extra\layouts\" />
+    <Folder Include="src\ASF\thirdparty\lvgl8\src\extra\layouts\flex\" />
+    <Folder Include="src\ASF\thirdparty\lvgl8\src\extra\layouts\grid\" />
+    <Folder Include="src\ASF\thirdparty\lvgl8\src\extra\libs\" />
+    <Folder Include="src\ASF\thirdparty\lvgl8\src\extra\libs\bmp\" />
+    <Folder Include="src\ASF\thirdparty\lvgl8\src\extra\libs\freetype\" />
+    <Folder Include="src\ASF\thirdparty\lvgl8\src\extra\libs\fsdrv\" />
+    <Folder Include="src\ASF\thirdparty\lvgl8\src\extra\libs\gif\" />
+    <Folder Include="src\ASF\thirdparty\lvgl8\src\extra\libs\png\" />
+    <Folder Include="src\ASF\thirdparty\lvgl8\src\extra\libs\qrcode\" />
+    <Folder Include="src\ASF\thirdparty\lvgl8\src\extra\libs\sjpg\" />
+    <Folder Include="src\ASF\thirdparty\lvgl8\src\extra\others\" />
+    <Folder Include="src\ASF\thirdparty\lvgl8\src\extra\others\snapshot\" />
+    <Folder Include="src\ASF\thirdparty\lvgl8\src\extra\themes\" />
+    <Folder Include="src\ASF\thirdparty\lvgl8\src\extra\themes\basic\" />
+    <Folder Include="src\ASF\thirdparty\lvgl8\src\extra\themes\default\" />
+    <Folder Include="src\ASF\thirdparty\lvgl8\src\extra\themes\mono\" />
+    <Folder Include="src\ASF\thirdparty\lvgl8\src\extra\widgets\" />
+    <Folder Include="src\ASF\thirdparty\lvgl8\src\extra\widgets\animimg\" />
+    <Folder Include="src\ASF\thirdparty\lvgl8\src\extra\widgets\calendar\" />
+    <Folder Include="src\ASF\thirdparty\lvgl8\src\extra\widgets\chart\" />
+    <Folder Include="src\ASF\thirdparty\lvgl8\src\extra\widgets\colorwheel\" />
+    <Folder Include="src\ASF\thirdparty\lvgl8\src\extra\widgets\imgbtn\" />
+    <Folder Include="src\ASF\thirdparty\lvgl8\src\extra\widgets\keyboard\" />
+    <Folder Include="src\ASF\thirdparty\lvgl8\src\extra\widgets\led\" />
+    <Folder Include="src\ASF\thirdparty\lvgl8\src\extra\widgets\list\" />
+    <Folder Include="src\ASF\thirdparty\lvgl8\src\extra\widgets\meter\" />
+    <Folder Include="src\ASF\thirdparty\lvgl8\src\extra\widgets\msgbox\" />
+    <Folder Include="src\ASF\thirdparty\lvgl8\src\extra\widgets\span\" />
+    <Folder Include="src\ASF\thirdparty\lvgl8\src\extra\widgets\spinbox\" />
+    <Folder Include="src\ASF\thirdparty\lvgl8\src\extra\widgets\spinner\" />
+    <Folder Include="src\ASF\thirdparty\lvgl8\src\extra\widgets\tabview\" />
+    <Folder Include="src\ASF\thirdparty\lvgl8\src\extra\widgets\tileview\" />
+    <Folder Include="src\ASF\thirdparty\lvgl8\src\extra\widgets\win\" />
+    <Folder Include="src\ASF\thirdparty\lvgl8\src\font\" />
+    <Folder Include="src\ASF\thirdparty\lvgl8\src\gpu\" />
+    <Folder Include="src\ASF\thirdparty\lvgl8\src\gpu\sdl\" />
+    <Folder Include="src\ASF\thirdparty\lvgl8\src\hal\" />
+    <Folder Include="src\ASF\thirdparty\lvgl8\src\misc\" />
+    <Folder Include="src\ASF\thirdparty\lvgl8\src\widgets\" />
+    <Folder Include="src\ASF\thirdparty\lvgl8\tests\" />
+    <Folder Include="src\ASF\thirdparty\lvgl8\tests\ref_imgs\" />
+    <Folder Include="src\ASF\thirdparty\lvgl8\tests\src\" />
+    <Folder Include="src\ASF\thirdparty\lvgl8\tests\src\test_cases\" />
+    <Folder Include="src\ASF\thirdparty\lvgl8\tests\src\test_fonts\" />
+    <Folder Include="src\ASF\thirdparty\lvgl8\tests\unity\" />
+    <Folder Include="src\ASF\thirdparty\lvgl8\zephyr\" />
     <Folder Include="src\config\" />
     <Folder Include="src\touch\" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="src\ASF\thirdparty\lvgl8\examples\anim\lv_example_anim.h">
+      <SubType>compile</SubType>
+    </Compile>
+    <Compile Include="src\ASF\thirdparty\lvgl8\examples\anim\lv_example_anim_1.c">
+      <SubType>compile</SubType>
+    </Compile>
+    <Compile Include="src\ASF\thirdparty\lvgl8\examples\anim\lv_example_anim_2.c">
+      <SubType>compile</SubType>
+    </Compile>
+    <Compile Include="src\ASF\thirdparty\lvgl8\examples\anim\lv_example_anim_3.c">
+      <SubType>compile</SubType>
+    </Compile>
+    <Compile Include="src\ASF\thirdparty\lvgl8\examples\anim\lv_example_anim_timeline_1.c">
+      <SubType>compile</SubType>
+    </Compile>
+    <Compile Include="src\ASF\thirdparty\lvgl8\examples\assets\animimg001.c">
+      <SubType>compile</SubType>
+    </Compile>
+    <Compile Include="src\ASF\thirdparty\lvgl8\examples\assets\animimg002.c">
+      <SubType>compile</SubType>
+    </Compile>
+    <Compile Include="src\ASF\thirdparty\lvgl8\examples\assets\animimg003.c">
+      <SubType>compile</SubType>
+    </Compile>
+    <Compile Include="src\ASF\thirdparty\lvgl8\examples\assets\imgbtn_left.c">
+      <SubType>compile</SubType>
+    </Compile>
+    <Compile Include="src\ASF\thirdparty\lvgl8\examples\assets\imgbtn_mid.c">
+      <SubType>compile</SubType>
+    </Compile>
+    <Compile Include="src\ASF\thirdparty\lvgl8\examples\assets\imgbtn_right.c">
+      <SubType>compile</SubType>
+    </Compile>
+    <Compile Include="src\ASF\thirdparty\lvgl8\examples\assets\img_caret_down.c">
+      <SubType>compile</SubType>
+    </Compile>
+    <Compile Include="src\ASF\thirdparty\lvgl8\examples\assets\img_cogwheel_alpha16.c">
+      <SubType>compile</SubType>
+    </Compile>
+    <Compile Include="src\ASF\thirdparty\lvgl8\examples\assets\img_cogwheel_argb.c">
+      <SubType>compile</SubType>
+    </Compile>
+    <Compile Include="src\ASF\thirdparty\lvgl8\examples\assets\img_cogwheel_chroma_keyed.c">
+      <SubType>compile</SubType>
+    </Compile>
+    <Compile Include="src\ASF\thirdparty\lvgl8\examples\assets\img_cogwheel_indexed16.c">
+      <SubType>compile</SubType>
+    </Compile>
+    <Compile Include="src\ASF\thirdparty\lvgl8\examples\assets\img_cogwheel_rgb.c">
+      <SubType>compile</SubType>
+    </Compile>
+    <Compile Include="src\ASF\thirdparty\lvgl8\examples\assets\img_hand.c">
+      <SubType>compile</SubType>
+    </Compile>
+    <Compile Include="src\ASF\thirdparty\lvgl8\examples\assets\img_skew_strip.c">
+      <SubType>compile</SubType>
+    </Compile>
+    <Compile Include="src\ASF\thirdparty\lvgl8\examples\assets\img_star.c">
+      <SubType>compile</SubType>
+    </Compile>
+    <Compile Include="src\ASF\thirdparty\lvgl8\examples\event\lv_example_event.h">
+      <SubType>compile</SubType>
+    </Compile>
+    <Compile Include="src\ASF\thirdparty\lvgl8\examples\event\lv_example_event_1.c">
+      <SubType>compile</SubType>
+    </Compile>
+    <Compile Include="src\ASF\thirdparty\lvgl8\examples\event\lv_example_event_2.c">
+      <SubType>compile</SubType>
+    </Compile>
+    <Compile Include="src\ASF\thirdparty\lvgl8\examples\event\lv_example_event_3.c">
+      <SubType>compile</SubType>
+    </Compile>
+    <Compile Include="src\ASF\thirdparty\lvgl8\examples\get_started\lv_example_get_started.h">
+      <SubType>compile</SubType>
+    </Compile>
+    <Compile Include="src\ASF\thirdparty\lvgl8\examples\get_started\lv_example_get_started_1.c">
+      <SubType>compile</SubType>
+    </Compile>
+    <Compile Include="src\ASF\thirdparty\lvgl8\examples\get_started\lv_example_get_started_2.c">
+      <SubType>compile</SubType>
+    </Compile>
+    <Compile Include="src\ASF\thirdparty\lvgl8\examples\get_started\lv_example_get_started_3.c">
+      <SubType>compile</SubType>
+    </Compile>
+    <Compile Include="src\ASF\thirdparty\lvgl8\examples\layouts\flex\lv_example_flex.h">
+      <SubType>compile</SubType>
+    </Compile>
+    <Compile Include="src\ASF\thirdparty\lvgl8\examples\layouts\flex\lv_example_flex_1.c">
+      <SubType>compile</SubType>
+    </Compile>
+    <Compile Include="src\ASF\thirdparty\lvgl8\examples\layouts\flex\lv_example_flex_2.c">
+      <SubType>compile</SubType>
+    </Compile>
+    <Compile Include="src\ASF\thirdparty\lvgl8\examples\layouts\flex\lv_example_flex_3.c">
+      <SubType>compile</SubType>
+    </Compile>
+    <Compile Include="src\ASF\thirdparty\lvgl8\examples\layouts\flex\lv_example_flex_4.c">
+      <SubType>compile</SubType>
+    </Compile>
+    <Compile Include="src\ASF\thirdparty\lvgl8\examples\layouts\flex\lv_example_flex_5.c">
+      <SubType>compile</SubType>
+    </Compile>
+    <Compile Include="src\ASF\thirdparty\lvgl8\examples\layouts\flex\lv_example_flex_6.c">
+      <SubType>compile</SubType>
+    </Compile>
+    <Compile Include="src\ASF\thirdparty\lvgl8\examples\layouts\grid\lv_example_grid.h">
+      <SubType>compile</SubType>
+    </Compile>
+    <Compile Include="src\ASF\thirdparty\lvgl8\examples\layouts\grid\lv_example_grid_1.c">
+      <SubType>compile</SubType>
+    </Compile>
+    <Compile Include="src\ASF\thirdparty\lvgl8\examples\layouts\grid\lv_example_grid_2.c">
+      <SubType>compile</SubType>
+    </Compile>
+    <Compile Include="src\ASF\thirdparty\lvgl8\examples\layouts\grid\lv_example_grid_3.c">
+      <SubType>compile</SubType>
+    </Compile>
+    <Compile Include="src\ASF\thirdparty\lvgl8\examples\layouts\grid\lv_example_grid_4.c">
+      <SubType>compile</SubType>
+    </Compile>
+    <Compile Include="src\ASF\thirdparty\lvgl8\examples\layouts\grid\lv_example_grid_5.c">
+      <SubType>compile</SubType>
+    </Compile>
+    <Compile Include="src\ASF\thirdparty\lvgl8\examples\layouts\grid\lv_example_grid_6.c">
+      <SubType>compile</SubType>
+    </Compile>
+    <Compile Include="src\ASF\thirdparty\lvgl8\examples\layouts\lv_example_layout.h">
+      <SubType>compile</SubType>
+    </Compile>
+    <Compile Include="src\ASF\thirdparty\lvgl8\examples\libs\bmp\lv_example_bmp.h">
+      <SubType>compile</SubType>
+    </Compile>
+    <Compile Include="src\ASF\thirdparty\lvgl8\examples\libs\bmp\lv_example_bmp_1.c">
+      <SubType>compile</SubType>
+    </Compile>
+    <Compile Include="src\ASF\thirdparty\lvgl8\examples\libs\freetype\lv_example_freetype.h">
+      <SubType>compile</SubType>
+    </Compile>
+    <Compile Include="src\ASF\thirdparty\lvgl8\examples\libs\freetype\lv_example_freetype_1.c">
+      <SubType>compile</SubType>
+    </Compile>
+    <Compile Include="src\ASF\thirdparty\lvgl8\examples\libs\gif\img_bulb_gif.c">
+      <SubType>compile</SubType>
+    </Compile>
+    <Compile Include="src\ASF\thirdparty\lvgl8\examples\libs\gif\lv_example_gif.h">
+      <SubType>compile</SubType>
+    </Compile>
+    <Compile Include="src\ASF\thirdparty\lvgl8\examples\libs\gif\lv_example_gif_1.c">
+      <SubType>compile</SubType>
+    </Compile>
+    <Compile Include="src\ASF\thirdparty\lvgl8\examples\libs\lv_example_libs.h">
+      <SubType>compile</SubType>
+    </Compile>
+    <Compile Include="src\ASF\thirdparty\lvgl8\examples\libs\png\img_wing_png.c">
+      <SubType>compile</SubType>
+    </Compile>
+    <Compile Include="src\ASF\thirdparty\lvgl8\examples\libs\png\lv_example_png.h">
+      <SubType>compile</SubType>
+    </Compile>
+    <Compile Include="src\ASF\thirdparty\lvgl8\examples\libs\png\lv_example_png_1.c">
+      <SubType>compile</SubType>
+    </Compile>
+    <Compile Include="src\ASF\thirdparty\lvgl8\examples\libs\qrcode\lv_example_qrcode.h">
+      <SubType>compile</SubType>
+    </Compile>
+    <Compile Include="src\ASF\thirdparty\lvgl8\examples\libs\qrcode\lv_example_qrcode_1.c">
+      <SubType>compile</SubType>
+    </Compile>
+    <Compile Include="src\ASF\thirdparty\lvgl8\examples\libs\sjpg\lv_example_sjpg.h">
+      <SubType>compile</SubType>
+    </Compile>
+    <Compile Include="src\ASF\thirdparty\lvgl8\examples\libs\sjpg\lv_example_sjpg_1.c">
+      <SubType>compile</SubType>
+    </Compile>
+    <Compile Include="src\ASF\thirdparty\lvgl8\examples\lv_examples.h">
+      <SubType>compile</SubType>
+    </Compile>
+    <Compile Include="src\ASF\thirdparty\lvgl8\examples\others\lv_example_others.h">
+      <SubType>compile</SubType>
+    </Compile>
+    <Compile Include="src\ASF\thirdparty\lvgl8\examples\others\snapshot\lv_example_snapshot.h">
+      <SubType>compile</SubType>
+    </Compile>
+    <Compile Include="src\ASF\thirdparty\lvgl8\examples\others\snapshot\lv_example_snapshot_1.c">
+      <SubType>compile</SubType>
+    </Compile>
+    <Compile Include="src\ASF\thirdparty\lvgl8\examples\porting\lv_port_disp_template.c">
+      <SubType>compile</SubType>
+    </Compile>
+    <Compile Include="src\ASF\thirdparty\lvgl8\examples\porting\lv_port_disp_template.h">
+      <SubType>compile</SubType>
+    </Compile>
+    <Compile Include="src\ASF\thirdparty\lvgl8\examples\porting\lv_port_fs_template.c">
+      <SubType>compile</SubType>
+    </Compile>
+    <Compile Include="src\ASF\thirdparty\lvgl8\examples\porting\lv_port_fs_template.h">
+      <SubType>compile</SubType>
+    </Compile>
+    <Compile Include="src\ASF\thirdparty\lvgl8\examples\porting\lv_port_indev_template.c">
+      <SubType>compile</SubType>
+    </Compile>
+    <Compile Include="src\ASF\thirdparty\lvgl8\examples\porting\lv_port_indev_template.h">
+      <SubType>compile</SubType>
+    </Compile>
+    <Compile Include="src\ASF\thirdparty\lvgl8\examples\scroll\lv_example_scroll.h">
+      <SubType>compile</SubType>
+    </Compile>
+    <Compile Include="src\ASF\thirdparty\lvgl8\examples\scroll\lv_example_scroll_1.c">
+      <SubType>compile</SubType>
+    </Compile>
+    <Compile Include="src\ASF\thirdparty\lvgl8\examples\scroll\lv_example_scroll_2.c">
+      <SubType>compile</SubType>
+    </Compile>
+    <Compile Include="src\ASF\thirdparty\lvgl8\examples\scroll\lv_example_scroll_3.c">
+      <SubType>compile</SubType>
+    </Compile>
+    <Compile Include="src\ASF\thirdparty\lvgl8\examples\scroll\lv_example_scroll_4.c">
+      <SubType>compile</SubType>
+    </Compile>
+    <Compile Include="src\ASF\thirdparty\lvgl8\examples\scroll\lv_example_scroll_5.c">
+      <SubType>compile</SubType>
+    </Compile>
+    <Compile Include="src\ASF\thirdparty\lvgl8\examples\scroll\lv_example_scroll_6.c">
+      <SubType>compile</SubType>
+    </Compile>
+    <Compile Include="src\ASF\thirdparty\lvgl8\examples\styles\lv_example_style.h">
+      <SubType>compile</SubType>
+    </Compile>
+    <Compile Include="src\ASF\thirdparty\lvgl8\examples\styles\lv_example_style_1.c">
+      <SubType>compile</SubType>
+    </Compile>
+    <Compile Include="src\ASF\thirdparty\lvgl8\examples\styles\lv_example_style_10.c">
+      <SubType>compile</SubType>
+    </Compile>
+    <Compile Include="src\ASF\thirdparty\lvgl8\examples\styles\lv_example_style_11.c">
+      <SubType>compile</SubType>
+    </Compile>
+    <Compile Include="src\ASF\thirdparty\lvgl8\examples\styles\lv_example_style_12.c">
+      <SubType>compile</SubType>
+    </Compile>
+    <Compile Include="src\ASF\thirdparty\lvgl8\examples\styles\lv_example_style_13.c">
+      <SubType>compile</SubType>
+    </Compile>
+    <Compile Include="src\ASF\thirdparty\lvgl8\examples\styles\lv_example_style_14.c">
+      <SubType>compile</SubType>
+    </Compile>
+    <Compile Include="src\ASF\thirdparty\lvgl8\examples\styles\lv_example_style_2.c">
+      <SubType>compile</SubType>
+    </Compile>
+    <Compile Include="src\ASF\thirdparty\lvgl8\examples\styles\lv_example_style_3.c">
+      <SubType>compile</SubType>
+    </Compile>
+    <Compile Include="src\ASF\thirdparty\lvgl8\examples\styles\lv_example_style_4.c">
+      <SubType>compile</SubType>
+    </Compile>
+    <Compile Include="src\ASF\thirdparty\lvgl8\examples\styles\lv_example_style_5.c">
+      <SubType>compile</SubType>
+    </Compile>
+    <Compile Include="src\ASF\thirdparty\lvgl8\examples\styles\lv_example_style_6.c">
+      <SubType>compile</SubType>
+    </Compile>
+    <Compile Include="src\ASF\thirdparty\lvgl8\examples\styles\lv_example_style_7.c">
+      <SubType>compile</SubType>
+    </Compile>
+    <Compile Include="src\ASF\thirdparty\lvgl8\examples\styles\lv_example_style_8.c">
+      <SubType>compile</SubType>
+    </Compile>
+    <Compile Include="src\ASF\thirdparty\lvgl8\examples\styles\lv_example_style_9.c">
+      <SubType>compile</SubType>
+    </Compile>
+    <Compile Include="src\ASF\thirdparty\lvgl8\examples\widgets\animimg\lv_example_animimg_1.c">
+      <SubType>compile</SubType>
+    </Compile>
+    <Compile Include="src\ASF\thirdparty\lvgl8\examples\widgets\arc\lv_example_arc_1.c">
+      <SubType>compile</SubType>
+    </Compile>
+    <Compile Include="src\ASF\thirdparty\lvgl8\examples\widgets\arc\lv_example_arc_2.c">
+      <SubType>compile</SubType>
+    </Compile>
+    <Compile Include="src\ASF\thirdparty\lvgl8\examples\widgets\bar\lv_example_bar_1.c">
+      <SubType>compile</SubType>
+    </Compile>
+    <Compile Include="src\ASF\thirdparty\lvgl8\examples\widgets\bar\lv_example_bar_2.c">
+      <SubType>compile</SubType>
+    </Compile>
+    <Compile Include="src\ASF\thirdparty\lvgl8\examples\widgets\bar\lv_example_bar_3.c">
+      <SubType>compile</SubType>
+    </Compile>
+    <Compile Include="src\ASF\thirdparty\lvgl8\examples\widgets\bar\lv_example_bar_4.c">
+      <SubType>compile</SubType>
+    </Compile>
+    <Compile Include="src\ASF\thirdparty\lvgl8\examples\widgets\bar\lv_example_bar_5.c">
+      <SubType>compile</SubType>
+    </Compile>
+    <Compile Include="src\ASF\thirdparty\lvgl8\examples\widgets\bar\lv_example_bar_6.c">
+      <SubType>compile</SubType>
+    </Compile>
+    <Compile Include="src\ASF\thirdparty\lvgl8\examples\widgets\btnmatrix\lv_example_btnmatrix_1.c">
+      <SubType>compile</SubType>
+    </Compile>
+    <Compile Include="src\ASF\thirdparty\lvgl8\examples\widgets\btnmatrix\lv_example_btnmatrix_2.c">
+      <SubType>compile</SubType>
+    </Compile>
+    <Compile Include="src\ASF\thirdparty\lvgl8\examples\widgets\btnmatrix\lv_example_btnmatrix_3.c">
+      <SubType>compile</SubType>
+    </Compile>
+    <Compile Include="src\ASF\thirdparty\lvgl8\examples\widgets\btn\lv_example_btn_1.c">
+      <SubType>compile</SubType>
+    </Compile>
+    <Compile Include="src\ASF\thirdparty\lvgl8\examples\widgets\btn\lv_example_btn_2.c">
+      <SubType>compile</SubType>
+    </Compile>
+    <Compile Include="src\ASF\thirdparty\lvgl8\examples\widgets\btn\lv_example_btn_3.c">
+      <SubType>compile</SubType>
+    </Compile>
+    <Compile Include="src\ASF\thirdparty\lvgl8\examples\widgets\calendar\lv_example_calendar_1.c">
+      <SubType>compile</SubType>
+    </Compile>
+    <Compile Include="src\ASF\thirdparty\lvgl8\examples\widgets\canvas\lv_example_canvas_1.c">
+      <SubType>compile</SubType>
+    </Compile>
+    <Compile Include="src\ASF\thirdparty\lvgl8\examples\widgets\canvas\lv_example_canvas_2.c">
+      <SubType>compile</SubType>
+    </Compile>
+    <Compile Include="src\ASF\thirdparty\lvgl8\examples\widgets\chart\lv_example_chart_1.c">
+      <SubType>compile</SubType>
+    </Compile>
+    <Compile Include="src\ASF\thirdparty\lvgl8\examples\widgets\chart\lv_example_chart_2.c">
+      <SubType>compile</SubType>
+    </Compile>
+    <Compile Include="src\ASF\thirdparty\lvgl8\examples\widgets\chart\lv_example_chart_3.c">
+      <SubType>compile</SubType>
+    </Compile>
+    <Compile Include="src\ASF\thirdparty\lvgl8\examples\widgets\chart\lv_example_chart_4.c">
+      <SubType>compile</SubType>
+    </Compile>
+    <Compile Include="src\ASF\thirdparty\lvgl8\examples\widgets\chart\lv_example_chart_5.c">
+      <SubType>compile</SubType>
+    </Compile>
+    <Compile Include="src\ASF\thirdparty\lvgl8\examples\widgets\chart\lv_example_chart_6.c">
+      <SubType>compile</SubType>
+    </Compile>
+    <Compile Include="src\ASF\thirdparty\lvgl8\examples\widgets\chart\lv_example_chart_7.c">
+      <SubType>compile</SubType>
+    </Compile>
+    <Compile Include="src\ASF\thirdparty\lvgl8\examples\widgets\chart\lv_example_chart_8.c">
+      <SubType>compile</SubType>
+    </Compile>
+    <Compile Include="src\ASF\thirdparty\lvgl8\examples\widgets\chart\lv_example_chart_9.c">
+      <SubType>compile</SubType>
+    </Compile>
+    <Compile Include="src\ASF\thirdparty\lvgl8\examples\widgets\checkbox\lv_example_checkbox_1.c">
+      <SubType>compile</SubType>
+    </Compile>
+    <Compile Include="src\ASF\thirdparty\lvgl8\examples\widgets\checkbox\lv_example_checkbox_2.c">
+      <SubType>compile</SubType>
+    </Compile>
+    <Compile Include="src\ASF\thirdparty\lvgl8\examples\widgets\colorwheel\lv_example_colorwheel_1.c">
+      <SubType>compile</SubType>
+    </Compile>
+    <Compile Include="src\ASF\thirdparty\lvgl8\examples\widgets\dropdown\lv_example_dropdown_1.c">
+      <SubType>compile</SubType>
+    </Compile>
+    <Compile Include="src\ASF\thirdparty\lvgl8\examples\widgets\dropdown\lv_example_dropdown_2.c">
+      <SubType>compile</SubType>
+    </Compile>
+    <Compile Include="src\ASF\thirdparty\lvgl8\examples\widgets\dropdown\lv_example_dropdown_3.c">
+      <SubType>compile</SubType>
+    </Compile>
+    <Compile Include="src\ASF\thirdparty\lvgl8\examples\widgets\imgbtn\lv_example_imgbtn_1.c">
+      <SubType>compile</SubType>
+    </Compile>
+    <Compile Include="src\ASF\thirdparty\lvgl8\examples\widgets\img\lv_example_img_1.c">
+      <SubType>compile</SubType>
+    </Compile>
+    <Compile Include="src\ASF\thirdparty\lvgl8\examples\widgets\img\lv_example_img_2.c">
+      <SubType>compile</SubType>
+    </Compile>
+    <Compile Include="src\ASF\thirdparty\lvgl8\examples\widgets\img\lv_example_img_3.c">
+      <SubType>compile</SubType>
+    </Compile>
+    <Compile Include="src\ASF\thirdparty\lvgl8\examples\widgets\img\lv_example_img_4.c">
+      <SubType>compile</SubType>
+    </Compile>
+    <Compile Include="src\ASF\thirdparty\lvgl8\examples\widgets\keyboard\lv_example_keyboard_1.c">
+      <SubType>compile</SubType>
+    </Compile>
+    <Compile Include="src\ASF\thirdparty\lvgl8\examples\widgets\label\lv_example_label_1.c">
+      <SubType>compile</SubType>
+    </Compile>
+    <Compile Include="src\ASF\thirdparty\lvgl8\examples\widgets\label\lv_example_label_2.c">
+      <SubType>compile</SubType>
+    </Compile>
+    <Compile Include="src\ASF\thirdparty\lvgl8\examples\widgets\label\lv_example_label_3.c">
+      <SubType>compile</SubType>
+    </Compile>
+    <Compile Include="src\ASF\thirdparty\lvgl8\examples\widgets\led\lv_example_led_1.c">
+      <SubType>compile</SubType>
+    </Compile>
+    <Compile Include="src\ASF\thirdparty\lvgl8\examples\widgets\line\lv_example_line_1.c">
+      <SubType>compile</SubType>
+    </Compile>
+    <Compile Include="src\ASF\thirdparty\lvgl8\examples\widgets\list\lv_example_list_1.c">
+      <SubType>compile</SubType>
+    </Compile>
+    <Compile Include="src\ASF\thirdparty\lvgl8\examples\widgets\list\lv_example_list_2.c">
+      <SubType>compile</SubType>
+    </Compile>
+    <Compile Include="src\ASF\thirdparty\lvgl8\examples\widgets\lv_example_widgets.h">
+      <SubType>compile</SubType>
+    </Compile>
+    <Compile Include="src\ASF\thirdparty\lvgl8\examples\widgets\meter\lv_example_meter_1.c">
+      <SubType>compile</SubType>
+    </Compile>
+    <Compile Include="src\ASF\thirdparty\lvgl8\examples\widgets\meter\lv_example_meter_2.c">
+      <SubType>compile</SubType>
+    </Compile>
+    <Compile Include="src\ASF\thirdparty\lvgl8\examples\widgets\meter\lv_example_meter_3.c">
+      <SubType>compile</SubType>
+    </Compile>
+    <Compile Include="src\ASF\thirdparty\lvgl8\examples\widgets\meter\lv_example_meter_4.c">
+      <SubType>compile</SubType>
+    </Compile>
+    <Compile Include="src\ASF\thirdparty\lvgl8\examples\widgets\msgbox\lv_example_msgbox_1.c">
+      <SubType>compile</SubType>
+    </Compile>
+    <Compile Include="src\ASF\thirdparty\lvgl8\examples\widgets\obj\lv_example_obj_1.c">
+      <SubType>compile</SubType>
+    </Compile>
+    <Compile Include="src\ASF\thirdparty\lvgl8\examples\widgets\obj\lv_example_obj_2.c">
+      <SubType>compile</SubType>
+    </Compile>
+    <Compile Include="src\ASF\thirdparty\lvgl8\examples\widgets\roller\lv_example_roller_1.c">
+      <SubType>compile</SubType>
+    </Compile>
+    <Compile Include="src\ASF\thirdparty\lvgl8\examples\widgets\roller\lv_example_roller_2.c">
+      <SubType>compile</SubType>
+    </Compile>
+    <Compile Include="src\ASF\thirdparty\lvgl8\examples\widgets\roller\lv_example_roller_3.c">
+      <SubType>compile</SubType>
+    </Compile>
+    <Compile Include="src\ASF\thirdparty\lvgl8\examples\widgets\slider\lv_example_slider_1.c">
+      <SubType>compile</SubType>
+    </Compile>
+    <Compile Include="src\ASF\thirdparty\lvgl8\examples\widgets\slider\lv_example_slider_2.c">
+      <SubType>compile</SubType>
+    </Compile>
+    <Compile Include="src\ASF\thirdparty\lvgl8\examples\widgets\slider\lv_example_slider_3.c">
+      <SubType>compile</SubType>
+    </Compile>
+    <Compile Include="src\ASF\thirdparty\lvgl8\examples\widgets\span\lv_example_span_1.c">
+      <SubType>compile</SubType>
+    </Compile>
+    <Compile Include="src\ASF\thirdparty\lvgl8\examples\widgets\spinbox\lv_example_spinbox_1.c">
+      <SubType>compile</SubType>
+    </Compile>
+    <Compile Include="src\ASF\thirdparty\lvgl8\examples\widgets\spinner\lv_example_spinner_1.c">
+      <SubType>compile</SubType>
+    </Compile>
+    <Compile Include="src\ASF\thirdparty\lvgl8\examples\widgets\switch\lv_example_switch_1.c">
+      <SubType>compile</SubType>
+    </Compile>
+    <Compile Include="src\ASF\thirdparty\lvgl8\examples\widgets\table\lv_example_table_1.c">
+      <SubType>compile</SubType>
+    </Compile>
+    <Compile Include="src\ASF\thirdparty\lvgl8\examples\widgets\table\lv_example_table_2.c">
+      <SubType>compile</SubType>
+    </Compile>
+    <Compile Include="src\ASF\thirdparty\lvgl8\examples\widgets\tabview\lv_example_tabview_1.c">
+      <SubType>compile</SubType>
+    </Compile>
+    <Compile Include="src\ASF\thirdparty\lvgl8\examples\widgets\tabview\lv_example_tabview_2.c">
+      <SubType>compile</SubType>
+    </Compile>
+    <Compile Include="src\ASF\thirdparty\lvgl8\examples\widgets\textarea\lv_example_textarea_1.c">
+      <SubType>compile</SubType>
+    </Compile>
+    <Compile Include="src\ASF\thirdparty\lvgl8\examples\widgets\textarea\lv_example_textarea_2.c">
+      <SubType>compile</SubType>
+    </Compile>
+    <Compile Include="src\ASF\thirdparty\lvgl8\examples\widgets\textarea\lv_example_textarea_3.c">
+      <SubType>compile</SubType>
+    </Compile>
+    <Compile Include="src\ASF\thirdparty\lvgl8\examples\widgets\tileview\lv_example_tileview_1.c">
+      <SubType>compile</SubType>
+    </Compile>
+    <Compile Include="src\ASF\thirdparty\lvgl8\examples\widgets\win\lv_example_win_1.c">
+      <SubType>compile</SubType>
+    </Compile>
+    <Compile Include="src\ASF\thirdparty\lvgl8\lvgl.h">
+      <SubType>compile</SubType>
+    </Compile>
+    <Compile Include="src\ASF\thirdparty\lvgl8\rt-thread\lv_rt_thread_conf.h">
+      <SubType>compile</SubType>
+    </Compile>
+    <Compile Include="src\ASF\thirdparty\lvgl8\rt-thread\lv_rt_thread_port.c">
+      <SubType>compile</SubType>
+    </Compile>
+    <Compile Include="src\ASF\thirdparty\lvgl8\src\core\lv_disp.c">
+      <SubType>compile</SubType>
+    </Compile>
+    <Compile Include="src\ASF\thirdparty\lvgl8\src\core\lv_disp.h">
+      <SubType>compile</SubType>
+    </Compile>
+    <Compile Include="src\ASF\thirdparty\lvgl8\src\core\lv_event.c">
+      <SubType>compile</SubType>
+    </Compile>
+    <Compile Include="src\ASF\thirdparty\lvgl8\src\core\lv_event.h">
+      <SubType>compile</SubType>
+    </Compile>
+    <Compile Include="src\ASF\thirdparty\lvgl8\src\core\lv_group.c">
+      <SubType>compile</SubType>
+    </Compile>
+    <Compile Include="src\ASF\thirdparty\lvgl8\src\core\lv_group.h">
+      <SubType>compile</SubType>
+    </Compile>
+    <Compile Include="src\ASF\thirdparty\lvgl8\src\core\lv_indev.c">
+      <SubType>compile</SubType>
+    </Compile>
+    <Compile Include="src\ASF\thirdparty\lvgl8\src\core\lv_indev.h">
+      <SubType>compile</SubType>
+    </Compile>
+    <Compile Include="src\ASF\thirdparty\lvgl8\src\core\lv_indev_scroll.c">
+      <SubType>compile</SubType>
+    </Compile>
+    <Compile Include="src\ASF\thirdparty\lvgl8\src\core\lv_indev_scroll.h">
+      <SubType>compile</SubType>
+    </Compile>
+    <Compile Include="src\ASF\thirdparty\lvgl8\src\core\lv_obj.c">
+      <SubType>compile</SubType>
+    </Compile>
+    <Compile Include="src\ASF\thirdparty\lvgl8\src\core\lv_obj.h">
+      <SubType>compile</SubType>
+    </Compile>
+    <Compile Include="src\ASF\thirdparty\lvgl8\src\core\lv_obj_class.c">
+      <SubType>compile</SubType>
+    </Compile>
+    <Compile Include="src\ASF\thirdparty\lvgl8\src\core\lv_obj_class.h">
+      <SubType>compile</SubType>
+    </Compile>
+    <Compile Include="src\ASF\thirdparty\lvgl8\src\core\lv_obj_draw.c">
+      <SubType>compile</SubType>
+    </Compile>
+    <Compile Include="src\ASF\thirdparty\lvgl8\src\core\lv_obj_draw.h">
+      <SubType>compile</SubType>
+    </Compile>
+    <Compile Include="src\ASF\thirdparty\lvgl8\src\core\lv_obj_pos.c">
+      <SubType>compile</SubType>
+    </Compile>
+    <Compile Include="src\ASF\thirdparty\lvgl8\src\core\lv_obj_pos.h">
+      <SubType>compile</SubType>
+    </Compile>
+    <Compile Include="src\ASF\thirdparty\lvgl8\src\core\lv_obj_scroll.c">
+      <SubType>compile</SubType>
+    </Compile>
+    <Compile Include="src\ASF\thirdparty\lvgl8\src\core\lv_obj_scroll.h">
+      <SubType>compile</SubType>
+    </Compile>
+    <Compile Include="src\ASF\thirdparty\lvgl8\src\core\lv_obj_style.c">
+      <SubType>compile</SubType>
+    </Compile>
+    <Compile Include="src\ASF\thirdparty\lvgl8\src\core\lv_obj_style.h">
+      <SubType>compile</SubType>
+    </Compile>
+    <Compile Include="src\ASF\thirdparty\lvgl8\src\core\lv_obj_style_gen.c">
+      <SubType>compile</SubType>
+    </Compile>
+    <Compile Include="src\ASF\thirdparty\lvgl8\src\core\lv_obj_style_gen.h">
+      <SubType>compile</SubType>
+    </Compile>
+    <Compile Include="src\ASF\thirdparty\lvgl8\src\core\lv_obj_tree.c">
+      <SubType>compile</SubType>
+    </Compile>
+    <Compile Include="src\ASF\thirdparty\lvgl8\src\core\lv_obj_tree.h">
+      <SubType>compile</SubType>
+    </Compile>
+    <Compile Include="src\ASF\thirdparty\lvgl8\src\core\lv_refr.c">
+      <SubType>compile</SubType>
+    </Compile>
+    <Compile Include="src\ASF\thirdparty\lvgl8\src\core\lv_refr.h">
+      <SubType>compile</SubType>
+    </Compile>
+    <Compile Include="src\ASF\thirdparty\lvgl8\src\core\lv_theme.c">
+      <SubType>compile</SubType>
+    </Compile>
+    <Compile Include="src\ASF\thirdparty\lvgl8\src\core\lv_theme.h">
+      <SubType>compile</SubType>
+    </Compile>
+    <Compile Include="src\ASF\thirdparty\lvgl8\src\draw\lv_draw.h">
+      <SubType>compile</SubType>
+    </Compile>
+    <Compile Include="src\ASF\thirdparty\lvgl8\src\draw\lv_draw_arc.c">
+      <SubType>compile</SubType>
+    </Compile>
+    <Compile Include="src\ASF\thirdparty\lvgl8\src\draw\lv_draw_arc.h">
+      <SubType>compile</SubType>
+    </Compile>
+    <Compile Include="src\ASF\thirdparty\lvgl8\src\draw\lv_draw_blend.c">
+      <SubType>compile</SubType>
+    </Compile>
+    <Compile Include="src\ASF\thirdparty\lvgl8\src\draw\lv_draw_blend.h">
+      <SubType>compile</SubType>
+    </Compile>
+    <Compile Include="src\ASF\thirdparty\lvgl8\src\draw\lv_draw_img.c">
+      <SubType>compile</SubType>
+    </Compile>
+    <Compile Include="src\ASF\thirdparty\lvgl8\src\draw\lv_draw_img.h">
+      <SubType>compile</SubType>
+    </Compile>
+    <Compile Include="src\ASF\thirdparty\lvgl8\src\draw\lv_draw_label.c">
+      <SubType>compile</SubType>
+    </Compile>
+    <Compile Include="src\ASF\thirdparty\lvgl8\src\draw\lv_draw_label.h">
+      <SubType>compile</SubType>
+    </Compile>
+    <Compile Include="src\ASF\thirdparty\lvgl8\src\draw\lv_draw_line.c">
+      <SubType>compile</SubType>
+    </Compile>
+    <Compile Include="src\ASF\thirdparty\lvgl8\src\draw\lv_draw_line.h">
+      <SubType>compile</SubType>
+    </Compile>
+    <Compile Include="src\ASF\thirdparty\lvgl8\src\draw\lv_draw_mask.c">
+      <SubType>compile</SubType>
+    </Compile>
+    <Compile Include="src\ASF\thirdparty\lvgl8\src\draw\lv_draw_mask.h">
+      <SubType>compile</SubType>
+    </Compile>
+    <Compile Include="src\ASF\thirdparty\lvgl8\src\draw\lv_draw_rect.c">
+      <SubType>compile</SubType>
+    </Compile>
+    <Compile Include="src\ASF\thirdparty\lvgl8\src\draw\lv_draw_rect.h">
+      <SubType>compile</SubType>
+    </Compile>
+    <Compile Include="src\ASF\thirdparty\lvgl8\src\draw\lv_draw_triangle.c">
+      <SubType>compile</SubType>
+    </Compile>
+    <Compile Include="src\ASF\thirdparty\lvgl8\src\draw\lv_draw_triangle.h">
+      <SubType>compile</SubType>
+    </Compile>
+    <Compile Include="src\ASF\thirdparty\lvgl8\src\draw\lv_img_buf.c">
+      <SubType>compile</SubType>
+    </Compile>
+    <Compile Include="src\ASF\thirdparty\lvgl8\src\draw\lv_img_buf.h">
+      <SubType>compile</SubType>
+    </Compile>
+    <Compile Include="src\ASF\thirdparty\lvgl8\src\draw\lv_img_cache.c">
+      <SubType>compile</SubType>
+    </Compile>
+    <Compile Include="src\ASF\thirdparty\lvgl8\src\draw\lv_img_cache.h">
+      <SubType>compile</SubType>
+    </Compile>
+    <Compile Include="src\ASF\thirdparty\lvgl8\src\draw\lv_img_decoder.c">
+      <SubType>compile</SubType>
+    </Compile>
+    <Compile Include="src\ASF\thirdparty\lvgl8\src\draw\lv_img_decoder.h">
+      <SubType>compile</SubType>
+    </Compile>
+    <Compile Include="src\ASF\thirdparty\lvgl8\src\extra\layouts\flex\lv_flex.c">
+      <SubType>compile</SubType>
+    </Compile>
+    <Compile Include="src\ASF\thirdparty\lvgl8\src\extra\layouts\flex\lv_flex.h">
+      <SubType>compile</SubType>
+    </Compile>
+    <Compile Include="src\ASF\thirdparty\lvgl8\src\extra\layouts\grid\lv_grid.c">
+      <SubType>compile</SubType>
+    </Compile>
+    <Compile Include="src\ASF\thirdparty\lvgl8\src\extra\layouts\grid\lv_grid.h">
+      <SubType>compile</SubType>
+    </Compile>
+    <Compile Include="src\ASF\thirdparty\lvgl8\src\extra\layouts\lv_layouts.h">
+      <SubType>compile</SubType>
+    </Compile>
+    <Compile Include="src\ASF\thirdparty\lvgl8\src\extra\libs\bmp\lv_bmp.c">
+      <SubType>compile</SubType>
+    </Compile>
+    <Compile Include="src\ASF\thirdparty\lvgl8\src\extra\libs\bmp\lv_bmp.h">
+      <SubType>compile</SubType>
+    </Compile>
+    <Compile Include="src\ASF\thirdparty\lvgl8\src\extra\libs\freetype\lv_freetype.c">
+      <SubType>compile</SubType>
+    </Compile>
+    <Compile Include="src\ASF\thirdparty\lvgl8\src\extra\libs\freetype\lv_freetype.h">
+      <SubType>compile</SubType>
+    </Compile>
+    <Compile Include="src\ASF\thirdparty\lvgl8\src\extra\libs\fsdrv\lv_fsdrv.h">
+      <SubType>compile</SubType>
+    </Compile>
+    <Compile Include="src\ASF\thirdparty\lvgl8\src\extra\libs\fsdrv\lv_fs_fatfs.c">
+      <SubType>compile</SubType>
+    </Compile>
+    <Compile Include="src\ASF\thirdparty\lvgl8\src\extra\libs\fsdrv\lv_fs_posix.c">
+      <SubType>compile</SubType>
+    </Compile>
+    <Compile Include="src\ASF\thirdparty\lvgl8\src\extra\libs\fsdrv\lv_fs_stdio.c">
+      <SubType>compile</SubType>
+    </Compile>
+    <Compile Include="src\ASF\thirdparty\lvgl8\src\extra\libs\fsdrv\lv_fs_win32.c">
+      <SubType>compile</SubType>
+    </Compile>
+    <Compile Include="src\ASF\thirdparty\lvgl8\src\extra\libs\gif\gifdec.c">
+      <SubType>compile</SubType>
+    </Compile>
+    <Compile Include="src\ASF\thirdparty\lvgl8\src\extra\libs\gif\gifdec.h">
+      <SubType>compile</SubType>
+    </Compile>
+    <Compile Include="src\ASF\thirdparty\lvgl8\src\extra\libs\gif\lv_gif.c">
+      <SubType>compile</SubType>
+    </Compile>
+    <Compile Include="src\ASF\thirdparty\lvgl8\src\extra\libs\gif\lv_gif.h">
+      <SubType>compile</SubType>
+    </Compile>
+    <Compile Include="src\ASF\thirdparty\lvgl8\src\extra\libs\lv_libs.h">
+      <SubType>compile</SubType>
+    </Compile>
+    <Compile Include="src\ASF\thirdparty\lvgl8\src\extra\libs\png\lodepng.c">
+      <SubType>compile</SubType>
+    </Compile>
+    <Compile Include="src\ASF\thirdparty\lvgl8\src\extra\libs\png\lodepng.h">
+      <SubType>compile</SubType>
+    </Compile>
+    <Compile Include="src\ASF\thirdparty\lvgl8\src\extra\libs\png\lv_png.c">
+      <SubType>compile</SubType>
+    </Compile>
+    <Compile Include="src\ASF\thirdparty\lvgl8\src\extra\libs\png\lv_png.h">
+      <SubType>compile</SubType>
+    </Compile>
+    <Compile Include="src\ASF\thirdparty\lvgl8\src\extra\libs\qrcode\lv_qrcode.c">
+      <SubType>compile</SubType>
+    </Compile>
+    <Compile Include="src\ASF\thirdparty\lvgl8\src\extra\libs\qrcode\lv_qrcode.h">
+      <SubType>compile</SubType>
+    </Compile>
+    <Compile Include="src\ASF\thirdparty\lvgl8\src\extra\libs\qrcode\qrcodegen.c">
+      <SubType>compile</SubType>
+    </Compile>
+    <Compile Include="src\ASF\thirdparty\lvgl8\src\extra\libs\qrcode\qrcodegen.h">
+      <SubType>compile</SubType>
+    </Compile>
+    <Compile Include="src\ASF\thirdparty\lvgl8\src\extra\libs\sjpg\lv_sjpg.c">
+      <SubType>compile</SubType>
+    </Compile>
+    <Compile Include="src\ASF\thirdparty\lvgl8\src\extra\libs\sjpg\lv_sjpg.h">
+      <SubType>compile</SubType>
+    </Compile>
+    <Compile Include="src\ASF\thirdparty\lvgl8\src\extra\libs\sjpg\tjpgd.c">
+      <SubType>compile</SubType>
+    </Compile>
+    <Compile Include="src\ASF\thirdparty\lvgl8\src\extra\libs\sjpg\tjpgd.h">
+      <SubType>compile</SubType>
+    </Compile>
+    <Compile Include="src\ASF\thirdparty\lvgl8\src\extra\libs\sjpg\tjpgdcnf.h">
+      <SubType>compile</SubType>
+    </Compile>
+    <Compile Include="src\ASF\thirdparty\lvgl8\src\extra\lv_extra.c">
+      <SubType>compile</SubType>
+    </Compile>
+    <Compile Include="src\ASF\thirdparty\lvgl8\src\extra\lv_extra.h">
+      <SubType>compile</SubType>
+    </Compile>
+    <Compile Include="src\ASF\thirdparty\lvgl8\src\extra\others\lv_others.h">
+      <SubType>compile</SubType>
+    </Compile>
+    <Compile Include="src\ASF\thirdparty\lvgl8\src\extra\others\snapshot\lv_snapshot.c">
+      <SubType>compile</SubType>
+    </Compile>
+    <Compile Include="src\ASF\thirdparty\lvgl8\src\extra\others\snapshot\lv_snapshot.h">
+      <SubType>compile</SubType>
+    </Compile>
+    <Compile Include="src\ASF\thirdparty\lvgl8\src\extra\themes\basic\lv_theme_basic.c">
+      <SubType>compile</SubType>
+    </Compile>
+    <Compile Include="src\ASF\thirdparty\lvgl8\src\extra\themes\basic\lv_theme_basic.h">
+      <SubType>compile</SubType>
+    </Compile>
+    <Compile Include="src\ASF\thirdparty\lvgl8\src\extra\themes\default\lv_theme_default.c">
+      <SubType>compile</SubType>
+    </Compile>
+    <Compile Include="src\ASF\thirdparty\lvgl8\src\extra\themes\default\lv_theme_default.h">
+      <SubType>compile</SubType>
+    </Compile>
+    <Compile Include="src\ASF\thirdparty\lvgl8\src\extra\themes\lv_themes.h">
+      <SubType>compile</SubType>
+    </Compile>
+    <Compile Include="src\ASF\thirdparty\lvgl8\src\extra\themes\mono\lv_theme_mono.c">
+      <SubType>compile</SubType>
+    </Compile>
+    <Compile Include="src\ASF\thirdparty\lvgl8\src\extra\themes\mono\lv_theme_mono.h">
+      <SubType>compile</SubType>
+    </Compile>
+    <Compile Include="src\ASF\thirdparty\lvgl8\src\extra\widgets\animimg\lv_animimg.c">
+      <SubType>compile</SubType>
+    </Compile>
+    <Compile Include="src\ASF\thirdparty\lvgl8\src\extra\widgets\animimg\lv_animimg.h">
+      <SubType>compile</SubType>
+    </Compile>
+    <Compile Include="src\ASF\thirdparty\lvgl8\src\extra\widgets\calendar\lv_calendar.c">
+      <SubType>compile</SubType>
+    </Compile>
+    <Compile Include="src\ASF\thirdparty\lvgl8\src\extra\widgets\calendar\lv_calendar.h">
+      <SubType>compile</SubType>
+    </Compile>
+    <Compile Include="src\ASF\thirdparty\lvgl8\src\extra\widgets\calendar\lv_calendar_header_arrow.c">
+      <SubType>compile</SubType>
+    </Compile>
+    <Compile Include="src\ASF\thirdparty\lvgl8\src\extra\widgets\calendar\lv_calendar_header_arrow.h">
+      <SubType>compile</SubType>
+    </Compile>
+    <Compile Include="src\ASF\thirdparty\lvgl8\src\extra\widgets\calendar\lv_calendar_header_dropdown.c">
+      <SubType>compile</SubType>
+    </Compile>
+    <Compile Include="src\ASF\thirdparty\lvgl8\src\extra\widgets\calendar\lv_calendar_header_dropdown.h">
+      <SubType>compile</SubType>
+    </Compile>
+    <Compile Include="src\ASF\thirdparty\lvgl8\src\extra\widgets\chart\lv_chart.c">
+      <SubType>compile</SubType>
+    </Compile>
+    <Compile Include="src\ASF\thirdparty\lvgl8\src\extra\widgets\chart\lv_chart.h">
+      <SubType>compile</SubType>
+    </Compile>
+    <Compile Include="src\ASF\thirdparty\lvgl8\src\extra\widgets\colorwheel\lv_colorwheel.c">
+      <SubType>compile</SubType>
+    </Compile>
+    <Compile Include="src\ASF\thirdparty\lvgl8\src\extra\widgets\colorwheel\lv_colorwheel.h">
+      <SubType>compile</SubType>
+    </Compile>
+    <Compile Include="src\ASF\thirdparty\lvgl8\src\extra\widgets\imgbtn\lv_imgbtn.c">
+      <SubType>compile</SubType>
+    </Compile>
+    <Compile Include="src\ASF\thirdparty\lvgl8\src\extra\widgets\imgbtn\lv_imgbtn.h">
+      <SubType>compile</SubType>
+    </Compile>
+    <Compile Include="src\ASF\thirdparty\lvgl8\src\extra\widgets\keyboard\lv_keyboard.c">
+      <SubType>compile</SubType>
+    </Compile>
+    <Compile Include="src\ASF\thirdparty\lvgl8\src\extra\widgets\keyboard\lv_keyboard.h">
+      <SubType>compile</SubType>
+    </Compile>
+    <Compile Include="src\ASF\thirdparty\lvgl8\src\extra\widgets\led\lv_led.c">
+      <SubType>compile</SubType>
+    </Compile>
+    <Compile Include="src\ASF\thirdparty\lvgl8\src\extra\widgets\led\lv_led.h">
+      <SubType>compile</SubType>
+    </Compile>
+    <Compile Include="src\ASF\thirdparty\lvgl8\src\extra\widgets\list\lv_list.c">
+      <SubType>compile</SubType>
+    </Compile>
+    <Compile Include="src\ASF\thirdparty\lvgl8\src\extra\widgets\list\lv_list.h">
+      <SubType>compile</SubType>
+    </Compile>
+    <Compile Include="src\ASF\thirdparty\lvgl8\src\extra\widgets\lv_widgets.h">
+      <SubType>compile</SubType>
+    </Compile>
+    <Compile Include="src\ASF\thirdparty\lvgl8\src\extra\widgets\meter\lv_meter.c">
+      <SubType>compile</SubType>
+    </Compile>
+    <Compile Include="src\ASF\thirdparty\lvgl8\src\extra\widgets\meter\lv_meter.h">
+      <SubType>compile</SubType>
+    </Compile>
+    <Compile Include="src\ASF\thirdparty\lvgl8\src\extra\widgets\msgbox\lv_msgbox.c">
+      <SubType>compile</SubType>
+    </Compile>
+    <Compile Include="src\ASF\thirdparty\lvgl8\src\extra\widgets\msgbox\lv_msgbox.h">
+      <SubType>compile</SubType>
+    </Compile>
+    <Compile Include="src\ASF\thirdparty\lvgl8\src\extra\widgets\span\lv_span.c">
+      <SubType>compile</SubType>
+    </Compile>
+    <Compile Include="src\ASF\thirdparty\lvgl8\src\extra\widgets\span\lv_span.h">
+      <SubType>compile</SubType>
+    </Compile>
+    <Compile Include="src\ASF\thirdparty\lvgl8\src\extra\widgets\spinbox\lv_spinbox.c">
+      <SubType>compile</SubType>
+    </Compile>
+    <Compile Include="src\ASF\thirdparty\lvgl8\src\extra\widgets\spinbox\lv_spinbox.h">
+      <SubType>compile</SubType>
+    </Compile>
+    <Compile Include="src\ASF\thirdparty\lvgl8\src\extra\widgets\spinner\lv_spinner.c">
+      <SubType>compile</SubType>
+    </Compile>
+    <Compile Include="src\ASF\thirdparty\lvgl8\src\extra\widgets\spinner\lv_spinner.h">
+      <SubType>compile</SubType>
+    </Compile>
+    <Compile Include="src\ASF\thirdparty\lvgl8\src\extra\widgets\tabview\lv_tabview.c">
+      <SubType>compile</SubType>
+    </Compile>
+    <Compile Include="src\ASF\thirdparty\lvgl8\src\extra\widgets\tabview\lv_tabview.h">
+      <SubType>compile</SubType>
+    </Compile>
+    <Compile Include="src\ASF\thirdparty\lvgl8\src\extra\widgets\tileview\lv_tileview.c">
+      <SubType>compile</SubType>
+    </Compile>
+    <Compile Include="src\ASF\thirdparty\lvgl8\src\extra\widgets\tileview\lv_tileview.h">
+      <SubType>compile</SubType>
+    </Compile>
+    <Compile Include="src\ASF\thirdparty\lvgl8\src\extra\widgets\win\lv_win.c">
+      <SubType>compile</SubType>
+    </Compile>
+    <Compile Include="src\ASF\thirdparty\lvgl8\src\extra\widgets\win\lv_win.h">
+      <SubType>compile</SubType>
+    </Compile>
+    <Compile Include="src\ASF\thirdparty\lvgl8\src\font\lv_font.c">
+      <SubType>compile</SubType>
+    </Compile>
+    <Compile Include="src\ASF\thirdparty\lvgl8\src\font\lv_font.h">
+      <SubType>compile</SubType>
+    </Compile>
+    <Compile Include="src\ASF\thirdparty\lvgl8\src\font\lv_font_dejavu_16_persian_hebrew.c">
+      <SubType>compile</SubType>
+    </Compile>
+    <Compile Include="src\ASF\thirdparty\lvgl8\src\font\lv_font_fmt_txt.c">
+      <SubType>compile</SubType>
+    </Compile>
+    <Compile Include="src\ASF\thirdparty\lvgl8\src\font\lv_font_fmt_txt.h">
+      <SubType>compile</SubType>
+    </Compile>
+    <Compile Include="src\ASF\thirdparty\lvgl8\src\font\lv_font_loader.c">
+      <SubType>compile</SubType>
+    </Compile>
+    <Compile Include="src\ASF\thirdparty\lvgl8\src\font\lv_font_loader.h">
+      <SubType>compile</SubType>
+    </Compile>
+    <Compile Include="src\ASF\thirdparty\lvgl8\src\font\lv_font_montserrat_10.c">
+      <SubType>compile</SubType>
+    </Compile>
+    <Compile Include="src\ASF\thirdparty\lvgl8\src\font\lv_font_montserrat_12.c">
+      <SubType>compile</SubType>
+    </Compile>
+    <Compile Include="src\ASF\thirdparty\lvgl8\src\font\lv_font_montserrat_12_subpx.c">
+      <SubType>compile</SubType>
+    </Compile>
+    <Compile Include="src\ASF\thirdparty\lvgl8\src\font\lv_font_montserrat_14.c">
+      <SubType>compile</SubType>
+    </Compile>
+    <Compile Include="src\ASF\thirdparty\lvgl8\src\font\lv_font_montserrat_16.c">
+      <SubType>compile</SubType>
+    </Compile>
+    <Compile Include="src\ASF\thirdparty\lvgl8\src\font\lv_font_montserrat_18.c">
+      <SubType>compile</SubType>
+    </Compile>
+    <Compile Include="src\ASF\thirdparty\lvgl8\src\font\lv_font_montserrat_20.c">
+      <SubType>compile</SubType>
+    </Compile>
+    <Compile Include="src\ASF\thirdparty\lvgl8\src\font\lv_font_montserrat_22.c">
+      <SubType>compile</SubType>
+    </Compile>
+    <Compile Include="src\ASF\thirdparty\lvgl8\src\font\lv_font_montserrat_24.c">
+      <SubType>compile</SubType>
+    </Compile>
+    <Compile Include="src\ASF\thirdparty\lvgl8\src\font\lv_font_montserrat_26.c">
+      <SubType>compile</SubType>
+    </Compile>
+    <Compile Include="src\ASF\thirdparty\lvgl8\src\font\lv_font_montserrat_28.c">
+      <SubType>compile</SubType>
+    </Compile>
+    <Compile Include="src\ASF\thirdparty\lvgl8\src\font\lv_font_montserrat_28_compressed.c">
+      <SubType>compile</SubType>
+    </Compile>
+    <Compile Include="src\ASF\thirdparty\lvgl8\src\font\lv_font_montserrat_30.c">
+      <SubType>compile</SubType>
+    </Compile>
+    <Compile Include="src\ASF\thirdparty\lvgl8\src\font\lv_font_montserrat_32.c">
+      <SubType>compile</SubType>
+    </Compile>
+    <Compile Include="src\ASF\thirdparty\lvgl8\src\font\lv_font_montserrat_34.c">
+      <SubType>compile</SubType>
+    </Compile>
+    <Compile Include="src\ASF\thirdparty\lvgl8\src\font\lv_font_montserrat_36.c">
+      <SubType>compile</SubType>
+    </Compile>
+    <Compile Include="src\ASF\thirdparty\lvgl8\src\font\lv_font_montserrat_38.c">
+      <SubType>compile</SubType>
+    </Compile>
+    <Compile Include="src\ASF\thirdparty\lvgl8\src\font\lv_font_montserrat_40.c">
+      <SubType>compile</SubType>
+    </Compile>
+    <Compile Include="src\ASF\thirdparty\lvgl8\src\font\lv_font_montserrat_42.c">
+      <SubType>compile</SubType>
+    </Compile>
+    <Compile Include="src\ASF\thirdparty\lvgl8\src\font\lv_font_montserrat_44.c">
+      <SubType>compile</SubType>
+    </Compile>
+    <Compile Include="src\ASF\thirdparty\lvgl8\src\font\lv_font_montserrat_46.c">
+      <SubType>compile</SubType>
+    </Compile>
+    <Compile Include="src\ASF\thirdparty\lvgl8\src\font\lv_font_montserrat_48.c">
+      <SubType>compile</SubType>
+    </Compile>
+    <Compile Include="src\ASF\thirdparty\lvgl8\src\font\lv_font_montserrat_8.c">
+      <SubType>compile</SubType>
+    </Compile>
+    <Compile Include="src\ASF\thirdparty\lvgl8\src\font\lv_font_simsun_16_cjk.c">
+      <SubType>compile</SubType>
+    </Compile>
+    <Compile Include="src\ASF\thirdparty\lvgl8\src\font\lv_font_unscii_16.c">
+      <SubType>compile</SubType>
+    </Compile>
+    <Compile Include="src\ASF\thirdparty\lvgl8\src\font\lv_font_unscii_8.c">
+      <SubType>compile</SubType>
+    </Compile>
+    <Compile Include="src\ASF\thirdparty\lvgl8\src\font\lv_symbol_def.h">
+      <SubType>compile</SubType>
+    </Compile>
+    <Compile Include="src\ASF\thirdparty\lvgl8\src\gpu\lv_gpu_nxp_pxp.c">
+      <SubType>compile</SubType>
+    </Compile>
+    <Compile Include="src\ASF\thirdparty\lvgl8\src\gpu\lv_gpu_nxp_pxp.h">
+      <SubType>compile</SubType>
+    </Compile>
+    <Compile Include="src\ASF\thirdparty\lvgl8\src\gpu\lv_gpu_nxp_pxp_osa.c">
+      <SubType>compile</SubType>
+    </Compile>
+    <Compile Include="src\ASF\thirdparty\lvgl8\src\gpu\lv_gpu_nxp_pxp_osa.h">
+      <SubType>compile</SubType>
+    </Compile>
+    <Compile Include="src\ASF\thirdparty\lvgl8\src\gpu\lv_gpu_nxp_vglite.c">
+      <SubType>compile</SubType>
+    </Compile>
+    <Compile Include="src\ASF\thirdparty\lvgl8\src\gpu\lv_gpu_nxp_vglite.h">
+      <SubType>compile</SubType>
+    </Compile>
+    <Compile Include="src\ASF\thirdparty\lvgl8\src\gpu\lv_gpu_sdl.c">
+      <SubType>compile</SubType>
+    </Compile>
+    <Compile Include="src\ASF\thirdparty\lvgl8\src\gpu\lv_gpu_sdl.h">
+      <SubType>compile</SubType>
+    </Compile>
+    <Compile Include="src\ASF\thirdparty\lvgl8\src\gpu\lv_gpu_stm32_dma2d.c">
+      <SubType>compile</SubType>
+    </Compile>
+    <Compile Include="src\ASF\thirdparty\lvgl8\src\gpu\lv_gpu_stm32_dma2d.h">
+      <SubType>compile</SubType>
+    </Compile>
+    <Compile Include="src\ASF\thirdparty\lvgl8\src\gpu\sdl\lv_gpu_sdl_draw_arc.c">
+      <SubType>compile</SubType>
+    </Compile>
+    <Compile Include="src\ASF\thirdparty\lvgl8\src\gpu\sdl\lv_gpu_sdl_draw_blend.c">
+      <SubType>compile</SubType>
+    </Compile>
+    <Compile Include="src\ASF\thirdparty\lvgl8\src\gpu\sdl\lv_gpu_sdl_draw_img.c">
+      <SubType>compile</SubType>
+    </Compile>
+    <Compile Include="src\ASF\thirdparty\lvgl8\src\gpu\sdl\lv_gpu_sdl_draw_label.c">
+      <SubType>compile</SubType>
+    </Compile>
+    <Compile Include="src\ASF\thirdparty\lvgl8\src\gpu\sdl\lv_gpu_sdl_draw_line.c">
+      <SubType>compile</SubType>
+    </Compile>
+    <Compile Include="src\ASF\thirdparty\lvgl8\src\gpu\sdl\lv_gpu_sdl_draw_rect.c">
+      <SubType>compile</SubType>
+    </Compile>
+    <Compile Include="src\ASF\thirdparty\lvgl8\src\gpu\sdl\lv_gpu_sdl_lru.c">
+      <SubType>compile</SubType>
+    </Compile>
+    <Compile Include="src\ASF\thirdparty\lvgl8\src\gpu\sdl\lv_gpu_sdl_lru.h">
+      <SubType>compile</SubType>
+    </Compile>
+    <Compile Include="src\ASF\thirdparty\lvgl8\src\gpu\sdl\lv_gpu_sdl_mask.c">
+      <SubType>compile</SubType>
+    </Compile>
+    <Compile Include="src\ASF\thirdparty\lvgl8\src\gpu\sdl\lv_gpu_sdl_mask.h">
+      <SubType>compile</SubType>
+    </Compile>
+    <Compile Include="src\ASF\thirdparty\lvgl8\src\gpu\sdl\lv_gpu_sdl_stack_blur.c">
+      <SubType>compile</SubType>
+    </Compile>
+    <Compile Include="src\ASF\thirdparty\lvgl8\src\gpu\sdl\lv_gpu_sdl_stack_blur.h">
+      <SubType>compile</SubType>
+    </Compile>
+    <Compile Include="src\ASF\thirdparty\lvgl8\src\gpu\sdl\lv_gpu_sdl_texture_cache.c">
+      <SubType>compile</SubType>
+    </Compile>
+    <Compile Include="src\ASF\thirdparty\lvgl8\src\gpu\sdl\lv_gpu_sdl_texture_cache.h">
+      <SubType>compile</SubType>
+    </Compile>
+    <Compile Include="src\ASF\thirdparty\lvgl8\src\gpu\sdl\lv_gpu_sdl_utils.c">
+      <SubType>compile</SubType>
+    </Compile>
+    <Compile Include="src\ASF\thirdparty\lvgl8\src\gpu\sdl\lv_gpu_sdl_utils.h">
+      <SubType>compile</SubType>
+    </Compile>
+    <Compile Include="src\ASF\thirdparty\lvgl8\src\hal\lv_hal.h">
+      <SubType>compile</SubType>
+    </Compile>
+    <Compile Include="src\ASF\thirdparty\lvgl8\src\hal\lv_hal_disp.c">
+      <SubType>compile</SubType>
+    </Compile>
+    <Compile Include="src\ASF\thirdparty\lvgl8\src\hal\lv_hal_disp.h">
+      <SubType>compile</SubType>
+    </Compile>
+    <Compile Include="src\ASF\thirdparty\lvgl8\src\hal\lv_hal_indev.c">
+      <SubType>compile</SubType>
+    </Compile>
+    <Compile Include="src\ASF\thirdparty\lvgl8\src\hal\lv_hal_indev.h">
+      <SubType>compile</SubType>
+    </Compile>
+    <Compile Include="src\ASF\thirdparty\lvgl8\src\hal\lv_hal_tick.c">
+      <SubType>compile</SubType>
+    </Compile>
+    <Compile Include="src\ASF\thirdparty\lvgl8\src\hal\lv_hal_tick.h">
+      <SubType>compile</SubType>
+    </Compile>
+    <Compile Include="src\ASF\thirdparty\lvgl8\src\lvgl.h">
+      <SubType>compile</SubType>
+    </Compile>
+    <Compile Include="src\ASF\thirdparty\lvgl8\src\lv_api_map.h">
+      <SubType>compile</SubType>
+    </Compile>
+    <Compile Include="src\ASF\thirdparty\lvgl8\src\lv_conf_internal.h">
+      <SubType>compile</SubType>
+    </Compile>
+    <Compile Include="src\ASF\thirdparty\lvgl8\src\lv_conf_kconfig.h">
+      <SubType>compile</SubType>
+    </Compile>
+    <Compile Include="src\ASF\thirdparty\lvgl8\src\misc\lv_anim.c">
+      <SubType>compile</SubType>
+    </Compile>
+    <Compile Include="src\ASF\thirdparty\lvgl8\src\misc\lv_anim.h">
+      <SubType>compile</SubType>
+    </Compile>
+    <Compile Include="src\ASF\thirdparty\lvgl8\src\misc\lv_anim_timeline.c">
+      <SubType>compile</SubType>
+    </Compile>
+    <Compile Include="src\ASF\thirdparty\lvgl8\src\misc\lv_anim_timeline.h">
+      <SubType>compile</SubType>
+    </Compile>
+    <Compile Include="src\ASF\thirdparty\lvgl8\src\misc\lv_area.c">
+      <SubType>compile</SubType>
+    </Compile>
+    <Compile Include="src\ASF\thirdparty\lvgl8\src\misc\lv_area.h">
+      <SubType>compile</SubType>
+    </Compile>
+    <Compile Include="src\ASF\thirdparty\lvgl8\src\misc\lv_assert.h">
+      <SubType>compile</SubType>
+    </Compile>
+    <Compile Include="src\ASF\thirdparty\lvgl8\src\misc\lv_async.c">
+      <SubType>compile</SubType>
+    </Compile>
+    <Compile Include="src\ASF\thirdparty\lvgl8\src\misc\lv_async.h">
+      <SubType>compile</SubType>
+    </Compile>
+    <Compile Include="src\ASF\thirdparty\lvgl8\src\misc\lv_bidi.c">
+      <SubType>compile</SubType>
+    </Compile>
+    <Compile Include="src\ASF\thirdparty\lvgl8\src\misc\lv_bidi.h">
+      <SubType>compile</SubType>
+    </Compile>
+    <Compile Include="src\ASF\thirdparty\lvgl8\src\misc\lv_color.c">
+      <SubType>compile</SubType>
+    </Compile>
+    <Compile Include="src\ASF\thirdparty\lvgl8\src\misc\lv_color.h">
+      <SubType>compile</SubType>
+    </Compile>
+    <Compile Include="src\ASF\thirdparty\lvgl8\src\misc\lv_fs.c">
+      <SubType>compile</SubType>
+    </Compile>
+    <Compile Include="src\ASF\thirdparty\lvgl8\src\misc\lv_fs.h">
+      <SubType>compile</SubType>
+    </Compile>
+    <Compile Include="src\ASF\thirdparty\lvgl8\src\misc\lv_gc.c">
+      <SubType>compile</SubType>
+    </Compile>
+    <Compile Include="src\ASF\thirdparty\lvgl8\src\misc\lv_gc.h">
+      <SubType>compile</SubType>
+    </Compile>
+    <Compile Include="src\ASF\thirdparty\lvgl8\src\misc\lv_ll.c">
+      <SubType>compile</SubType>
+    </Compile>
+    <Compile Include="src\ASF\thirdparty\lvgl8\src\misc\lv_ll.h">
+      <SubType>compile</SubType>
+    </Compile>
+    <Compile Include="src\ASF\thirdparty\lvgl8\src\misc\lv_log.c">
+      <SubType>compile</SubType>
+    </Compile>
+    <Compile Include="src\ASF\thirdparty\lvgl8\src\misc\lv_log.h">
+      <SubType>compile</SubType>
+    </Compile>
+    <Compile Include="src\ASF\thirdparty\lvgl8\src\misc\lv_math.c">
+      <SubType>compile</SubType>
+    </Compile>
+    <Compile Include="src\ASF\thirdparty\lvgl8\src\misc\lv_math.h">
+      <SubType>compile</SubType>
+    </Compile>
+    <Compile Include="src\ASF\thirdparty\lvgl8\src\misc\lv_mem.c">
+      <SubType>compile</SubType>
+    </Compile>
+    <Compile Include="src\ASF\thirdparty\lvgl8\src\misc\lv_mem.h">
+      <SubType>compile</SubType>
+    </Compile>
+    <Compile Include="src\ASF\thirdparty\lvgl8\src\misc\lv_printf.c">
+      <SubType>compile</SubType>
+    </Compile>
+    <Compile Include="src\ASF\thirdparty\lvgl8\src\misc\lv_printf.h">
+      <SubType>compile</SubType>
+    </Compile>
+    <Compile Include="src\ASF\thirdparty\lvgl8\src\misc\lv_style.c">
+      <SubType>compile</SubType>
+    </Compile>
+    <Compile Include="src\ASF\thirdparty\lvgl8\src\misc\lv_style.h">
+      <SubType>compile</SubType>
+    </Compile>
+    <Compile Include="src\ASF\thirdparty\lvgl8\src\misc\lv_style_gen.c">
+      <SubType>compile</SubType>
+    </Compile>
+    <Compile Include="src\ASF\thirdparty\lvgl8\src\misc\lv_style_gen.h">
+      <SubType>compile</SubType>
+    </Compile>
+    <Compile Include="src\ASF\thirdparty\lvgl8\src\misc\lv_templ.c">
+      <SubType>compile</SubType>
+    </Compile>
+    <Compile Include="src\ASF\thirdparty\lvgl8\src\misc\lv_templ.h">
+      <SubType>compile</SubType>
+    </Compile>
+    <Compile Include="src\ASF\thirdparty\lvgl8\src\misc\lv_timer.c">
+      <SubType>compile</SubType>
+    </Compile>
+    <Compile Include="src\ASF\thirdparty\lvgl8\src\misc\lv_timer.h">
+      <SubType>compile</SubType>
+    </Compile>
+    <Compile Include="src\ASF\thirdparty\lvgl8\src\misc\lv_tlsf.c">
+      <SubType>compile</SubType>
+    </Compile>
+    <Compile Include="src\ASF\thirdparty\lvgl8\src\misc\lv_tlsf.h">
+      <SubType>compile</SubType>
+    </Compile>
+    <Compile Include="src\ASF\thirdparty\lvgl8\src\misc\lv_txt.c">
+      <SubType>compile</SubType>
+    </Compile>
+    <Compile Include="src\ASF\thirdparty\lvgl8\src\misc\lv_txt.h">
+      <SubType>compile</SubType>
+    </Compile>
+    <Compile Include="src\ASF\thirdparty\lvgl8\src\misc\lv_txt_ap.c">
+      <SubType>compile</SubType>
+    </Compile>
+    <Compile Include="src\ASF\thirdparty\lvgl8\src\misc\lv_txt_ap.h">
+      <SubType>compile</SubType>
+    </Compile>
+    <Compile Include="src\ASF\thirdparty\lvgl8\src\misc\lv_types.h">
+      <SubType>compile</SubType>
+    </Compile>
+    <Compile Include="src\ASF\thirdparty\lvgl8\src\misc\lv_utils.c">
+      <SubType>compile</SubType>
+    </Compile>
+    <Compile Include="src\ASF\thirdparty\lvgl8\src\misc\lv_utils.h">
+      <SubType>compile</SubType>
+    </Compile>
+    <Compile Include="src\ASF\thirdparty\lvgl8\src\widgets\lv_arc.c">
+      <SubType>compile</SubType>
+    </Compile>
+    <Compile Include="src\ASF\thirdparty\lvgl8\src\widgets\lv_arc.h">
+      <SubType>compile</SubType>
+    </Compile>
+    <Compile Include="src\ASF\thirdparty\lvgl8\src\widgets\lv_bar.c">
+      <SubType>compile</SubType>
+    </Compile>
+    <Compile Include="src\ASF\thirdparty\lvgl8\src\widgets\lv_bar.h">
+      <SubType>compile</SubType>
+    </Compile>
+    <Compile Include="src\ASF\thirdparty\lvgl8\src\widgets\lv_btn.c">
+      <SubType>compile</SubType>
+    </Compile>
+    <Compile Include="src\ASF\thirdparty\lvgl8\src\widgets\lv_btn.h">
+      <SubType>compile</SubType>
+    </Compile>
+    <Compile Include="src\ASF\thirdparty\lvgl8\src\widgets\lv_btnmatrix.c">
+      <SubType>compile</SubType>
+    </Compile>
+    <Compile Include="src\ASF\thirdparty\lvgl8\src\widgets\lv_btnmatrix.h">
+      <SubType>compile</SubType>
+    </Compile>
+    <Compile Include="src\ASF\thirdparty\lvgl8\src\widgets\lv_canvas.c">
+      <SubType>compile</SubType>
+    </Compile>
+    <Compile Include="src\ASF\thirdparty\lvgl8\src\widgets\lv_canvas.h">
+      <SubType>compile</SubType>
+    </Compile>
+    <Compile Include="src\ASF\thirdparty\lvgl8\src\widgets\lv_checkbox.c">
+      <SubType>compile</SubType>
+    </Compile>
+    <Compile Include="src\ASF\thirdparty\lvgl8\src\widgets\lv_checkbox.h">
+      <SubType>compile</SubType>
+    </Compile>
+    <Compile Include="src\ASF\thirdparty\lvgl8\src\widgets\lv_dropdown.c">
+      <SubType>compile</SubType>
+    </Compile>
+    <Compile Include="src\ASF\thirdparty\lvgl8\src\widgets\lv_dropdown.h">
+      <SubType>compile</SubType>
+    </Compile>
+    <Compile Include="src\ASF\thirdparty\lvgl8\src\widgets\lv_img.c">
+      <SubType>compile</SubType>
+    </Compile>
+    <Compile Include="src\ASF\thirdparty\lvgl8\src\widgets\lv_img.h">
+      <SubType>compile</SubType>
+    </Compile>
+    <Compile Include="src\ASF\thirdparty\lvgl8\src\widgets\lv_label.c">
+      <SubType>compile</SubType>
+    </Compile>
+    <Compile Include="src\ASF\thirdparty\lvgl8\src\widgets\lv_label.h">
+      <SubType>compile</SubType>
+    </Compile>
+    <Compile Include="src\ASF\thirdparty\lvgl8\src\widgets\lv_line.c">
+      <SubType>compile</SubType>
+    </Compile>
+    <Compile Include="src\ASF\thirdparty\lvgl8\src\widgets\lv_line.h">
+      <SubType>compile</SubType>
+    </Compile>
+    <Compile Include="src\ASF\thirdparty\lvgl8\src\widgets\lv_objx_templ.c">
+      <SubType>compile</SubType>
+    </Compile>
+    <Compile Include="src\ASF\thirdparty\lvgl8\src\widgets\lv_objx_templ.h">
+      <SubType>compile</SubType>
+    </Compile>
+    <Compile Include="src\ASF\thirdparty\lvgl8\src\widgets\lv_roller.c">
+      <SubType>compile</SubType>
+    </Compile>
+    <Compile Include="src\ASF\thirdparty\lvgl8\src\widgets\lv_roller.h">
+      <SubType>compile</SubType>
+    </Compile>
+    <Compile Include="src\ASF\thirdparty\lvgl8\src\widgets\lv_slider.c">
+      <SubType>compile</SubType>
+    </Compile>
+    <Compile Include="src\ASF\thirdparty\lvgl8\src\widgets\lv_slider.h">
+      <SubType>compile</SubType>
+    </Compile>
+    <Compile Include="src\ASF\thirdparty\lvgl8\src\widgets\lv_switch.c">
+      <SubType>compile</SubType>
+    </Compile>
+    <Compile Include="src\ASF\thirdparty\lvgl8\src\widgets\lv_switch.h">
+      <SubType>compile</SubType>
+    </Compile>
+    <Compile Include="src\ASF\thirdparty\lvgl8\src\widgets\lv_table.c">
+      <SubType>compile</SubType>
+    </Compile>
+    <Compile Include="src\ASF\thirdparty\lvgl8\src\widgets\lv_table.h">
+      <SubType>compile</SubType>
+    </Compile>
+    <Compile Include="src\ASF\thirdparty\lvgl8\src\widgets\lv_textarea.c">
+      <SubType>compile</SubType>
+    </Compile>
+    <Compile Include="src\ASF\thirdparty\lvgl8\src\widgets\lv_textarea.h">
+      <SubType>compile</SubType>
+    </Compile>
+    <Compile Include="src\ASF\thirdparty\lvgl8\tests\src\lv_test_conf.h">
+      <SubType>compile</SubType>
+    </Compile>
+    <Compile Include="src\ASF\thirdparty\lvgl8\tests\src\lv_test_indev.c">
+      <SubType>compile</SubType>
+    </Compile>
+    <Compile Include="src\ASF\thirdparty\lvgl8\tests\src\lv_test_indev.h">
+      <SubType>compile</SubType>
+    </Compile>
+    <Compile Include="src\ASF\thirdparty\lvgl8\tests\src\lv_test_init.c">
+      <SubType>compile</SubType>
+    </Compile>
+    <Compile Include="src\ASF\thirdparty\lvgl8\tests\src\lv_test_init.h">
+      <SubType>compile</SubType>
+    </Compile>
+    <Compile Include="src\ASF\thirdparty\lvgl8\tests\src\test_cases\test_arc.c">
+      <SubType>compile</SubType>
+    </Compile>
+    <Compile Include="src\ASF\thirdparty\lvgl8\tests\src\test_cases\test_checkbox.c">
+      <SubType>compile</SubType>
+    </Compile>
+    <Compile Include="src\ASF\thirdparty\lvgl8\tests\src\test_cases\test_config.c">
+      <SubType>compile</SubType>
+    </Compile>
+    <Compile Include="src\ASF\thirdparty\lvgl8\tests\src\test_cases\test_dropdown.c">
+      <SubType>compile</SubType>
+    </Compile>
+    <Compile Include="src\ASF\thirdparty\lvgl8\tests\src\test_cases\test_font_loader.c">
+      <SubType>compile</SubType>
+    </Compile>
+    <Compile Include="src\ASF\thirdparty\lvgl8\tests\src\test_cases\test_obj_tree.c">
+      <SubType>compile</SubType>
+    </Compile>
+    <Compile Include="src\ASF\thirdparty\lvgl8\tests\src\test_cases\test_style.c">
+      <SubType>compile</SubType>
+    </Compile>
+    <Compile Include="src\ASF\thirdparty\lvgl8\tests\src\test_cases\test_txt.c">
+      <SubType>compile</SubType>
+    </Compile>
+    <Compile Include="src\ASF\thirdparty\lvgl8\tests\src\test_cases\_test_template.c">
+      <SubType>compile</SubType>
+    </Compile>
+    <Compile Include="src\ASF\thirdparty\lvgl8\tests\src\test_fonts\font_1.c">
+      <SubType>compile</SubType>
+    </Compile>
+    <Compile Include="src\ASF\thirdparty\lvgl8\tests\src\test_fonts\font_2.c">
+      <SubType>compile</SubType>
+    </Compile>
+    <Compile Include="src\ASF\thirdparty\lvgl8\tests\src\test_fonts\font_3.c">
+      <SubType>compile</SubType>
+    </Compile>
+    <Compile Include="src\ASF\thirdparty\lvgl8\tests\unity\unity.c">
+      <SubType>compile</SubType>
+    </Compile>
+    <Compile Include="src\ASF\thirdparty\lvgl8\tests\unity\unity.h">
+      <SubType>compile</SubType>
+    </Compile>
+    <Compile Include="src\ASF\thirdparty\lvgl8\tests\unity\unity_internals.h">
+      <SubType>compile</SubType>
+    </Compile>
+    <Compile Include="src\ASF\thirdparty\lvgl8\tests\unity\unity_support.c">
+      <SubType>compile</SubType>
+    </Compile>
+    <Compile Include="src\ASF\thirdparty\lvgl8\tests\unity\unity_support.h">
+      <SubType>compile</SubType>
+    </Compile>
     <Compile Include="src\config\conf_touch.h">
       <SubType>compile</SubType>
     </Compile>
@@ -800,190 +2294,790 @@
     <None Include="src\ASF\thirdparty\freertos\freertos-8.2.3\Source\readme.txt">
       <SubType>compile</SubType>
     </None>
-    <None Include="src\ASF\thirdparty\lvgl\.editorconfig">
+    <None Include="src\ASF\thirdparty\lvgl8\.codecov.yml">
       <SubType>compile</SubType>
     </None>
-    <None Include="src\ASF\thirdparty\lvgl\.github\auto-comment.yml">
+    <None Include="src\ASF\thirdparty\lvgl8\.editorconfig">
       <SubType>compile</SubType>
     </None>
-    <None Include="src\ASF\thirdparty\lvgl\.github\FUNDING.yml">
+    <None Include="src\ASF\thirdparty\lvgl8\.gitignore">
       <SubType>compile</SubType>
     </None>
-    <None Include="src\ASF\thirdparty\lvgl\.github\ISSUE_TEMPLATE\bug-report.md">
+    <None Include="src\ASF\thirdparty\lvgl8\.gitmodules">
       <SubType>compile</SubType>
     </None>
-    <None Include="src\ASF\thirdparty\lvgl\.github\ISSUE_TEMPLATE\config.yml">
+    <None Include="src\ASF\thirdparty\lvgl8\CMakeLists.txt">
       <SubType>compile</SubType>
     </None>
-    <None Include="src\ASF\thirdparty\lvgl\.github\ISSUE_TEMPLATE\dev-discussion.md">
+    <None Include="src\ASF\thirdparty\lvgl8\component.mk">
       <SubType>compile</SubType>
     </None>
-    <None Include="src\ASF\thirdparty\lvgl\.github\pull_request_template.md">
+    <None Include="src\ASF\thirdparty\lvgl8\examples\anim\index.rst">
       <SubType>compile</SubType>
     </None>
-    <None Include="src\ASF\thirdparty\lvgl\.github\stale.yml">
+    <None Include="src\ASF\thirdparty\lvgl8\examples\anim\lv_example_anim_1.py">
       <SubType>compile</SubType>
     </None>
-    <None Include="src\ASF\thirdparty\lvgl\.github\workflows\build_micropython.yml">
+    <None Include="src\ASF\thirdparty\lvgl8\examples\anim\lv_example_anim_2.py">
       <SubType>compile</SubType>
     </None>
-    <None Include="src\ASF\thirdparty\lvgl\.github\workflows\ccpp.yml">
+    <None Include="src\ASF\thirdparty\lvgl8\examples\anim\lv_example_anim_3.py">
       <SubType>compile</SubType>
     </None>
-    <None Include="src\ASF\thirdparty\lvgl\.github\workflows\main.yml">
+    <None Include="src\ASF\thirdparty\lvgl8\examples\anim\lv_example_anim_timeline_1.py">
       <SubType>compile</SubType>
     </None>
-    <None Include="src\ASF\thirdparty\lvgl\.github\workflows\merge-to-dev.yml">
+    <None Include="src\ASF\thirdparty\lvgl8\examples\arduino\LVGL_Arduino\LVGL_Arduino.ino">
       <SubType>compile</SubType>
     </None>
-    <None Include="src\ASF\thirdparty\lvgl\.github\workflows\release.yml">
+    <None Include="src\ASF\thirdparty\lvgl8\examples\assets\animimg001.png">
       <SubType>compile</SubType>
     </None>
-    <None Include="src\ASF\thirdparty\lvgl\.gitignore">
+    <None Include="src\ASF\thirdparty\lvgl8\examples\assets\animimg002.png">
       <SubType>compile</SubType>
     </None>
-    <None Include="src\ASF\thirdparty\lvgl\.gitmodules">
+    <None Include="src\ASF\thirdparty\lvgl8\examples\assets\animimg003.png">
       <SubType>compile</SubType>
     </None>
-    <None Include="src\ASF\thirdparty\lvgl\CHANGELOG.md">
+    <None Include="src\ASF\thirdparty\lvgl8\examples\assets\caret_down.png">
       <SubType>compile</SubType>
     </None>
-    <None Include="src\ASF\thirdparty\lvgl\CMakeLists.txt">
+    <None Include="src\ASF\thirdparty\lvgl8\examples\assets\font\lv_font_simsun_16_cjk.fnt">
       <SubType>compile</SubType>
     </None>
-    <None Include="src\ASF\thirdparty\lvgl\docs\CODE_OF_CONDUCT.md">
+    <None Include="src\ASF\thirdparty\lvgl8\examples\assets\font\montserrat-16.fnt">
       <SubType>compile</SubType>
     </None>
-    <None Include="src\ASF\thirdparty\lvgl\docs\CODING_STYLE.md">
+    <None Include="src\ASF\thirdparty\lvgl8\examples\assets\font\montserrat-22.fnt">
       <SubType>compile</SubType>
     </None>
-    <None Include="src\ASF\thirdparty\lvgl\docs\CONTRIBUTING.md">
+    <None Include="src\ASF\thirdparty\lvgl8\examples\assets\imgbtn_left.png">
       <SubType>compile</SubType>
     </None>
-    <None Include="src\ASF\thirdparty\lvgl\docs\ROADMAP.md">
+    <None Include="src\ASF\thirdparty\lvgl8\examples\assets\imgbtn_mid.png">
       <SubType>compile</SubType>
     </None>
-    <None Include="src\ASF\thirdparty\lvgl\examples\LVGL_Arduino.ino">
+    <None Include="src\ASF\thirdparty\lvgl8\examples\assets\imgbtn_right.png">
       <SubType>compile</SubType>
     </None>
-    <None Include="src\ASF\thirdparty\lvgl\Kconfig">
+    <None Include="src\ASF\thirdparty\lvgl8\examples\assets\img_caret_down.png">
       <SubType>compile</SubType>
     </None>
-    <None Include="src\ASF\thirdparty\lvgl\library.json">
+    <None Include="src\ASF\thirdparty\lvgl8\examples\assets\img_cogwheel_argb.png">
       <SubType>compile</SubType>
     </None>
-    <None Include="src\ASF\thirdparty\lvgl\library.properties">
+    <None Include="src\ASF\thirdparty\lvgl8\examples\assets\img_cogwheel_chroma_keyed.png">
       <SubType>compile</SubType>
     </None>
-    <None Include="src\ASF\thirdparty\lvgl\LICENCE.txt">
+    <None Include="src\ASF\thirdparty\lvgl8\examples\assets\img_cogwheel_indexed16.png">
       <SubType>compile</SubType>
     </None>
-    <None Include="src\ASF\thirdparty\lvgl\lvgl.mk">
+    <None Include="src\ASF\thirdparty\lvgl8\examples\assets\img_cogwheel_rgb.png">
       <SubType>compile</SubType>
     </None>
-    <None Include="src\ASF\thirdparty\lvgl\README.md">
+    <None Include="src\ASF\thirdparty\lvgl8\examples\assets\img_hand_hour.png">
       <SubType>compile</SubType>
     </None>
-    <None Include="src\ASF\thirdparty\lvgl\scripts\built_in_font\built_in_font_gen.py">
+    <None Include="src\ASF\thirdparty\lvgl8\examples\assets\img_hand_min.png">
       <SubType>compile</SubType>
     </None>
-    <None Include="src\ASF\thirdparty\lvgl\scripts\built_in_font\DejaVuSans.ttf">
+    <None Include="src\ASF\thirdparty\lvgl8\examples\assets\img_skew_strip.png">
       <SubType>compile</SubType>
     </None>
-    <None Include="src\ASF\thirdparty\lvgl\scripts\built_in_font\FontAwesome5-Solid+Brands+Regular.woff">
+    <None Include="src\ASF\thirdparty\lvgl8\examples\assets\img_skew_strip_80x20_argb8888.fnt">
       <SubType>compile</SubType>
     </None>
-    <None Include="src\ASF\thirdparty\lvgl\scripts\built_in_font\generate_all.py">
+    <None Include="src\ASF\thirdparty\lvgl8\examples\assets\img_star.png">
       <SubType>compile</SubType>
     </None>
-    <None Include="src\ASF\thirdparty\lvgl\scripts\built_in_font\Montserrat-Medium.ttf">
+    <None Include="src\ASF\thirdparty\lvgl8\examples\assets\img_strip.png">
       <SubType>compile</SubType>
     </None>
-    <None Include="src\ASF\thirdparty\lvgl\scripts\built_in_font\SimSun.woff">
+    <None Include="src\ASF\thirdparty\lvgl8\examples\assets\skew_strip.png">
       <SubType>compile</SubType>
     </None>
-    <None Include="src\ASF\thirdparty\lvgl\scripts\code-format.cfg">
+    <None Include="src\ASF\thirdparty\lvgl8\examples\assets\star.png">
       <SubType>compile</SubType>
     </None>
-    <None Include="src\ASF\thirdparty\lvgl\scripts\code-format.sh">
+    <None Include="src\ASF\thirdparty\lvgl8\examples\event\index.rst">
       <SubType>compile</SubType>
     </None>
-    <None Include="src\ASF\thirdparty\lvgl\scripts\cppcheck_run.sh">
+    <None Include="src\ASF\thirdparty\lvgl8\examples\event\lv_example_event_1.py">
       <SubType>compile</SubType>
     </None>
-    <None Include="src\ASF\thirdparty\lvgl\scripts\Doxyfile">
+    <None Include="src\ASF\thirdparty\lvgl8\examples\event\lv_example_event_2.py">
       <SubType>compile</SubType>
     </None>
-    <None Include="src\ASF\thirdparty\lvgl\scripts\infer_run.sh">
+    <None Include="src\ASF\thirdparty\lvgl8\examples\event\lv_example_event_3.py">
       <SubType>compile</SubType>
     </None>
-    <None Include="src\ASF\thirdparty\lvgl\scripts\lv_conf_checker.py">
+    <None Include="src\ASF\thirdparty\lvgl8\examples\examples.mk">
       <SubType>compile</SubType>
     </None>
-    <None Include="src\ASF\thirdparty\lvgl\scripts\release\com.py">
+    <None Include="src\ASF\thirdparty\lvgl8\examples\get_started\index.rst">
       <SubType>compile</SubType>
     </None>
-    <None Include="src\ASF\thirdparty\lvgl\scripts\release\dev.py">
+    <None Include="src\ASF\thirdparty\lvgl8\examples\get_started\lv_example_get_started_1.py">
       <SubType>compile</SubType>
     </None>
-    <None Include="src\ASF\thirdparty\lvgl\scripts\release\main.py">
+    <None Include="src\ASF\thirdparty\lvgl8\examples\get_started\lv_example_get_started_2.py">
       <SubType>compile</SubType>
     </None>
-    <None Include="src\ASF\thirdparty\lvgl\scripts\release\proj.py">
+    <None Include="src\ASF\thirdparty\lvgl8\examples\get_started\lv_example_get_started_3.py">
       <SubType>compile</SubType>
     </None>
-    <None Include="src\ASF\thirdparty\lvgl\scripts\release\release.py">
+    <None Include="src\ASF\thirdparty\lvgl8\examples\header.py">
       <SubType>compile</SubType>
     </None>
-    <None Include="src\ASF\thirdparty\lvgl\src\lv_core\lv_core.mk">
+    <None Include="src\ASF\thirdparty\lvgl8\examples\layouts\flex\index.rst">
       <SubType>compile</SubType>
     </None>
-    <None Include="src\ASF\thirdparty\lvgl\src\lv_draw\lv_draw.mk">
+    <None Include="src\ASF\thirdparty\lvgl8\examples\layouts\flex\lv_example_flex_1.py">
       <SubType>compile</SubType>
     </None>
-    <None Include="src\ASF\thirdparty\lvgl\src\lv_font\lv_font.mk">
+    <None Include="src\ASF\thirdparty\lvgl8\examples\layouts\flex\lv_example_flex_2.py">
       <SubType>compile</SubType>
     </None>
-    <None Include="src\ASF\thirdparty\lvgl\src\lv_gpu\lv_gpu.mk">
+    <None Include="src\ASF\thirdparty\lvgl8\examples\layouts\flex\lv_example_flex_3.py">
       <SubType>compile</SubType>
     </None>
-    <None Include="src\ASF\thirdparty\lvgl\src\lv_hal\lv_hal.mk">
+    <None Include="src\ASF\thirdparty\lvgl8\examples\layouts\flex\lv_example_flex_4.py">
       <SubType>compile</SubType>
     </None>
-    <None Include="src\ASF\thirdparty\lvgl\src\lv_misc\lv_misc.mk">
+    <None Include="src\ASF\thirdparty\lvgl8\examples\layouts\flex\lv_example_flex_5.py">
       <SubType>compile</SubType>
     </None>
-    <None Include="src\ASF\thirdparty\lvgl\src\lv_themes\lv_themes.mk">
+    <None Include="src\ASF\thirdparty\lvgl8\examples\layouts\flex\lv_example_flex_6.py">
       <SubType>compile</SubType>
     </None>
-    <None Include="src\ASF\thirdparty\lvgl\src\lv_widgets\lv_widgets.mk">
+    <None Include="src\ASF\thirdparty\lvgl8\examples\layouts\grid\index.rst">
       <SubType>compile</SubType>
     </None>
-    <None Include="src\ASF\thirdparty\lvgl\tests\build.py">
+    <None Include="src\ASF\thirdparty\lvgl8\examples\layouts\grid\lv_example_grid_1.py">
       <SubType>compile</SubType>
     </None>
-    <None Include="src\ASF\thirdparty\lvgl\tests\font_1.fnt">
+    <None Include="src\ASF\thirdparty\lvgl8\examples\layouts\grid\lv_example_grid_2.py">
       <SubType>compile</SubType>
     </None>
-    <None Include="src\ASF\thirdparty\lvgl\tests\font_2.fnt">
+    <None Include="src\ASF\thirdparty\lvgl8\examples\layouts\grid\lv_example_grid_3.py">
       <SubType>compile</SubType>
     </None>
-    <None Include="src\ASF\thirdparty\lvgl\tests\font_3.fnt">
+    <None Include="src\ASF\thirdparty\lvgl8\examples\layouts\grid\lv_example_grid_4.py">
       <SubType>compile</SubType>
     </None>
-    <None Include="src\ASF\thirdparty\lvgl\tests\icon.png">
+    <None Include="src\ASF\thirdparty\lvgl8\examples\layouts\grid\lv_example_grid_5.py">
       <SubType>compile</SubType>
     </None>
-    <None Include="src\ASF\thirdparty\lvgl\tests\icon2.png">
+    <None Include="src\ASF\thirdparty\lvgl8\examples\layouts\grid\lv_example_grid_6.py">
       <SubType>compile</SubType>
     </None>
-    <None Include="src\ASF\thirdparty\lvgl\tests\lv_test_ref_imgs\lv_test_img32_label_1.png">
+    <None Include="src\ASF\thirdparty\lvgl8\examples\libs\bmp\example_16bit.bmp">
       <SubType>compile</SubType>
     </None>
-    <None Include="src\ASF\thirdparty\lvgl\tests\Makefile">
+    <None Include="src\ASF\thirdparty\lvgl8\examples\libs\bmp\example_24bit.bmp">
       <SubType>compile</SubType>
     </None>
-    <None Include="src\ASF\thirdparty\lvgl\zephyr\module.yml">
+    <None Include="src\ASF\thirdparty\lvgl8\examples\libs\bmp\example_32bit.bmp">
+      <SubType>compile</SubType>
+    </None>
+    <None Include="src\ASF\thirdparty\lvgl8\examples\libs\bmp\index.rst">
+      <SubType>compile</SubType>
+    </None>
+    <None Include="src\ASF\thirdparty\lvgl8\examples\libs\freetype\arial.ttf">
+      <SubType>compile</SubType>
+    </None>
+    <None Include="src\ASF\thirdparty\lvgl8\examples\libs\freetype\index.rst">
+      <SubType>compile</SubType>
+    </None>
+    <None Include="src\ASF\thirdparty\lvgl8\examples\libs\gif\bulb.gif">
+      <SubType>compile</SubType>
+    </None>
+    <None Include="src\ASF\thirdparty\lvgl8\examples\libs\gif\index.rst">
+      <SubType>compile</SubType>
+    </None>
+    <None Include="src\ASF\thirdparty\lvgl8\examples\libs\png\index.rst">
+      <SubType>compile</SubType>
+    </None>
+    <None Include="src\ASF\thirdparty\lvgl8\examples\libs\png\wink.png">
+      <SubType>compile</SubType>
+    </None>
+    <None Include="src\ASF\thirdparty\lvgl8\examples\libs\qrcode\index.rst">
+      <SubType>compile</SubType>
+    </None>
+    <None Include="src\ASF\thirdparty\lvgl8\examples\libs\sjpg\index.rst">
+      <SubType>compile</SubType>
+    </None>
+    <None Include="src\ASF\thirdparty\lvgl8\examples\libs\sjpg\small_image.sjpg">
+      <SubType>compile</SubType>
+    </None>
+    <None Include="src\ASF\thirdparty\lvgl8\examples\others\snapshot\index.rst">
+      <SubType>compile</SubType>
+    </None>
+    <None Include="src\ASF\thirdparty\lvgl8\examples\others\snapshot\lv_example_snapshot_1.py">
+      <SubType>compile</SubType>
+    </None>
+    <None Include="src\ASF\thirdparty\lvgl8\examples\scroll\index.rst">
+      <SubType>compile</SubType>
+    </None>
+    <None Include="src\ASF\thirdparty\lvgl8\examples\scroll\lv_example_scroll_1.py">
+      <SubType>compile</SubType>
+    </None>
+    <None Include="src\ASF\thirdparty\lvgl8\examples\scroll\lv_example_scroll_2.py">
+      <SubType>compile</SubType>
+    </None>
+    <None Include="src\ASF\thirdparty\lvgl8\examples\scroll\lv_example_scroll_3.py">
+      <SubType>compile</SubType>
+    </None>
+    <None Include="src\ASF\thirdparty\lvgl8\examples\scroll\lv_example_scroll_4.py">
+      <SubType>compile</SubType>
+    </None>
+    <None Include="src\ASF\thirdparty\lvgl8\examples\scroll\lv_example_scroll_5.py">
+      <SubType>compile</SubType>
+    </None>
+    <None Include="src\ASF\thirdparty\lvgl8\examples\scroll\lv_example_scroll_6.py">
+      <SubType>compile</SubType>
+    </None>
+    <None Include="src\ASF\thirdparty\lvgl8\examples\styles\index.rst">
+      <SubType>compile</SubType>
+    </None>
+    <None Include="src\ASF\thirdparty\lvgl8\examples\styles\lv_example_style_1.py">
+      <SubType>compile</SubType>
+    </None>
+    <None Include="src\ASF\thirdparty\lvgl8\examples\styles\lv_example_style_10.py">
+      <SubType>compile</SubType>
+    </None>
+    <None Include="src\ASF\thirdparty\lvgl8\examples\styles\lv_example_style_11.py">
+      <SubType>compile</SubType>
+    </None>
+    <None Include="src\ASF\thirdparty\lvgl8\examples\styles\lv_example_style_12.py">
+      <SubType>compile</SubType>
+    </None>
+    <None Include="src\ASF\thirdparty\lvgl8\examples\styles\lv_example_style_13.py">
+      <SubType>compile</SubType>
+    </None>
+    <None Include="src\ASF\thirdparty\lvgl8\examples\styles\lv_example_style_14.py">
+      <SubType>compile</SubType>
+    </None>
+    <None Include="src\ASF\thirdparty\lvgl8\examples\styles\lv_example_style_2.py">
+      <SubType>compile</SubType>
+    </None>
+    <None Include="src\ASF\thirdparty\lvgl8\examples\styles\lv_example_style_3.py">
+      <SubType>compile</SubType>
+    </None>
+    <None Include="src\ASF\thirdparty\lvgl8\examples\styles\lv_example_style_4.py">
+      <SubType>compile</SubType>
+    </None>
+    <None Include="src\ASF\thirdparty\lvgl8\examples\styles\lv_example_style_5.py">
+      <SubType>compile</SubType>
+    </None>
+    <None Include="src\ASF\thirdparty\lvgl8\examples\styles\lv_example_style_6.py">
+      <SubType>compile</SubType>
+    </None>
+    <None Include="src\ASF\thirdparty\lvgl8\examples\styles\lv_example_style_7.py">
+      <SubType>compile</SubType>
+    </None>
+    <None Include="src\ASF\thirdparty\lvgl8\examples\styles\lv_example_style_8.py">
+      <SubType>compile</SubType>
+    </None>
+    <None Include="src\ASF\thirdparty\lvgl8\examples\styles\lv_example_style_9.py">
+      <SubType>compile</SubType>
+    </None>
+    <None Include="src\ASF\thirdparty\lvgl8\examples\test_ex.sh">
+      <SubType>compile</SubType>
+    </None>
+    <None Include="src\ASF\thirdparty\lvgl8\examples\widgets\animimg\index.rst">
+      <SubType>compile</SubType>
+    </None>
+    <None Include="src\ASF\thirdparty\lvgl8\examples\widgets\animimg\lv_example_animimg_1.py">
+      <SubType>compile</SubType>
+    </None>
+    <None Include="src\ASF\thirdparty\lvgl8\examples\widgets\arc\index.rst">
+      <SubType>compile</SubType>
+    </None>
+    <None Include="src\ASF\thirdparty\lvgl8\examples\widgets\arc\lv_example_arc_1.py">
+      <SubType>compile</SubType>
+    </None>
+    <None Include="src\ASF\thirdparty\lvgl8\examples\widgets\arc\lv_example_arc_2.py">
+      <SubType>compile</SubType>
+    </None>
+    <None Include="src\ASF\thirdparty\lvgl8\examples\widgets\bar\index.rst">
+      <SubType>compile</SubType>
+    </None>
+    <None Include="src\ASF\thirdparty\lvgl8\examples\widgets\bar\lv_example_bar_1.py">
+      <SubType>compile</SubType>
+    </None>
+    <None Include="src\ASF\thirdparty\lvgl8\examples\widgets\bar\lv_example_bar_2.py">
+      <SubType>compile</SubType>
+    </None>
+    <None Include="src\ASF\thirdparty\lvgl8\examples\widgets\bar\lv_example_bar_3.py">
+      <SubType>compile</SubType>
+    </None>
+    <None Include="src\ASF\thirdparty\lvgl8\examples\widgets\bar\lv_example_bar_4.py">
+      <SubType>compile</SubType>
+    </None>
+    <None Include="src\ASF\thirdparty\lvgl8\examples\widgets\bar\lv_example_bar_5.py">
+      <SubType>compile</SubType>
+    </None>
+    <None Include="src\ASF\thirdparty\lvgl8\examples\widgets\bar\lv_example_bar_6.py">
+      <SubType>compile</SubType>
+    </None>
+    <None Include="src\ASF\thirdparty\lvgl8\examples\widgets\bar\test.py">
+      <SubType>compile</SubType>
+    </None>
+    <None Include="src\ASF\thirdparty\lvgl8\examples\widgets\btnmatrix\index.rst">
+      <SubType>compile</SubType>
+    </None>
+    <None Include="src\ASF\thirdparty\lvgl8\examples\widgets\btnmatrix\lv_example_btnmatrix_1.py">
+      <SubType>compile</SubType>
+    </None>
+    <None Include="src\ASF\thirdparty\lvgl8\examples\widgets\btnmatrix\lv_example_btnmatrix_2.py">
+      <SubType>compile</SubType>
+    </None>
+    <None Include="src\ASF\thirdparty\lvgl8\examples\widgets\btnmatrix\lv_example_btnmatrix_3.py">
+      <SubType>compile</SubType>
+    </None>
+    <None Include="src\ASF\thirdparty\lvgl8\examples\widgets\btn\index.rst">
+      <SubType>compile</SubType>
+    </None>
+    <None Include="src\ASF\thirdparty\lvgl8\examples\widgets\btn\lv_example_btn_1.py">
+      <SubType>compile</SubType>
+    </None>
+    <None Include="src\ASF\thirdparty\lvgl8\examples\widgets\btn\lv_example_btn_2.py">
+      <SubType>compile</SubType>
+    </None>
+    <None Include="src\ASF\thirdparty\lvgl8\examples\widgets\btn\lv_example_btn_3.py">
+      <SubType>compile</SubType>
+    </None>
+    <None Include="src\ASF\thirdparty\lvgl8\examples\widgets\calendar\index.rst">
+      <SubType>compile</SubType>
+    </None>
+    <None Include="src\ASF\thirdparty\lvgl8\examples\widgets\calendar\lv_example_calendar_1.py">
+      <SubType>compile</SubType>
+    </None>
+    <None Include="src\ASF\thirdparty\lvgl8\examples\widgets\canvas\index.rst">
+      <SubType>compile</SubType>
+    </None>
+    <None Include="src\ASF\thirdparty\lvgl8\examples\widgets\canvas\lv_example_canvas_1.py">
+      <SubType>compile</SubType>
+    </None>
+    <None Include="src\ASF\thirdparty\lvgl8\examples\widgets\canvas\lv_example_canvas_2.py">
+      <SubType>compile</SubType>
+    </None>
+    <None Include="src\ASF\thirdparty\lvgl8\examples\widgets\chart\index.rst">
+      <SubType>compile</SubType>
+    </None>
+    <None Include="src\ASF\thirdparty\lvgl8\examples\widgets\chart\lv_example_chart_1.py">
+      <SubType>compile</SubType>
+    </None>
+    <None Include="src\ASF\thirdparty\lvgl8\examples\widgets\chart\lv_example_chart_2.py">
+      <SubType>compile</SubType>
+    </None>
+    <None Include="src\ASF\thirdparty\lvgl8\examples\widgets\chart\lv_example_chart_3.py">
+      <SubType>compile</SubType>
+    </None>
+    <None Include="src\ASF\thirdparty\lvgl8\examples\widgets\chart\lv_example_chart_4.py">
+      <SubType>compile</SubType>
+    </None>
+    <None Include="src\ASF\thirdparty\lvgl8\examples\widgets\chart\lv_example_chart_5.py">
+      <SubType>compile</SubType>
+    </None>
+    <None Include="src\ASF\thirdparty\lvgl8\examples\widgets\chart\lv_example_chart_6.py">
+      <SubType>compile</SubType>
+    </None>
+    <None Include="src\ASF\thirdparty\lvgl8\examples\widgets\chart\lv_example_chart_7.py">
+      <SubType>compile</SubType>
+    </None>
+    <None Include="src\ASF\thirdparty\lvgl8\examples\widgets\chart\lv_example_chart_8.py">
+      <SubType>compile</SubType>
+    </None>
+    <None Include="src\ASF\thirdparty\lvgl8\examples\widgets\chart\lv_example_chart_9.py">
+      <SubType>compile</SubType>
+    </None>
+    <None Include="src\ASF\thirdparty\lvgl8\examples\widgets\checkbox\index.rst">
+      <SubType>compile</SubType>
+    </None>
+    <None Include="src\ASF\thirdparty\lvgl8\examples\widgets\checkbox\lv_example_checkbox_1.py">
+      <SubType>compile</SubType>
+    </None>
+    <None Include="src\ASF\thirdparty\lvgl8\examples\widgets\colorwheel\index.rst">
+      <SubType>compile</SubType>
+    </None>
+    <None Include="src\ASF\thirdparty\lvgl8\examples\widgets\colorwheel\lv_example_colorwheel_1.py">
+      <SubType>compile</SubType>
+    </None>
+    <None Include="src\ASF\thirdparty\lvgl8\examples\widgets\dropdown\index.rst">
+      <SubType>compile</SubType>
+    </None>
+    <None Include="src\ASF\thirdparty\lvgl8\examples\widgets\dropdown\lv_example_dropdown_1.py">
+      <SubType>compile</SubType>
+    </None>
+    <None Include="src\ASF\thirdparty\lvgl8\examples\widgets\dropdown\lv_example_dropdown_2.py">
+      <SubType>compile</SubType>
+    </None>
+    <None Include="src\ASF\thirdparty\lvgl8\examples\widgets\dropdown\lv_example_dropdown_3.py">
+      <SubType>compile</SubType>
+    </None>
+    <None Include="src\ASF\thirdparty\lvgl8\examples\widgets\imgbtn\index.rst">
+      <SubType>compile</SubType>
+    </None>
+    <None Include="src\ASF\thirdparty\lvgl8\examples\widgets\imgbtn\lv_example_imgbtn_1.py">
+      <SubType>compile</SubType>
+    </None>
+    <None Include="src\ASF\thirdparty\lvgl8\examples\widgets\img\index.rst">
+      <SubType>compile</SubType>
+    </None>
+    <None Include="src\ASF\thirdparty\lvgl8\examples\widgets\img\lv_example_img_1.py">
+      <SubType>compile</SubType>
+    </None>
+    <None Include="src\ASF\thirdparty\lvgl8\examples\widgets\img\lv_example_img_2.py">
+      <SubType>compile</SubType>
+    </None>
+    <None Include="src\ASF\thirdparty\lvgl8\examples\widgets\img\lv_example_img_3.py">
+      <SubType>compile</SubType>
+    </None>
+    <None Include="src\ASF\thirdparty\lvgl8\examples\widgets\img\lv_example_img_4.py">
+      <SubType>compile</SubType>
+    </None>
+    <None Include="src\ASF\thirdparty\lvgl8\examples\widgets\keyboard\index.rst">
+      <SubType>compile</SubType>
+    </None>
+    <None Include="src\ASF\thirdparty\lvgl8\examples\widgets\keyboard\lv_example_keyboard_1.py">
+      <SubType>compile</SubType>
+    </None>
+    <None Include="src\ASF\thirdparty\lvgl8\examples\widgets\label\index.rst">
+      <SubType>compile</SubType>
+    </None>
+    <None Include="src\ASF\thirdparty\lvgl8\examples\widgets\label\lv_example_label_1.py">
+      <SubType>compile</SubType>
+    </None>
+    <None Include="src\ASF\thirdparty\lvgl8\examples\widgets\label\lv_example_label_2.py">
+      <SubType>compile</SubType>
+    </None>
+    <None Include="src\ASF\thirdparty\lvgl8\examples\widgets\label\lv_example_label_3.py">
+      <SubType>compile</SubType>
+    </None>
+    <None Include="src\ASF\thirdparty\lvgl8\examples\widgets\led\index.rst">
+      <SubType>compile</SubType>
+    </None>
+    <None Include="src\ASF\thirdparty\lvgl8\examples\widgets\led\lv_example_led_1.py">
+      <SubType>compile</SubType>
+    </None>
+    <None Include="src\ASF\thirdparty\lvgl8\examples\widgets\line\index.rst">
+      <SubType>compile</SubType>
+    </None>
+    <None Include="src\ASF\thirdparty\lvgl8\examples\widgets\line\lv_example_line_1.py">
+      <SubType>compile</SubType>
+    </None>
+    <None Include="src\ASF\thirdparty\lvgl8\examples\widgets\list\index.rst">
+      <SubType>compile</SubType>
+    </None>
+    <None Include="src\ASF\thirdparty\lvgl8\examples\widgets\list\lv_example_list_1.py">
+      <SubType>compile</SubType>
+    </None>
+    <None Include="src\ASF\thirdparty\lvgl8\examples\widgets\list\lv_example_list_2.py">
+      <SubType>compile</SubType>
+    </None>
+    <None Include="src\ASF\thirdparty\lvgl8\examples\widgets\list\test.py">
+      <SubType>compile</SubType>
+    </None>
+    <None Include="src\ASF\thirdparty\lvgl8\examples\widgets\meter\index.rst">
+      <SubType>compile</SubType>
+    </None>
+    <None Include="src\ASF\thirdparty\lvgl8\examples\widgets\meter\lv_example_meter_1.py">
+      <SubType>compile</SubType>
+    </None>
+    <None Include="src\ASF\thirdparty\lvgl8\examples\widgets\meter\lv_example_meter_2.py">
+      <SubType>compile</SubType>
+    </None>
+    <None Include="src\ASF\thirdparty\lvgl8\examples\widgets\meter\lv_example_meter_3.py">
+      <SubType>compile</SubType>
+    </None>
+    <None Include="src\ASF\thirdparty\lvgl8\examples\widgets\meter\lv_example_meter_4.py">
+      <SubType>compile</SubType>
+    </None>
+    <None Include="src\ASF\thirdparty\lvgl8\examples\widgets\msgbox\index.rst">
+      <SubType>compile</SubType>
+    </None>
+    <None Include="src\ASF\thirdparty\lvgl8\examples\widgets\msgbox\lv_example_msgbox_1.py">
+      <SubType>compile</SubType>
+    </None>
+    <None Include="src\ASF\thirdparty\lvgl8\examples\widgets\obj\index.rst">
+      <SubType>compile</SubType>
+    </None>
+    <None Include="src\ASF\thirdparty\lvgl8\examples\widgets\obj\lv_example_obj_1.py">
+      <SubType>compile</SubType>
+    </None>
+    <None Include="src\ASF\thirdparty\lvgl8\examples\widgets\obj\lv_example_obj_2.py">
+      <SubType>compile</SubType>
+    </None>
+    <None Include="src\ASF\thirdparty\lvgl8\examples\widgets\roller\index.rst">
+      <SubType>compile</SubType>
+    </None>
+    <None Include="src\ASF\thirdparty\lvgl8\examples\widgets\roller\lv_example_roller_1.py">
+      <SubType>compile</SubType>
+    </None>
+    <None Include="src\ASF\thirdparty\lvgl8\examples\widgets\roller\lv_example_roller_2.py">
+      <SubType>compile</SubType>
+    </None>
+    <None Include="src\ASF\thirdparty\lvgl8\examples\widgets\roller\lv_example_roller_3.py">
+      <SubType>compile</SubType>
+    </None>
+    <None Include="src\ASF\thirdparty\lvgl8\examples\widgets\slider\index.rst">
+      <SubType>compile</SubType>
+    </None>
+    <None Include="src\ASF\thirdparty\lvgl8\examples\widgets\slider\lv_example_slider_1.py">
+      <SubType>compile</SubType>
+    </None>
+    <None Include="src\ASF\thirdparty\lvgl8\examples\widgets\slider\lv_example_slider_2.py">
+      <SubType>compile</SubType>
+    </None>
+    <None Include="src\ASF\thirdparty\lvgl8\examples\widgets\slider\lv_example_slider_3.py">
+      <SubType>compile</SubType>
+    </None>
+    <None Include="src\ASF\thirdparty\lvgl8\examples\widgets\span\index.rst">
+      <SubType>compile</SubType>
+    </None>
+    <None Include="src\ASF\thirdparty\lvgl8\examples\widgets\span\lv_example_span_1.py">
+      <SubType>compile</SubType>
+    </None>
+    <None Include="src\ASF\thirdparty\lvgl8\examples\widgets\spinbox\index.rst">
+      <SubType>compile</SubType>
+    </None>
+    <None Include="src\ASF\thirdparty\lvgl8\examples\widgets\spinbox\lv_example_spinbox_1.py">
+      <SubType>compile</SubType>
+    </None>
+    <None Include="src\ASF\thirdparty\lvgl8\examples\widgets\spinner\index.rst">
+      <SubType>compile</SubType>
+    </None>
+    <None Include="src\ASF\thirdparty\lvgl8\examples\widgets\spinner\lv_example_spinner_1.py">
+      <SubType>compile</SubType>
+    </None>
+    <None Include="src\ASF\thirdparty\lvgl8\examples\widgets\switch\index.rst">
+      <SubType>compile</SubType>
+    </None>
+    <None Include="src\ASF\thirdparty\lvgl8\examples\widgets\switch\lv_example_switch_1.py">
+      <SubType>compile</SubType>
+    </None>
+    <None Include="src\ASF\thirdparty\lvgl8\examples\widgets\table\index.rst">
+      <SubType>compile</SubType>
+    </None>
+    <None Include="src\ASF\thirdparty\lvgl8\examples\widgets\table\lv_example_table_1.py">
+      <SubType>compile</SubType>
+    </None>
+    <None Include="src\ASF\thirdparty\lvgl8\examples\widgets\table\lv_example_table_2.py">
+      <SubType>compile</SubType>
+    </None>
+    <None Include="src\ASF\thirdparty\lvgl8\examples\widgets\tabview\index.rst">
+      <SubType>compile</SubType>
+    </None>
+    <None Include="src\ASF\thirdparty\lvgl8\examples\widgets\tabview\lv_example_tabview_1.py">
+      <SubType>compile</SubType>
+    </None>
+    <None Include="src\ASF\thirdparty\lvgl8\examples\widgets\tabview\lv_example_tabview_2.py">
+      <SubType>compile</SubType>
+    </None>
+    <None Include="src\ASF\thirdparty\lvgl8\examples\widgets\textarea\index.rst">
+      <SubType>compile</SubType>
+    </None>
+    <None Include="src\ASF\thirdparty\lvgl8\examples\widgets\textarea\lv_example_textarea_1.py">
+      <SubType>compile</SubType>
+    </None>
+    <None Include="src\ASF\thirdparty\lvgl8\examples\widgets\textarea\lv_example_textarea_2.py">
+      <SubType>compile</SubType>
+    </None>
+    <None Include="src\ASF\thirdparty\lvgl8\examples\widgets\textarea\lv_example_textarea_3.py">
+      <SubType>compile</SubType>
+    </None>
+    <None Include="src\ASF\thirdparty\lvgl8\examples\widgets\tileview\index.rst">
+      <SubType>compile</SubType>
+    </None>
+    <None Include="src\ASF\thirdparty\lvgl8\examples\widgets\tileview\lv_example_tileview_1.py">
+      <SubType>compile</SubType>
+    </None>
+    <None Include="src\ASF\thirdparty\lvgl8\examples\widgets\win\index.rst">
+      <SubType>compile</SubType>
+    </None>
+    <None Include="src\ASF\thirdparty\lvgl8\examples\widgets\win\lv_example_win_1.py">
+      <SubType>compile</SubType>
+    </None>
+    <None Include="src\ASF\thirdparty\lvgl8\idf_component.yml">
+      <SubType>compile</SubType>
+    </None>
+    <None Include="src\ASF\thirdparty\lvgl8\Kconfig">
+      <SubType>compile</SubType>
+    </None>
+    <None Include="src\ASF\thirdparty\lvgl8\library.json">
+      <SubType>compile</SubType>
+    </None>
+    <None Include="src\ASF\thirdparty\lvgl8\library.properties">
+      <SubType>compile</SubType>
+    </None>
+    <None Include="src\ASF\thirdparty\lvgl8\LICENCE.txt">
+      <SubType>compile</SubType>
+    </None>
+    <None Include="src\ASF\thirdparty\lvgl8\lvgl.mk">
+      <SubType>compile</SubType>
+    </None>
+    <None Include="src\ASF\thirdparty\lvgl8\README.md">
+      <SubType>compile</SubType>
+    </None>
+    <None Include="src\ASF\thirdparty\lvgl8\rt-thread\SConscript">
+      <SubType>compile</SubType>
+    </None>
+    <None Include="src\ASF\thirdparty\lvgl8\SConscript">
+      <SubType>compile</SubType>
+    </None>
+    <None Include="src\ASF\thirdparty\lvgl8\scripts\build_html_examples.sh">
+      <SubType>compile</SubType>
+    </None>
+    <None Include="src\ASF\thirdparty\lvgl8\scripts\built_in_font\built_in_font_gen.py">
+      <SubType>compile</SubType>
+    </None>
+    <None Include="src\ASF\thirdparty\lvgl8\scripts\built_in_font\DejaVuSans.ttf">
+      <SubType>compile</SubType>
+    </None>
+    <None Include="src\ASF\thirdparty\lvgl8\scripts\built_in_font\FontAwesome5-Solid+Brands+Regular.woff">
+      <SubType>compile</SubType>
+    </None>
+    <None Include="src\ASF\thirdparty\lvgl8\scripts\built_in_font\generate_all.py">
+      <SubType>compile</SubType>
+    </None>
+    <None Include="src\ASF\thirdparty\lvgl8\scripts\built_in_font\Montserrat-Medium.ttf">
+      <SubType>compile</SubType>
+    </None>
+    <None Include="src\ASF\thirdparty\lvgl8\scripts\built_in_font\SimSun.woff">
+      <SubType>compile</SubType>
+    </None>
+    <None Include="src\ASF\thirdparty\lvgl8\scripts\built_in_font\unscii-8.ttf">
+      <SubType>compile</SubType>
+    </None>
+    <None Include="src\ASF\thirdparty\lvgl8\scripts\code-format.cfg">
+      <SubType>compile</SubType>
+    </None>
+    <None Include="src\ASF\thirdparty\lvgl8\scripts\code-format.sh">
+      <SubType>compile</SubType>
+    </None>
+    <None Include="src\ASF\thirdparty\lvgl8\scripts\cppcheck_run.sh">
+      <SubType>compile</SubType>
+    </None>
+    <None Include="src\ASF\thirdparty\lvgl8\scripts\Doxyfile">
+      <SubType>compile</SubType>
+    </None>
+    <None Include="src\ASF\thirdparty\lvgl8\scripts\find_version.sh">
+      <SubType>compile</SubType>
+    </None>
+    <None Include="src\ASF\thirdparty\lvgl8\scripts\genexamplelist.sh">
+      <SubType>compile</SubType>
+    </None>
+    <None Include="src\ASF\thirdparty\lvgl8\scripts\infer_run.sh">
+      <SubType>compile</SubType>
+    </None>
+    <None Include="src\ASF\thirdparty\lvgl8\scripts\install-prerequisites.sh">
+      <SubType>compile</SubType>
+    </None>
+    <None Include="src\ASF\thirdparty\lvgl8\scripts\jpg_to_sjpg.py">
+      <SubType>compile</SubType>
+    </None>
+    <None Include="src\ASF\thirdparty\lvgl8\scripts\lv_conf_internal_gen.py">
+      <SubType>compile</SubType>
+    </None>
+    <None Include="src\ASF\thirdparty\lvgl8\scripts\release\com.py">
+      <SubType>compile</SubType>
+    </None>
+    <None Include="src\ASF\thirdparty\lvgl8\scripts\release\commits.txt">
+      <SubType>compile</SubType>
+    </None>
+    <None Include="src\ASF\thirdparty\lvgl8\scripts\release\patch.py">
+      <SubType>compile</SubType>
+    </None>
+    <None Include="src\ASF\thirdparty\lvgl8\scripts\release\release.py">
+      <SubType>compile</SubType>
+    </None>
+    <None Include="src\ASF\thirdparty\lvgl8\scripts\style_api_gen.py">
+      <SubType>compile</SubType>
+    </None>
+    <None Include="src\ASF\thirdparty\lvgl8\src\core\lv_core.mk">
+      <SubType>compile</SubType>
+    </None>
+    <None Include="src\ASF\thirdparty\lvgl8\src\draw\lv_draw.mk">
+      <SubType>compile</SubType>
+    </None>
+    <None Include="src\ASF\thirdparty\lvgl8\src\extra\extra.mk">
+      <SubType>compile</SubType>
+    </None>
+    <None Include="src\ASF\thirdparty\lvgl8\src\extra\libs\freetype\arial.ttf">
+      <SubType>compile</SubType>
+    </None>
+    <None Include="src\ASF\thirdparty\lvgl8\src\extra\README.md">
+      <SubType>compile</SubType>
+    </None>
+    <None Include="src\ASF\thirdparty\lvgl8\src\font\korean.ttf">
+      <SubType>compile</SubType>
+    </None>
+    <None Include="src\ASF\thirdparty\lvgl8\src\font\lv_font.mk">
+      <SubType>compile</SubType>
+    </None>
+    <None Include="src\ASF\thirdparty\lvgl8\src\gpu\lv_gpu.mk">
+      <SubType>compile</SubType>
+    </None>
+    <None Include="src\ASF\thirdparty\lvgl8\src\gpu\sdl\lv_gpu_sdl.mk">
+      <SubType>compile</SubType>
+    </None>
+    <None Include="src\ASF\thirdparty\lvgl8\src\gpu\sdl\README.md">
+      <SubType>compile</SubType>
+    </None>
+    <None Include="src\ASF\thirdparty\lvgl8\src\hal\lv_hal.mk">
+      <SubType>compile</SubType>
+    </None>
+    <None Include="src\ASF\thirdparty\lvgl8\src\misc\lv_misc.mk">
+      <SubType>compile</SubType>
+    </None>
+    <None Include="src\ASF\thirdparty\lvgl8\src\widgets\lv_widgets.mk">
+      <SubType>compile</SubType>
+    </None>
+    <None Include="src\ASF\thirdparty\lvgl8\tests\.gitignore">
+      <SubType>compile</SubType>
+    </None>
+    <None Include="src\ASF\thirdparty\lvgl8\tests\CMakeLists.txt">
+      <SubType>compile</SubType>
+    </None>
+    <None Include="src\ASF\thirdparty\lvgl8\tests\config.yml">
+      <SubType>compile</SubType>
+    </None>
+    <None Include="src\ASF\thirdparty\lvgl8\tests\main.py">
+      <SubType>compile</SubType>
+    </None>
+    <None Include="src\ASF\thirdparty\lvgl8\tests\README.md">
+      <SubType>compile</SubType>
+    </None>
+    <None Include="src\ASF\thirdparty\lvgl8\tests\ref_imgs\dropdown_1.png">
+      <SubType>compile</SubType>
+    </None>
+    <None Include="src\ASF\thirdparty\lvgl8\tests\ref_imgs\dropdown_2.png">
+      <SubType>compile</SubType>
+    </None>
+    <None Include="src\ASF\thirdparty\lvgl8\tests\ref_imgs\scr1.png">
+      <SubType>compile</SubType>
+    </None>
+    <None Include="src\ASF\thirdparty\lvgl8\tests\src\test_fonts\font_1.fnt">
+      <SubType>compile</SubType>
+    </None>
+    <None Include="src\ASF\thirdparty\lvgl8\tests\src\test_fonts\font_2.fnt">
+      <SubType>compile</SubType>
+    </None>
+    <None Include="src\ASF\thirdparty\lvgl8\tests\src\test_fonts\font_3.fnt">
+      <SubType>compile</SubType>
+    </None>
+    <None Include="src\ASF\thirdparty\lvgl8\tests\unity\generate_test_runner.rb">
+      <SubType>compile</SubType>
+    </None>
+    <None Include="src\ASF\thirdparty\lvgl8\tests\unity\run_test.erb">
+      <SubType>compile</SubType>
+    </None>
+    <None Include="src\ASF\thirdparty\lvgl8\tests\unity\type_sanitizer.rb">
+      <SubType>compile</SubType>
+    </None>
+    <None Include="src\ASF\thirdparty\lvgl8\zephyr\module.yml">
       <SubType>compile</SubType>
     </None>
     <None Include="src\config\conf_sleepmgr.h">
@@ -1065,693 +3159,6 @@
       <SubType>compile</SubType>
     </Compile>
     <Compile Include="src\ASF\thirdparty\freertos\freertos-8.2.3\Source\timers.c">
-      <SubType>compile</SubType>
-    </Compile>
-    <Compile Include="src\ASF\thirdparty\lvgl\examples\porting\lv_port_disp_template.c">
-      <SubType>compile</SubType>
-    </Compile>
-    <Compile Include="src\ASF\thirdparty\lvgl\examples\porting\lv_port_disp_template.h">
-      <SubType>compile</SubType>
-    </Compile>
-    <Compile Include="src\ASF\thirdparty\lvgl\examples\porting\lv_port_fs_template.c">
-      <SubType>compile</SubType>
-    </Compile>
-    <Compile Include="src\ASF\thirdparty\lvgl\examples\porting\lv_port_fs_template.h">
-      <SubType>compile</SubType>
-    </Compile>
-    <Compile Include="src\ASF\thirdparty\lvgl\examples\porting\lv_port_indev_template.c">
-      <SubType>compile</SubType>
-    </Compile>
-    <Compile Include="src\ASF\thirdparty\lvgl\examples\porting\lv_port_indev_template.h">
-      <SubType>compile</SubType>
-    </Compile>
-    <Compile Include="src\ASF\thirdparty\lvgl\lvgl.h">
-      <SubType>compile</SubType>
-    </Compile>
-    <Compile Include="src\ASF\thirdparty\lvgl\lv_conf_template.h">
-      <SubType>compile</SubType>
-    </Compile>
-    <Compile Include="src\ASF\thirdparty\lvgl\src\lvgl.h">
-      <SubType>compile</SubType>
-    </Compile>
-    <Compile Include="src\ASF\thirdparty\lvgl\src\lv_api_map.h">
-      <SubType>compile</SubType>
-    </Compile>
-    <Compile Include="src\ASF\thirdparty\lvgl\src\lv_conf_internal.h">
-      <SubType>compile</SubType>
-    </Compile>
-    <Compile Include="src\ASF\thirdparty\lvgl\src\lv_conf_kconfig.h">
-      <SubType>compile</SubType>
-    </Compile>
-    <Compile Include="src\ASF\thirdparty\lvgl\src\lv_core\lv_disp.c">
-      <SubType>compile</SubType>
-    </Compile>
-    <Compile Include="src\ASF\thirdparty\lvgl\src\lv_core\lv_disp.h">
-      <SubType>compile</SubType>
-    </Compile>
-    <Compile Include="src\ASF\thirdparty\lvgl\src\lv_core\lv_group.c">
-      <SubType>compile</SubType>
-    </Compile>
-    <Compile Include="src\ASF\thirdparty\lvgl\src\lv_core\lv_group.h">
-      <SubType>compile</SubType>
-    </Compile>
-    <Compile Include="src\ASF\thirdparty\lvgl\src\lv_core\lv_indev.c">
-      <SubType>compile</SubType>
-    </Compile>
-    <Compile Include="src\ASF\thirdparty\lvgl\src\lv_core\lv_indev.h">
-      <SubType>compile</SubType>
-    </Compile>
-    <Compile Include="src\ASF\thirdparty\lvgl\src\lv_core\lv_obj.c">
-      <SubType>compile</SubType>
-    </Compile>
-    <Compile Include="src\ASF\thirdparty\lvgl\src\lv_core\lv_obj.h">
-      <SubType>compile</SubType>
-    </Compile>
-    <Compile Include="src\ASF\thirdparty\lvgl\src\lv_core\lv_obj_style_dec.h">
-      <SubType>compile</SubType>
-    </Compile>
-    <Compile Include="src\ASF\thirdparty\lvgl\src\lv_core\lv_refr.c">
-      <SubType>compile</SubType>
-    </Compile>
-    <Compile Include="src\ASF\thirdparty\lvgl\src\lv_core\lv_refr.h">
-      <SubType>compile</SubType>
-    </Compile>
-    <Compile Include="src\ASF\thirdparty\lvgl\src\lv_core\lv_style.c">
-      <SubType>compile</SubType>
-    </Compile>
-    <Compile Include="src\ASF\thirdparty\lvgl\src\lv_core\lv_style.h">
-      <SubType>compile</SubType>
-    </Compile>
-    <Compile Include="src\ASF\thirdparty\lvgl\src\lv_draw\lv_draw.h">
-      <SubType>compile</SubType>
-    </Compile>
-    <Compile Include="src\ASF\thirdparty\lvgl\src\lv_draw\lv_draw_arc.c">
-      <SubType>compile</SubType>
-    </Compile>
-    <Compile Include="src\ASF\thirdparty\lvgl\src\lv_draw\lv_draw_arc.h">
-      <SubType>compile</SubType>
-    </Compile>
-    <Compile Include="src\ASF\thirdparty\lvgl\src\lv_draw\lv_draw_blend.c">
-      <SubType>compile</SubType>
-    </Compile>
-    <Compile Include="src\ASF\thirdparty\lvgl\src\lv_draw\lv_draw_blend.h">
-      <SubType>compile</SubType>
-    </Compile>
-    <Compile Include="src\ASF\thirdparty\lvgl\src\lv_draw\lv_draw_img.c">
-      <SubType>compile</SubType>
-    </Compile>
-    <Compile Include="src\ASF\thirdparty\lvgl\src\lv_draw\lv_draw_img.h">
-      <SubType>compile</SubType>
-    </Compile>
-    <Compile Include="src\ASF\thirdparty\lvgl\src\lv_draw\lv_draw_label.c">
-      <SubType>compile</SubType>
-    </Compile>
-    <Compile Include="src\ASF\thirdparty\lvgl\src\lv_draw\lv_draw_label.h">
-      <SubType>compile</SubType>
-    </Compile>
-    <Compile Include="src\ASF\thirdparty\lvgl\src\lv_draw\lv_draw_line.c">
-      <SubType>compile</SubType>
-    </Compile>
-    <Compile Include="src\ASF\thirdparty\lvgl\src\lv_draw\lv_draw_line.h">
-      <SubType>compile</SubType>
-    </Compile>
-    <Compile Include="src\ASF\thirdparty\lvgl\src\lv_draw\lv_draw_mask.c">
-      <SubType>compile</SubType>
-    </Compile>
-    <Compile Include="src\ASF\thirdparty\lvgl\src\lv_draw\lv_draw_mask.h">
-      <SubType>compile</SubType>
-    </Compile>
-    <Compile Include="src\ASF\thirdparty\lvgl\src\lv_draw\lv_draw_rect.c">
-      <SubType>compile</SubType>
-    </Compile>
-    <Compile Include="src\ASF\thirdparty\lvgl\src\lv_draw\lv_draw_rect.h">
-      <SubType>compile</SubType>
-    </Compile>
-    <Compile Include="src\ASF\thirdparty\lvgl\src\lv_draw\lv_draw_triangle.c">
-      <SubType>compile</SubType>
-    </Compile>
-    <Compile Include="src\ASF\thirdparty\lvgl\src\lv_draw\lv_draw_triangle.h">
-      <SubType>compile</SubType>
-    </Compile>
-    <Compile Include="src\ASF\thirdparty\lvgl\src\lv_draw\lv_img_buf.c">
-      <SubType>compile</SubType>
-    </Compile>
-    <Compile Include="src\ASF\thirdparty\lvgl\src\lv_draw\lv_img_buf.h">
-      <SubType>compile</SubType>
-    </Compile>
-    <Compile Include="src\ASF\thirdparty\lvgl\src\lv_draw\lv_img_cache.c">
-      <SubType>compile</SubType>
-    </Compile>
-    <Compile Include="src\ASF\thirdparty\lvgl\src\lv_draw\lv_img_cache.h">
-      <SubType>compile</SubType>
-    </Compile>
-    <Compile Include="src\ASF\thirdparty\lvgl\src\lv_draw\lv_img_decoder.c">
-      <SubType>compile</SubType>
-    </Compile>
-    <Compile Include="src\ASF\thirdparty\lvgl\src\lv_draw\lv_img_decoder.h">
-      <SubType>compile</SubType>
-    </Compile>
-    <Compile Include="src\ASF\thirdparty\lvgl\src\lv_font\lv_font.c">
-      <SubType>compile</SubType>
-    </Compile>
-    <Compile Include="src\ASF\thirdparty\lvgl\src\lv_font\lv_font.h">
-      <SubType>compile</SubType>
-    </Compile>
-    <Compile Include="src\ASF\thirdparty\lvgl\src\lv_font\lv_font_dejavu_16_persian_hebrew.c">
-      <SubType>compile</SubType>
-    </Compile>
-    <Compile Include="src\ASF\thirdparty\lvgl\src\lv_font\lv_font_fmt_txt.c">
-      <SubType>compile</SubType>
-    </Compile>
-    <Compile Include="src\ASF\thirdparty\lvgl\src\lv_font\lv_font_fmt_txt.h">
-      <SubType>compile</SubType>
-    </Compile>
-    <Compile Include="src\ASF\thirdparty\lvgl\src\lv_font\lv_font_loader.c">
-      <SubType>compile</SubType>
-    </Compile>
-    <Compile Include="src\ASF\thirdparty\lvgl\src\lv_font\lv_font_loader.h">
-      <SubType>compile</SubType>
-    </Compile>
-    <Compile Include="src\ASF\thirdparty\lvgl\src\lv_font\lv_font_montserrat_10.c">
-      <SubType>compile</SubType>
-    </Compile>
-    <Compile Include="src\ASF\thirdparty\lvgl\src\lv_font\lv_font_montserrat_12.c">
-      <SubType>compile</SubType>
-    </Compile>
-    <Compile Include="src\ASF\thirdparty\lvgl\src\lv_font\lv_font_montserrat_12_subpx.c">
-      <SubType>compile</SubType>
-    </Compile>
-    <Compile Include="src\ASF\thirdparty\lvgl\src\lv_font\lv_font_montserrat_14.c">
-      <SubType>compile</SubType>
-    </Compile>
-    <Compile Include="src\ASF\thirdparty\lvgl\src\lv_font\lv_font_montserrat_16.c">
-      <SubType>compile</SubType>
-    </Compile>
-    <Compile Include="src\ASF\thirdparty\lvgl\src\lv_font\lv_font_montserrat_18.c">
-      <SubType>compile</SubType>
-    </Compile>
-    <Compile Include="src\ASF\thirdparty\lvgl\src\lv_font\lv_font_montserrat_20.c">
-      <SubType>compile</SubType>
-    </Compile>
-    <Compile Include="src\ASF\thirdparty\lvgl\src\lv_font\lv_font_montserrat_22.c">
-      <SubType>compile</SubType>
-    </Compile>
-    <Compile Include="src\ASF\thirdparty\lvgl\src\lv_font\lv_font_montserrat_24.c">
-      <SubType>compile</SubType>
-    </Compile>
-    <Compile Include="src\ASF\thirdparty\lvgl\src\lv_font\lv_font_montserrat_26.c">
-      <SubType>compile</SubType>
-    </Compile>
-    <Compile Include="src\ASF\thirdparty\lvgl\src\lv_font\lv_font_montserrat_28.c">
-      <SubType>compile</SubType>
-    </Compile>
-    <Compile Include="src\ASF\thirdparty\lvgl\src\lv_font\lv_font_montserrat_28_compressed.c">
-      <SubType>compile</SubType>
-    </Compile>
-    <Compile Include="src\ASF\thirdparty\lvgl\src\lv_font\lv_font_montserrat_30.c">
-      <SubType>compile</SubType>
-    </Compile>
-    <Compile Include="src\ASF\thirdparty\lvgl\src\lv_font\lv_font_montserrat_32.c">
-      <SubType>compile</SubType>
-    </Compile>
-    <Compile Include="src\ASF\thirdparty\lvgl\src\lv_font\lv_font_montserrat_34.c">
-      <SubType>compile</SubType>
-    </Compile>
-    <Compile Include="src\ASF\thirdparty\lvgl\src\lv_font\lv_font_montserrat_36.c">
-      <SubType>compile</SubType>
-    </Compile>
-    <Compile Include="src\ASF\thirdparty\lvgl\src\lv_font\lv_font_montserrat_38.c">
-      <SubType>compile</SubType>
-    </Compile>
-    <Compile Include="src\ASF\thirdparty\lvgl\src\lv_font\lv_font_montserrat_40.c">
-      <SubType>compile</SubType>
-    </Compile>
-    <Compile Include="src\ASF\thirdparty\lvgl\src\lv_font\lv_font_montserrat_42.c">
-      <SubType>compile</SubType>
-    </Compile>
-    <Compile Include="src\ASF\thirdparty\lvgl\src\lv_font\lv_font_montserrat_44.c">
-      <SubType>compile</SubType>
-    </Compile>
-    <Compile Include="src\ASF\thirdparty\lvgl\src\lv_font\lv_font_montserrat_46.c">
-      <SubType>compile</SubType>
-    </Compile>
-    <Compile Include="src\ASF\thirdparty\lvgl\src\lv_font\lv_font_montserrat_48.c">
-      <SubType>compile</SubType>
-    </Compile>
-    <Compile Include="src\ASF\thirdparty\lvgl\src\lv_font\lv_font_montserrat_8.c">
-      <SubType>compile</SubType>
-    </Compile>
-    <Compile Include="src\ASF\thirdparty\lvgl\src\lv_font\lv_font_simsun_16_cjk.c">
-      <SubType>compile</SubType>
-    </Compile>
-    <Compile Include="src\ASF\thirdparty\lvgl\src\lv_font\lv_font_unscii_16.c">
-      <SubType>compile</SubType>
-    </Compile>
-    <Compile Include="src\ASF\thirdparty\lvgl\src\lv_font\lv_font_unscii_8.c">
-      <SubType>compile</SubType>
-    </Compile>
-    <Compile Include="src\ASF\thirdparty\lvgl\src\lv_font\lv_symbol_def.h">
-      <SubType>compile</SubType>
-    </Compile>
-    <Compile Include="src\ASF\thirdparty\lvgl\src\lv_gpu\lv_gpu_nxp_pxp.c">
-      <SubType>compile</SubType>
-    </Compile>
-    <Compile Include="src\ASF\thirdparty\lvgl\src\lv_gpu\lv_gpu_nxp_pxp.h">
-      <SubType>compile</SubType>
-    </Compile>
-    <Compile Include="src\ASF\thirdparty\lvgl\src\lv_gpu\lv_gpu_nxp_pxp_osa.c">
-      <SubType>compile</SubType>
-    </Compile>
-    <Compile Include="src\ASF\thirdparty\lvgl\src\lv_gpu\lv_gpu_nxp_pxp_osa.h">
-      <SubType>compile</SubType>
-    </Compile>
-    <Compile Include="src\ASF\thirdparty\lvgl\src\lv_gpu\lv_gpu_nxp_vglite.c">
-      <SubType>compile</SubType>
-    </Compile>
-    <Compile Include="src\ASF\thirdparty\lvgl\src\lv_gpu\lv_gpu_nxp_vglite.h">
-      <SubType>compile</SubType>
-    </Compile>
-    <Compile Include="src\ASF\thirdparty\lvgl\src\lv_gpu\lv_gpu_stm32_dma2d.c">
-      <SubType>compile</SubType>
-    </Compile>
-    <Compile Include="src\ASF\thirdparty\lvgl\src\lv_gpu\lv_gpu_stm32_dma2d.h">
-      <SubType>compile</SubType>
-    </Compile>
-    <Compile Include="src\ASF\thirdparty\lvgl\src\lv_hal\lv_hal.h">
-      <SubType>compile</SubType>
-    </Compile>
-    <Compile Include="src\ASF\thirdparty\lvgl\src\lv_hal\lv_hal_disp.c">
-      <SubType>compile</SubType>
-    </Compile>
-    <Compile Include="src\ASF\thirdparty\lvgl\src\lv_hal\lv_hal_disp.h">
-      <SubType>compile</SubType>
-    </Compile>
-    <Compile Include="src\ASF\thirdparty\lvgl\src\lv_hal\lv_hal_indev.c">
-      <SubType>compile</SubType>
-    </Compile>
-    <Compile Include="src\ASF\thirdparty\lvgl\src\lv_hal\lv_hal_indev.h">
-      <SubType>compile</SubType>
-    </Compile>
-    <Compile Include="src\ASF\thirdparty\lvgl\src\lv_hal\lv_hal_tick.c">
-      <SubType>compile</SubType>
-    </Compile>
-    <Compile Include="src\ASF\thirdparty\lvgl\src\lv_hal\lv_hal_tick.h">
-      <SubType>compile</SubType>
-    </Compile>
-    <Compile Include="src\ASF\thirdparty\lvgl\src\lv_misc\lv_anim.c">
-      <SubType>compile</SubType>
-    </Compile>
-    <Compile Include="src\ASF\thirdparty\lvgl\src\lv_misc\lv_anim.h">
-      <SubType>compile</SubType>
-    </Compile>
-    <Compile Include="src\ASF\thirdparty\lvgl\src\lv_misc\lv_area.c">
-      <SubType>compile</SubType>
-    </Compile>
-    <Compile Include="src\ASF\thirdparty\lvgl\src\lv_misc\lv_area.h">
-      <SubType>compile</SubType>
-    </Compile>
-    <Compile Include="src\ASF\thirdparty\lvgl\src\lv_misc\lv_async.c">
-      <SubType>compile</SubType>
-    </Compile>
-    <Compile Include="src\ASF\thirdparty\lvgl\src\lv_misc\lv_async.h">
-      <SubType>compile</SubType>
-    </Compile>
-    <Compile Include="src\ASF\thirdparty\lvgl\src\lv_misc\lv_bidi.c">
-      <SubType>compile</SubType>
-    </Compile>
-    <Compile Include="src\ASF\thirdparty\lvgl\src\lv_misc\lv_bidi.h">
-      <SubType>compile</SubType>
-    </Compile>
-    <Compile Include="src\ASF\thirdparty\lvgl\src\lv_misc\lv_color.c">
-      <SubType>compile</SubType>
-    </Compile>
-    <Compile Include="src\ASF\thirdparty\lvgl\src\lv_misc\lv_color.h">
-      <SubType>compile</SubType>
-    </Compile>
-    <Compile Include="src\ASF\thirdparty\lvgl\src\lv_misc\lv_debug.c">
-      <SubType>compile</SubType>
-    </Compile>
-    <Compile Include="src\ASF\thirdparty\lvgl\src\lv_misc\lv_debug.h">
-      <SubType>compile</SubType>
-    </Compile>
-    <Compile Include="src\ASF\thirdparty\lvgl\src\lv_misc\lv_fs.c">
-      <SubType>compile</SubType>
-    </Compile>
-    <Compile Include="src\ASF\thirdparty\lvgl\src\lv_misc\lv_fs.h">
-      <SubType>compile</SubType>
-    </Compile>
-    <Compile Include="src\ASF\thirdparty\lvgl\src\lv_misc\lv_gc.c">
-      <SubType>compile</SubType>
-    </Compile>
-    <Compile Include="src\ASF\thirdparty\lvgl\src\lv_misc\lv_gc.h">
-      <SubType>compile</SubType>
-    </Compile>
-    <Compile Include="src\ASF\thirdparty\lvgl\src\lv_misc\lv_ll.c">
-      <SubType>compile</SubType>
-    </Compile>
-    <Compile Include="src\ASF\thirdparty\lvgl\src\lv_misc\lv_ll.h">
-      <SubType>compile</SubType>
-    </Compile>
-    <Compile Include="src\ASF\thirdparty\lvgl\src\lv_misc\lv_log.c">
-      <SubType>compile</SubType>
-    </Compile>
-    <Compile Include="src\ASF\thirdparty\lvgl\src\lv_misc\lv_log.h">
-      <SubType>compile</SubType>
-    </Compile>
-    <Compile Include="src\ASF\thirdparty\lvgl\src\lv_misc\lv_math.c">
-      <SubType>compile</SubType>
-    </Compile>
-    <Compile Include="src\ASF\thirdparty\lvgl\src\lv_misc\lv_math.h">
-      <SubType>compile</SubType>
-    </Compile>
-    <Compile Include="src\ASF\thirdparty\lvgl\src\lv_misc\lv_mem.c">
-      <SubType>compile</SubType>
-    </Compile>
-    <Compile Include="src\ASF\thirdparty\lvgl\src\lv_misc\lv_mem.h">
-      <SubType>compile</SubType>
-    </Compile>
-    <Compile Include="src\ASF\thirdparty\lvgl\src\lv_misc\lv_printf.c">
-      <SubType>compile</SubType>
-    </Compile>
-    <Compile Include="src\ASF\thirdparty\lvgl\src\lv_misc\lv_printf.h">
-      <SubType>compile</SubType>
-    </Compile>
-    <Compile Include="src\ASF\thirdparty\lvgl\src\lv_misc\lv_task.c">
-      <SubType>compile</SubType>
-    </Compile>
-    <Compile Include="src\ASF\thirdparty\lvgl\src\lv_misc\lv_task.h">
-      <SubType>compile</SubType>
-    </Compile>
-    <Compile Include="src\ASF\thirdparty\lvgl\src\lv_misc\lv_templ.c">
-      <SubType>compile</SubType>
-    </Compile>
-    <Compile Include="src\ASF\thirdparty\lvgl\src\lv_misc\lv_templ.h">
-      <SubType>compile</SubType>
-    </Compile>
-    <Compile Include="src\ASF\thirdparty\lvgl\src\lv_misc\lv_txt.c">
-      <SubType>compile</SubType>
-    </Compile>
-    <Compile Include="src\ASF\thirdparty\lvgl\src\lv_misc\lv_txt.h">
-      <SubType>compile</SubType>
-    </Compile>
-    <Compile Include="src\ASF\thirdparty\lvgl\src\lv_misc\lv_txt_ap.c">
-      <SubType>compile</SubType>
-    </Compile>
-    <Compile Include="src\ASF\thirdparty\lvgl\src\lv_misc\lv_txt_ap.h">
-      <SubType>compile</SubType>
-    </Compile>
-    <Compile Include="src\ASF\thirdparty\lvgl\src\lv_misc\lv_types.h">
-      <SubType>compile</SubType>
-    </Compile>
-    <Compile Include="src\ASF\thirdparty\lvgl\src\lv_misc\lv_utils.c">
-      <SubType>compile</SubType>
-    </Compile>
-    <Compile Include="src\ASF\thirdparty\lvgl\src\lv_misc\lv_utils.h">
-      <SubType>compile</SubType>
-    </Compile>
-    <Compile Include="src\ASF\thirdparty\lvgl\src\lv_themes\lv_theme.c">
-      <SubType>compile</SubType>
-    </Compile>
-    <Compile Include="src\ASF\thirdparty\lvgl\src\lv_themes\lv_theme.h">
-      <SubType>compile</SubType>
-    </Compile>
-    <Compile Include="src\ASF\thirdparty\lvgl\src\lv_themes\lv_theme_empty.c">
-      <SubType>compile</SubType>
-    </Compile>
-    <Compile Include="src\ASF\thirdparty\lvgl\src\lv_themes\lv_theme_empty.h">
-      <SubType>compile</SubType>
-    </Compile>
-    <Compile Include="src\ASF\thirdparty\lvgl\src\lv_themes\lv_theme_material.c">
-      <SubType>compile</SubType>
-    </Compile>
-    <Compile Include="src\ASF\thirdparty\lvgl\src\lv_themes\lv_theme_material.h">
-      <SubType>compile</SubType>
-    </Compile>
-    <Compile Include="src\ASF\thirdparty\lvgl\src\lv_themes\lv_theme_mono.c">
-      <SubType>compile</SubType>
-    </Compile>
-    <Compile Include="src\ASF\thirdparty\lvgl\src\lv_themes\lv_theme_mono.h">
-      <SubType>compile</SubType>
-    </Compile>
-    <Compile Include="src\ASF\thirdparty\lvgl\src\lv_themes\lv_theme_template.c">
-      <SubType>compile</SubType>
-    </Compile>
-    <Compile Include="src\ASF\thirdparty\lvgl\src\lv_themes\lv_theme_template.h">
-      <SubType>compile</SubType>
-    </Compile>
-    <Compile Include="src\ASF\thirdparty\lvgl\src\lv_widgets\lv_arc.c">
-      <SubType>compile</SubType>
-    </Compile>
-    <Compile Include="src\ASF\thirdparty\lvgl\src\lv_widgets\lv_arc.h">
-      <SubType>compile</SubType>
-    </Compile>
-    <Compile Include="src\ASF\thirdparty\lvgl\src\lv_widgets\lv_bar.c">
-      <SubType>compile</SubType>
-    </Compile>
-    <Compile Include="src\ASF\thirdparty\lvgl\src\lv_widgets\lv_bar.h">
-      <SubType>compile</SubType>
-    </Compile>
-    <Compile Include="src\ASF\thirdparty\lvgl\src\lv_widgets\lv_btn.c">
-      <SubType>compile</SubType>
-    </Compile>
-    <Compile Include="src\ASF\thirdparty\lvgl\src\lv_widgets\lv_btn.h">
-      <SubType>compile</SubType>
-    </Compile>
-    <Compile Include="src\ASF\thirdparty\lvgl\src\lv_widgets\lv_btnmatrix.c">
-      <SubType>compile</SubType>
-    </Compile>
-    <Compile Include="src\ASF\thirdparty\lvgl\src\lv_widgets\lv_btnmatrix.h">
-      <SubType>compile</SubType>
-    </Compile>
-    <Compile Include="src\ASF\thirdparty\lvgl\src\lv_widgets\lv_calendar.c">
-      <SubType>compile</SubType>
-    </Compile>
-    <Compile Include="src\ASF\thirdparty\lvgl\src\lv_widgets\lv_calendar.h">
-      <SubType>compile</SubType>
-    </Compile>
-    <Compile Include="src\ASF\thirdparty\lvgl\src\lv_widgets\lv_canvas.c">
-      <SubType>compile</SubType>
-    </Compile>
-    <Compile Include="src\ASF\thirdparty\lvgl\src\lv_widgets\lv_canvas.h">
-      <SubType>compile</SubType>
-    </Compile>
-    <Compile Include="src\ASF\thirdparty\lvgl\src\lv_widgets\lv_chart.c">
-      <SubType>compile</SubType>
-    </Compile>
-    <Compile Include="src\ASF\thirdparty\lvgl\src\lv_widgets\lv_chart.h">
-      <SubType>compile</SubType>
-    </Compile>
-    <Compile Include="src\ASF\thirdparty\lvgl\src\lv_widgets\lv_checkbox.c">
-      <SubType>compile</SubType>
-    </Compile>
-    <Compile Include="src\ASF\thirdparty\lvgl\src\lv_widgets\lv_checkbox.h">
-      <SubType>compile</SubType>
-    </Compile>
-    <Compile Include="src\ASF\thirdparty\lvgl\src\lv_widgets\lv_cont.c">
-      <SubType>compile</SubType>
-    </Compile>
-    <Compile Include="src\ASF\thirdparty\lvgl\src\lv_widgets\lv_cont.h">
-      <SubType>compile</SubType>
-    </Compile>
-    <Compile Include="src\ASF\thirdparty\lvgl\src\lv_widgets\lv_cpicker.c">
-      <SubType>compile</SubType>
-    </Compile>
-    <Compile Include="src\ASF\thirdparty\lvgl\src\lv_widgets\lv_cpicker.h">
-      <SubType>compile</SubType>
-    </Compile>
-    <Compile Include="src\ASF\thirdparty\lvgl\src\lv_widgets\lv_dropdown.c">
-      <SubType>compile</SubType>
-    </Compile>
-    <Compile Include="src\ASF\thirdparty\lvgl\src\lv_widgets\lv_dropdown.h">
-      <SubType>compile</SubType>
-    </Compile>
-    <Compile Include="src\ASF\thirdparty\lvgl\src\lv_widgets\lv_gauge.c">
-      <SubType>compile</SubType>
-    </Compile>
-    <Compile Include="src\ASF\thirdparty\lvgl\src\lv_widgets\lv_gauge.h">
-      <SubType>compile</SubType>
-    </Compile>
-    <Compile Include="src\ASF\thirdparty\lvgl\src\lv_widgets\lv_img.c">
-      <SubType>compile</SubType>
-    </Compile>
-    <Compile Include="src\ASF\thirdparty\lvgl\src\lv_widgets\lv_img.h">
-      <SubType>compile</SubType>
-    </Compile>
-    <Compile Include="src\ASF\thirdparty\lvgl\src\lv_widgets\lv_imgbtn.c">
-      <SubType>compile</SubType>
-    </Compile>
-    <Compile Include="src\ASF\thirdparty\lvgl\src\lv_widgets\lv_imgbtn.h">
-      <SubType>compile</SubType>
-    </Compile>
-    <Compile Include="src\ASF\thirdparty\lvgl\src\lv_widgets\lv_keyboard.c">
-      <SubType>compile</SubType>
-    </Compile>
-    <Compile Include="src\ASF\thirdparty\lvgl\src\lv_widgets\lv_keyboard.h">
-      <SubType>compile</SubType>
-    </Compile>
-    <Compile Include="src\ASF\thirdparty\lvgl\src\lv_widgets\lv_label.c">
-      <SubType>compile</SubType>
-    </Compile>
-    <Compile Include="src\ASF\thirdparty\lvgl\src\lv_widgets\lv_label.h">
-      <SubType>compile</SubType>
-    </Compile>
-    <Compile Include="src\ASF\thirdparty\lvgl\src\lv_widgets\lv_led.c">
-      <SubType>compile</SubType>
-    </Compile>
-    <Compile Include="src\ASF\thirdparty\lvgl\src\lv_widgets\lv_led.h">
-      <SubType>compile</SubType>
-    </Compile>
-    <Compile Include="src\ASF\thirdparty\lvgl\src\lv_widgets\lv_line.c">
-      <SubType>compile</SubType>
-    </Compile>
-    <Compile Include="src\ASF\thirdparty\lvgl\src\lv_widgets\lv_line.h">
-      <SubType>compile</SubType>
-    </Compile>
-    <Compile Include="src\ASF\thirdparty\lvgl\src\lv_widgets\lv_linemeter.c">
-      <SubType>compile</SubType>
-    </Compile>
-    <Compile Include="src\ASF\thirdparty\lvgl\src\lv_widgets\lv_linemeter.h">
-      <SubType>compile</SubType>
-    </Compile>
-    <Compile Include="src\ASF\thirdparty\lvgl\src\lv_widgets\lv_list.c">
-      <SubType>compile</SubType>
-    </Compile>
-    <Compile Include="src\ASF\thirdparty\lvgl\src\lv_widgets\lv_list.h">
-      <SubType>compile</SubType>
-    </Compile>
-    <Compile Include="src\ASF\thirdparty\lvgl\src\lv_widgets\lv_msgbox.c">
-      <SubType>compile</SubType>
-    </Compile>
-    <Compile Include="src\ASF\thirdparty\lvgl\src\lv_widgets\lv_msgbox.h">
-      <SubType>compile</SubType>
-    </Compile>
-    <Compile Include="src\ASF\thirdparty\lvgl\src\lv_widgets\lv_objmask.c">
-      <SubType>compile</SubType>
-    </Compile>
-    <Compile Include="src\ASF\thirdparty\lvgl\src\lv_widgets\lv_objmask.h">
-      <SubType>compile</SubType>
-    </Compile>
-    <Compile Include="src\ASF\thirdparty\lvgl\src\lv_widgets\lv_objx_templ.c">
-      <SubType>compile</SubType>
-    </Compile>
-    <Compile Include="src\ASF\thirdparty\lvgl\src\lv_widgets\lv_objx_templ.h">
-      <SubType>compile</SubType>
-    </Compile>
-    <Compile Include="src\ASF\thirdparty\lvgl\src\lv_widgets\lv_page.c">
-      <SubType>compile</SubType>
-    </Compile>
-    <Compile Include="src\ASF\thirdparty\lvgl\src\lv_widgets\lv_page.h">
-      <SubType>compile</SubType>
-    </Compile>
-    <Compile Include="src\ASF\thirdparty\lvgl\src\lv_widgets\lv_roller.c">
-      <SubType>compile</SubType>
-    </Compile>
-    <Compile Include="src\ASF\thirdparty\lvgl\src\lv_widgets\lv_roller.h">
-      <SubType>compile</SubType>
-    </Compile>
-    <Compile Include="src\ASF\thirdparty\lvgl\src\lv_widgets\lv_slider.c">
-      <SubType>compile</SubType>
-    </Compile>
-    <Compile Include="src\ASF\thirdparty\lvgl\src\lv_widgets\lv_slider.h">
-      <SubType>compile</SubType>
-    </Compile>
-    <Compile Include="src\ASF\thirdparty\lvgl\src\lv_widgets\lv_spinbox.c">
-      <SubType>compile</SubType>
-    </Compile>
-    <Compile Include="src\ASF\thirdparty\lvgl\src\lv_widgets\lv_spinbox.h">
-      <SubType>compile</SubType>
-    </Compile>
-    <Compile Include="src\ASF\thirdparty\lvgl\src\lv_widgets\lv_spinner.c">
-      <SubType>compile</SubType>
-    </Compile>
-    <Compile Include="src\ASF\thirdparty\lvgl\src\lv_widgets\lv_spinner.h">
-      <SubType>compile</SubType>
-    </Compile>
-    <Compile Include="src\ASF\thirdparty\lvgl\src\lv_widgets\lv_switch.c">
-      <SubType>compile</SubType>
-    </Compile>
-    <Compile Include="src\ASF\thirdparty\lvgl\src\lv_widgets\lv_switch.h">
-      <SubType>compile</SubType>
-    </Compile>
-    <Compile Include="src\ASF\thirdparty\lvgl\src\lv_widgets\lv_table.c">
-      <SubType>compile</SubType>
-    </Compile>
-    <Compile Include="src\ASF\thirdparty\lvgl\src\lv_widgets\lv_table.h">
-      <SubType>compile</SubType>
-    </Compile>
-    <Compile Include="src\ASF\thirdparty\lvgl\src\lv_widgets\lv_tabview.c">
-      <SubType>compile</SubType>
-    </Compile>
-    <Compile Include="src\ASF\thirdparty\lvgl\src\lv_widgets\lv_tabview.h">
-      <SubType>compile</SubType>
-    </Compile>
-    <Compile Include="src\ASF\thirdparty\lvgl\src\lv_widgets\lv_textarea.c">
-      <SubType>compile</SubType>
-    </Compile>
-    <Compile Include="src\ASF\thirdparty\lvgl\src\lv_widgets\lv_textarea.h">
-      <SubType>compile</SubType>
-    </Compile>
-    <Compile Include="src\ASF\thirdparty\lvgl\src\lv_widgets\lv_tileview.c">
-      <SubType>compile</SubType>
-    </Compile>
-    <Compile Include="src\ASF\thirdparty\lvgl\src\lv_widgets\lv_tileview.h">
-      <SubType>compile</SubType>
-    </Compile>
-    <Compile Include="src\ASF\thirdparty\lvgl\src\lv_widgets\lv_win.c">
-      <SubType>compile</SubType>
-    </Compile>
-    <Compile Include="src\ASF\thirdparty\lvgl\src\lv_widgets\lv_win.h">
-      <SubType>compile</SubType>
-    </Compile>
-    <Compile Include="src\ASF\thirdparty\lvgl\tests\lv_test_assert.c">
-      <SubType>compile</SubType>
-    </Compile>
-    <Compile Include="src\ASF\thirdparty\lvgl\tests\lv_test_assert.h">
-      <SubType>compile</SubType>
-    </Compile>
-    <Compile Include="src\ASF\thirdparty\lvgl\tests\lv_test_conf.h">
-      <SubType>compile</SubType>
-    </Compile>
-    <Compile Include="src\ASF\thirdparty\lvgl\tests\lv_test_core\lv_test_core.c">
-      <SubType>compile</SubType>
-    </Compile>
-    <Compile Include="src\ASF\thirdparty\lvgl\tests\lv_test_core\lv_test_core.h">
-      <SubType>compile</SubType>
-    </Compile>
-    <Compile Include="src\ASF\thirdparty\lvgl\tests\lv_test_core\lv_test_font_loader.c">
-      <SubType>compile</SubType>
-    </Compile>
-    <Compile Include="src\ASF\thirdparty\lvgl\tests\lv_test_core\lv_test_font_loader.h">
-      <SubType>compile</SubType>
-    </Compile>
-    <Compile Include="src\ASF\thirdparty\lvgl\tests\lv_test_core\lv_test_obj.c">
-      <SubType>compile</SubType>
-    </Compile>
-    <Compile Include="src\ASF\thirdparty\lvgl\tests\lv_test_core\lv_test_obj.h">
-      <SubType>compile</SubType>
-    </Compile>
-    <Compile Include="src\ASF\thirdparty\lvgl\tests\lv_test_core\lv_test_style.c">
-      <SubType>compile</SubType>
-    </Compile>
-    <Compile Include="src\ASF\thirdparty\lvgl\tests\lv_test_core\lv_test_style.h">
-      <SubType>compile</SubType>
-    </Compile>
-    <Compile Include="src\ASF\thirdparty\lvgl\tests\lv_test_fonts\font_1.c">
-      <SubType>compile</SubType>
-    </Compile>
-    <Compile Include="src\ASF\thirdparty\lvgl\tests\lv_test_fonts\font_2.c">
-      <SubType>compile</SubType>
-    </Compile>
-    <Compile Include="src\ASF\thirdparty\lvgl\tests\lv_test_fonts\font_3.c">
-      <SubType>compile</SubType>
-    </Compile>
-    <Compile Include="src\ASF\thirdparty\lvgl\tests\lv_test_main.c">
-      <SubType>compile</SubType>
-    </Compile>
-    <Compile Include="src\ASF\thirdparty\lvgl\tests\lv_test_widgets\lv_test_label.c">
-      <SubType>compile</SubType>
-    </Compile>
-    <Compile Include="src\ASF\thirdparty\lvgl\tests\lv_test_widgets\lv_test_label.h">
       <SubType>compile</SubType>
     </Compile>
     <Compile Include="src\config\conf_ili9341.h">
