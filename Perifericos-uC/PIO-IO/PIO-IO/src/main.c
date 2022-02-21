@@ -81,27 +81,21 @@ int main(void)
 
 	// SUPER LOOP
 	// aplicacoes embarcadas no devem sair do while(1).
-	while(1)
-  {
-    // Verifica valor do pino que o botão está conectado
-		if(!pio_get(BUT_PIO, PIO_INPUT, BUT_IDX_MASK))
-    {
-      // Pisca LED
-			for (int i=0; i<10; i++)
-      {
-        pio_clear(LED_PIO, LED_IDX_MASK);  // Limpa o pino LED_PIO_PIN
-				delay_ms(100);                         // delay
-				pio_set(LED_PIO, LED_IDX_MASK);    // Ativa o pino LED_PIO_PIN
-				delay_ms(100);                         // delay
-			}
+	while(1) {
+	    // Verifica valor do pino que o botão está conectado
+	    if(!pio_get(BUT_PIO, PIO_INPUT, BUT_IDX_MASK)) {
+      	        // Pisca LED
+		for (int i=0; i<10; i++) {
+        		pio_clear(LED_PIO, LED_IDX_MASK);  // Limpa o pino LED_PIO_PIN
+			delay_ms(100);                         // delay
+			pio_set(LED_PIO, LED_IDX_MASK);    // Ativa o pino LED_PIO_PIN
+			delay_ms(100);                         // delay
 		}
-		else
-    {
-      // Ativa o pino LED_IDX
-			pio_set(LED_PIO, LED_IDX_MASK);
-		}
+	    } else  {
+      		// Ativa o pino LED_IDX (par apagar)
+		pio_set(LED_PIO, LED_IDX_MASK);
+	    }
 	}
-
-  // Nunca devemos chegar aqui !
+  	// Nunca devemos chegar aqui !
 	return 0;
 }
