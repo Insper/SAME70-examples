@@ -50,6 +50,9 @@ void LED_init(int estado) {
 	pio_set_output(LED_PIO, LED_IDX_MASK, estado, 0, 0);
 };
 
+/**
+* @Brief Inverte o valor do pino 0->1/ 1->0
+*/
 void pin_toggle(Pio *pio, uint32_t mask) {
   if(pio_get_output_data_status(pio, mask))
     pio_clear(pio, mask);
