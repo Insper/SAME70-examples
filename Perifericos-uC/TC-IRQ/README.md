@@ -2,19 +2,13 @@
 
 Configura o Timer Counter (TC) para gerar uma interrupção a 4Hz (250 ms) e o Real Time Timer (RTC) para operar em modo alarme, gerando uma interrupção após um minuto de operação.
 
-- Módulos: 
-    - .
-    
+
 - Periféricos:
     - TC0 - Timer Counter 0
     - USART1 (debug - para comunicação com o PC - `stdio` )
     
 - Pinos:
     - `PC8`: LED
-    - `PA11`: Botão
-
-- APIs:
-    - .
 
 ## Conexão e configuração
 
@@ -24,14 +18,11 @@ Configura o Timer Counter (TC) para gerar uma interrupção a 4Hz (250 ms) e o R
 
 ![](imgs/TC/overview.png)
 
-O exemplo configura o TimerCounter (TC) e o RTC do mircontrolador. O TC0 canal 1 é configurado para gerar uma interrupção (`TC1_Handler`) a cada 250ms (f=1/T -> de 4Hz) já o RTC é configurado para operar em modo de alarme, gerando uma interrupção (**RTC_Handler**) em um determinado momento. Inicialmente o RTC está configurado para gerar uma interrupção um minuto após o início do microcontrolador.
-
-O TimerCounter faz com o o led pisque na frequência de 4Hz enquanto não ocorrer o alarme do RTC, após o acontecimento do alarme (interrupção do RTC) o piscar do led é desligado.
+O exemplo configura o TimerCounter (TC) e o RTC do mircontrolador. O TC0 canal 1 é configurado para gerar uma interrupção (`TC1_Handler`) a cada 250ms (f=1/T -> de 4Hz) fazendo o LED mudar de valor (`pin_toggle`).
 
 ### Main
 
-A função `main` desse programa é responsável por inicializar todos os periféricos envolvidos no projeto (PIO para os LEDs e botões, RTC e TC). 
-O `while(1)` fica verificando a `flag_tc` que será a forma de comunicação do handler do TC com o main. 
+A função `main` desse programa é responsável por inicializar todos os periféricos envolvidos no projeto (PIO para o LED e TC) e então entra em sleep mode no while. 
 
 ``` c
 /************************************************************************/
@@ -54,36 +45,34 @@ int main(void){
 
         /** Configura timer TC0, canal 1 */
 	TC_init(TC0, ID_TC1, 1, 4);
-  
+  	tc_start(TC, TC_CHANNEL);
+	
 	while (1) {
-            if(flag_tc){
-                pisca_led(1,10);
-                flag_tc = 0;
-            }
             pmc_sleep(SAM_PM_SMODE_SLEEP_WFI);
 	}
 }
 ```
 
+- `TC_init`: Inicializa TC, **mas não inicializa contagem**
+- `tc_start` Faz com que o TC inicialize a contagem, as interrupções só vão parar quando você chamar a função `tc_stop`.
+
 #### Interrupção
 
-Sempre que houver um reset no contador do TC, a interrupção referente ao canal é chamada, nessa interrupção configuramos a `flag_tc=1` para
-ser processada no `while(1)` do main.
+Sempre que houver um reset no contador do TC a interrupção referente ao canal é chamada, nessa interrupção fazemos a leitura do status do TC (para avisar o periférico que a interrupção foi resolvida) e então fazemos a inversão do valor que controla o led (`pin_toggle`).
 
 ```C
-void TC1_Handler(void){
-	volatile uint32_t ul_dummy;
-
-	/****************************************************************
+/**
+*  Interrupt handler for TC1 interrupt.
+*/
+void TC1_Handler(void) {
+	/**
 	* Devemos indicar ao TC que a interrupção foi satisfeita.
-	******************************************************************/
-	ul_dummy = tc_get_status(TC0, 1);
+	* Isso é realizado pela leitura do status do periférico
+	**/
+	volatile uint32_t status = tc_get_status(TC0, 1);
 
-	/* Avoid compiler warning */
-	UNUSED(ul_dummy);
-
-	/** Muda o estado do LED */
-	flag_tc = 1;
+	/** Muda o estado do LED (pisca) **/
+	pin_toggle(LED_PIO, LED_IDX_MASK);  
 }
 ```
 
@@ -148,9 +137,5 @@ void TC_init(Tc * TC, int ID_TC, int TC_CHANNEL, int freq){
 	/* Interrupção no C */
 	NVIC_EnableIRQ((IRQn_Type) ID_TC);
 	tc_enable_interrupt(TC, TC_CHANNEL, TC_IER_CPCS);
-
-	/* Inicializa o canal 0 do TC */
-	tc_start(TC, TC_CHANNEL);
 }
 ```
-
