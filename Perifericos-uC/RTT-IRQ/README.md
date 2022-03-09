@@ -43,7 +43,7 @@ argumento.
 ### RTT_Handler
 
 Função chamada pelo NVIC quando acontecer alguma interrupção do RTT. Notem que 
-no exemplo verificamos por qual motivo o RTT_Handler foi chamado: `RTT_SR_RTTINC` ou `RTT_SR_ALMS
+no exemplo verificamos por qual motivo o RTT_Handler foi chamado: `RTT_SR_RTTINC` ou `RTT_SR_ALMS`
 
 ```c
 void RTT_Handler(void) {
@@ -70,12 +70,11 @@ void RTT_Handler(void) {
     - incremento a cada 0.25s (4Hz)
     - Alarme em 16 incrementos que é equivalente a 4s (0.25s * 16 = 4s)  
     - IRQ: Alarme 
-    - 
 ```c
     RTT_init(4, 16, RTT_MR_ALMIEN);
 ```
 
-2. Passado os 4s o RTT_Handler é chamado por conta do Alarme então o RTC é configurado para operar com IRQ de incremento.
+2. Passado os 4s, o RTT_Handler é chamado por conta do Alarme, então o RTC é configurado para operar com IRQ de incremento.
 
 ```c
   /* IRQ due to Alarm */
