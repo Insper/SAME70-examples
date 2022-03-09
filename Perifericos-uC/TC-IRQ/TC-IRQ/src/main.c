@@ -100,14 +100,14 @@ int main(void){
 	WDT->WDT_MR = WDT_MR_WDDIS;
 
 	/* Configura Leds */
-	LED_init(0);
+	LED_init(1);
 
 	/**
 	 * Configura timer TC0, canal 1 
 	 * e inicializa contagem 
 	 */
 	TC_init(TC0, ID_TC1, 1, 2);
-	tc_start(TC, TC_CHANNEL);
+	tc_start(TC0, 1);
 
 	while (1) {
             pmc_sleep(SAM_PM_SMODE_SLEEP_WFI);

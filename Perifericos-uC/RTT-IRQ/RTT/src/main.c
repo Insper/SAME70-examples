@@ -37,7 +37,7 @@
 /************************************************************************/
 void pin_toggle(Pio *pio, uint32_t mask);
 void io_init(void);
-static void RTT_init(uint16_t freq, uint32_t IrqNPulses);
+static void RTT_init(float freqPrescale, uint32_t IrqNPulses, uint32_t rttIRQSource);
 
 /************************************************************************/
 /* interrupcoes                                                         */
@@ -74,7 +74,7 @@ void pin_toggle(Pio *pio, uint32_t mask){
 
 void io_init(void){
   pmc_enable_periph_clk(LED_PIO_ID);
-  pio_configure(LED_PIO, PIO_OUTPUT_0, LED_IDX_MASK, PIO_DEFAULT);
+  pio_configure(LED_PIO, PIO_OUTPUT_1, LED_IDX_MASK, PIO_DEFAULT);
 }
 
 static float get_time_rtt(){
@@ -112,10 +112,11 @@ static void RTT_init(float freqPrescale, uint32_t IrqNPulses, uint32_t rttIRQSou
   NVIC_EnableIRQ(RTT_IRQn);
 
   /* Enable RTT interrupt */
-  if (rttIRQSource & (RTT_MR_RTTINCIEN | RTT_MR_ALMIEN)
-  	rtt_enable_interrupt(RTT, rttIRQSource);
+  if (rttIRQSource & (RTT_MR_RTTINCIEN | RTT_MR_ALMIEN))
+		rtt_enable_interrupt(RTT, rttIRQSource);
   else
-      	rtt_disable_interrupt(RTT, RTT_MR_RTTINCIEN | RTT_MR_ALMIEN);
+		rtt_disable_interrupt(RTT, RTT_MR_RTTINCIEN | RTT_MR_ALMIEN);
+		  
 }
 
 /************************************************************************/

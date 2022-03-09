@@ -132,7 +132,7 @@ int main(void) {
                                                                                                     
     /* Leitura do valor atual do RTC */           
     uint32_t current_hour, current_min, current_sec;
-    uint32_t current_year, current_month, current_day; current_week;
+    uint32_t current_year, current_month, current_day, current_week;
     rtc_get_time(RTC, &current_hour, &current_min, &current_sec);
     rtc_get_date(RTC, &current_year, &current_month, &current_day, &current_week);
 	
@@ -143,7 +143,7 @@ int main(void) {
     while (1) {                                                                                     
       if(flag_rtc_alarm){                                                                                 
           pisca_led(5, 200);                                                                       
-          flag_rtc = 0;                                                                             
+          flag_rtc_alarm = 0;                                                                             
        }                                                                                            
     }                                                                                               
 }
