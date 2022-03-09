@@ -37,72 +37,73 @@ typedef struct  {
 } calendar;
 ```
 
+Com a definição do calendário padrão podemos inicializar o RTC:
+
 ``` c
 /** Configura RTC */
 calendar rtc_initial = {2018, 3, 19, 12, 15, 45 ,1};
 RTC_init(RTC, ID_RTC, rtc_initial, RTC_IER_ALREN);
 ``` 
 
-O RTC é configurado na função `RTC_init()`:
+Notem que o último argumento da função `RTC_init` define qual tipo de interrupção que o RTC irá gerar, temos algumas opções:
 
-``` c
-void RTC_init(Rtc *rtc, uint32_t id_rtc, calendar t, uint32_t irq_type){
-	/* Configura o PMC */
-	pmc_enable_periph_clk(ID_RTC);
+- `RTC_IER_ALREN`: IRQ quando o RTC atingir o alarme configurado
+- `RTC_IER_SECEN`: IRQ a cada mudança de segundo
 
-	/* Default RTC configuration, 24-hour mode */
-	rtc_set_hour_mode(rtc, 0);
+O RTC fornece duas funções `rtc_get_time` e `rtc_get_date` para leitura da hora e do calendário atual:
 
-	/* Configura data e hora manualmente */
-	rtc_set_date(rtc, t.year, t.month, t.day, t.week);
-	rtc_set_time(rtc, t.hour, t.minute, t.seccond);
-
-	/* Configure RTC interrupts */
-	NVIC_DisableIRQ(id_rtc);
-	NVIC_ClearPendingIRQ(id_rtc);
-	NVIC_SetPriority(id_rtc, 0);
-	NVIC_EnableIRQ(id_rtc);
-
-	/* Ativa interrupcao via alarme */
-	rtc_enable_interrupt(rtc,  irq_type);
-}
-```
- 
-#### Alarme
-
-O alarme é uma maneira de configurarmos o RTC para gerar uma interrupção em uma determinada data, no nosso caso, para um minuto após a inicialização do microcontrolador. 
-
-```C
-  main(){
-  ...
-  
-  /* configura alarme do RTC */    
-  rtc_set_date_alarm(RTC, 1, MOUNTH, 1, DAY);
-  rtc_set_time_alarm(RTC, 1, HOUR, 1, MINUTE+1, 1, SECOND);
-  
-  }
+```c
+uint32_t current_hour, current_min, current_sec;
+uint32_t current_year, current_month, current_day; current_week;
+rtc_get_time(RTC, &current_hour, &current_min, &current_sec);
+rtc_get_date(RTC, &current_year, &current_month, &current_day, &current_week);
 ```
 
-#### Interrupção
+No exemplo estamos usando a IRQ por alarme, que e configurado para 20s após o ínicio do programa:
 
-Sempre que a situação do alarme for satisfeita, a função `RTC_Handler` será chamada. Na interrupção configura a variável global `flag_led0` para 0.
+```c
+/* configura alarme do RTC para daqui 20 segundos */                                                                  rtc_set_date_alarm(RTC, 1, rtc_initial.month, 1, rtc_initial.day);                              
+rtc_set_time_alarm(RTC, 1, rtc_initial.hour, 1, rtc_initial.minute, 1, rtc_initial.second + 20);
+//                                                                              ^- segundo atual + 20s
+```
+
+### Interrupção
+
+Sempre que houver um IRQ a função `RTC_Handler` será chamada. Reparem que precisamos verificar o porque entramos na interrupção do IRQ, que pode ser por várias razões: Alarme, mudança de segunda... e então fazemos o processamento para cada um das possibilidades.
+
+No exemplo interrupção configura a variável global `flag_rtc_alarm` para 1, indicando ao main que o IRQ de alarme aconteceu.
 
 ```C
 /**
  * \brief Interrupt handler for the RTC. 
  */
-void RTC_Handler(void)
-{
-  /* Qual parte do RTC gerou interrupção ? */
-  /* IRQ */
-  uint32_t ul_status = rtc_get_status(RTC);
-  
-  /* seta led para parar de piscar */
-  flag_led0 = 0;
-  
-  /* Informa que interrupção foi tratada */
-  rtc_clear_status(RTC, RTC_SCCR_ALRCLR);
+void RTC_Handler(void) {
+    uint32_t ul_status = rtc_get_status(RTC);
+	
+    /* seccond tick */
+    if ((ul_status & RTC_SR_SEC) == RTC_SR_SEC) {	
+	// o código para irq de segundo vem aqui
+    }
+	
+    /* Time or date alarm */
+    if ((ul_status & RTC_SR_ALARM) == RTC_SR_ALARM) {
+    	// o código para irq de alame vem aqui
+        flag_rtc_alarm = 1;
+    }
+    
+    /// ...
 }
 ```
 
-Note que ao chamarmos a função `rtc_get_status(RTC)` estamos automaticamente realizando o `ACK` da interrupção.
+### while(1)
+
+No while(1) aguardamos a IRQ acontecer (que demora 20s após a placa ter sido ligada) e então piscamos o LED por 5 segundos.
+
+```c
+    while (1) {                                                                                     
+      if(flag_rtc_alarm){                                                                                 
+          pisca_led(5, 200);                                                                       
+          flag_rtc = 0;                                                                             
+       }                                                                                            
+    }                                                                                               
+```
