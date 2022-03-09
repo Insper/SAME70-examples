@@ -2,23 +2,6 @@
 
 Configura o Real-time Clock - RTC para gerar uma interrupção após 20 segundos de operacao.
 
-- Módulos: 
-    - .
-    
-- Periféricos:
-    - RTC - Real Time Timer
-    - PIO
-
-- Pinos:
-    - `PC8`: LED
-
-- APIs:
-    - RTC
-
-## Conexão e configuração
-
-- Não é necessário
-
 ## Explicação
 
 O RTC é um periférico do uC que serve para contar tempo com resolução de segundos, ele possui toda a lógica interna de um relógio, contando anos, meses, dias, horas, minutos e segundos (para ai!). 
@@ -62,8 +45,8 @@ rtc_get_date(RTC, &current_year, &current_month, &current_day, &current_week);
 No exemplo estamos usando a IRQ por alarme, que e configurado para 20s após o ínicio do programa:
 
 ```c
-/* configura alarme do RTC para daqui 20 segundos */                                                                  rtc_set_date_alarm(RTC, 1, rtc_initial.month, 1, rtc_initial.day);                              
-rtc_set_time_alarm(RTC, 1, rtc_initial.hour, 1, rtc_initial.minute, 1, rtc_initial.second + 20);
+/* configura alarme do RTC para daqui 20 segundos */                                                                  rtc_set_date_alarm(RTC, 1, current_hour.month, 1, current_hour.day);                              
+rtc_set_time_alarm(RTC, 1, current_hour.hour, 1, current_hour.minute, 1, current_hour.second + 20);
 //                                                                              ^- segundo atual + 20s
 ```
 
