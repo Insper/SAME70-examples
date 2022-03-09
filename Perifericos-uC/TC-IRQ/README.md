@@ -1,14 +1,6 @@
 # TC - IRQ
 
-Configura o Timer Counter (TC) para gerar uma interrupção a 4Hz (250 ms) e o Real Time Timer (RTC) para operar em modo alarme, gerando uma interrupção após um minuto de operação.
-
-
-- Periféricos:
-    - TC0 - Timer Counter 0
-    - USART1 (debug - para comunicação com o PC - `stdio` )
-    
-- Pinos:
-    - `PC8`: LED
+Configura o Timer Counter (TC) para gerar uma interrupção a 4Hz (250 ms).
 
 ## Conexão e configuração
 
@@ -18,7 +10,7 @@ Configura o Timer Counter (TC) para gerar uma interrupção a 4Hz (250 ms) e o R
 
 ![](imgs/TC/overview.png)
 
-O exemplo configura o TimerCounter (TC) e o RTC do microntrolador. O TC0 canal 1 é configurado para gerar uma interrupção (`TC1_Handler`) a cada 250ms (f=1/T -> de 4Hz) fazendo o LED mudar de valor (`pin_toggle`).
+O exemplo configura o TimerCounter (TC) do microntrolador. O TC0 canal 1 é configurado para gerar uma interrupção (`TC1_Handler`) a cada 250ms (f=1/T -> de 4Hz) fazendo o LED mudar de valor (`pin_toggle`).
 
 ### Main
 
