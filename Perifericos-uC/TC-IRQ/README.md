@@ -18,7 +18,7 @@ Configura o Timer Counter (TC) para gerar uma interrupção a 4Hz (250 ms) e o R
 
 ![](imgs/TC/overview.png)
 
-O exemplo configura o TimerCounter (TC) e o RTC do mircontrolador. O TC0 canal 1 é configurado para gerar uma interrupção (`TC1_Handler`) a cada 250ms (f=1/T -> de 4Hz) fazendo o LED mudar de valor (`pin_toggle`).
+O exemplo configura o TimerCounter (TC) e o RTC do microntrolador. O TC0 canal 1 é configurado para gerar uma interrupção (`TC1_Handler`) a cada 250ms (f=1/T -> de 4Hz) fazendo o LED mudar de valor (`pin_toggle`).
 
 ### Main
 
