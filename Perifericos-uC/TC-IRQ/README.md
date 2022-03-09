@@ -8,7 +8,7 @@ Configura o Timer Counter (TC) para gerar uma interrupção a 4Hz (250 ms).
 
 ## Explicação
 
-![](imgs/TC/overview.png)
+![](imgs/TC/NEWoverview.svg)
 
 O exemplo configura o TimerCounter (TC) do microntrolador. O TC0 canal 1 é configurado para gerar uma interrupção (`TC1_Handler`) a cada 250ms (f=1/T -> de 4Hz) fazendo o LED mudar de valor (`pin_toggle`).
 
