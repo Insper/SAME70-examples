@@ -31,38 +31,34 @@
 /************************************************************************/
 /* variaveis globais                                                    */
 /************************************************************************/
-volatile Bool f_rtt_alarme = false;
 
 /************************************************************************/
 /* prototypes                                                           */
 /************************************************************************/
 void pin_toggle(Pio *pio, uint32_t mask);
 void io_init(void);
-static void RTT_init(uint16_t pllPreScale, uint32_t IrqNPulses);
+static void RTT_init(uint16_t freq, uint32_t IrqNPulses);
 
 /************************************************************************/
 /* interrupcoes                                                         */
 /************************************************************************/
 
-void RTT_Handler(void)
-{
+void RTT_Handler(void) {
   uint32_t ul_status;
 
   /* Get RTT status - ACK */
   ul_status = rtt_get_status(RTT);
 
-  /* IRQ due to Time has changed */
-  if ((ul_status & RTT_SR_RTTINC) == RTT_SR_RTTINC) {
-    //f_rtt_alarme = false;  
-     pin_toggle(LED_PIO, LED_IDX_MASK);    // BLINK Led
-  
-    }
-
   /* IRQ due to Alarm */
   if ((ul_status & RTT_SR_ALMS) == RTT_SR_ALMS) {
-     // pin_toggle(LED_PIO, LED_IDX_MASK);    // BLINK Led
-      f_rtt_alarme = true;                  // flag RTT alarme
+      RTT_init(4, 0, RTT_MR_RTTINCIEN);         
    }  
+	
+  /* IRQ due to Time has changed */
+  if ((ul_status & RTT_SR_RTTINC) == RTT_SR_RTTINC) {
+     pin_toggle(LED_PIO, LED_IDX_MASK);    // BLINK Led
+   }
+
 }
 
 /************************************************************************/
@@ -77,7 +73,6 @@ void pin_toggle(Pio *pio, uint32_t mask){
 }
 
 void io_init(void){
-  /* led */
   pmc_enable_periph_clk(LED_PIO_ID);
   pio_configure(LED_PIO, PIO_OUTPUT_0, LED_IDX_MASK, PIO_DEFAULT);
 }
@@ -86,25 +81,41 @@ static float get_time_rtt(){
   uint ul_previous_time = rtt_read_timer_value(RTT); 
 }
 
-static void RTT_init(uint16_t pllPreScale, uint32_t IrqNPulses)
-{
-  uint32_t ul_previous_time;
+/** 
+ * Configura RTT
+ *
+ * arg0 pllPreScale  : Frequência na qual o contador irá incrementar
+ * arg1 IrqNPulses   : Valor do alarme 
+ * arg2 rttIRQSource : Pode ser uma 
+ *     - 0: 
+ *     - RTT_MR_RTTINCIEN: Interrupção por incremento (pllPreScale)
+ *     - RTT_MR_ALMIEN : Interrupção por alarme
+ */
+static void RTT_init(float freqPrescale, uint32_t IrqNPulses, uint32_t rttIRQSource) {
 
-  /* Configure RTT for a 1 second tick interrupt */
+  uint16_t pllPreScale = (int) (((float) 32768) / freqPrescale);
+	
   rtt_sel_source(RTT, false);
   rtt_init(RTT, pllPreScale);
   
-  ul_previous_time = rtt_read_timer_value(RTT);
-  while (ul_previous_time == rtt_read_timer_value(RTT));
-  
-  rtt_write_alarm_time(RTT, IrqNPulses+ul_previous_time);
+  if (rttIRQSource & RTT_MR_ALMIEN) {
+	uint32_t ul_previous_time;
+  	ul_previous_time = rtt_read_timer_value(RTT);
+  	while (ul_previous_time == rtt_read_timer_value(RTT));
+  	rtt_write_alarm_time(RTT, IrqNPulses+ul_previous_time);
+  }
 
-  /* Enable RTT interrupt */
+  /* config NVIC */
   NVIC_DisableIRQ(RTT_IRQn);
   NVIC_ClearPendingIRQ(RTT_IRQn);
   NVIC_SetPriority(RTT_IRQn, 4);
   NVIC_EnableIRQ(RTT_IRQn);
-  rtt_enable_interrupt(RTT, RTT_MR_ALMIEN | RTT_MR_RTTINCIEN);
+
+  /* Enable RTT interrupt */
+  if (rttIRQSource & (RTT_MR_RTTINCIEN | RTT_MR_ALMIEN)
+  	rtt_enable_interrupt(RTT, rttIRQSource);
+  else
+      	rtt_disable_interrupt(RTT, RTT_MR_RTTINCIEN | RTT_MR_ALMIEN);
 }
 
 /************************************************************************/
@@ -113,33 +124,19 @@ static void RTT_init(uint16_t pllPreScale, uint32_t IrqNPulses)
 
 // Funcao principal chamada na inicalizacao do uC.
 int main(void){
-  
-	// Desliga watchdog
-	WDT->WDT_MR = WDT_MR_WDDIS;
-  
   sysclk_init();
+  WDT->WDT_MR = WDT_MR_WDDIS;
   io_init();
-  
-  // Inicializa RTT com IRQ no alarme.
-  f_rtt_alarme = true;
     
-  // super loop
-  // aplicacoes embarcadas não devem sair do while(1).
-  while (1){
-    if (f_rtt_alarme){
-      
-      /*
-       * IRQ (interrupção ocorre) apos 4s => 4 pulsos por sengundo (0,25s) -> 16 pulsos são necessários para dar 4s
-       * tempo[s] = 0,25 * 16 = 4s
-       */
-      uint16_t pllPreScale = (int) (((float) 32768) / 4.0);
-      uint32_t irqRTTvalue = 16;
-      
-      // reinicia RTT para gerar um novo IRQ
-      RTT_init(pllPreScale, irqRTTvalue);         
-      
-      f_rtt_alarme = false;
-    }
+  /* 
+  * Ativa RTT para trabalhar por alarme
+  * gerando uma interrupção em 4 s:
+  * aguarda 4 segundos
+  * tempo[s] = 0.25 * 16 = 4s
+  */
+  RTT_init(4, 16, RTT_MR_ALMIEN);         
+	
+  while (1) {
+   
   }  
-  return 0;
 }
