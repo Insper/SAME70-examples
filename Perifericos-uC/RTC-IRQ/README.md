@@ -103,7 +103,7 @@ No while(1) aguardamos a IRQ acontecer (que demora 20s após a placa ter sido li
     while (1) {                                                                                     
       if(flag_rtc_alarm){                                                                                 
           pisca_led(5, 200);                                                                       
-          flag_rtc = 0;                                                                             
+          flag_rtc_alarm = 0;                                                                             
        }                                                                                            
     }                                                                                               
 ```
