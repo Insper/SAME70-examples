@@ -37,7 +37,7 @@ int main(void){
 
         /** Configura timer TC0, canal 1 */
 	TC_init(TC0, ID_TC1, 1, 4);
-  	tc_start(TC, TC_CHANNEL);
+  	tc_start(TC0, 1);
 	
 	while (1) {
             pmc_sleep(SAM_PM_SMODE_SLEEP_WFI);
