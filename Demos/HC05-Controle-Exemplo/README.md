@@ -110,101 +110,18 @@ Selecione como porta de saída e o HC05 do seu grupo. E o serviço Dev B.:
 
 Verifique se placa conecta com o computador na porta COM configurada anteriormente, isto pode ser verificado utilizando o software [PuTTy](https://www.putty.org), conecte na COM configurada. Se estiver conectado e funcionando você deverá ver vários (`X0` ou `X1` dependendo se o botão da placa está apertado ou não).
 
-### Escolhendo exemplo
+## Exemplos python
 
-Agora você deve seguir o exemplo para o tipo de controle que quer executar:
+Disponibilizamos dois exemplos de programas python que devem ser escolhidos de acordo com o que seu controle irá controlar: Se for um programa no computador você deve usar o exemplo `youtube_controller.py` e se for um jogo o exemplo `game_controller.py`.
 
-- [PC - Controle para Automação]( https://github.com/Insper/SAME70-examples/tree/master/Demos/HC05-Controle-Exemplo#pc---controle-para-automa%C3%A7%C3%A3o)
+O exemplo do programa emula um teclado no computador, e uma ação do controle vira uma ação nesse teclado virtual. Exemplo: Se você quer parar um vídeo no youtube basta apertar a tecla `espaço`. O que esse exemplo faz é receber um comando pela UART/Bluetooth e emular que a tecla espaço foi pressionada.
 
-- [PC - Controle para Jogos](https://github.com/Insper/SAME70-examples/tree/master/Demos/HC05-Controle-Exemplo#pc---controle-para-jogos)
+Já o exemplo do jogo é diferente pois ele não emula um teclado e sim um joystick, tivemos que fazer isso pois muitos jogos não funcionam com teclado e a latência do teclado era muito grande, impossibilitando o uso do controle para alguns jogos.
 
-## PC - **Controle para Automação** 
+Os exemplos estão nas pastas listadas a seguir, e cada um possui um README que deve ser seguido para fazerem funcionar pela primeira vez.
 
-**Você deve escolher esse exemplo se quiser fazer um controle para aplicativos em geral, exemplo: Youtube, Chrome, Video Player.**
-
-Instale os pacotes necessários do Python via PIP. Os pacotes necessários estão no arquivo `requeriments.txt` (dentro da pasta `python/`):
-
-``` bash
-pip3 install -r requirements.txt
-```
-
-Utilize o arquivo `youtube_controller.py` como base para o seu controle, ele já vem configurado para usar no Youtube com um botão configurado (botão A do controle ->  tecla L do Youtube para adiantar o vídeo em 10 segundos).
-
-**Primeiro:** vamos testar se o computador instalou a biblioteca de automação corretamente (`pyautogui`).
-
-Execute o arquivo `youtube_controller.py` com os parametros `none -c dummy`. 
-
-``` bash
-python3 youtube_controller.py none -c dummy
-```
-
-Isto fará com que o aplicativo em Python, inicie sem comunicar com o Bluetooth e irá simular o aperto da tecla A do controle a cada 1 seg. 
-
-Abra um vídeo no Youtube e verifique se o vídeo fica pulando 10s a cada segundo. Dica: para debugar quando ocorre o botão, adicione a flag `-d` no final dos parametros para mostrar mensagens de debug.
-
-### Testando com a placa
-
-Necessitamos agora parear o Bluetooth do computador com o HC-05 e criar uma porta serial virtual. Para isto siga você deve ter realizado o roteiro `Conectando ao HC-05`, depois retorne para este roteiro.
-
-Se estiver tudo certo com o passo anterior, tente agora executar o `youtube_controller.py` com os parametros `PORTA_COM -b 115200` para conectar via serial, o controle agora deve funcionar no Youtube, aperte o botão da placa e veja se o vídeo vai para frente
-
-- `PORTA_COM `: porta do windows que o bluetooth conectou
-
-### Pronto!
-
-Agora você pode seguir o desenvolvimento do seu projeto!
-
-## PC - **Controle para Jogos**
-
-**Você deve escolher esse exemplo se quiser desenvolver um controle para emuladores, Jogos com suporte a DirectInput/Joystick.**
-
-Siga os passos a seguir:
-
-- Instale os pacotes necessários do Python via PIP. Os pacotes necessários estão no arquivo `requeriments.txt` (dentro da pasta `python/`):
-
-``` bash
-pip3 install -r requirements.txt
-```
-
-Instale o [`VJoy`](http://vjoystick.sourceforge.net/site/) para Windows, no qual permite criarmos um controle virtual programável para comunicarmos via Python: https://sourceforge.net/projects/vjoystick/files/Beta%202.x/2.1.9.1-160719/vJoySetup.exe/download
-
-Copie os arquivos `vJoyInterface.dll` e `vJoyInterfaceWrap.dll` da pasta `Program Files/VJoy` ou `Arquivos de Programas/VJoy` e pasta `x86` ou `x64` (depenendo da sua instalação python) para a `pasta do projeto/PC_Python/pyvjoy`. Para verificar qual versão python instalado execute no cmd do windows:
-
-```bash
-python3
-```
-
-Deve aparecer algo com x86 ou x64.
-
-Utilize o arquivo `game_controller.py` como base para o seu controle, ele já vem configurado para usar em um emulador com um botão configurado (botão A do controle -> botão 1 do controle virtual).
-
-Primeiro vamos testar se o computador instalou a biblioteca de controle virtual corretamente (`vjoy`). Execute o arquivo `game_controller.py` com os parametros `none -c dummy`. 
-
-``` bash
-python3 youtube_controller.py none -c dummy
-```
-
-Isto fará com que o aplicativo em Python, inicie **sem comunicar** com o Bluetooth e irá simular o aperto da tecla A do controle a cada 1seg. 
-
-Abra um emulador com um jogo (exemplo: ZSNES), e lembre-se de configurar o controle no emulador, que deve reconhecer o `VJoy 1`, como controle e clique na opção para trocar um dos botões, ao fazer isto com o aplicativo rodando, o emulador deve configurar aquele botão corretamente:
-
-![](doc/zsnesL.jpg)
-
-Dica: para debugar quando ocorre o botão, adicione a flag `-d` no final dos parametros ao rodar o python para mostrar mensagens de debug. 
-
-O VJoy instala um monitor para verificar o funcionamento, isto pode te auxiliar a detectar erros, você pode encontra-lo no menu Iniciar em VJoy.
-
-### Testando com a placa
-
-Necessitamos agora parear o Bluetooth do computador com o HC-05 e criar uma porta serial virtual. Para isto siga você deve ter realizado o roteiro `Conectando ao HC-05`, depois retorne para este roteiro.
-
-Se estiver tudo certo com o passo anterior, tente agora executar o `game_controller.py` com os parametros `PORTA_COM -b 115200` para conectar via serial, o controle agora deve funcionar no Youtube, aperte o botão da placa e veja se o vídeo vai para frente
-
-- `PORTA_COM `: porta do windows que o bluetooth conectou
-
-### Pronto!
-
-Agora você pode seguir o desenvolvimento do seu projeto!
+- python-pyautogui
+- python-vjoy
 
 ## OLED + Bluetooth?
 
