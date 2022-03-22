@@ -5,16 +5,31 @@
 #include <asf.h>
 #include "conf_board.h"
 
+/************************************************************************/
+/* DEFINES                                                              */
+/************************************************************************/
+
 #define TASK_MONITOR_STACK_SIZE            (2048/sizeof(portSTACK_TYPE))
 #define TASK_MONITOR_STACK_PRIORITY        (tskIDLE_PRIORITY)
 #define TASK_LED_STACK_SIZE                (1024/sizeof(portSTACK_TYPE))
 #define TASK_LED_STACK_PRIORITY            (tskIDLE_PRIORITY)
 
-
 #define LED_PIO       PIOC
 #define LED_PIO_ID    ID_PIOC
 #define LED_IDX       8u
 #define LED_IDX_MASK  (1u << LED_IDX)
+
+/************************************************************************/
+/* PROTOTYPES                                                           */
+/************************************************************************/
+
+void pin_toggle(Pio *pio, uint32_t mask);
+void LED_init(int estado);
+static void configure_console(void);
+
+/************************************************************************/
+/* RTOS Hooks                                                           */
+/************************************************************************/
 
 extern void vApplicationStackOverflowHook(xTaskHandle *pxTask,
 		signed char *pcTaskName);
@@ -23,64 +38,52 @@ extern void vApplicationTickHook(void);
 extern void vApplicationMallocFailedHook(void);
 extern void xPortSysTickHandler(void);
 
-void pin_toggle(Pio *pio, uint32_t mask);
-
-/**
- * \brief Called if stack overflow during execution
- */
 extern void vApplicationStackOverflowHook(xTaskHandle *pxTask,
-		signed char *pcTaskName)
-{
+		signed char *pcTaskName) {
 	printf("stack overflow %x %s\r\n", pxTask, (portCHAR *)pcTaskName);
-	/* If the parameters have been corrupted then inspect pxCurrentTCB to
-	 * identify which task has overflowed its stack.
-	 */
-	for (;;) {
-	}
+	for (;;) { }
 }
 
-/**
- * \brief This function is called by FreeRTOS idle task
- */
-extern void vApplicationIdleHook(void)
-{
-}
+extern void vApplicationIdleHook(void) { }
 
-/**
- * \brief This function is called by FreeRTOS each tick
- */
-extern void vApplicationTickHook(void)
-{
-}
+extern void vApplicationTickHook(void) { }
 
-extern void vApplicationMallocFailedHook(void)
-{
-	/* Called if a call to pvPortMalloc() fails because there is insufficient
-	free memory available in the FreeRTOS heap.  pvPortMalloc() is called
-	internally by FreeRTOS API functions that create tasks, queues, software
-	timers, and semaphores.  The size of the FreeRTOS heap is set by the
-	configTOTAL_HEAP_SIZE configuration constant in FreeRTOSConfig.h. */
+extern void vApplicationMallocFailedHook(void) { configASSERT( ( volatile void * ) NULL ); }
 
-	/* Force an assert. */
-	configASSERT( ( volatile void * ) NULL );
-}
-
+/************************************************************************/
+/* Funcoes                                                              */
+/************************************************************************/
 
 void pin_toggle(Pio *pio, uint32_t mask){
 	if(pio_get_output_data_status(pio, mask))
-	pio_clear(pio, mask);
+		pio_clear(pio, mask);
 	else
-	pio_set(pio,mask);
+		pio_set(pio,mask);
 }
 
-/**
- * \brief This task, when activated, send every ten seconds on debug UART
- * the whole report of free heap and total tasks status
- */
-static void task_monitor(void *pvParameters)
-{
+void LED_init(int estado) {
+	pmc_enable_periph_clk(LED_PIO_ID);
+	pio_set_output(LED_PIO, LED_IDX_MASK, estado, 0, 0);
+};
+
+static void configure_console(void) {
+	const usart_serial_options_t uart_serial_options = {
+		.baudrate = CONF_UART_BAUDRATE,
+		.charlength = CONF_UART_CHAR_LENGTH,
+		.paritytype = CONF_UART_PARITY,
+		.stopbits = CONF_UART_STOP_BITS,
+	};
+
+	stdio_serial_init(CONF_UART, &uart_serial_options);
+	setbuf(stdout, NULL);
+}
+
+/************************************************************************/
+/* Tasks                                                                */
+/************************************************************************/
+
+static void task_monitor(void *pvParameters) {
 	static portCHAR szList[256];
-	UNUSED(pvParameters);
 
 	for (;;) {
 		printf("--- task ## %u\n", (unsigned int)uxTaskGetNumberOfTasks());
@@ -90,55 +93,19 @@ static void task_monitor(void *pvParameters)
 	}
 }
 
-/**
- * \brief This task, when activated, make LED blink at a fixed rate
- */
-static void task_led(void *pvParameters)
-{
-	UNUSED(pvParameters);
+static void task_led(void *pvParameters) {
+	LED_init(1);
 	for (;;) {
 		pin_toggle(LED_PIO, LED_IDX_MASK);
 		vTaskDelay(1000);
 	}
 }
 
-/**
- * \brief Configure the console UART.
- */
-static void configure_console(void)
-{
-	const usart_serial_options_t uart_serial_options = {
-		.baudrate = CONF_UART_BAUDRATE,
-#if (defined CONF_UART_CHAR_LENGTH)
-		.charlength = CONF_UART_CHAR_LENGTH,
-#endif
-		.paritytype = CONF_UART_PARITY,
-#if (defined CONF_UART_STOP_BITS)
-		.stopbits = CONF_UART_STOP_BITS,
-#endif
-	};
+/************************************************************************/
+/* main                                                                */
+/************************************************************************/
 
-	/* Configure console UART. */
-	stdio_serial_init(CONF_UART, &uart_serial_options);
-
-	/* Specify that stdout should not be buffered. */
-#if defined(__GNUC__)
-	setbuf(stdout, NULL);
-#else
-	/* Already the case in IAR's Normal DLIB default configuration: printf()
-	 * emits one character at a time.
-	 */
-#endif
-}
-
-/**
- *  \brief FreeRTOS Real Time Kernel example entry point.
- *
- *  \return Unused (ANSI-C compatibility).
- */
-int main(void)
-{
-	/* Initialize the SAM system */
+int main(void) {
 	sysclk_init();
 	board_init();
 
