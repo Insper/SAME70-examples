@@ -16,7 +16,7 @@
 /* RTOS                                                                */
 /************************************************************************/
 
-#define TASK_ADC_STACK_SIZE (1024 / sizeof(portSTACK_TYPE))
+#define TASK_ADC_STACK_SIZE (1024*10 / sizeof(portSTACK_TYPE))
 #define TASK_ADC_STACK_PRIORITY (tskIDLE_PRIORITY)
 
 extern void vApplicationStackOverflowHook(xTaskHandle *pxTask,
@@ -31,7 +31,7 @@ extern void xPortSysTickHandler(void);
 /************************************************************************/
 
 /** Queue for msg log send data */
-QueueHandle_t xQueueTouch;
+QueueHandle_t xQueueADC;
 
 typedef struct {
   uint value;
@@ -42,10 +42,9 @@ typedef struct {
 /************************************************************************/
 
 static void USART1_init(void);
-TC_init(Tc *TC, int ID_TC, int TC_CHANNEL, int freq);
-config_AFEC_pot(Afec *afec, uint32_t afec_id, uint32_t afec_channel,
-                afec_callback_t callback);
-configure_console(void);
+void TC_init(Tc *TC, int ID_TC, int TC_CHANNEL, int freq);
+static void config_AFEC_pot(Afec *afec, uint32_t afec_id, uint32_t afec_channel, afec_callback_t callback);
+static void configure_console(void);
 
 /************************************************************************/
 /* RTOS application funcs                                               */
@@ -96,7 +95,7 @@ void TC1_Handler(void) {
 static void AFEC_pot_Callback(void) {
   adcData adc;
   adc.value = afec_channel_get_value(AFEC_POT, AFEC_POT_CHANNEL);
-  BaseType_t xHigherPriorityTaskWoken = pdFALSE;
+  BaseType_t xHigherPriorityTaskWoken = pdTRUE;
   xQueueSendFromISR(xQueueADC, &adc, &xHigherPriorityTaskWoken);
 }
 
@@ -108,16 +107,17 @@ static void task_adc(void *pvParameters) {
 
   // configura ADC e TC para controlar a leitura
   config_AFEC_pot(AFEC_POT, AFEC_POT_ID, AFEC_POT_CHANNEL, AFEC_pot_Callback);
-  TC_init(TC0, ID_TC1, 1, 60);
+  TC_init(TC0, ID_TC1, 1, 10);
+  tc_start(TC0, 1);
 
   // variável para recever dados da fila
   adcData adc;
 
   while (1) {
     if (xQueueReceive(xQueueADC, &(adc), 1000)) {
-      printf("ADC: %d", adc);
+      printf("ADC: %d \n", adc);
     } else {
-      printf("Nao chegou um novo dado em 1 segundo")
+      printf("Nao chegou um novo dado em 1 segundo");
     }
   }
 }
@@ -203,43 +203,6 @@ void TC_init(Tc *TC, int ID_TC, int TC_CHANNEL, int freq) {
   NVIC_SetPriority((IRQn_Type)ID_TC, 4);
   NVIC_EnableIRQ((IRQn_Type)ID_TC);
   tc_enable_interrupt(TC, TC_CHANNEL, TC_IER_CPCS);
-
-  tc_start(TC, TC_CHANNEL);
-}
-
-static void USART1_init(void) {
-  /* Configura USART1 Pinos */
-  sysclk_enable_peripheral_clock(ID_PIOB);
-  sysclk_enable_peripheral_clock(ID_PIOA);
-  pio_set_peripheral(PIOB, PIO_PERIPH_D, PIO_PB4);  // RX
-  pio_set_peripheral(PIOA, PIO_PERIPH_A, PIO_PA21); // TX
-  MATRIX->CCFG_SYSIO |= CCFG_SYSIO_SYSIO4;
-
-  /* Configura opcoes USART */
-  const sam_usart_opt_t usart_settings = {.baudrate = 115200,
-                                          .char_length = US_MR_CHRL_8_BIT,
-                                          .parity_type = US_MR_PAR_NO,
-                                          .stop_bits = US_MR_NBSTOP_1_BIT,
-                                          .channel_mode = US_MR_CHMODE_NORMAL};
-
-  /* Ativa Clock periferico USART0 */
-  sysclk_enable_peripheral_clock(USART_COM_ID);
-
-  /* Configura USART para operar em modo RS232 */
-  usart_init_rs232(USART_COM, &usart_settings, sysclk_get_peripheral_hz());
-
-  /* Enable the receiver and transmitter. */
-  usart_enable_tx(USART_COM);
-  usart_enable_rx(USART_COM);
-
-  /* map printf to usart */
-  ptr_put = (int (*)(void volatile *, char)) & usart_serial_putchar;
-  ptr_get = (void (*)(void volatile *, char *)) & usart_serial_getchar;
-
-  /* ativando interrupcao */
-  usart_enable_interrupt(USART_COM, US_IER_RXRDY);
-  NVIC_SetPriority(USART_COM_ID, 4);
-  NVIC_EnableIRQ(USART_COM_ID);
 }
 
 /************************************************************************/
@@ -252,28 +215,22 @@ static void USART1_init(void) {
  *  \return Unused (ANSI-C compatibility).
  */
 int main(void) {
-  /* Initialize the SAM system */
   sysclk_init();
   board_init();
-  USART1_init();
   configure_console();
 
   xQueueADC = xQueueCreate(100, sizeof(adcData));
-  if (xSemaphore == NULL)
-    printf("falha em criar o semaforo \n");
+  if (xQueueADC == NULL)
+    printf("falha em criar a queue xQueueADC \n");
 
-  /* Create task to make led blink */
   if (xTaskCreate(task_adc, "ADC", TASK_ADC_STACK_SIZE, NULL,
                   TASK_ADC_STACK_PRIORITY, NULL) != pdPASS) {
     printf("Failed to create test ADC task\r\n");
   }
 
-  /* Start the scheduler. */
   vTaskStartScheduler();
 
-  /* RTOS não deve chegar aqui !! */
-  while (1) {
-  }
+  while (1) {  }
 
   /* Will only get here if there was insufficient memory to create the idle
    * task. */

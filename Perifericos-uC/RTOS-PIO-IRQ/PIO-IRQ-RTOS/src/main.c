@@ -52,6 +52,7 @@ void but_callback(void);
 static void BUT_init(void);
 void pin_toggle(Pio *pio, uint32_t mask);
 static void USART1_init(void);
+void LED_init(int estado);
 
 /************************************************************************/
 /* RTOS application funcs                                               */
@@ -96,7 +97,7 @@ extern void vApplicationMallocFailedHook(void) {
 /************************************************************************/
 
 void but_callback(void) {
-  BaseType_t xHigherPriorityTaskWoken = pdTRUE;
+  BaseType_t xHigherPriorityTaskWoken = pdFALSE;
   xSemaphoreGiveFromISR(xSemaphoreBut, &xHigherPriorityTaskWoken);
 }
 
@@ -109,7 +110,7 @@ static void task_led(void *pvParameters) {
   LED_init(1);
 
   uint32_t msg = 0;
-  uint32_t delayTicks = 2000;
+  uint32_t delayMs = 2000;
 
   /* tarefas de um RTOS não devem retornar */
   for (;;) {
@@ -127,7 +128,7 @@ static void task_led(void *pvParameters) {
     pin_toggle(LED_PIO, LED_IDX_MASK);
 
     /* suspende por delayMs */
-    vTaskDelay(delayTicks / portTICK_PERIOD_MS);
+    vTaskDelay(delayMs);
   }
 }
 
@@ -140,7 +141,7 @@ static void task_but(void *pvParameters) {
 
   for (;;) {
     /* aguarda por tempo inderteminado até a liberacao do semaforo */
-    if (xSemaphoreTake(xSemaphoreBut, 0)) {
+    if (xSemaphoreTake(xSemaphoreBut, 1000)) {
       /* atualiza frequencia */
       delayTicks -= 100;
 
@@ -177,10 +178,6 @@ static void configure_console(void) {
   setbuf(stdout, NULL);
 }
 
-/************************************************************************/
-/* inits                                                                */
-/************************************************************************/
-
 void pin_toggle(Pio *pio, uint32_t mask) {
   if (pio_get_output_data_status(pio, mask))
     pio_clear(pio, mask);
@@ -188,11 +185,13 @@ void pin_toggle(Pio *pio, uint32_t mask) {
     pio_set(pio, mask);
 }
 
-static void BUT_init(void) {
-  /* configura prioridae */
-  NVIC_EnableIRQ(BUT_PIO_ID);
-  NVIC_SetPriority(BUT_PIO_ID, 4);
+void LED_init(int estado){
+	pmc_enable_periph_clk(LED_PIO_ID);
+	pio_set_output(LED_PIO, LED_IDX_MASK, estado, 0, 0);
+};
 
+
+static void BUT_init(void) {
   /* conf botão como entrada */
   pio_configure(BUT_PIO, PIO_INPUT, BUT_PIO_PIN_MASK,
                 PIO_PULLUP | PIO_DEBOUNCE);
@@ -200,41 +199,13 @@ static void BUT_init(void) {
   pio_enable_interrupt(BUT_PIO, BUT_PIO_PIN_MASK);
   pio_handler_set(BUT_PIO, BUT_PIO_ID, BUT_PIO_PIN_MASK, PIO_IT_FALL_EDGE,
                   but_callback);
-}
 
-static void USART1_init(void) {
-  /* Configura USART1 Pinos */
-  sysclk_enable_peripheral_clock(ID_PIOB);
-  sysclk_enable_peripheral_clock(ID_PIOA);
-  pio_set_peripheral(PIOB, PIO_PERIPH_D, PIO_PB4);  // RX
-  pio_set_peripheral(PIOA, PIO_PERIPH_A, PIO_PA21); // TX
-  MATRIX->CCFG_SYSIO |= CCFG_SYSIO_SYSIO4;
+  pio_get_interrupt_status(BUT_PIO);
+				  
+  /* configura prioridae */
+  NVIC_EnableIRQ(BUT_PIO_ID);
+  NVIC_SetPriority(BUT_PIO_ID, 4);
 
-  /* Configura opcoes USART */
-  const sam_usart_opt_t usart_settings = {.baudrate = 115200,
-                                          .char_length = US_MR_CHRL_8_BIT,
-                                          .parity_type = US_MR_PAR_NO,
-                                          .stop_bits = US_MR_NBSTOP_1_BIT,
-                                          .channel_mode = US_MR_CHMODE_NORMAL};
-
-  /* Ativa Clock periferico USART0 */
-  sysclk_enable_peripheral_clock(USART_COM_ID);
-
-  /* Configura USART para operar em modo RS232 */
-  usart_init_rs232(USART_COM, &usart_settings, sysclk_get_peripheral_hz());
-
-  /* Enable the receiver and transmitter. */
-  usart_enable_tx(USART_COM);
-  usart_enable_rx(USART_COM);
-
-  /* map printf to usart */
-  ptr_put = (int (*)(void volatile *, char)) & usart_serial_putchar;
-  ptr_get = (void (*)(void volatile *, char *)) & usart_serial_getchar;
-
-  /* ativando interrupcao */
-  usart_enable_interrupt(USART_COM, US_IER_RXRDY);
-  NVIC_SetPriority(USART_COM_ID, 4);
-  NVIC_EnableIRQ(USART_COM_ID);
 }
 
 /************************************************************************/
@@ -250,7 +221,6 @@ int main(void) {
   /* Initialize the SAM system */
   sysclk_init();
   board_init();
-  USART1_init();
   configure_console();
 
   /* Attempt to create a semaphore. */

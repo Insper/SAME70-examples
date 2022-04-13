@@ -5,7 +5,7 @@
     <ProjectVersion>7.0</ProjectVersion>
     <ToolchainName>com.Atmel.ARMGCC.C</ToolchainName>
     <ProjectGuid>dce6c7e3-ee26-4d79-826b-08594b9ad897</ProjectGuid>
-    <avrdevice>ATSAME70Q21</avrdevice>
+    <avrdevice>ATSAME70Q21B</avrdevice>
     <avrdeviceseries>same70</avrdeviceseries>
     <OutputType>Executable</OutputType>
     <Language>C</Language>
@@ -20,10 +20,10 @@
     <OverrideVtor>false</OverrideVtor>
     <CacheFlash>true</CacheFlash>
     <ProgFlashFromRam>true</ProgFlashFromRam>
-    <RamSnippetAddress />
+    <RamSnippetAddress>0x20000000</RamSnippetAddress>
     <UncachedRange />
     <preserveEEPROM>true</preserveEEPROM>
-    <OverrideVtorValue />
+    <OverrideVtorValue>exception_table</OverrideVtorValue>
     <BootSegment>2</BootSegment>
     <ResetRule>0</ResetRule>
     <eraseonlaunchrule>0</eraseonlaunchrule>
@@ -33,13 +33,15 @@
         <options>
           <option id="common.boards" value="Add" config="" content-id="Atmel.ASF" />
           <option id="common.services.basic.clock" value="Add" config="" content-id="Atmel.ASF" />
+          <option id="common.services.delay" value="Add" config="" content-id="Atmel.ASF" />
           <option id="common.services.basic.gpio" value="Add" config="" content-id="Atmel.ASF" />
           <option id="common.services.ioport" value="Add" config="" content-id="Atmel.ASF" />
           <option id="common.utils.stdio.stdio_serial" value="Add" config="" content-id="Atmel.ASF" />
           <option id="sam.drivers.mpu" value="Add" config="" content-id="Atmel.ASF" />
           <option id="sam.drivers.pio" value="Add" config="" content-id="Atmel.ASF" />
           <option id="thirdparty.os.freertos.version" value="Add" config="8.2.3" content-id="Atmel.ASF" />
-          <option id="common.services.delay" value="Add" config="" content-id="Atmel.ASF" />
+          <option id="sam.drivers.tc" value="Add" config="" content-id="Atmel.ASF" />
+          <option id="sam.drivers.afec" value="Add" config="" content-id="Atmel.ASF" />
           <option id="common.services.freertos.sam_example" value="Add" config="" content-id="Atmel.ASF" />
           <option id="sam.utils.cmsis.same70.source.template" value="Add" config="" content-id="Atmel.ASF" />
         </options>
@@ -268,16 +270,25 @@
           <file path="src/ASF/common/services/delay/sam/cycle_counter.c" framework="" version="3.35.1" source="common\services\delay\sam\cycle_counter.c" changed="False" content-id="Atmel.ASF" />
           <file path="src/ASF/common/services/delay/sam/cycle_counter.h" framework="" version="3.35.1" source="common\services\delay\sam\cycle_counter.h" changed="False" content-id="Atmel.ASF" />
           <file path="src/ASF/common/services/delay/delay.h" framework="" version="3.35.1" source="common\services\delay\delay.h" changed="False" content-id="Atmel.ASF" />
+          <file path="src/ASF/sam/drivers/afec/afec.c" framework="" version="3.42.0" source="sam\drivers\afec\afec.c" changed="False" content-id="Atmel.ASF" />
+          <file path="src/ASF/sam/drivers/afec/afec.h" framework="" version="3.42.0" source="sam\drivers\afec\afec.h" changed="False" content-id="Atmel.ASF" />
+          <file path="src/ASF/sam/drivers/tc/tc.c" framework="" version="3.42.0" source="sam\drivers\tc\tc.c" changed="False" content-id="Atmel.ASF" />
+          <file path="src/ASF/sam/drivers/tc/tc.h" framework="" version="3.42.0" source="sam\drivers\tc\tc.h" changed="False" content-id="Atmel.ASF" />
+          <file path="src/ASF/common/services/sleepmgr/sam/sleepmgr.c" framework="" version="3.42.0" source="common\services\sleepmgr\sam\sleepmgr.c" changed="False" content-id="Atmel.ASF" />
+          <file path="src/ASF/common/services/sleepmgr/sleepmgr.h" framework="" version="3.42.0" source="common\services\sleepmgr\sleepmgr.h" changed="False" content-id="Atmel.ASF" />
+          <file path="src/ASF/common/services/sleepmgr/sam/sleepmgr.h" framework="" version="3.42.0" source="common\services\sleepmgr\sam\sleepmgr.h" changed="False" content-id="Atmel.ASF" />
+          <file path="src/Config/conf_sleepmgr.h" framework="" version="3.42.0" source="common\services\sleepmgr\sam\module_config\conf_sleepmgr.h" changed="False" content-id="Atmel.ASF" />
         </files>
         <documentation help="http://asf.atmel.com/docs/3.35.1/common.services.freertos.sam_example.same70_xplained/html/index.html" />
         <offline-documentation help="" />
         <dependencies>
-          <content-extension eid="atmel.asf" uuidref="Atmel.ASF" version="3.35.1" />
+          <content-extension eid="atmel.asf" uuidref="Atmel.ASF" version="3.42.0" />
         </dependencies>
         <project id="common.services.freertos.sam_example.same70_xplained" value="Add" config="" content-id="Atmel.ASF" />
         <board id="board.same70_xplained" value="Add" config="" content-id="Atmel.ASF" />
       </framework-data>
     </AsfFrameworkConfig>
+    <avrtool />
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)' == 'Release' ">
     <ToolchainSettings>
@@ -328,6 +339,9 @@
       <Value>../src</Value>
       <Value>../src/config</Value>
       <Value>../src/ASF/common/services/delay</Value>
+      <Value>../src/ASF/sam/drivers/afec</Value>
+      <Value>../src/ASF/sam/drivers/tc</Value>
+      <Value>../src/ASF/common/services/sleepmgr</Value>
     </ListValues>
   </armgcc.compiler.directories.IncludePaths>
   <armgcc.compiler.optimization.level>Optimize most (-O3)</armgcc.compiler.optimization.level>
@@ -378,6 +392,9 @@
       <Value>../src</Value>
       <Value>../src/config</Value>
       <Value>../src/ASF/common/services/delay</Value>
+      <Value>../src/ASF/sam/drivers/afec</Value>
+      <Value>../src/ASF/sam/drivers/tc</Value>
+      <Value>../src/ASF/common/services/sleepmgr</Value>
     </ListValues>
   </armgcc.assembler.general.IncludePaths>
   <armgcc.preprocessingassembler.general.AssemblerFlags>-DARM_MATH_CM7=true -DBOARD=SAME70_XPLAINED -D__FREERTOS__ -D__SAME70Q21__ -Dprintf=iprintf -Dscanf=iscanf</armgcc.preprocessingassembler.general.AssemblerFlags>
@@ -411,6 +428,9 @@
       <Value>../src</Value>
       <Value>../src/config</Value>
       <Value>../src/ASF/common/services/delay</Value>
+      <Value>../src/ASF/sam/drivers/afec</Value>
+      <Value>../src/ASF/sam/drivers/tc</Value>
+      <Value>../src/ASF/common/services/sleepmgr</Value>
     </ListValues>
   </armgcc.preprocessingassembler.general.IncludePaths>
 </ArmGcc>
@@ -465,9 +485,12 @@
       <Value>../src</Value>
       <Value>../src/config</Value>
       <Value>../src/ASF/common/services/delay</Value>
+      <Value>../src/ASF/sam/drivers/afec</Value>
+      <Value>../src/ASF/sam/drivers/tc</Value>
+      <Value>../src/ASF/common/services/sleepmgr</Value>
     </ListValues>
   </armgcc.compiler.directories.IncludePaths>
-  <armgcc.compiler.optimization.level>Optimize (-O1)</armgcc.compiler.optimization.level>
+  <armgcc.compiler.optimization.level>Optimize more (-O2)</armgcc.compiler.optimization.level>
   <armgcc.compiler.optimization.OtherFlags>-fdata-sections</armgcc.compiler.optimization.OtherFlags>
   <armgcc.compiler.optimization.PrepareFunctionsForGarbageCollection>True</armgcc.compiler.optimization.PrepareFunctionsForGarbageCollection>
   <armgcc.compiler.optimization.DebugLevel>Maximum (-g3)</armgcc.compiler.optimization.DebugLevel>
@@ -485,6 +508,7 @@
     </ListValues>
   </armgcc.linker.libraries.LibrarySearchPaths>
   <armgcc.linker.optimization.GarbageCollectUnusedSections>True</armgcc.linker.optimization.GarbageCollectUnusedSections>
+  <armgcc.linker.memorysettings.ExternalRAM />
   <armgcc.linker.miscellaneous.LinkerFlags>-Wl,--entry=Reset_Handler -Wl,--cref -mthumb -T../src/ASF/sam/utils/linker_scripts/same70/same70q21/gcc/flash.ld</armgcc.linker.miscellaneous.LinkerFlags>
   <armgcc.assembler.general.IncludePaths>
     <ListValues>
@@ -516,6 +540,9 @@
       <Value>../src</Value>
       <Value>../src/config</Value>
       <Value>../src/ASF/common/services/delay</Value>
+      <Value>../src/ASF/sam/drivers/afec</Value>
+      <Value>../src/ASF/sam/drivers/tc</Value>
+      <Value>../src/ASF/common/services/sleepmgr</Value>
     </ListValues>
   </armgcc.assembler.general.IncludePaths>
   <armgcc.assembler.debugging.DebugLevel>Default (-g)</armgcc.assembler.debugging.DebugLevel>
@@ -550,6 +577,9 @@
       <Value>../src</Value>
       <Value>../src/config</Value>
       <Value>../src/ASF/common/services/delay</Value>
+      <Value>../src/ASF/sam/drivers/afec</Value>
+      <Value>../src/ASF/sam/drivers/tc</Value>
+      <Value>../src/ASF/common/services/sleepmgr</Value>
     </ListValues>
   </armgcc.preprocessingassembler.general.IncludePaths>
   <armgcc.preprocessingassembler.debugging.DebugLevel>Default (-Wa,-g)</armgcc.preprocessingassembler.debugging.DebugLevel>
@@ -572,6 +602,8 @@
     <Folder Include="src\ASF\common\services\ioport\sam\" />
     <Folder Include="src\ASF\common\services\serial\" />
     <Folder Include="src\ASF\common\services\serial\sam_uart\" />
+    <Folder Include="src\ASF\common\services\sleepmgr\" />
+    <Folder Include="src\ASF\common\services\sleepmgr\sam\" />
     <Folder Include="src\ASF\common\utils\" />
     <Folder Include="src\ASF\common\utils\interrupt\" />
     <Folder Include="src\ASF\common\utils\stdio\" />
@@ -580,9 +612,11 @@
     <Folder Include="src\ASF\sam\boards\" />
     <Folder Include="src\ASF\sam\boards\same70_xplained\" />
     <Folder Include="src\ASF\sam\drivers\" />
+    <Folder Include="src\ASF\sam\drivers\afec\" />
     <Folder Include="src\ASF\sam\drivers\mpu\" />
     <Folder Include="src\ASF\sam\drivers\pio\" />
     <Folder Include="src\ASF\sam\drivers\pmc\" />
+    <Folder Include="src\ASF\sam\drivers\tc\" />
     <Folder Include="src\ASF\sam\drivers\uart\" />
     <Folder Include="src\ASF\sam\drivers\usart\" />
     <Folder Include="src\ASF\sam\utils\" />
@@ -1159,6 +1193,15 @@
     <Compile Include="src\ASF\common\services\serial\usart_serial.c">
       <SubType>compile</SubType>
     </Compile>
+    <Compile Include="src\ASF\common\services\sleepmgr\sam\sleepmgr.c">
+      <SubType>compile</SubType>
+    </Compile>
+    <None Include="src\ASF\common\services\sleepmgr\sleepmgr.h">
+      <SubType>compile</SubType>
+    </None>
+    <None Include="src\ASF\common\services\sleepmgr\sam\sleepmgr.h">
+      <SubType>compile</SubType>
+    </None>
     <Compile Include="src\ASF\common\utils\interrupt\interrupt_sam_nvic.c">
       <SubType>compile</SubType>
     </Compile>
@@ -1171,6 +1214,12 @@
     <Compile Include="src\ASF\sam\boards\same70_xplained\init.c">
       <SubType>compile</SubType>
     </Compile>
+    <Compile Include="src\ASF\sam\drivers\afec\afec.c">
+      <SubType>compile</SubType>
+    </Compile>
+    <None Include="src\ASF\sam\drivers\afec\afec.h">
+      <SubType>compile</SubType>
+    </None>
     <Compile Include="src\ASF\sam\drivers\mpu\mpu.c">
       <SubType>compile</SubType>
     </Compile>
@@ -1195,6 +1244,12 @@
     <Compile Include="src\ASF\sam\drivers\pmc\sleep.c">
       <SubType>compile</SubType>
     </Compile>
+    <Compile Include="src\ASF\sam\drivers\tc\tc.c">
+      <SubType>compile</SubType>
+    </Compile>
+    <None Include="src\ASF\sam\drivers\tc\tc.h">
+      <SubType>compile</SubType>
+    </None>
     <Compile Include="src\ASF\sam\drivers\uart\uart.c">
       <SubType>compile</SubType>
     </Compile>
@@ -1243,6 +1298,9 @@
     <Compile Include="src\ASF\thirdparty\freertos\freertos-8.2.3\Source\timers.c">
       <SubType>compile</SubType>
     </Compile>
+    <None Include="src\config\conf_sleepmgr.h">
+      <SubType>compile</SubType>
+    </None>
     <Compile Include="src\main.c">
       <SubType>compile</SubType>
     </Compile>
