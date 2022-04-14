@@ -8,9 +8,9 @@
 #define USART_COM_ID ID_USART1
 #define USART_COM USART1
 
-#define AFEC_POT AFEC1
-#define AFEC_POT_ID ID_AFEC1
-#define AFEC_POT_CHANNEL 6 // Canal do pino PC31
+#define AFEC_POT AFEC0
+#define AFEC_POT_ID ID_AFEC0
+#define AFEC_POT_CHANNEL 0 // Canal do pino PD30
 
 /************************************************************************/
 /* RTOS                                                                */
@@ -87,7 +87,7 @@ void TC1_Handler(void) {
   /* Avoid compiler warning */
   UNUSED(ul_dummy);
 
-  /* Selecina canal e inicializa convers„o */
+  /* Selecina canal e inicializa convers√£o */
   afec_channel_enable(AFEC_POT, AFEC_POT_CHANNEL);
   afec_start_software_conversion(AFEC_POT);
 }
@@ -110,7 +110,7 @@ static void task_adc(void *pvParameters) {
   TC_init(TC0, ID_TC1, 1, 10);
   tc_start(TC0, 1);
 
-  // vari·vel para recever dados da fila
+  // vari√°vel para recever dados da fila
   adcData adc;
 
   while (1) {
@@ -164,7 +164,7 @@ static void config_AFEC_pot(Afec *afec, uint32_t afec_id, uint32_t afec_channel,
   /* Configura trigger por software */
   afec_set_trigger(afec, AFEC_TRIG_SW);
 
-  /*** Configuracao especÌfica do canal AFEC ***/
+  /*** Configuracao espec√≠fica do canal AFEC ***/
   struct afec_ch_config afec_ch_cfg;
   afec_ch_get_config_defaults(&afec_ch_cfg);
   afec_ch_cfg.gain = AFEC_GAINVALUE_0;
