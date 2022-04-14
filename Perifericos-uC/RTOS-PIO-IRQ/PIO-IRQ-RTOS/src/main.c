@@ -22,9 +22,9 @@
 /* RTOS                                                                */
 /************************************************************************/
 
-#define TASK_LED_STACK_SIZE (1024 / sizeof(portSTACK_TYPE))
+#define TASK_LED_STACK_SIZE (4096 / sizeof(portSTACK_TYPE))
 #define TASK_LED_STACK_PRIORITY (tskIDLE_PRIORITY)
-#define TASK_BUT_STACK_SIZE (2048 / sizeof(portSTACK_TYPE))
+#define TASK_BUT_STACK_SIZE (4096 / sizeof(portSTACK_TYPE))
 #define TASK_BUT_STACK_PRIORITY (tskIDLE_PRIORITY)
 
 extern void vApplicationStackOverflowHook(xTaskHandle *pxTask,
@@ -112,7 +112,7 @@ static void task_led(void *pvParameters) {
   uint32_t msg = 0;
   uint32_t delayMs = 2000;
 
-  /* tarefas de um RTOS n„o devem retornar */
+  /* tarefas de um RTOS n√£o devem retornar */
   for (;;) {
     /* verifica se chegou algum dado na queue, e espera por 0 ticks */
     if (xQueueReceive(xQueueLedFreq, &msg, (TickType_t)0)) {
@@ -140,7 +140,7 @@ static void task_but(void *pvParameters) {
   uint32_t delayTicks = 2000;
 
   for (;;) {
-    /* aguarda por tempo inderteminado atÈ a liberacao do semaforo */
+    /* aguarda por tempo inderteminado at√© a liberacao do semaforo */
     if (xSemaphoreTake(xSemaphoreBut, 1000)) {
       /* atualiza frequencia */
       delayTicks -= 100;
@@ -192,7 +192,7 @@ void LED_init(int estado){
 
 
 static void BUT_init(void) {
-  /* conf bot„o como entrada */
+  /* conf bot√£o como entrada */
   pio_configure(BUT_PIO, PIO_INPUT, BUT_PIO_PIN_MASK,
                 PIO_PULLUP | PIO_DEBOUNCE);
   pio_set_debounce_filter(BUT_PIO, BUT_PIO_PIN_MASK, 60);
@@ -229,7 +229,7 @@ int main(void) {
     printf("falha em criar o semaforo \n");
 
   /* cria queue com 32 "espacos" */
-  /* cada espaÁo possui o tamanho de um inteiro*/
+  /* cada espa√ßo possui o tamanho de um inteiro*/
   xQueueLedFreq = xQueueCreate(32, sizeof(uint32_t));
   if (xQueueLedFreq == NULL)
     printf("falha em criar a queue \n");
@@ -249,7 +249,7 @@ int main(void) {
   /* Start the scheduler. */
   vTaskStartScheduler();
 
-  /* RTOS n„o deve chegar aqui !! */
+  /* RTOS n√£o deve chegar aqui !! */
   while (1) {
   }
 
