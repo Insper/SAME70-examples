@@ -121,7 +121,7 @@ static void task_led(void *pvParameters) {
        */
       /* converte ms -> ticks */
       delayMs = msg / portTICK_PERIOD_MS;
-      printf("task_led: %d \n", delayTicks);
+      printf("task_led: %d \n", delayMs);
     }
 
     /* pisca LED */
@@ -196,19 +196,19 @@ void LED_init(int estado){
 static void BUT_init(void) {
   // Configura PIO para lidar com o pino do botão como entrada
   // com pull-up
-  pio_configure(BUT_PIO, PIO_INPUT, BUT_IDX_MASK, PIO_PULLUP);
+  pio_configure(BUT_PIO, PIO_INPUT, BUT_PIO_PIN_MASK, PIO_PULLUP);
 
   // Configura interrupção no pino referente ao botao e associa
   // função de callback caso uma interrupção for gerada
   // a função de callback é a: but_callback()
   pio_handler_set(BUT_PIO,
                   BUT_PIO_ID,
-                  BUT_IDX_MASK,
+                  BUT_PIO_PIN_MASK,
                   PIO_IT_FALL_EDGE,
                   but_callback);
 
   // Ativa interrupção e limpa primeira IRQ gerada na ativacao
-  pio_enable_interrupt(BUT_PIO, BUT_IDX_MASK);
+  pio_enable_interrupt(BUT_PIO, BUT_PIO_PIN_MASK);
   pio_get_interrupt_status(BUT_PIO);
   
   // Configura NVIC para receber interrupcoes do PIO do botao
