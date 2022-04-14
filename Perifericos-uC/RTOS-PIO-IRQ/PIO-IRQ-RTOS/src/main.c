@@ -115,13 +115,13 @@ static void task_led(void *pvParameters) {
   /* tarefas de um RTOS não devem retornar */
   for (;;) {
     /* verifica se chegou algum dado na queue, e espera por 0 ticks */
-    if (xQueueReceive(xQueueLedFreq, &msg, (TickType_t)0)) {
+    if (xQueueReceive(xQueueLedFreq, &msg, (TickType_t) 0)) {
       /* chegou novo valor, atualiza delay ! */
       /* aqui eu poderia verificar se msg faz sentido (se esta no range certo)
        */
       /* converte ms -> ticks */
       delayMs = msg / portTICK_PERIOD_MS;
-      printf("delay = %d \n", delayMs);
+      printf("task_led: %d \n", delayTicks);
     }
 
     /* pisca LED */
@@ -147,6 +147,8 @@ static void task_but(void *pvParameters) {
 
       /* envia nova frequencia para a task_led */
       xQueueSend(xQueueLedFreq, (void *)&delayTicks, 10);
+	    
+      printf("task_but: %d \n", delayTicks);
 
       /* garante range da freq. */
       if (delayTicks == 100) {
@@ -192,20 +194,27 @@ void LED_init(int estado){
 
 
 static void BUT_init(void) {
-  /* conf botão como entrada */
-  pio_configure(BUT_PIO, PIO_INPUT, BUT_PIO_PIN_MASK,
-                PIO_PULLUP | PIO_DEBOUNCE);
-  pio_set_debounce_filter(BUT_PIO, BUT_PIO_PIN_MASK, 60);
-  pio_enable_interrupt(BUT_PIO, BUT_PIO_PIN_MASK);
-  pio_handler_set(BUT_PIO, BUT_PIO_ID, BUT_PIO_PIN_MASK, PIO_IT_FALL_EDGE,
+  // Configura PIO para lidar com o pino do botão como entrada
+  // com pull-up
+  pio_configure(BUT_PIO, PIO_INPUT, BUT_IDX_MASK, PIO_PULLUP);
+
+  // Configura interrupção no pino referente ao botao e associa
+  // função de callback caso uma interrupção for gerada
+  // a função de callback é a: but_callback()
+  pio_handler_set(BUT_PIO,
+                  BUT_PIO_ID,
+                  BUT_IDX_MASK,
+                  PIO_IT_FALL_EDGE,
                   but_callback);
 
+  // Ativa interrupção e limpa primeira IRQ gerada na ativacao
+  pio_enable_interrupt(BUT_PIO, BUT_IDX_MASK);
   pio_get_interrupt_status(BUT_PIO);
-				  
-  /* configura prioridae */
+  
+  // Configura NVIC para receber interrupcoes do PIO do botao
+  // com prioridade 4 (quanto mais próximo de 0 maior)
   NVIC_EnableIRQ(BUT_PIO_ID);
-  NVIC_SetPriority(BUT_PIO_ID, 4);
-
+  NVIC_SetPriority(BUT_PIO_ID, 4); // Prioridade 4
 }
 
 /************************************************************************/
@@ -222,6 +231,8 @@ int main(void) {
   sysclk_init();
   board_init();
   configure_console();
+	
+  printf("Sys init ok \n")
 
   /* Attempt to create a semaphore. */
   xSemaphoreBut = xSemaphoreCreateBinary();
@@ -238,12 +249,16 @@ int main(void) {
   if (xTaskCreate(task_led, "Led", TASK_LED_STACK_SIZE, NULL,
                   TASK_LED_STACK_PRIORITY, NULL) != pdPASS) {
     printf("Failed to create test led task\r\n");
+  } else {
+     printf("task led created \r\n");
+	  
   }
-
   /* Create task to monitor processor activity */
   if (xTaskCreate(task_but, "BUT", TASK_BUT_STACK_SIZE, NULL,
                   TASK_BUT_STACK_PRIORITY, NULL) != pdPASS) {
     printf("Failed to create UartTx task\r\n");
+  } else {
+     printf("task led but \r\n");  
   }
 
   /* Start the scheduler. */
