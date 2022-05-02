@@ -5,7 +5,7 @@
     <ProjectVersion>7.0</ProjectVersion>
     <ToolchainName>com.Atmel.ARMGCC.C</ToolchainName>
     <ProjectGuid>dce6c7e3-ee26-4d79-826b-08594b9ad897</ProjectGuid>
-    <avrdevice>ATSAME70Q21B</avrdevice>
+    <avrdevice>ATSAME70Q21</avrdevice>
     <avrdeviceseries>same70</avrdeviceseries>
     <OutputType>Executable</OutputType>
     <Language>C</Language>
@@ -35,6 +35,7 @@
           <option id="common.services.basic.gpio" value="Add" config="" content-id="Atmel.ASF" />
           <option id="common.services.ioport" value="Add" config="" content-id="Atmel.ASF" />
           <option id="common.services.basic.sleepmgr" value="Add" config="" content-id="Atmel.ASF" />
+          <option id="common.services.basic.twihs" value="Add" config="" content-id="Atmel.ASF" />
           <option id="common.utils.stdio.stdio_serial" value="Add" config="" content-id="Atmel.ASF" />
           <option id="sam.drivers.matrix" value="Add" config="" content-id="Atmel.ASF" />
           <option id="sam.drivers.mpu" value="Add" config="" content-id="Atmel.ASF" />
@@ -43,7 +44,7 @@
           <option id="sam.drivers.rtc" value="Add" config="" content-id="Atmel.ASF" />
           <option id="sam.drivers.tc" value="Add" config="" content-id="Atmel.ASF" />
           <option id="sam.drivers.xdmac" value="Add" config="" content-id="Atmel.ASF" />
-          <option id="common.services.basic.twihs" value="Add" config="" content-id="Atmel.ASF" />
+          <option id="sam.drivers.rtt" value="Add" config="" content-id="Atmel.ASF" />
           <option id="sam.utils.cmsis.same70.source.template" value="Add" config="" content-id="Atmel.ASF" />
           <option id="config.board.same70_xplained.init" value="Add" config="yes" content-id="Atmel.ASF" />
           <option id="config.board.same70_xplained.led" value="Add" config="yes" content-id="Atmel.ASF" />
@@ -279,6 +280,8 @@
           <file path="src/ASF/sam/drivers/mpu/mpu.c" framework="" version="3.45.0" source="sam\drivers\mpu\mpu.c" changed="False" content-id="Atmel.ASF" />
           <file path="src/ASF/sam/drivers/mpu/mpu.h" framework="" version="3.45.0" source="sam\drivers\mpu\mpu.h" changed="False" content-id="Atmel.ASF" />
           <file path="src/ASF/sam/boards/same70_xplained/led.h" framework="" version="3.45.0" source="sam\boards\same70_xplained\led.h" changed="False" content-id="Atmel.ASF" />
+          <file path="src/ASF/sam/drivers/rtt/rtt.c" framework="" version="3.45.0" source="sam\drivers\rtt\rtt.c" changed="False" content-id="Atmel.ASF" />
+          <file path="src/ASF/sam/drivers/rtt/rtt.h" framework="" version="3.45.0" source="sam\drivers\rtt\rtt.h" changed="False" content-id="Atmel.ASF" />
         </files>
         <documentation help="http://asf.atmel.com/docs/3.45.0/sam.applications.getting-started.same70_xplained/html/index.html" />
         <offline-documentation help="" />
@@ -290,8 +293,8 @@
       </framework-data>
     </AsfFrameworkConfig>
     <avrtool>com.atmel.avrdbg.tool.edbg</avrtool>
-    <avrtoolserialnumber>ATML2637010000000000</avrtoolserialnumber>
-    <avrdeviceexpectedsignature>0xA1020E01</avrdeviceexpectedsignature>
+    <avrtoolserialnumber>ATML2637010000000006</avrtoolserialnumber>
+    <avrdeviceexpectedsignature>0xA1020E00</avrdeviceexpectedsignature>
     <avrtoolinterface>SWD</avrtoolinterface>
     <com_atmel_avrdbg_tool_edbg>
       <ToolOptions>
@@ -301,7 +304,7 @@
         <InterfaceName>SWD</InterfaceName>
       </ToolOptions>
       <ToolType>com.atmel.avrdbg.tool.edbg</ToolType>
-      <ToolNumber>ATML2637010000000000</ToolNumber>
+      <ToolNumber>ATML2637010000000006</ToolNumber>
       <ToolName>EDBG</ToolName>
     </com_atmel_avrdbg_tool_edbg>
     <avrtoolinterfaceclock>2000000</avrtoolinterfaceclock>
@@ -318,6 +321,19 @@
     </com_atmel_avrdbg_tool_samice>
     <ResetRule>0</ResetRule>
     <EraseKey />
+    <custom>
+      <ToolOptions>
+        <InterfaceProperties>
+          <SwdClock>2000000</SwdClock>
+        </InterfaceProperties>
+        <InterfaceName>
+        </InterfaceName>
+      </ToolOptions>
+      <ToolType>custom</ToolType>
+      <ToolNumber>
+      </ToolNumber>
+      <ToolName>Custom Programming Tool</ToolName>
+    </custom>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)' == 'Release' ">
     <ToolchainSettings>
@@ -372,6 +388,7 @@
       <Value>../src/ASF/common/services/gpio</Value>
       <Value>../src/ASF/sam/drivers/pio</Value>
       <Value>../src/ASF/sam/drivers/mpu</Value>
+      <Value>../src/ASF/sam/drivers/rtt</Value>
     </ListValues>
   </armgcc.compiler.directories.IncludePaths>
   <armgcc.compiler.optimization.level>Optimize for size (-Os)</armgcc.compiler.optimization.level>
@@ -427,6 +444,7 @@
       <Value>../src/ASF/common/services/gpio</Value>
       <Value>../src/ASF/sam/drivers/pio</Value>
       <Value>../src/ASF/sam/drivers/mpu</Value>
+      <Value>../src/ASF/sam/drivers/rtt</Value>
     </ListValues>
   </armgcc.assembler.general.IncludePaths>
   <armgcc.preprocessingassembler.general.AssemblerFlags>-DARM_MATH_CM7=true -D__SAME70Q21B__ -DBOARD=SAME70_XPLAINED -Dprintf=iprintf -Dscanf=iscanf</armgcc.preprocessingassembler.general.AssemblerFlags>
@@ -465,6 +483,7 @@
       <Value>../src/ASF/common/services/gpio</Value>
       <Value>../src/ASF/sam/drivers/pio</Value>
       <Value>../src/ASF/sam/drivers/mpu</Value>
+      <Value>../src/ASF/sam/drivers/rtt</Value>
     </ListValues>
   </armgcc.preprocessingassembler.general.IncludePaths>
 </ArmGcc>
@@ -484,7 +503,6 @@
       <Value>__SAME70Q21B__</Value>
       <Value>BOARD=SAME70_XPLAINED</Value>
       <Value>ARM_MATH_CM7=true</Value>
-      <Value>printf=iprintf</Value>
       <Value>scanf=iscanf</Value>
     </ListValues>
   </armgcc.compiler.symbols.DefSymbols>
@@ -523,6 +541,7 @@
       <Value>../src/ASF/common/services/gpio</Value>
       <Value>../src/ASF/sam/drivers/pio</Value>
       <Value>../src/ASF/sam/drivers/mpu</Value>
+      <Value>../src/ASF/sam/drivers/rtt</Value>
     </ListValues>
   </armgcc.compiler.directories.IncludePaths>
   <armgcc.compiler.optimization.OtherFlags>-fdata-sections</armgcc.compiler.optimization.OtherFlags>
@@ -579,6 +598,7 @@
       <Value>../src/ASF/common/services/gpio</Value>
       <Value>../src/ASF/sam/drivers/pio</Value>
       <Value>../src/ASF/sam/drivers/mpu</Value>
+      <Value>../src/ASF/sam/drivers/rtt</Value>
     </ListValues>
   </armgcc.assembler.general.IncludePaths>
   <armgcc.assembler.debugging.DebugLevel>Default (-g)</armgcc.assembler.debugging.DebugLevel>
@@ -618,6 +638,7 @@
       <Value>../src/ASF/common/services/gpio</Value>
       <Value>../src/ASF/sam/drivers/pio</Value>
       <Value>../src/ASF/sam/drivers/mpu</Value>
+      <Value>../src/ASF/sam/drivers/rtt</Value>
     </ListValues>
   </armgcc.preprocessingassembler.general.IncludePaths>
   <armgcc.preprocessingassembler.debugging.DebugLevel>Default (-Wa,-g)</armgcc.preprocessingassembler.debugging.DebugLevel>
@@ -657,6 +678,7 @@
     <Folder Include="src\ASF\sam\drivers\pio\" />
     <Folder Include="src\ASF\sam\drivers\pmc\" />
     <Folder Include="src\ASF\sam\drivers\rtc\" />
+    <Folder Include="src\ASF\sam\drivers\rtt\" />
     <Folder Include="src\ASF\sam\drivers\tc\" />
     <Folder Include="src\ASF\sam\drivers\twihs\" />
     <Folder Include="src\ASF\sam\drivers\uart\" />
@@ -688,6 +710,7 @@
     <Folder Include="src\ASF\thirdparty\CMSIS\Lib\" />
     <Folder Include="src\ASF\thirdparty\CMSIS\Lib\GCC\" />
     <Folder Include="src\config\" />
+    <Folder Include="src\fusion" />
   </ItemGroup>
   <ItemGroup>
     <None Include="src\ASF\sam\boards\same70_xplained\same70_xplained.h">
@@ -1170,6 +1193,12 @@
     <None Include="src\ASF\sam\drivers\pmc\sleep.h">
       <SubType>compile</SubType>
     </None>
+    <Compile Include="src\ASF\sam\drivers\rtt\rtt.c">
+      <SubType>compile</SubType>
+    </Compile>
+    <None Include="src\ASF\sam\drivers\rtt\rtt.h">
+      <SubType>compile</SubType>
+    </None>
     <Compile Include="src\ASF\sam\utils\cmsis\same70\source\templates\gcc\startup_same70.c">
       <SubType>compile</SubType>
     </Compile>
@@ -1359,9 +1388,45 @@
     <None Include="src\config\conf_sleepmgr.h">
       <SubType>compile</SubType>
     </None>
+    <Compile Include="src\fusion\Fusion.h">
+      <SubType>compile</SubType>
+    </Compile>
+    <Compile Include="src\fusion\FusionAhrs.c">
+      <SubType>compile</SubType>
+    </Compile>
+    <Compile Include="src\fusion\FusionAhrs.h">
+      <SubType>compile</SubType>
+    </Compile>
+    <Compile Include="src\fusion\FusionAxes.h">
+      <SubType>compile</SubType>
+    </Compile>
+    <Compile Include="src\fusion\FusionCalibration.h">
+      <SubType>compile</SubType>
+    </Compile>
+    <Compile Include="src\fusion\FusionCompass.c">
+      <SubType>compile</SubType>
+    </Compile>
+    <Compile Include="src\fusion\FusionCompass.h">
+      <SubType>compile</SubType>
+    </Compile>
+    <Compile Include="src\fusion\FusionMath.h">
+      <SubType>compile</SubType>
+    </Compile>
+    <Compile Include="src\fusion\FusionOffset.c">
+      <SubType>compile</SubType>
+    </Compile>
+    <Compile Include="src\fusion\FusionOffset.h">
+      <SubType>compile</SubType>
+    </Compile>
+    <Compile Include="src\mpu6050.h">
+      <SubType>compile</SubType>
+    </Compile>
     <Compile Include="src\main.c">
       <SubType>compile</SubType>
     </Compile>
+    <None Include="src\fusion\CMakeLists.txt">
+      <SubType>compile</SubType>
+    </None>
   </ItemGroup>
   <Import Project="$(AVRSTUDIO_EXE_PATH)\\Vs\\Compiler.targets" />
 </Project>
