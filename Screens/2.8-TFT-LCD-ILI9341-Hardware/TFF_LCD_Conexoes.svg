@@ -7,8 +7,8 @@
    viewBox="0 0 423.33334 634.99988"
    version="1.1"
    id="svg5"
-   inkscape:version="1.1.1 (3bf5ae0d25, 2021-09-20)"
    sodipodi:docname="TFF_LCD_Conexoes.svg"
+   inkscape:version="1.1.1 (3bf5ae0d25, 2021-09-20)"
    xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape"
    xmlns:sodipodi="http://sodipodi.sourceforge.net/DTD/sodipodi-0.dtd"
    xmlns:xlink="http://www.w3.org/1999/xlink"
@@ -28,9 +28,9 @@
      fit-margin-left="0"
      fit-margin-right="0"
      fit-margin-bottom="0"
-     inkscape:zoom="0.18084315"
-     inkscape:cx="837.74252"
-     inkscape:cy="1833.0802"
+     inkscape:zoom="0.36168631"
+     inkscape:cx="839.12494"
+     inkscape:cy="1165.3745"
      inkscape:window-width="1920"
      inkscape:window-height="1001"
      inkscape:window-x="-9"
@@ -8207,5 +8207,17 @@ lmyM4CTljV/AHjS38OuW3nct1ByceT+HzznDB+ZktnDIMt/1wmeAmCfeSWb/2Q==
        id="image856"
        x="220.18948"
        y="86.209778" />
+    <circle
+       style="fill:none;stroke:#ff0000;stroke-width:1.55396;stroke-opacity:1"
+       id="path937"
+       cx="327.55997"
+       cy="217.46512"
+       r="13.250109" />
+    <circle
+       style="fill:none;stroke:#ff0000;stroke-width:1.79708;stroke-opacity:1"
+       id="path937-2"
+       cx="125.56733"
+       cy="180.06609"
+       r="15.323129" />
   </g>
 </svg>
