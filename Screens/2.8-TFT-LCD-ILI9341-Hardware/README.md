@@ -57,5 +57,5 @@ Os pinos tem o uso a seguir:
 ## Conexões com o adaptador TFT LCD - Xplained V0
 
 
-<img src="TFF_LCD_Conexoe.svg" alt="drawing" width="400" class="center"/>
+<img src="TFF_LCD_Conexoes.svg" alt="drawing" width="400" class="center"/>
 
