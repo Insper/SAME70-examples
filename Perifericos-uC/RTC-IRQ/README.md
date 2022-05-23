@@ -37,7 +37,7 @@ O RTC fornece duas funções `rtc_get_time` e `rtc_get_date` para leitura da hor
 
 ```c
 uint32_t current_hour, current_min, current_sec;
-uint32_t current_year, current_month, current_day; current_week;
+uint32_t current_year, current_month, current_day, current_week;
 rtc_get_time(RTC, &current_hour, &current_min, &current_sec);
 rtc_get_date(RTC, &current_year, &current_month, &current_day, &current_week);
 ```
