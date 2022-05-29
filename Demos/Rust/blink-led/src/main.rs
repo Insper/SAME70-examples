@@ -3,6 +3,7 @@
 
 use panic_halt as _;
 use cortex_m_rt::entry;
+use cortex_m::asm;
 
 #[entry]
 fn main() -> ! {
@@ -27,7 +28,7 @@ fn main() -> ! {
         unsafe {
             *pioc_odsr  ^= 0x100;
         }
-
-        for _wait in 0..10000 {}
+        
+        asm::delay(10000000);
     }
 }
