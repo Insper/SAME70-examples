@@ -1,6 +1,27 @@
 # True Random Number Generator - TRNG
 
-É um periférico que gera numeros pseudoaleatórios de 32-bit a cada 84 ciclos do Clock.
+É um periférico que gera numeros aleatórios de tamanho 32-bit.
+
+## Para que serve:
+
+Um TRNG é uma função ou dispositivo baseado em um fenômeno físico imprevisível, chamado de fonte de entropia, projetado para gerar dados não determinísticos (por exemplo, uma sucessão de números) para semear algoritmos de segurança.
+
+Os dispositivos conectados estão se tornando parte da vida cotidiana e esperamos que funcionem corretamente, protegendo as informações comerciais e pessoais. Os TRNGs estão na base da proteção desses dispositivos, pois são usados para criar e proteger segredos e outras informações confidenciais. Eles fazem parte de uma “cadeia de confiança” que precisa ser estabelecida a partir do SoC, passando para as camadas de aplicação e comunicação para a nuvem. Uma corrente de confiança é tão forte quanto seu elo mais fraco.
+
+Geradores de números aleatórios previsíveis (RNGs) abrem portas para muitos ataques possíveis que podem invadir dispositivos e comprometer dados. Para serem eficazes, os números aleatórios devem ser imprevisíveis, estatisticamente independentes (não relacionados a quaisquer números aleatórios gerados anteriormente), uniformemente distribuídos (igual probabilidade de qualquer número ser gerado) e protegidos.
+
+![image](https://user-images.githubusercontent.com/62663074/171724487-b2a4dfa9-dd34-4ed6-ab44-5fcc74792ae4.png)
+
+## Possiveis aplicações:
+
+- Geração de chaves para vários algoritmos (simétricos, assimétricos, MACs) e protocolos (SSL/TLH, SSH, WiFi, LTE, IPsec, etc.);
+- Fabricação de chips (dispositivo de semeadura único e chaves de plataforma);
+- Valores iniciais (para algoritmos de criptografia e MAC, valores de pacotes TCP, etc.);
+- Geração de Nonce e valores iniciais do contador para várias funções criptográficas;
+- Desafios usados para trocas de autenticação de protocolo;
+- Etc.;
+
+Diferentemente de 
 
 ## Conexão e configuração
 
