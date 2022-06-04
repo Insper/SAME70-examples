@@ -31,7 +31,8 @@ Para criptografia ou usos específicos que requerem obrigatoriamente números ve
 
 A função `main` desse programa é responsável por inicializar todos os periféricos envolvidos no projeto e também escreve no terminal a saída de um valor aleatório gerado.
 
-`int main(void)
+``` c
+int main(void)
 {
 	/* Initialize the SAM system */
 	sysclk_init();
@@ -61,13 +62,15 @@ A função `main` desse programa é responsável por inicializar todos os perif�
 	/* User input loop */
 	while (1) {
 	}
-}`
+}
+```
 
 ### Interrupção
 
 Quando houver uma interupção, será chamado o Handler do TRNG e então aperece no terminal o número aleatório gerado.
 
-`void TRNG_Handler(void)
+```C
+void TRNG_Handler(void)
 {
 	uint32_t status;
 
@@ -76,7 +79,8 @@ Quando houver uma interupção, será chamado o Handler do TRNG e então aperece
 	if ((status & TRNG_ISR_DATRDY) == TRNG_ISR_DATRDY) {
 		printf("-- Random Value: %lx --\n\r", trng_read_output_data(TRNG));
 	}
-}`
+}
+```
 
 ## True Random Number Generator - TRNG
 
