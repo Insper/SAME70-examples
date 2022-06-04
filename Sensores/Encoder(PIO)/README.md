@@ -240,3 +240,8 @@ int main (void){
 }
 
 ```
+
+# Vídeo de explicação no Youtube
+
+[![IMAGE ALT TEXT HERE](https://img.youtube.com/vi/QkjXMJvSxeM/0.jpg)](https://www.youtube.com/watch?v=QkjXMJvSxeM)
+
