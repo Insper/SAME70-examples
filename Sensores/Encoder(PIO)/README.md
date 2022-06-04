@@ -36,7 +36,7 @@ Caso o encoder seja girado no sentido antihorário, a onda produzida primeiro se
 Como só precisamos comparar as ondas produzidas por CLK e DT uma vez para saber qual foi a primeira onda produzida, nós só precisamos fazer uma função de callback, que checa no momento em que houve o giro se as duas ondas estão em pico ou não. Por conveniência, nós usamos
 o output do CLK, que é produzido primeiro quando giramos o encoder para o sentido horário.
 
-Como comparamos as duas ondas no momento em que CLK chega no seu pico, isso significa que quando CLK = DT, a onda DT foi a primeira a ser produzida, logo o encoder foi girado no sentido anti-horário. Caso CLK != DT no momento em que CLK atingir seu pico, então CLK foi a primeira onda a ser produzida, e portanto o encoder foi girado no sentido horário.
+Como comparamos as duas ondas no momento em que CLK chega no seu pico, isso significa que quando CLK == DT, a onda DT foi a primeira a ser produzida, logo o encoder foi girado no sentido anti-horário. Caso CLK != DT no momento em que CLK atingir seu pico, então CLK foi a primeira onda a ser produzida, e portanto o encoder foi girado no sentido horário.
 
 ## Definindo as funções de callback
 
