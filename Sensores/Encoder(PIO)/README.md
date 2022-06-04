@@ -13,6 +13,14 @@ Configura o encoder para modificar o numero de voltas dependendo de que direçã
 
 ![alt text](https://github.com/TiagoSeixas2103/SAME70-examples/blob/master/Sensores/Encoder(PIO)/Encoder.jpeg)
 
+# Explicação
+
+![alt text](https://github.com/TiagoSeixas2103/SAME70-examples/blob/master/Sensores/Encoder(PIO)/encoderControl.png)
+
+O exemplo usa dos valores das saídas CLK e DT do encoder para determinar para que sentido o mesmo foi girado e determinar quantas vezes o mesmo foi girado em relação ao seu estado inicial.
+
+O exemplo também usa da mudança de estado da saída SW para determinar quando o encoder foi pressionado, e então reiniciar o contador.
+
 # Encoder PIO - IRQ
 
 Quando o encoder é girado, duas ondas quadradas são produzidas, com seu output em CLK e DT. Quando se gira no sentido horário, a primeira onda é produzida pelo CLK, e na metado do tempo em que CLK permanece em pico, a onda do DT é então produzida, as duas ficando em pico simultaneamente por um quarto de período, quando então a onda de CLK desce para seu valor mínimo (0) enquanto DT continua em pico.
@@ -23,7 +31,7 @@ Para melhor ilustrar isso, veja a imagem a seguir:
 
 Caso o encoder seja girado no sentido antihorário, a onda produzida primeiro será a de DT, seguida da onda produzida por CLK.
 
-# Explicação
+![alt text](https://github.com/TiagoSeixas2103/SAME70-examples/blob/master/Sensores/Encoder(PIO)/squareGraphs2.png)
 
 Como só precisamos comparar as ondas produzidas por CLK e DT uma vez para saber qual foi a primeira onda produzida, nós só precisamos fazer uma função de callback, que checa no momento em que houve o giro se as duas ondas estão em pico ou não. Por conveniência, nós usamos
 o output do CLK, que é produzido primeiro quando giramos o encoder para o sentido horário.
