@@ -145,82 +145,81 @@ void io_init(void){
 /* main                                                                 */
 /************************************************************************/
 
-int main (void)
-{
+int main (void){
 	board_init();
 	
 	// Inicializa clock
 	sysclk_init();
 
-	// Init OLED
+	// Inicializa OLED
 	gfx_mono_ssd1306_init();
-  
-	// configura botao com interrupcao
+	
+	// Configura botão com interrupção
 	io_init();
-  
+	
 	// Desativa watchdog
 	WDT->WDT_MR = WDT_MR_WDDIS;
-  
-	//inicia contador de ref�rencia, usado para saber se o encoder girou
+	
+	// Inicia contador de refêrencia, usado para saber se o encoder girou
 	int contadorNovo = 0;
 
-	/* Insert application code here, after the board has been initialized. */
 	while(1) {
-			if (sw_flag == 1) {
-				contador = 0;
-				//imprime na placa OLED o valor do contador
-				gfx_mono_draw_string("r", 0, 18, &sysfont);
-				sw_flag = 0;
-			}
+		if (sw_flag == 1) {
+			// Reinicia o contador
+			contador = 0;
 			
-			if (contador > 0 && contador != contadorNovo) {
-				//limpa a tela do OLED
-				gfx_mono_draw_rect(0, 0, 300, 300, GFX_PIXEL_CLR);
-				
-				//imprime na placa OLED o sentido do giro em rela��o a posi��o original do encoder
-				gfx_mono_draw_string(" horario", 0, 0, &sysfont);
-				char str[128];
-				
-				//imprime na placa OLED o valor do contador
-				sprintf(str, " %d   ", abs(contador)); 
-				gfx_mono_draw_string(str, 0, 18, &sysfont);
-				
-				//atualiza contador novo para indicar que o valor do contador mudou
-				contadorNovo = contador;
-				
-			}
+			// Desativa a flag
+			sw_flag = 0;
+		}
+		
+		if (contador > 0 && contador != contadorNovo) {
+			// Limpa a tela do OLED
+			gfx_mono_draw_rect(0, 0, 300, 300, GFX_PIXEL_CLR);
 			
-			if (contador < 0 && contador != contadorNovo) {
-				//limpa a tela do OLED
-				gfx_mono_draw_rect(0, 0, 300, 300, GFX_PIXEL_CLR);
-				
-				//imprime na placa OLED o sentido do giro em rela��o a posi��o original do encoder
-				gfx_mono_draw_string(" anti-horario", 0, 0, &sysfont);
-				char str[128];
-				
-				//imprime na placa OLED o valor do contador
-				sprintf(str, " %d    ", abs(contador));
-				gfx_mono_draw_string(str, 0, 18, &sysfont);
-				
-				//atualiza contador novo para indicar que o valor do contador mudou
-				contadorNovo = contador;
-			}
+			// Imprime na placa OLED o sentido do giro em relação à posição original do encoder
+			gfx_mono_draw_string(" horario", 0, 0, &sysfont);
+			char str[128];
 			
-			if (contador == 0 && contador != contadorNovo) {
-				//limpa a tela do OLED
-				gfx_mono_draw_rect(0, 0, 300, 300, GFX_PIXEL_CLR);
-				
-				//imprime na placa OLED que o encoder est� no estado inicial
-				gfx_mono_draw_string(" inicio      ", 0, 0, &sysfont);
-				char str[128];
-				
-				//imprime na placa OLED o valor do contador
-				sprintf(str, " %d    ", abs(contador));
-				gfx_mono_draw_string(str, 0, 18, &sysfont);
-				
-				//atualiza contador novo para indicar que o valor do contador mudou
-				contadorNovo = contador;
-			}
+			// Imprime na placa OLED o valor do contador
+			sprintf(str, " %d   ", abs(contador));
+			gfx_mono_draw_string(str, 0, 18, &sysfont);
 			
+			// Atualiza contadorNovo para indicar que o valor do contador mudou
+			contadorNovo = contador;
+			
+		}
+		
+		if (contador < 0 && contador != contadorNovo) {
+			// Limpa a tela do OLED
+			gfx_mono_draw_rect(0, 0, 300, 300, GFX_PIXEL_CLR);
+			
+			// Imprime na placa OLED o sentido do giro em relação à posição original do encoder
+			gfx_mono_draw_string(" anti-horario", 0, 0, &sysfont);
+			char str[128];
+			
+			// Imprime na placa OLED o valor do contador
+			sprintf(str, " %d    ", abs(contador));
+			gfx_mono_draw_string(str, 0, 18, &sysfont);
+			
+			// Atualiza contadorNovo para indicar que o valor do contador mudou
+			contadorNovo = contador;
+		}
+		
+		if (contador == 0 && contador != contadorNovo) {
+			// Limpa a tela do OLED
+			gfx_mono_draw_rect(0, 0, 300, 300, GFX_PIXEL_CLR);
+			
+			// Imprime na placa OLED que o encoder está no estado inicial
+			gfx_mono_draw_string(" inicio      ", 0, 0, &sysfont);
+			char str[128];
+			
+			// Imprime na placa OLED o valor do contador
+			sprintf(str, " %d    ", abs(contador));
+			gfx_mono_draw_string(str, 0, 18, &sysfont);
+			
+			// Atualiza contadorNovo para indicar que o valor do contador mudou
+			contadorNovo = contador;
+		}
+		
 	}
 }
