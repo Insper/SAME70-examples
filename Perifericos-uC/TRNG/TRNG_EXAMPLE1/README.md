@@ -21,26 +21,15 @@ Geradores de números aleatórios previsíveis (RNGs) abrem portas para muitos a
 - Desafios usados para trocas de autenticação de protocolo;
 - Etc.;
 
-Diferentemente de 
+## Comparação:
 
-## Conexão e configuração
+Existe também dispositivos que criam os números pseudoaleátorios, através de ou aloritmo ou de um dispositivo em si que necessita que uma "semente" seja usada para a geração de uma sequência numérica. Eles não são verdadeiramente aleatórios justamente por necessitar de uma "semente geradora" que gera uma sequência de números que se repetem com um período tão exorbitante, que podemos ignorá-lo. Embora os números gerados pareçam imprevisíveis em uma execução de um programa, a sequência de números é exatamente a mesma de uma execução para a seguinte. Isso ocorre porque a semente inicial é sempre a mesma. Isso é conveniente quando você está depurando um programa, mas é inútil se você quiser que o programa se comporte de forma imprevisível. Se você quiser uma série pseudo-aleatória diferente toda vez que seu programa for executado, você deverá especificar uma semente diferente a cada vez. Para propósitos comuns, basear a semente no tempo atual funciona bem.
 
-- Não é necessário
+Para criptografia ou usos específicos que requerem obrigatoriamente números verdadeiramente aleatórios é que será utilizado o TRNG pois sempre será garantido um número aleatório sempre que nao depende de nenhuma "semente geradora".
 
-## Explicação
+## Main()
 
+A função `main` desse programa é responsável por inicializar todos os periféricos envolvidos no projeto assim como escrever no terminal um exemplo de como é uma saída verdadeira de quando o usuário chamar a função de gerar o TRNG
 
-### Definição das variáveis
+<img width="303" alt="image" src="https://user-images.githubusercontent.com/62663074/172022706-5cfc33a3-1003-42ed-8f6f-2e521b4723be.png">
 
-<img width="492" alt="image" src="https://user-images.githubusercontent.com/62663074/171494708-27023acf-affa-47ec-84de-287801463986.png">
-
-### Definição das Structs
-
-<img width="483" alt="image" src="https://user-images.githubusercontent.com/62663074/171494830-f9bb7b31-efa1-4838-bd34-c893356d5b8e.png">
-
-### Inicialização e Configuração
-
-<img width="483" alt="image" src="https://user-images.githubusercontent.com/62663074/171494937-db952b1a-177b-4e4d-9564-cb6f0793e175.png">
-
-- Parâmetros da função:
-<img width="492" alt="image" src="https://user-images.githubusercontent.com/62663074/171495052-62e131bb-5075-4fac-a787-8f53c8cc8d54.png">
