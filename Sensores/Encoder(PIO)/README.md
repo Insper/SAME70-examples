@@ -1,47 +1,36 @@
-# PIO - IRQ
+# Encoder (PIO) - IRQ
 
-Exemplo que configura o pino do botão para gerar interrupção no microcontrolador. 
-
-- Módulos: 
-    - .
-    
-- Periféricos:
-    - PIOC e PIOA
-    
-- Pinos:
-    - `PC8`: LED
-    - `PA11`: Botão
-    - `stdio` / DEBUG
-        - `PB4`:  UART1 
-        - `PD21`: UART1
- 
-- APIs:
-    - .
+Configura o encoder para modificar o numero de voltas dependendo de que direção ele foi girado
 
 ## Conexão e configuração
 
-- Não é necessário
-
+- Conectar o pino [GND] do encoder no pino [GND] da placa
+- Conectar o pino [+] do encoder no pino [3V3] da placa
+- Conectar o pino [CLK] do encoder no pino [PC13] da placa
+- Conectar o pino [DT] do encoder no pino [PD30] da placa
+- Conectar o pino [SW] do encoder no pino [PD11] da placa
+- Conectar a placa [OLED] no conjunto de pinos [EXT1] da placa
 
 # Explicação
 
-A seguir iremos ter uma breve explicação de como configurarmos uma interrupção para o PIO do SAME70, na verdade, iremos usar um driver que abstrai a parte mais baixa da interrupção e iremos conseguir configurar um [`callback`](https://en.wikipedia.org/wiki/Callback_(computer_programming)) para cada pino do PIO.
+Quando o encoder é girado, duas ondas quadradas são produzidas, com seu output em CLK e DT. Quando se gira para o sentido horário,
+a primeira onda é produzida pelo CLK, e na metado do tempo em que CLK está no seu ápice, a onda do DT é então produzida, as duas ficando em ápice simultaneamente por um quarto de período, e então a onda de CLK desse para seu valor mínimo (0) enquanto DT continua em ápice.
 
-![](https://raw.githubusercontent.com/wiki/Insper/ComputacaoEmbarcada/imgs/PIO-IRQ/callback.png)
+\Para melhor ilustrar isso, veja a imagem a seguir:
+
+![alt text]()
 
 ## Definindo a função de callBack
 
-Devemos definir uma função de callBack que será chamada sempre que acontecer uma mudança no botão. 
+Devemos definir uma função de callBack que será chamada sempre que acontecer uma mudança no clk. 
 
 ```c
-void but_callback(void){
-  for (int i=0;i<5;i++)
-  {
-    pio_clear(LED_PIO, LED_IDX_MASK);
-    delay_ms(200);
-    pio_set(LED_PIO, LED_IDX_MASK);
-    delay_ms(200);
-  }
+void clk_callback(void){	
+	if (pio_get(DT_PIO, PIO_INPUT, DT_IDX_MASK) != pio_get(CLK_PIO, PIO_INPUT, CLK_IDX_MASK)) {
+		contador++;
+	} else {
+		contador--;
+	}
 }
 ```
 
@@ -109,11 +98,11 @@ Além do PIO, pino e atributo, a função `pio_handler_set()` recebe como parâm
 Exemplo de uso:
 
 ```c
-pio_handler_set(BUT_PIO,
-                BUT_PIO_ID,
-                BUT_IDX_MASK,
-                PIO_IT_FALL_EDGE,
-                but_callback);
+pio_handler_set(CLK_PIO,
+                  CLK_PIO_ID,
+                  CLK_IDX_MASK,
+                  PIO_IT_EDGE,
+                  clk_callback);
 ```
 
 ### NVIC
