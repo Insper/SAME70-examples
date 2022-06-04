@@ -10,8 +10,6 @@ Os dispositivos conectados estão se tornando parte da vida cotidiana e esperamo
 
 Geradores de números aleatórios previsíveis (RNGs) abrem portas para muitos ataques possíveis que podem invadir dispositivos e comprometer dados. Para serem eficazes, os números aleatórios devem ser imprevisíveis, estatisticamente independentes (não relacionados a quaisquer números aleatórios gerados anteriormente), uniformemente distribuídos (igual probabilidade de qualquer número ser gerado) e protegidos.
 
-![image](https://user-images.githubusercontent.com/62663074/171724487-b2a4dfa9-dd34-4ed6-ab44-5fcc74792ae4.png)
-
 ## Possiveis aplicações:
 
 - Geração de chaves para vários algoritmos (simétricos, assimétricos, MACs) e protocolos (SSL/TLH, SSH, WiFi, LTE, IPsec, etc.);
@@ -26,6 +24,8 @@ Geradores de números aleatórios previsíveis (RNGs) abrem portas para muitos a
 Existe também dispositivos que criam os números pseudoaleátorios, através de ou aloritmo ou de um dispositivo em si que necessita que uma "semente" seja usada para a geração de uma sequência numérica. Eles não são verdadeiramente aleatórios justamente por necessitar de uma "semente geradora" que gera uma sequência de números que se repetem com um período tão exorbitante, que podemos ignorá-lo. Embora os números gerados pareçam imprevisíveis em uma execução de um programa, a sequência de números é exatamente a mesma de uma execução para a seguinte. Isso ocorre porque a semente inicial é sempre a mesma. Isso é conveniente quando você está depurando um programa, mas é inútil se você quiser que o programa se comporte de forma imprevisível. Se você quiser uma série pseudo-aleatória diferente toda vez que seu programa for executado, você deverá especificar uma semente diferente a cada vez. Para propósitos comuns, basear a semente no tempo atual funciona bem.
 
 Para criptografia ou usos específicos que requerem obrigatoriamente números verdadeiramente aleatórios é que será utilizado o TRNG pois sempre será garantido um número aleatório sempre que nao depende de nenhuma "semente geradora".
+
+![image](https://user-images.githubusercontent.com/62663074/171724487-b2a4dfa9-dd34-4ed6-ab44-5fcc74792ae4.png)
 
 ## Main()
 
