@@ -27,9 +27,120 @@ Para criptografia ou usos específicos que requerem obrigatoriamente números ve
 
 ![image](https://user-images.githubusercontent.com/62663074/171724487-b2a4dfa9-dd34-4ed6-ab44-5fcc74792ae4.png)
 
-## Main()
+## Main(void)
 
-A função `main` desse programa é responsável por inicializar todos os periféricos envolvidos no projeto assim como escrever no terminal um exemplo de como é uma saída verdadeira de quando o usuário chamar a função de gerar o TRNG
+A função `main` desse programa é responsável por inicializar todos os periféricos envolvidos no projeto e também escreve no terminal a saída de um valor aleatório gerado.
 
-<img width="303" alt="image" src="https://user-images.githubusercontent.com/62663074/172022706-5cfc33a3-1003-42ed-8f6f-2e521b4723be.png">
+`
+int main(void)
+{
+	/* Initialize the SAM system */
+	sysclk_init();
+	board_init();
+
+	/* Configure console UART */
+	configure_console();
+
+	/* Output example information */
+	printf("-- TRNG Example --\n\r");
+	printf("-- %s\n\r", BOARD_NAME);
+	printf("-- Compiled: %s %s --\n\r", __DATE__, __TIME__);
+
+	/* Configure PMC */
+	pmc_enable_periph_clk(ID_TRNG);
+
+	/* Enable TRNG */
+	trng_enable(TRNG);
+
+	/* Enable TRNG interrupt */
+	NVIC_DisableIRQ(TRNG_IRQn);
+	NVIC_ClearPendingIRQ(TRNG_IRQn);
+	NVIC_SetPriority(TRNG_IRQn, 0);
+	NVIC_EnableIRQ(TRNG_IRQn);
+	trng_enable_interrupt(TRNG);
+
+	/* User input loop */
+	while (1) {
+	}
+}
+`
+
+### Interrupção
+
+Quando houver uma interupção, será chamado o Handler do TRNG e então aperece no terminal o número aleatório gerado.
+
+`
+void TRNG_Handler(void)
+{
+	uint32_t status;
+
+	status = trng_get_interrupt_status(TRNG);
+
+	if ((status & TRNG_ISR_DATRDY) == TRNG_ISR_DATRDY) {
+		printf("-- Random Value: %lx --\n\r", trng_read_output_data(TRNG));
+	}
+}
+`
+
+## True Random Number Generator - TRNG
+
+Ele é um periférico de geração de números aleatórios muito utilizados principalmente o campo da criptografia assim como no próprio campo da computação para geração dos contratos e algoritmos respectivamentes.
+
+Assim que o TRNG é habilitado no registrador de controle (TRNG_CR), o gerador fornece um valor de 32 bits a cada 84 ciclos de clock. A linha de interrupção TRNG pode ser habilitada no TRNG_IER (respectivamente desabilitada no TRNG_IDR). Esta interrupção é definida quando um novo valor aleatório está disponível e é limpo quando o registrador de status (TRNG_ISR) é lido. O sinalizador DATRDY do (TRNG_ISR) é definido quando os dados aleatórios estão prontos para serem lidos no
+o registrador de dados de saída de 32 bits (TRNG_ODATA). O modo normal de operação verifica se o sinalizador do registrador de status é igual a 1 antes de ler o registrador de dados de saída quando um valor aleatório de 32 bits é exigido pelo aplicativo de software.
+
+Segue um exemplo visual de como o TRNG funciona:
+
+<img width="405" alt="image" src="https://user-images.githubusercontent.com/62663074/172023626-c8ba8207-ef9b-447b-8353-606c574c170c.png">
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
