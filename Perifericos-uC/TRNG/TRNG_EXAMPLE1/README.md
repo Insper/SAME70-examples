@@ -32,6 +32,7 @@ Para criptografia ou usos específicos que requerem obrigatoriamente números ve
 A função `main` desse programa é responsável por inicializar todos os periféricos envolvidos no projeto e também escreve no terminal a saída de um valor aleatório gerado.
 
 `
+
 int main(void)
 {
 	/* Initialize the SAM system */
@@ -63,6 +64,7 @@ int main(void)
 	while (1) {
 	}
 }
+
 `
 
 ### Interrupção
@@ -70,6 +72,7 @@ int main(void)
 Quando houver uma interupção, será chamado o Handler do TRNG e então aperece no terminal o número aleatório gerado.
 
 `
+
 void TRNG_Handler(void)
 {
 	uint32_t status;
@@ -80,6 +83,7 @@ void TRNG_Handler(void)
 		printf("-- Random Value: %lx --\n\r", trng_read_output_data(TRNG));
 	}
 }
+
 `
 
 ## True Random Number Generator - TRNG
