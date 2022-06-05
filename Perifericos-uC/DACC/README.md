@@ -1,5 +1,7 @@
 # Digital-to-Analog Converter Controller
 
+Vídeo: https://youtu.be/Y6YW9zRnSgE
+
 ## Conexão e configuração
 
 - Conectar o pino PB13 da placa ao osciloscópio.
