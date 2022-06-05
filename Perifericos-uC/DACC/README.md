@@ -197,7 +197,7 @@ static uint32_t get_input_value(uint32_t ul_lower_limit, uint32_t ul_upper_limit
 
 ### DACC
 
-O DACC conta com três canais (canal 0, canal 1 e canal 2), cada um com um respectivo pino. No caso desse exemplo, foi usado o canal 0 (pino PB13).
+O DACC conta com três canais (canal 0, canal 1 e canal de Trigger), cada um com um respectivo pino. No caso desse exemplo, foi usado o canal 0 (pino PB13).
 
 A conversão começa assim que pelo menos um canal é habilitado. Uma vez que os dados são escritos na Conversão de Registro de Dados do DACC (DACC_CDRx), 12 períodos de relógio DAC depois, os dados convertidos estão disponíveis na saída analógica correspondente. Os dados seguintes são convertidos somente quando o EOC dos dados anteriores é definido.
 Se o FIFO for esvaziado, nenhuma conversão ocorre e os dados são mantidos na saída do DAC.
