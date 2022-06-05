@@ -27,6 +27,15 @@ Para criptografia ou usos específicos que requerem obrigatoriamente números ve
 
 ![image](https://user-images.githubusercontent.com/62663074/171724487-b2a4dfa9-dd34-4ed6-ab44-5fcc74792ae4.png)
 
+## Explicação
+
+Abaixo segue uma foto com o diagrama de bloco do funcionamento do periférico TRNG. A interface TRNG pode ser cronometrada através do Power Management Controller (PMC), assim o programador deve primeiro configurar o PMC para habilitar o relógio da interface do usuário TRNG. O relógio da interface do usuário é independente de qualquer relógio que possa ser usado no circuito lógico da fonte de entropia.
+
+<img width="272" alt="image" src="https://user-images.githubusercontent.com/62663074/172056488-2f59127b-b6b5-4454-9c20-0db2aaa4a28f.png">
+
+Para realizar a interrupçãpo a interface TRNG possui uma linha de interrupção conectada ao Interrupt Controller. Para lidar com interrupções, o
+O controlador de interrupção deve ser programado antes de configurar o TRNG cujo Id é o 57
+
 ## Main(void)
 
 A função `main` desse programa é responsável por inicializar todos os periféricos envolvidos no projeto e também escreve no terminal a saída de um valor aleatório gerado.
