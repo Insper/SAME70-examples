@@ -25,7 +25,7 @@ Quando as configurações do comparador analógico são modificadas, a saída da
 
 Um sinalizador de comparação é acionado por um evento na saída do comparador analógico e uma interrupção é gerada.
 
-O evento na saída do comparador analógico pode ser selecionado entre ``	fall edge``, flanco ascendente ou qualquer flanco.
+O evento na saída do comparador analógico pode ser selecionado entre ``	falling edge``, ``rising edge`` ou ``any edge``.
 
 O ACC também pode gerar um evento de comparação que pode ser usado pelo Pulse Width Modulation (PWM).
 
