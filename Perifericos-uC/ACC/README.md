@@ -82,7 +82,8 @@ int main(void)
 
 			if (s_volt > 0) {
 				l_volt_dac0 = s_volt;
-				ul_value = ((s_volt - (VOLT_REF / 6))* (MAX_DIGITAL * 6) / 4) / VOLT_REF; /*Coloca novo valor de tensão*/
+				/*Coloca novo valor de tensão*/
+				ul_value = ((s_volt - (VOLT_REF / 6))* (MAX_DIGITAL * 6) / 4) / VOLT_REF; 
 				dacc_write_conversion_data(DACC, ul_value, DACC_CHANNEL_0); 
 				puts("-I- Set ok\r");
 			} else {
