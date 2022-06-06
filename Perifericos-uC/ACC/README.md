@@ -36,6 +36,9 @@ A tensão de saída de DAC0 varia de (1/6)*ADVREF a (5/6)*ADVREF, e a tensão de
 O evento de comparação seria gerado se a tensão de uma entrada fosse alterada pela tensão da outra entrada. Tanto eventos maiores quanto menores podem ser acionados por padrão.
 
 ### Main
+
+A função ``main`` desse programa é responsável por inicializar todos os periféricos envolvidos no projeto e exibir um menu para o usuário que permite definir uma nova tensão de entrada, como também pegar a voltagem do potênciometro.
+
 ```c
 
 int main(void)
