@@ -16,7 +16,7 @@ A tensão de saída de DAC0 varia de (1/6)*ADVREF a (5/6)*ADVREF, e a tensão de
 O evento de comparação seria gerado se a tensão de uma entrada fosse alterada pela tensão da outra entrada. Tanto eventos maiores quanto menores podem ser acionados por padrão.
 
 
-### Main
+#### Main
 
 ### Interrupção
 
@@ -44,7 +44,7 @@ void ACC_Handler(void)
 }
 ```
 
-# Referências
+### Referências
 
 - Atmel Datasheet: https://www.tme.eu/Document/b85c146da65ff583bac4b0dfc098ee7b/ATSAME70-DTE.pdf
 
