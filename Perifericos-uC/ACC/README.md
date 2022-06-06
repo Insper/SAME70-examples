@@ -1,10 +1,10 @@
 #  Analog Comparator Controller (ACC)
 Configura o comparador analógico e gera uma interrupção dependendo nas configurações do usuário.
 
-#  Conexão e configuração
+##  Conexão e configuração
 - Não é necessária
 
-# Explicação 
+## Explicação 
 ![image](https://user-images.githubusercontent.com/62957465/172076354-d0085309-cc7c-4098-94a7-52673859c7b0.png)
 
 O comparador analógico incorpora dois multiplexadores de 8 para 1 que geram duas entradas internas. Essas entradas são comparadas, resultando em uma saída de comparação. 
@@ -30,16 +30,18 @@ void ACC_Handler(void)
 {
 	uint32_t ul_status;
 
+	/* Leitura do status do periférico */
 	ul_status = acc_get_interrupt_status(ACC);
 
-	/* Compare Output Interrupt */
+	/* Comparação da interrupção de saída*/
 	if ((ul_status & ACC_ISR_CE) == ACC_ISR_CE) {
-		if (acc_get_comparison_result(ACC)) {
+		if (acc_get_comparison_result(ACC)) { 
 			puts("-ISR- Voltage Comparison Result: AD0 > DAC0\r");
 		} else {
 			puts("-ISR- Voltage Comparison Result: AD0 < DAC0\r");
 		}
 	}
+}
 ```
 
 # Referências
