@@ -124,6 +124,21 @@ int main(void)
 ```c
 void acc_init(Acc * p_acc, uint32_t ul_select_plus, uint32_t ul_select_minus, uint32_t ul_edge_type, uint32_t ul_invert)
  ```
+- p_acc: Ponteiro de endereço do registrador
+
+- ul_select_plus: Seleção para a entrada positiva do comparador 
+![image](https://user-images.githubusercontent.com/62957465/172091682-3917c68b-4fe6-4ebc-ac25-07d6b7750aee.png)
+
+- ul_select_minus: Seleção para a entrada negativa do comparador 
+![image](https://user-images.githubusercontent.com/62957465/172091766-b4dd8465-732d-4def-a4fd-a619584e438d.png)
+
+- ul_edge_type: Modo de acionamento do sinal de comparação 
+-![image](https://user-images.githubusercontent.com/62957465/172092077-e7aa590c-e937-43a7-adea-befbdc433081.png)
+
+- ul_invert: Inverter o modo de saída do comparador
+- ![image](https://user-images.githubusercontent.com/62957465/172092173-5dcfc376-f212-4386-bfbf-fd9e60263a28.png)
+
+
 
 ### Interrupção
 
