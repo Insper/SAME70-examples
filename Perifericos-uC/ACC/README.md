@@ -74,7 +74,7 @@ int main(void)
 		printf("input: %c\r\n", uc_key);
 
 		switch (uc_key) {
-		case 's': /*s: Set new DAC0 output voltage */
+		case 's': /*s: Definir nova tensão de saída DAC0 */
 		case 'S': 
 			printf("Input DAC0 output voltage (%d~%d mv): ",(VOLT_REF / 6), (VOLT_REF * 5 / 6));
 			s_volt = get_input_voltage(); /*Pega o valor de tensão da entrada inserida pelo usuário*/
@@ -106,7 +106,7 @@ int main(void)
 			printf("-I- Voltage on DAC0 is %ld mv \n\r", (long)l_volt_dac0);
 			break;
 			
-		case 'm': /*m: Display this menu again*/
+		case 'm': /* m: Exibir este menu novamente */
 		case 'M':
 			dsplay_menu();
 			break;
