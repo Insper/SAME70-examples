@@ -4,17 +4,6 @@ Configura o comparador analógico e gera uma interrupção dependendo nas config
 ##  Conexão e configuração
 - Não é necessária
 
-## Diagrama de Blocos
-![image](https://user-images.githubusercontent.com/62957465/172076354-d0085309-cc7c-4098-94a7-52673859c7b0.png)
-
-O comparador analógico incorpora 8 a 1 multiplexadores em ambos suas entradas. 
-
-O DAC0 e o AD0 são selecionados como duas entradas. O usuário pode alterar a tensão de saída do DAC0 e alterar a tensão do AD0.
-
-A tensão de saída de DAC0 varia de (1/6)*ADVREF a (5/6)*ADVREF, e a tensão de entrada de AD0 varia de 0 a ADVREF.
-
-O evento de comparação seria gerado se a tensão de uma entrada fosse alterada pela tensão da outra entrada. Tanto eventos maiores quanto menores podem ser acionados por padrão.
-
 ## Analog Comparator Controller - ACC
 
 O ACC configura o Comparador Analógico e gera uma interrupção de acordo com as configurações do aplicativo do usuário. 
@@ -35,7 +24,97 @@ O ACC também pode gerar um evento de comparação que pode ser usado pelo Pulse
 
 Quando a tensão na entrada positiva (Vin0) é maior que a tensão na entrada negativa (Vin1), então a tensão de saída (VOUT) está saturada para seu alimentação positiva (+VSUPPLY), caso contrário, a saída é saturada com alimentação negativa (-VSUPPLY). Em microcontroladores, como não há tensão de alimentação negativa, GND (nível de terra) é tomado como –VSUPPLY e VCC nível é considerado +VSUPPLY.
 
+## Diagrama de Blocos
+![image](https://user-images.githubusercontent.com/62957465/172076354-d0085309-cc7c-4098-94a7-52673859c7b0.png)
+
+O comparador analógico incorpora 8 a 1 multiplexadores em ambos suas entradas. 
+
+O DAC0 e o AD0 são selecionados como duas entradas. O usuário pode alterar a tensão de saída do DAC0 e alterar a tensão do AD0.
+
+A tensão de saída de DAC0 varia de (1/6)*ADVREF a (5/6)*ADVREF, e a tensão de entrada de AD0 varia de 0 a ADVREF.
+
+O evento de comparação seria gerado se a tensão de uma entrada fosse alterada pela tensão da outra entrada. Tanto eventos maiores quanto menores podem ser acionados por padrão.
+
 ### Main
+```c
+
+int main(void)
+{
+	uint32_t uc_key;
+	int16_t s_volt = 0;
+	uint32_t ul_value = 0;
+	volatile uint32_t ul_status = 0x0;
+	int32_t l_volt_dac0 = 0;
+
+	/* Função para iniçialização do sistema, clocks, DACC e AFEC */
+	init();
+	
+	/* Iniciando a entrada DAC0 em ADVREF/2  */
+	dacc_write_conversion_data(DACC, MAX_DIGITAL / 2, DACC_CHANNEL_0);
+	l_volt_dac0 = (MAX_DIGITAL / 2) * (2 * VOLT_REF / 3) / MAX_DIGITAL +VOLT_REF / 6;
+
+	/* Enable clock for ACC */
+	pmc_enable_periph_clk(ID_ACC);
+	
+	/* Inicializa o ACC*/
+	acc_init(ACC, ACC_MR_SELPLUS_AFE0_AD0, ACC_MR_SELMINUS_DAC0, ACC_MR_EDGETYP_ANY, ACC_MR_INV_DIS);
+
+	/* Enable ACC interrupt */
+	NVIC_EnableIRQ(ACC_IRQn);
+
+	/* Enable */
+	acc_enable_interrupt(ACC);
+
+	dsplay_menu(); /* Função para colocar na Terminal Window as opções do menu  */
+
+	while (1) {
+		while (usart_read(CONSOLE_UART, &uc_key)) {
+		}
+
+		printf("input: %c\r\n", uc_key);
+
+		switch (uc_key) {
+		case 's': /*s: Set new DAC0 output voltage */
+		case 'S': 
+			printf("Input DAC0 output voltage (%d~%d mv): ",(VOLT_REF / 6), (VOLT_REF * 5 / 6));
+			s_volt = get_input_voltage(); /*Pega o valor de tensão da entrada inserida pelo usuário*/
+			puts("\r");
+
+			if (s_volt > 0) {
+				l_volt_dac0 = s_volt;
+				ul_value = ((s_volt - (VOLT_REF / 6))* (MAX_DIGITAL * 6) / 4) / VOLT_REF; /*Coloca novo valor de tensão*/
+				dacc_write_conversion_data(DACC, ul_value, DACC_CHANNEL_0); 
+				puts("-I- Set ok\r");
+			} else {
+				puts("-I- Input voltage is invalid\r");
+			}
+			break;
+		case 'v':  /*v: Pega a voltagem do potenciometro*/
+		case 'V': 
+			/* Começa conversão */
+			afec_start_software_conversion(AFEC0);
+			ul_status = afec_get_interrupt_status(AFEC0); /* Leitura do status do periférico */
+			while ((ul_status & AFEC_ISR_EOC0) != AFEC_ISR_EOC0) {
+				ul_status = afec_get_interrupt_status(AFEC0);
+			}
+			/* Fim da conversão */
+			ul_value = afec_channel_get_value(AFEC0, AFEC_CHANNEL_POTENTIOMETER);
+			
+			/* Converte de AFEC data para valor em voltagem*/
+			s_volt = (ul_value * VOLT_REF) / MAX_DIGITAL;
+			printf("-I- Voltage on potentiometer(AD0) is %d mv\n\r", s_volt);
+			printf("-I- Voltage on DAC0 is %ld mv \n\r", (long)l_volt_dac0);
+			break;
+			
+		case 'm': /*m: Display this menu again*/
+		case 'M':
+			dsplay_menu();
+			break;
+		}
+	}
+}
+
+```
 
 ### Interrupção
 
