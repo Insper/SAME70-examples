@@ -16,6 +16,8 @@ Por fim, vale ressaltar que como o processo de checagem de integridade, necessit
 ## **Diagrama de Blocos**
 Na imagem a seguir podemos ver um diagrama de blocos que resume o funcionamento desse periférico:
 
+![image](https://user-images.githubusercontent.com/63023972/172082241-6c051a33-2152-4460-af65-0f523dc895ab.png)
+
 Alguns pontos desse diagrama valem ser destacados, como por exemplo, os blocos *SHA Hash Engine* e o *Context Registers* estarem ambos enviando e recebendo informações de um para o outro, o motivo disso é que os registradores passam as mensagens que devem ser realizadas a função Hash e depois recebem ela criptografada para que o monitoramento e a comparação sejam feitos e assim a integridade checada, como vemos nos blocos que estão logo abaixo *Monitoring FSM* e *Integrity Scheduler*.
 
 ## **Dependências**
