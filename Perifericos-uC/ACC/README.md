@@ -19,15 +19,19 @@ O ACC configura o Comparador Analógico e gera uma interrupção de acordo com a
 
 O comparador analógico incorpora 8 a 1 multiplexadores em ambos suas entradas. O Comparador Analógico compara duas tensões de entrada analógicas, e o resultado dessa comparação fornece uma comparação saída (emite um nível de sinal indicando qual das entradas é maior ou menor) e uma interrupção pode ser gerada de acordo. Um comparador analógico é basicamente um amplificador sem feedback e, portanto, tem ganho muito alto.
 
-O aplicativo do usuário pode selecionar uma alta velocidade ou
-opção de baixa potência, o nível de histerese, detecção de borda e polaridade.
+O usuário pode selecionar uma alta velocidade ou opção de baixa potência, o nível de histerese, detecção de borda e polaridade.
+
+Quando as configurações do comparador analógico são modificadas, a saída da célula analógica pode ser inválida. 
+
+Um sinalizador de comparação é acionado por um evento na saída do comparador analógico e uma interrupção é gerada.
+
+O evento na saída do comparador analógico pode ser selecionado entre ``	fall edge``, flanco ascendente ou qualquer flanco.
 
 O ACC também pode gerar um evento de comparação que pode ser usado pelo Pulse Width Modulation (PWM).
 
 ![image](https://user-images.githubusercontent.com/62957465/172083444-b36941b3-36df-4993-ab29-b3cab1f9e7a7.png)
 
 Quando a tensão na entrada positiva (Vin0) é maior que a tensão na entrada negativa (Vin1), então a tensão de saída (VOUT) está saturada para seu alimentação positiva (+VSUPPLY), caso contrário, a saída é saturada com alimentação negativa (-VSUPPLY). Em microcontroladores, como não há tensão de alimentação negativa, GND (nível de terra) é tomado como –VSUPPLY e VCC nível é considerado +VSUPPLY.
-
 
 ### Main
 
