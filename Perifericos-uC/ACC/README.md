@@ -120,6 +120,11 @@ int main(void)
 
 ```
 
+### Inicialização 
+```c
+void acc_init(Acc * p_acc, uint32_t ul_select_plus, uint32_t ul_select_minus, uint32_t ul_edge_type, uint32_t ul_invert)
+ ```
+
 ### Interrupção
 
 ![image](https://user-images.githubusercontent.com/62957465/172090861-626aff4b-a012-4188-9ba5-185cfa5ff998.png)
@@ -147,6 +152,8 @@ void ACC_Handler(void)
 	}
 }
 ```
+
+
 
 ## Referências
 
