@@ -241,3 +241,6 @@ icm_set_hash_area_addr(ICM, (uint32_t)output_sha);
 
 ## **Curiosidade**
 A função Hash utilizada no ICM pertence ao *Secure Hash Algorithm* (SHA), o qual é compatível com o  American FIPS (Federal Information Processing Standards ou Padrões Federais de Processamento de Informações).
+
+## **Vídeo**
+https://youtu.be/RhPoz6aJIAY
