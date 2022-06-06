@@ -122,6 +122,8 @@ int main(void)
 
 ### Interrupção
 
+![image](https://user-images.githubusercontent.com/62957465/172090861-626aff4b-a012-4188-9ba5-185cfa5ff998.png)
+
 O ACC tem uma linha de interrupção conectada ao Interrupt Controller (IC). Para lidar com interrupções, o IC deve ser programado antes de configurar o ACC.
 
 ```c
