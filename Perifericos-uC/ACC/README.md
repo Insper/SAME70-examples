@@ -22,6 +22,7 @@ O evento de comparação seria gerado se a tensão de uma entrada fosse alterada
 
 O ACC tem uma linha de interrupção conectada ao Interrupt Controller (IC). Para lidar com interrupções, o IC deve ser programado antes de configurar o ACC.
 
+```
 /**
  * Interrupt handler for the ACC.
  */
@@ -39,6 +40,7 @@ void ACC_Handler(void)
 			puts("-ISR- Voltage Comparison Result: AD0 < DAC0\r");
 		}
 	}
+```
 
 # Referências
 
