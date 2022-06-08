@@ -23,7 +23,7 @@ Geradores de números aleatórios previsíveis (RNGs) abrem portas para muitos a
 
 Existe também dispositivos que criam os números pseudoaleátorios, através de ou aloritmo ou de um dispositivo em si que necessita que uma "semente" seja usada para a geração de uma sequência numérica. Eles não são verdadeiramente aleatórios justamente por necessitar de uma "semente geradora" que gera uma sequência de números que se repetem com um período tão exorbitante, que podemos ignorá-lo. Embora os números gerados pareçam imprevisíveis em uma execução de um programa, a sequência de números é exatamente a mesma de uma execução para a seguinte. Isso ocorre porque a semente inicial é sempre a mesma. Isso é conveniente quando você está depurando um programa, mas é inútil se você quiser que o programa se comporte de forma imprevisível. Se você quiser uma série pseudo-aleatória diferente toda vez que seu programa for executado, você deverá especificar uma semente diferente a cada vez. Para propósitos comuns, basear a semente no tempo atual funciona bem.
 
-Para criptografia ou usos específicos que requerem obrigatoriamente números verdadeiramente aleatórios é que será utilizado o TRNG pois sempre será garantido um número aleatório sempre que nao depende de nenhuma "semente geradora".
+Para criptografia ou usos específicos que requerem obrigatoriamente números verdadeiramente aleatórios será nesse caso que será utilizado o nosso periférico pois sempre será garantido um número aleatório que nao depende de nenhuma "semente geradora".
 
 ![image](https://user-images.githubusercontent.com/62663074/171724487-b2a4dfa9-dd34-4ed6-ab44-5fcc74792ae4.png)
 
@@ -34,7 +34,7 @@ Abaixo segue uma foto com o diagrama de bloco do funcionamento do periférico TR
 <img width="272" alt="image" src="https://user-images.githubusercontent.com/62663074/172056488-2f59127b-b6b5-4454-9c20-0db2aaa4a28f.png">
 
 Para realizar a interrupçãpo a interface TRNG possui uma linha de interrupção conectada ao Interrupt Controller. Para lidar com interrupções, o
-O controlador de interrupção deve ser programado antes de configurar o TRNG cujo Id é o 57
+O controlador de interrupção deve ser programado antes de configurar o TRNG cujo Id é o 57. Para que esses números sejam gerados, é antes necessário desbloquear o registrador do TRNG com uma `Key` como espécie de chave mestre, essa chave é um HEX -> `0x524E47` que significa RNG em caracteres ascii. Quando utilizada pela primeira vez o registrador é desbloqueado e então permite-se encontrar os números aleatórios. Quando utilizada essa chave pela segunda vez, esse registrador "desliga" e então não é mais possível criar esses númeoros.
 
 ## Main(void)
 
@@ -91,6 +91,14 @@ void TRNG_Handler(void)
 }
 ```
 
+### Saída no Terminal
+
+Ao rodarmos o código na placa, utilizamos do Terminal Window para visualizar as saídas, pois o código na forma que se encontra, fica gerando números aleatórios sem nenhuma interrupção pois fica constantemente chando o `TRNG_Handler`.
+
+<img width="337" alt="image" src="https://user-images.githubusercontent.com/62663074/172645925-d6e8b7b1-3b06-4f06-9cf4-0a75b6e6f4b2.png">
+
+Para escolher apenas um numero da lista de numeros gerados (quase que instantaneamente) é preciso utilizar de um botão com interrupção e quando for pressionado, ele então chama as funções do TRNG e guarda essa chamada em uma variável e printa.
+
 ## True Random Number Generator - TRNG
 
 Ele é um periférico de geração de números aleatórios muito utilizados principalmente o campo da criptografia assim como no próprio campo da computação para geração dos contratos e algoritmos respectivamentes.
@@ -102,8 +110,7 @@ Segue um exemplo visual de como o TRNG funciona:
 
 <img width="405" alt="image" src="https://user-images.githubusercontent.com/62663074/172023626-c8ba8207-ef9b-447b-8353-606c574c170c.png">
 
-
-
+Como o TRNG trabalha com o sequências de clock da placa, a geração dos números é extremamente rápida e eficiente, a não ser que a placa esteja com alguma limitação de clock ou muitas tarefas que a sobrecarreguem e deixe o clock lento, gerando menos números por consequência. Agora a Lib em C para geração de pseudo-números aleatórios precisa sempre de uma seed geradora que sempre gera a mesma sequência, isso para casos menores ou apenas de uma pequena depuração de código é rapida e eficaz, porém para casos maiores ou mais complexos como criptografia, ou computação, essa `seed` precisa estar sempre se alterando e para que isso seja feito demora mais tempo que a geração de núemros através do clock da placa com o TRNG. 
 
 
 
