@@ -80,29 +80,11 @@ $ rustc -V
 rustc 1.61.0 (fe5b13d68 2022-05-18)
 ```
 
-- Por questões de largura de banda e uso de disco, a instalação padrão suporta apenas compilação nativa (para o seu x86-64, por exemplo). Para adicionar suporte de compilação cruzada para as arquiteturas ARM Cortex-M, escolha um dos seguintes destinos de compilação. Para a placa SAME-70 usada para os exemplos, use o destino thumbv7em-none-eabihf.
+- Por questões de largura de banda e uso de disco, a instalação padrão suporta apenas compilação nativa (para o seu x86-64, por exemplo). Para adicionar suporte de compilação cruzada para as arquiteturas ARM Cortex-M, devemos instalar o compilador para nossa arquitetura. Para a placa SAME-70, use o compilador `thumbv7em-none-eabihf`. Para instalar, execute o comando abaixo:
 
 ```
-Cortex-M0, M0+, and M1 (ARMv6-M architecture):
-$ rustup target add thumbv6m-none-eabi
-
-Cortex-M3 (ARMv7-M architecture):
-$ rustup target add thumbv7m-none-eabi
-
-Cortex-M4 and M7 without hardware floating point (ARMv7E-M architecture):
-$ rustup target add thumbv7em-none-eabi
-
 Cortex-M4F and M7F with hardware floating point (ARMv7E-M architecture):
 $ rustup target add thumbv7em-none-eabihf
-
-Cortex-M23 (ARMv8-M architecture):
-$ rustup target add thumbv8m.base-none-eabi
-
-Cortex-M33 and M35P (ARMv8-M architecture):
-$ rustup target add thumbv8m.main-none-eabi
-
-Cortex-M33F and M35PF with hardware floating point (ARMv8-M architecture):
-$ rustup target add thumbv8m.main-none-eabihf
 ```
 
 ### Cargo-binutils
@@ -153,7 +135,7 @@ Nesta seção, usaremos nosso hardware de referência, o SAME70. Este microcontr
 
 ## Configurando
 
-1. O passo número um é definir um destino de compilação padrão em `.cargo/config.toml`.
+1. O passo número um é definir um destino de compilação padrão em `.cargo/config.toml`. Para fazer isso, descomente o target para a nossa placa (o `thumbv7em-none-eabihf` que tinhamos instalado anteriormente)
 
 ```
 # Pick ONE of these compilation targets
@@ -163,9 +145,9 @@ Nesta seção, usaremos nosso hardware de referência, o SAME70. Este microcontr
 target = "thumbv7em-none-eabihf" # Cortex-M4F and Cortex-M7F (with FPU)
 ```
 
-Usaremos o thumbv7em-none-eabihf, pois cobre o Cortex-M7F.
+Usaremos o `thumbv7em-none-eabihf`, pois cobre o Cortex-M7F.
 
-2. A segunda etapa é inserir as informações da região de memória no arquivo `memory.x`.
+2. A segunda etapa é inserir as informações da região de memória que vimos anteriormente no manual do SAME-70 no arquivo `memory.x`.
 
 ```
 /* Memory Spaces Definitions */
@@ -178,63 +160,159 @@ MEMORY
 
 ## Overview do Programa
 
-Por conveniência, aqui estão as partes mais importantes do código-fonte em `src/main.rs`
+Por conveniência, aqui está o código-fonte localizado no diretório `src/main.rs`
 
 ```rust
 #![no_std]
 #![no_main]
 
 use panic_halt as _;
-
 use cortex_m_rt::entry;
+use cortex_m::asm;
+
+struct Pio {
+    pio_per: *mut u32, // PIO Enable Register
+    pio_oer: *mut u32, // PIO Output Enable Register
+    pio_sodr: *mut u32, // Set Output Data Register
+    pio_codr: *mut u32, // Clear Output Data Register
+    pio_puer: *mut u32, // Pull-up Enable Register
+    pio_pudr: *mut u32, // Pull-up Disable Register
+    pio_ier: *mut u32, // Interrupt Enable Register
+    pio_ifscer: *mut u32, // Input Filter Slow Clock Enable Register
+    pio_ifscdr: *mut u32, // Input Filter Slow Clock Disable Register
+    pio_mder: *mut u32, // Multi-driver Enable Register
+    pio_mddr: *mut u32, // Multi-driver Disable Register
+}
+
+fn pio_set(p_pio: &Pio, ul_mask: u32) {
+    unsafe { *(p_pio.pio_sodr)= ul_mask };
+}
+
+fn pio_clear(p_pio: &Pio, ul_mask: u32) {
+    unsafe { *(p_pio.pio_codr)= ul_mask };
+}
+
+fn pio_pull_up(p_pio: &Pio, ul_mask: u32, ul_pull_up_enable: bool) {
+    if ul_pull_up_enable {
+        unsafe { *(p_pio.pio_puer) = ul_mask };
+    } else {
+        unsafe { *(p_pio.pio_pudr) = ul_mask };
+    }
+}
+
+fn pio_set_input(p_pio: &Pio, ul_mask: u32, ul_attribute: bool) {
+    unsafe { *(p_pio.pio_ier) = ul_mask };
+
+    if ul_attribute {
+        pio_pull_up(p_pio, ul_mask, true);
+        unsafe { *(p_pio.pio_ifscer) = ul_mask };
+    } else {
+        pio_pull_up(p_pio, ul_mask, false);
+        unsafe { *(p_pio.pio_ifscdr) = ul_mask };
+    }
+}
+
+fn pio_set_output(
+    p_pio: &Pio,
+    ul_mask: u32,
+    ul_default_level: bool,
+    ul_multidrive_enable: bool,
+    ul_pull_up_enable: bool)
+{
+
+    unsafe { *(p_pio.pio_per) = ul_mask };
+    unsafe { *(p_pio.pio_oer) = ul_mask };
+
+    if ul_default_level {
+        pio_set(p_pio, ul_mask);
+    } else {
+        pio_clear(p_pio, ul_mask);
+    }
+
+    if ul_multidrive_enable {
+        unsafe { *(p_pio.pio_mder) = ul_mask };
+    } else {
+        unsafe { *(p_pio.pio_mddr) = ul_mask };
+    }
+
+    pio_pull_up(p_pio, ul_mask, ul_pull_up_enable);
+}
+
+fn delay_ms(ms: u32) {
+    for _wait in 0..ms {
+        asm::nop();
+    }
+}
 
 #[entry]
 fn main() -> ! {
 
-    let pioc_per: *mut i32  = 0x400e1200 as *mut i32;
-    let pioc_oer: *mut i32  = 0x400e1210 as *mut i32;
-    let pioc_odsr: *mut i32  = 0x400e1238 as *mut i32;
-    let pioc_ower: *mut i32  = 0x400e12a0 as *mut i32;
-    let pioc_owdr: *mut i32  = 0x400e12a4 as *mut i32;
-    let wdt_mr: *mut i32  = 0x400e1854 as *mut i32;
+    let pioc = Pio {
+        pio_per: 0x400e1200 as *mut u32,
+        pio_oer: 0x400e1210 as *mut u32,
+        pio_sodr: 0x400E1230 as *mut u32,
+        pio_codr: 0x400E1234 as *mut u32,
+        pio_puer: 0x400E1264 as *mut u32,
+        pio_pudr: 0x400E1260 as *mut u32,
+        pio_ier: 0x400E1240 as *mut u32,
+        pio_ifscer: 0x400E1284 as *mut u32,
+        pio_ifscdr: 0x400E1280 as *mut u32,
+        pio_mder: 0x400E1250 as *mut u32,
+        pio_mddr: 0x400E1254 as *mut u32,
+    };
+
+    let ul_pioc8_mask: u32 = 1 << 8;
+
+    let pioa = Pio {
+        pio_per: 0x400E0E00 as *mut u32,
+        pio_oer: 0x400E0E10 as *mut u32,
+        pio_sodr: 0x400E0E30 as *mut u32,
+        pio_codr: 0x400E0E34 as *mut u32,
+        pio_puer: 0x400E0E64 as *mut u32,
+        pio_pudr: 0x400E0E60 as *mut u32,
+        pio_ier: 0x400E0E40 as *mut u32,
+        pio_ifscer: 0x400E0E84 as *mut u32,
+        pio_ifscdr: 0x400E0E80 as *mut u32,
+        pio_mder: 0x400E0E50 as *mut u32,
+        pio_mddr: 0x400E0E54 as *mut u32,
+    };
+
+    let ul_pioa11_mask: u32 = 1 << 11;
+
+    let wdt_mr: *mut u32  = 0x400e1854 as *mut u32;
+
+    pio_set_output(&pioc, ul_pioc8_mask, false, false, false);
+    pio_set_input(&pioa, ul_pioa11_mask, false);
+
 
     unsafe {
         *wdt_mr = 0x000080000; // Disable watchdog timer.
-
-        *pioc_per = 0x100;
-        *pioc_oer = 0x100;
-        *pioc_owdr = 0;
-        *pioc_ower = 0x100;
     }
 
     loop {
-        unsafe {
-            *pioc_odsr  ^= 0x100;
-        }
+        pio_clear(&pioc, ul_pioc8_mask);
 
-        for _wait in 0..10000 {}
+        delay_ms(100000);
+
+        pio_set(&pioc, ul_pioc8_mask);
+
+        delay_ms(100000);
     }
 }
+
 ```
 
 Este programa é um pouco diferente de um programa Rust padrão, então vamos dar uma olhada mais de perto.
 
-- #![no_std] indica que este programa não será vinculado ao compilador 'std'. Em vez disso, ele será vinculado ao seu subconjunto: o compilador 'core'.
+- `#![no_std]` indica que este programa não será vinculado ao compilador 'std'. Em vez disso, ele será vinculado ao seu subconjunto: o compilador 'core'.
 
-- #![no_main] indica que este programa não usará a interface principal padrão que a maioria dos programas Rust usa.
+- `#![no_main]` indica que este programa não usará a interface principal padrão que a maioria dos programas Rust usa.
 
-- use panic*halt como *;. Este padrão fornece um panic_handler que define o comportamento de pânico do programa.
+- `use panic_halt as _;` Este padrão fornece um panic_handler que define o comportamento de pânico do programa.
 
-- #[entry] é um atributo fornecido pela biblioteca cortex-m-rt que é usada para marcar o ponto de entrada do programa. Como não estamos usando a interface principal padrão, precisamos de outra maneira de indicar o ponto de entrada do programa, que seria #[entry].
+- `#[entry]` é um atributo fornecido pela biblioteca cortex-m-rt que é usada para marcar o ponto de entrada do programa. Como não estamos usando a interface principal padrão, precisamos de outra maneira de indicar o ponto de entrada do programa, que seria #[entry].
 
-- fn main() -> !. Nosso programa será o único processo em execução no hardware de destino, então não queremos que ele termine! Usamos uma função divergente (o -> ! bit na assinatura da função) para garantir que em tempo de compilação seja esse o caso.
-
-- ![](imgs/PIO_PER.png)
-- ![](imgs/PIO_OER.png)
-- ![](imgs/PIO_ODSR.png)
-- ![](imgs/PIO_OWER.png)
-- ![](imgs/PIO_OWDR.png)
-- ![](imgs/WDT_MR.png)
+- `fn main() -> !` Nosso programa será o único processo em execução no hardware de destino, então não queremos que ele termine! Usamos uma função divergente (o -> ! bit na assinatura da função) para garantir que em tempo de compilação seja esse o caso.
 
 ## Compilando o código
 
@@ -261,7 +339,7 @@ Dentro de cada uma dessas pastas teremos os arquivos executáveis `blink-led` (s
 
 Primeiro, vá para o caminho onde está o executável:
 
-1. `$ cd thumbv7em-none-eabihf/release` ou `$ cd thumbv7em-none-eabihf/debug`
+1. `$ cd target/thumbv7em-none-eabihf/release` ou `$ cd target/thumbv7em-none-eabihf/debug`
 
 2. Execute em um terminal o comando:
 
@@ -278,3 +356,9 @@ Para rodar o código com o GDB, devemos primeiro executar o openocd em outro ter
 Depois executamos o gdb com o script `openocd.gdb` que está nesse repositório
 
 2. `$ gdb -x openocd.gdb target/thumbv7em-none-eabihf/debug/blink-led` ou simplesmente rode `$ cargo run`
+
+## Referências
+
+- [Rust Embedded Book](https://docs.rust-embedded.org/book/intro/index.html)
+- [Programming of ARM Cortex-M microcontrollers](https://svenssonjoel.github.io/pages-2021/cortex-m-assembler-0/index.html)
+- [Low Level Learning YT channel](https://www.youtube.com/c/LowLevelLearning)
