@@ -1,3 +1,7 @@
+
+HC-05_ATCommandSet -> https://s3-sa-east-1.amazonaws.com/robocore-lojavirtual/709/HC-05_ATCommandSet.pdf
+HC-06_ATCommandSet -> https://mcuoneclipse.com/2013/06/19/using-the-hc-06-bluetooth-module/
+
 # Bluetooth HC-05
 
 Exemplo de como usar o bluetooth HC-05 com o kit de desenvolvimento
