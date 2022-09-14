@@ -16,7 +16,7 @@
 /* RTOS                                                                */
 /************************************************************************/
 
-#define TASK_ADC_STACK_SIZE (1024*10 / sizeof(portSTACK_TYPE))
+#define TASK_ADC_STACK_SIZE (1024 * 10 / sizeof(portSTACK_TYPE))
 #define TASK_ADC_STACK_PRIORITY (tskIDLE_PRIORITY)
 
 extern void vApplicationStackOverflowHook(xTaskHandle *pxTask,
@@ -30,6 +30,8 @@ extern void xPortSysTickHandler(void);
 /* recursos RTOS                                                        */
 /************************************************************************/
 
+TimerHandle_t xTimer;
+
 /** Queue for msg log send data */
 QueueHandle_t xQueueADC;
 
@@ -42,8 +44,8 @@ typedef struct {
 /************************************************************************/
 
 static void USART1_init(void);
-void TC_init(Tc *TC, int ID_TC, int TC_CHANNEL, int freq);
-static void config_AFEC_pot(Afec *afec, uint32_t afec_id, uint32_t afec_channel, afec_callback_t callback);
+static void config_AFEC_pot(Afec *afec, uint32_t afec_id, uint32_t afec_channel,
+                            afec_callback_t callback);
 static void configure_console(void);
 
 /************************************************************************/
@@ -79,20 +81,7 @@ extern void vApplicationMallocFailedHook(void) {
 /* handlers / callbacks                                                 */
 /************************************************************************/
 
-void TC1_Handler(void) {
-  volatile uint32_t ul_dummy;
-
-  ul_dummy = tc_get_status(TC0, 1);
-
-  /* Avoid compiler warning */
-  UNUSED(ul_dummy);
-
-  /* Selecina canal e inicializa conversão */
-  afec_channel_enable(AFEC_POT, AFEC_POT_CHANNEL);
-  afec_start_software_conversion(AFEC_POT);
-}
-
-static void AFEC_pot_Callback(void) {
+static void AFEC_pot_callback(void) {
   adcData adc;
   adc.value = afec_channel_get_value(AFEC_POT, AFEC_POT_CHANNEL);
   BaseType_t xHigherPriorityTaskWoken = pdTRUE;
@@ -103,12 +92,33 @@ static void AFEC_pot_Callback(void) {
 /* TASKS                                                                */
 /************************************************************************/
 
+void vTimerCallback(TimerHandle_t xTimer) {
+  /* Selecina canal e inicializa conversão */
+  afec_channel_enable(AFEC_POT, AFEC_POT_CHANNEL);
+  afec_start_software_conversion(AFEC_POT);
+}
+
 static void task_adc(void *pvParameters) {
 
   // configura ADC e TC para controlar a leitura
-  config_AFEC_pot(AFEC_POT, AFEC_POT_ID, AFEC_POT_CHANNEL, AFEC_pot_Callback);
-  TC_init(TC0, ID_TC1, 1, 10);
-  tc_start(TC0, 1);
+  config_AFEC_pot(AFEC_POT, AFEC_POT_ID, AFEC_POT_CHANNEL, AFEC_pot_callback);
+
+  xTimer = xTimerCreate(/* Just a text name, not used by the RTOS
+                        kernel. */
+                        "Timer",
+                        /* The timer period in ticks, must be
+                        greater than 0. */
+                        100,
+                        /* The timers will auto-reload themselves
+                        when they expire. */
+                        pdTRUE,
+                        /* The ID is used to store a count of the
+                        number of times the timer has expired, which
+                        is initialised to 0. */
+                        (void *)0,
+                        /* Timer callback */
+                        vTimerCallback);
+  xTimerStart(xTimer, 0);
 
   // variável para recever dados da fila
   adcData adc;
@@ -189,22 +199,6 @@ static void config_AFEC_pot(Afec *afec, uint32_t afec_id, uint32_t afec_channel,
   NVIC_EnableIRQ(afec_id);
 }
 
-void TC_init(Tc *TC, int ID_TC, int TC_CHANNEL, int freq) {
-  uint32_t ul_div;
-  uint32_t ul_tcclks;
-  uint32_t ul_sysclk = sysclk_get_cpu_hz();
-
-  pmc_enable_periph_clk(ID_TC);
-
-  tc_find_mck_divisor(freq, ul_sysclk, &ul_div, &ul_tcclks, ul_sysclk);
-  tc_init(TC, TC_CHANNEL, ul_tcclks | TC_CMR_CPCTRG);
-  tc_write_rc(TC, TC_CHANNEL, (ul_sysclk / ul_div) / freq);
-
-  NVIC_SetPriority((IRQn_Type)ID_TC, 4);
-  NVIC_EnableIRQ((IRQn_Type)ID_TC);
-  tc_enable_interrupt(TC, TC_CHANNEL, TC_IER_CPCS);
-}
-
 /************************************************************************/
 /* main                                                                 */
 /************************************************************************/
@@ -230,7 +224,8 @@ int main(void) {
 
   vTaskStartScheduler();
 
-  while (1) {  }
+  while (1) {
+  }
 
   /* Will only get here if there was insufficient memory to create the idle
    * task. */
