@@ -136,3 +136,7 @@ A pasta `RTOS-OLED-Xplained-Pro-Bluetooth` possui um exemplo de como usar o OLED
 > 1. Alteramos o baudrate do terminal para 9600, devido a taxa de comunicação com o módulo HC05
 
 
+## Comandos AT
+
+- HC-05_ATCommandSet: https://s3-sa-east-1.amazonaws.com/robocore-lojavirtual/709/HC-05_ATCommandSet.pdf
+- HC-06_ATCommandSet: https://mcuoneclipse.com/2013/06/19/using-the-hc-06-bluetooth-module/
