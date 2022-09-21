@@ -100,24 +100,23 @@ configuração de prescale, conforme ilustração a seguir :
 A função a seguir configura o TC para operar com uma frequência **freq**:
 
 ```C
+
 /**
 * Configura TimerCounter (TC) para gerar uma interrupcao no canal (ID_TC e TC_CHANNEL)
 * na taxa de especificada em freq.
-*/
+* O TimerCounter é meio confuso
+* o uC possui 3 TCs, cada TC possui 3 canais
+*	TC0 : ID_TC0, ID_TC1, ID_TC2
+*	TC1 : ID_TC3, ID_TC4, ID_TC5
+*	TC2 : ID_TC6, ID_TC7, ID_TC8
+*
+**/
 void TC_init(Tc * TC, int ID_TC, int TC_CHANNEL, int freq){
 	uint32_t ul_div;
 	uint32_t ul_tcclks;
 	uint32_t ul_sysclk = sysclk_get_cpu_hz();
 
-	uint32_t channel = 1;
-
 	/* Configura o PMC */
-	/* O TimerCounter é meio confuso
-	o uC possui 3 TCs, cada TC possui 3 canais
-	TC0 : ID_TC0, ID_TC1, ID_TC2
-	TC1 : ID_TC3, ID_TC4, ID_TC5
-	TC2 : ID_TC6, ID_TC7, ID_TC8
-	*/
 	pmc_enable_periph_clk(ID_TC);
 
 	/** Configura o TC para operar em  freq hz e interrupçcão no RC compare */
@@ -125,8 +124,8 @@ void TC_init(Tc * TC, int ID_TC, int TC_CHANNEL, int freq){
 	tc_init(TC, TC_CHANNEL, ul_tcclks | TC_CMR_CPCTRG);
 	tc_write_rc(TC, TC_CHANNEL, (ul_sysclk / ul_div) / freq);
 
-	/* Configura e ativa interrupçcão no TC canal 0 */
-	/* Interrupção no C */
+	/* Configura NVIC*/
+  	NVIC_SetPriority(ID_TC, 4);
 	NVIC_EnableIRQ((IRQn_Type) ID_TC);
 	tc_enable_interrupt(TC, TC_CHANNEL, TC_IER_CPCS);
 }
