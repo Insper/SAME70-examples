@@ -4,7 +4,7 @@ O **Real Time Time** (RTT) é um timer similar ao TC, mas bem mais simples. Serv
 
 ## Explicação
 
-O RTT pode gerar interrupção quando o contador interno atinge um valor determinado, possibilitando realizarmos ações no tempo! O RTT é configurado para operar com uma base de tempo fixa, que iremos chamar de `freqPrescale`. Este valor irá defiinir qual a frequência de operação do relógio, por exemplo, se passarmos o valor 32, o relógio interno do RTT irá incrementar `32 vezes em um único segundo! Ou seja, passado `4`s do ínicio do relógio este valor irá estar em `128`. O valor do `freqPrescale` pode ser na ordem de `Hz` ou `Khz`. Podemos colocar um valor de comparação no relógio (`IrqNPulses`), que quando atingido irá gerar uma interrupção. No exemplo a seguir o RTT é inicialziado para operar com `1000` Hz e gerar um alarme quando atingir `1.5s`:
+O RTT pode gerar interrupção quando o contador interno atinge um valor determinado, possibilitando realizarmos ações no tempo! O RTT é configurado para operar com uma base de tempo fixa, que iremos chamar de `freqPrescale`. Este valor irá defiinir qual a frequência de operação do relógio, por exemplo, se passarmos o valor `32, o relógio interno do RTT irá incrementar `32` vezes em um único segundo! Ou seja, passado `4`s do ínicio do relógio este valor irá estar em `128`. O valor do `freqPrescale` pode ser na ordem de `Hz` ou `Khz`. Podemos colocar um valor de comparação no relógio (`IrqNPulses`), que quando atingido irá gerar uma interrupção. No exemplo a seguir o RTT é inicialziado para operar com `1000` Hz e gerar um alarme quando atingir `1.5s`:
 
 ```c
 RTT_init(1000, 1500, RTT_MR_ALMIEN);
