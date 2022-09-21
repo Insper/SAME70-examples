@@ -31,6 +31,7 @@
 /************************************************************************/
 /* variaveis globais                                                    */
 /************************************************************************/
+volatile int flag_rtt;
 
 /************************************************************************/
 /* prototypes                                                           */
@@ -45,20 +46,12 @@ static void RTT_init(float freqPrescale, uint32_t IrqNPulses, uint32_t rttIRQSou
 
 void RTT_Handler(void) {
   uint32_t ul_status;
-
-  /* Get RTT status - ACK */
   ul_status = rtt_get_status(RTT);
 
   /* IRQ due to Alarm */
   if ((ul_status & RTT_SR_ALMS) == RTT_SR_ALMS) {
-      RTT_init(4, 0, RTT_MR_RTTINCIEN);         
+      flag_rtt = 1;
    }  
-	
-  /* IRQ due to Time has changed */
-  if ((ul_status & RTT_SR_RTTINC) == RTT_SR_RTTINC) {
-     pin_toggle(LED_PIO, LED_IDX_MASK);    // BLINK Led
-   }
-
 }
 
 /************************************************************************/
@@ -113,9 +106,9 @@ static void RTT_init(float freqPrescale, uint32_t IrqNPulses, uint32_t rttIRQSou
 
   /* Enable RTT interrupt */
   if (rttIRQSource & (RTT_MR_RTTINCIEN | RTT_MR_ALMIEN))
-		rtt_enable_interrupt(RTT, rttIRQSource);
+	rtt_enable_interrupt(RTT, rttIRQSource);
   else
-		rtt_disable_interrupt(RTT, RTT_MR_RTTINCIEN | RTT_MR_ALMIEN);
+	rtt_disable_interrupt(RTT, RTT_MR_RTTINCIEN | RTT_MR_ALMIEN);
 		  
 }
 
@@ -128,16 +121,13 @@ int main(void){
   sysclk_init();
   WDT->WDT_MR = WDT_MR_WDDIS;
   io_init();
-    
-  /* 
-  * Ativa RTT para trabalhar por alarme
-  * gerando uma interrupção em 4 s:
-  * aguarda 4 segundos
-  * tempo[s] = 0.25 * 16 = 4s
-  */
-  RTT_init(4, 16, RTT_MR_ALMIEN);         
-	
+    	
+  flag_rtt = 1; // força flag = 1 para inicializar alarme.
   while (1) {
-   
+   if(flag_rtt) {
+	  pin_toggle(LED_PIO, LED_IDX_MASK);    // BLINK Led
+	  RTT_init(4, 16, RTT_MR_ALMIEN);  // inicializa rtt com alarme
+	  flag_rtt = 0;
+    }   
   }  
 }
