@@ -13,37 +13,21 @@ O RTT pode gerar interrupção por duas fontes distintas: `Alarme` ou `Mudança 
 A função `RTT_init` configura e ativa o RTT:
 
 ```c
-static void RTT_init(float freqPrescale, uint32_t IrqNPulses, uint32_t rttIRQSource) {
+static void RTT_init(float freqPrescale, uint32_t IrqNPulses, uint32_t rttIRQSource)
 ```
 
-Vamos dar uma olhada nos argumentos
+Vamos dar uma olhada nos argumentos:
 
-### `freqPrescale`
-
-Define a frequência na qual o RTT irá incrementar o contador. Quanto maior a frequência maior a resolução, porém menor o tempo máximo que conseguimos contar.
-    
-### `IrqNPulses`
-
-Define o valor do arlarme do RTT, causando uma interrupção quando o contador alcançar tal valor. 
-
-> Necessita ativar interrupção.
-
-### rttIRQSource
-
-Define qual tipo de interrupção será ativada:
-
-- `RTT_MR_RTTINCIEN`: Interrupção por incremento (pllPreScale)
-- `RTT_MR_ALMIEN` : Interrupção por alarme (irqRTTvalue)
-
-Note que você pode ativar as duas interrupções simultâneamente: `RTT_MR_RTTINCIEN | RTT_MR_ALMIEN`.
-
-Caso não queria ativar interrupção no RTT (e usar ele apenas como contador), basta passar o valor 0 nesse
-argumento.
+- `freqPrescale`: Define a frequência na qual o RTT irá incrementar o contador. Quanto maior a frequência maior a resolução, porém menor o tempo máximo que conseguimos contar ( o contador é de 32bits).  
+- `IrqNPulses`: Define o valor do arlarme do RTT, causando uma interrupção quando o contador alcançar tal valor. 
+- `rttIRQSource`: Define qual tipo de interrupção será ativada, possíveis argumentos:
+    - `NULL`: Sem interrupção ativida (pode passar qualquer valor para o `IrqNPulses`)
+    - `RTT_MR_ALMIEN` : Interrupção por alarme (IrqNPulses)
+    - ~`RTT_MR_RTTINCIEN`: Interrupção por incremento (pllPreScale)~ (existe mas não vamos usar pois deu muito problema no semestre anterior)
 
 ### RTT_Handler
 
-Função chamada pelo NVIC quando acontecer alguma interrupção do RTT. Notem que 
-no exemplo verificamos por qual motivo o RTT_Handler foi chamado: `RTT_SR_RTTINC` ou `RTT_SR_ALMS`
+Função chamada pelo NVIC quando acontece alguma interrupção do RTT.
 
 ```c
 void RTT_Handler(void) {
@@ -54,48 +38,44 @@ void RTT_Handler(void) {
 
   /* IRQ due to Time has changed */
   if ((ul_status & RTT_SR_RTTINC) == RTT_SR_RTTINC) {
-     pin_toggle(LED_PIO, LED_IDX_MASK);    // BLINK Led
+     rtt_flag = 1;   // BLINK Led
    }
-
-  /* IRQ due to Alarm */
-  if ((ul_status & RTT_SR_ALMS) == RTT_SR_ALMS) {
-      f_rtt_alarme = true;                  // flag RTT alarme
-   }  
 }
-````
+```
 
 ### main
 
 1. O código começa configurando o RTT para operar com alarme: 
-    - incremento a cada 0.25s (4Hz)
-    - Alarme em 16 incrementos que é equivalente a 4s (0.25s * 16 = 4s)  
-    - IRQ: Alarme 
+    - Alarme em 16 incrementos que é equivalente a 4s (1/freqPrescale * IrqNPulses ==> 1/4 * 16 = 4s)  
+    - IRQ: Alarme contador
+    
 ```c
     RTT_init(4, 16, RTT_MR_ALMIEN);
 ```
 
-2. Passado os 4s, o RTT_Handler é chamado por conta do Alarme, então o RTC é configurado para operar com IRQ de incremento.
+2. Passado os 4s o `RTT_handler` é chamado e a `flag_rtt` vira True
 
 ```c
+void RTT_Handler(void) {
+  uint32_t ul_status;
+  ul_status = rtt_get_status(RTT);
+
   /* IRQ due to Alarm */
   if ((ul_status & RTT_SR_ALMS) == RTT_SR_ALMS) {
-      RTT_init(4, 0, RTT_MR_RTTINCIEN);         
-  }  
+      flag_rtt = 1;
+   }  
+}
 ```
 
-3. Agora a cada 0.25s o RTT_Handler é chamado por conta do IRQ de incremento e o estado do pino do LED invertido, fazendo o LED piscar:
+3. E no main, fazemos o toggle do pino do led e inicialziamos o contador novamente (para ele gerar um novo alarme):
 
 ```c
-  /* IRQ due to Time has changed */
-  if ((ul_status & RTT_SR_RTTINC) == RTT_SR_RTTINC) {
-     pin_toggle(LED_PIO, LED_IDX_MASK);    // BLINK Led
-   }
-```
-
-Notem que o nosso super loop está vazio e mesmo assim o LED pisca!!!
-
-```c
+  flag_rtt = 1; // força flag = 1 para inicializar alarme.
   while (1) {
-   
+   if(flag_rtt) {
+	  pin_toggle(LED_PIO, LED_IDX_MASK);    // BLINK Led
+	  RTT_init(4, 16, RTT_MR_ALMIEN);  // inicializa rtt com alarme
+	  flag_rtt = 0;
+    }   
   }  
 ```
