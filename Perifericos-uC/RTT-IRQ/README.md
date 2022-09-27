@@ -39,14 +39,12 @@ Função chamada pelo NVIC quando acontece alguma interrupção do RTT.
 ```c
 void RTT_Handler(void) {
   uint32_t ul_status;
-
-  /* Get RTT status - ACK */
   ul_status = rtt_get_status(RTT);
 
-  /* IRQ due to Time has changed */
-  if ((ul_status & RTT_SR_RTTINC) == RTT_SR_RTTINC) {
-     rtt_flag = 1;   // BLINK Led
-   }
+  /* IRQ due to Alarm */
+  if ((ul_status & RTT_SR_ALMS) == RTT_SR_ALMS) {
+      flag_rtt = 1;
+   }  
 }
 ```
 
