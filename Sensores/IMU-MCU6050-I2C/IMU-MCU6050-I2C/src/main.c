@@ -1,20 +1,20 @@
 /**
- *  ComputaÁ„o Embarcada
+ *  Computa√ß√£o Embarcada
  *  Insper
  *  Rafael Corsi - rafael.corsi@insper.edu.br
- *  CÛdigo exemplo uso I2C
+ *  C√≥digo exemplo uso I2C
  *  Abril - 2017
  *
  *  Bug conhecido : spi read deve ser executado duas vezes ?
  *      - funcao afetada : mcu6050_i2c_bus_read()
  *
  *  Conectar :
- *            MCU  |  SAME70-XPLD | 
- *           ----------------------
- *            SDA  |   EXT2-11    |  
- *            SCL  |   EXT2-12    |
- *            GND  |   EXT2-19    |
- *            VCC  |   EXT2-20    | 
+ *            MCU    |    PIN    |    SAME70-XPLD
+ *           ------------------------------------
+ *            SDA    |    PA3    |    EXT2-11   
+ *            SCL    |    PA4    |    EXT2-12    	
+ *            GND    |    GND    |    EXT2-19    
+ *            VCC    |    VCC    |    EXT2-20     
  * 
  * ref [1] http://playground.arduino.cc/Main/MPU-6050#short
  * ref [2] https://github.com/jarzebski/Arduino-MPU6050/blob/master/MPU6050.cpp
@@ -197,7 +197,7 @@ int main(void){
 	/* Inicializa funcao de delay */
 	delay_init( sysclk_get_cpu_hz());
 
-	/* Inicializa FunÁ„o de fus„o */
+	/* Inicializa Fun√ß√£o de fus√£o */
 	FusionAhrs ahrs;
 	FusionAhrsInitialise(&ahrs);
   
@@ -215,7 +215,7 @@ int main(void){
 		printf("[ERRO] [i2c] [read] \n");
 	}
   
-	// Por algum motivo a primeira leitura È errada.
+	// Por algum motivo a primeira leitura √© errada.
 	if(bufferRX[0] != 0x68){
 		printf("[ERRO] [mcu] [Wrong device] [0x%2X] \n", bufferRX[0]);
 	}
@@ -246,7 +246,7 @@ int main(void){
 		rtn = mcu6050_i2c_bus_read(MPU6050_DEFAULT_ADDRESS, MPU6050_RA_ACCEL_ZOUT_H, &raw_acc_zHigh, 1);
 		rtn = mcu6050_i2c_bus_read(MPU6050_DEFAULT_ADDRESS, MPU6050_RA_ACCEL_ZOUT_L, &raw_acc_zLow,  1);
      
-		// Dados s„o do tipo complemento de dois
+		// Dados s√£o do tipo complemento de dois
 		raw_acc_x = (raw_acc_xHigh << 8) | (raw_acc_xLow << 0);
 		raw_acc_y = (raw_acc_yHigh << 8) | (raw_acc_yLow << 0);
 		raw_acc_z = (raw_acc_zHigh << 8) | (raw_acc_zLow << 0);
@@ -254,8 +254,8 @@ int main(void){
 		proc_acc_y = (float)raw_acc_y/16384;
 		proc_acc_z = (float)raw_acc_z/16384;
 		
-		// Configura range gyroscopio para operar com 250 ∞/s
-		bufferTX[0] = 0x00; // 250 ∞/s
+		// Configura range gyroscopio para operar com 250 ¬∞/s
+		bufferTX[0] = 0x00; // 250 ¬∞/s
 		rtn = mcu6050_i2c_bus_write(MPU6050_DEFAULT_ADDRESS, MPU6050_RA_GYRO_CONFIG, bufferTX, 1);
 				
 		// Le valor do gyr X High e Low
@@ -270,7 +270,7 @@ int main(void){
 		rtn = mcu6050_i2c_bus_read(MPU6050_DEFAULT_ADDRESS, MPU6050_RA_GYRO_ZOUT_H, &raw_gyr_zHigh, 1);
 		rtn = mcu6050_i2c_bus_read(MPU6050_DEFAULT_ADDRESS, MPU6050_RA_GYRO_ZOUT_L, &raw_gyr_zLow,  1);
 				
-		// Dados s„o do tipo complemento de dois
+		// Dados s√£o do tipo complemento de dois
 		raw_gyr_x = (raw_gyr_xHigh << 8) | (raw_gyr_xLow << 0);
 		raw_gyr_y = (raw_gyr_yHigh << 8) | (raw_gyr_yLow << 0);
 		raw_gyr_z = (raw_gyr_zHigh << 8) | (raw_gyr_zLow << 0);
@@ -283,7 +283,7 @@ int main(void){
 		// replace this with actual accelerometer data in g	
 		const FusionVector accelerometer = {proc_acc_x, proc_acc_y, proc_acc_z}; 
    
-		// calcula runtime do cÛdigo acima para definir delta t do programa
+		// calcula runtime do c√≥digo acima para definir delta t do programa
 		int tick = rtt_read_timer_value(RTT);
 		float delta_time = (tick - tick_old)/1000.0;
 		tick_old = tick;
