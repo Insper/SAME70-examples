@@ -3,9 +3,9 @@
 #include "conf_board.h"
 #include "conf_clock.h"
 
-#define PIO_PWM_0 PIOA
-#define ID_PIO_PWM_0 ID_PIOA
-#define MASK_PIN_PWM_0 (1 << 0) 
+#define PIO_PWM_0 PIOD
+#define ID_PIO_PWM_0 ID_PIOD
+#define MASK_PIN_PWM_0 (1 << 11)
 
 void PWM_init(Pwm *p_pwm, uint id_pwm, pwm_channel_t *p_channel, uint channel, uint duty) {
 	/* Enable PWM peripheral clock */
@@ -51,7 +51,7 @@ int main(void) {
   /* Configura pino para ser controlado pelo PWM */
   /* MUITO IMPORTANTE AJUSTAR ESSE CÓDIGO DE ACORDO COM O CANAL E PINO USADO */
   pmc_enable_periph_clk(ID_PIO_PWM_0);
-  pio_set_peripheral(PIO_PWM_0, PIO_PERIPH_A, MASK_PIN_PWM_0 );
+  pio_set_peripheral(PIO_PWM_0, PIO_PERIPH_B, MASK_PIN_PWM_0 );
 
   /* inicializa PWM com duty cycle 23*/
   /* MUITO IMPORTANTE CRIAR UM pwm_channel_t POR CANAL */
