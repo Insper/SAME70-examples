@@ -108,3 +108,25 @@ Note que da tabela para o código, fizemos as seguintes associações:
 | PWM 0        | `PWM0`          |
 | Canal 1      | `PWM_CHANNEL_1` |
 | Periférico A | `PIO_PERIPH_A`  |
+
+## Pinos do EXT
+
+A tabela a seguir (criada pelo Marco) possui um mapa de pinos do PWM que podem ser usados no EXT.
+
+| Instance | Channel | I/O Line | Peripheral |
+| --- | --- | --- | --- |
+| PWM0 | 0 | PA23 | B |
+|  |  | PD20 | A |
+|  |  | PD11 | B |
+| PWM0 | 1 | PA2 | A |
+|  |  | PA24 | B |
+|  |  | PD21 | A |
+| PWM0 | 2 | PD22 | A |
+|  |  | PC19 | B |
+|  |  | PA13 | B |
+| PWM1 | 0 | PA12 | C |
+|  |  | PD1 | B |
+| PWM1 | 1 | PA14 | C |
+|  |  | PD3 | B |
+| PWM1 | 2 | PA31 | D |
+|  |  | PD5 | B |
