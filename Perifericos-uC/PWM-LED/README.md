@@ -1,6 +1,6 @@
 # PWM - LED 
 
-Esse exemplo configura o pino PA0 para ser controlado pelo PWM0, canal 0. Realizando um controle da intensidade luminosa do LED via duty cycle do PWM.
+Esse exemplo configura o pino PD11 para ser controlado pelo PWM0, canal 0. Realizando um controle da intensidade luminosa do LED via duty cycle do PWM.
 
 - Periféricos:
     - PWM0 - Pulse Width Modulation
@@ -10,7 +10,7 @@ Esse exemplo configura o pino PA0 para ser controlado pelo PWM0, canal 0. Realiz
  
 ## Conexão e configuração
 
-- Conectar um LED no pino PD11 (lembre de colocar um resistor)
+- Conectar um LED no pino PD11 (lembre de colocar um resistor).
 
 ## Explicação
 
