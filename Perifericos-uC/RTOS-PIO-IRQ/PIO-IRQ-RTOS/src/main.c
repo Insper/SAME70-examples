@@ -232,7 +232,7 @@ int main(void) {
   board_init();
   configure_console();
 	
-  printf("Sys init ok \n")
+  printf("Sys init ok \n");
 
   /* Attempt to create a semaphore. */
   xSemaphoreBut = xSemaphoreCreateBinary();
