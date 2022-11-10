@@ -82,7 +82,7 @@ Encontramos o pino **PA24** que pertence ao EXT2 e também ao canal 1 do PWM0, c
 |-------|------|-------|-------|------------|
 | PIO A | PA2  | PWM 0 | 1     | A          |
 
-Com as informações podemos fazer o código que inicializa o pino PA24 como sendo controlado pelo PWM:
+Com as informações podemos fazer o código que inicializa o pino PA2 como sendo controlado pelo PWM:
 
 ``` c
 pmc_enable_periph_clk(ID_PIOA);
