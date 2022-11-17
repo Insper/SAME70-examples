@@ -76,13 +76,13 @@ e os pinos disponíveis no EXT2:
 
 ![](doc/ext2.png)
 
-Encontramos o pino **PA24** que pertence ao EXT2 e também ao canal 1 do PWM0, com isso conseguimos preencher a tabela:
+Encontramos o pino **PA2** que pertence ao EXT2 e também ao canal 1 do PWM0, com isso conseguimos preencher a tabela:
 
 | PIO   | Pino | PWM   | Canal | Periférico |
 |-------|------|-------|-------|------------|
 | PIO A | PA2  | PWM 0 | 1     | A          |
 
-Com as informações podemos fazer o código que inicializa o pino PA24 como sendo controlado pelo PWM:
+Com as informações podemos fazer o código que inicializa o pino PA2 como sendo controlado pelo PWM:
 
 ``` c
 pmc_enable_periph_clk(ID_PIOA);
@@ -108,3 +108,25 @@ Note que da tabela para o código, fizemos as seguintes associações:
 | PWM 0        | `PWM0`          |
 | Canal 1      | `PWM_CHANNEL_1` |
 | Periférico A | `PIO_PERIPH_A`  |
+
+## Pinos do EXT
+
+A tabela a seguir (criada pelo Marco) possui um mapa de pinos do PWM que podem ser usados no EXT.
+
+| Instance | Channel | I/O Line | Peripheral |
+| --- | --- | --- | --- |
+| PWM0 | 0 | PA23 | B |
+|  |  | PD20 | A |
+|  |  | PD11 | B |
+| PWM0 | 1 | PA2 | A |
+|  |  | PA24 | B |
+|  |  | PD21 | A |
+| PWM0 | 2 | PD22 | A |
+|  |  | PC19 | B |
+|  |  | PA13 | B |
+| PWM1 | 0 | PA12 | C |
+|  |  | PD1 | B |
+| PWM1 | 1 | PA14 | C |
+|  |  | PD3 | B |
+| PWM1 | 2 | PA31 | D |
+|  |  | PD5 | B |
