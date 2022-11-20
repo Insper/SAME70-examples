@@ -76,13 +76,13 @@ e os pinos disponíveis no EXT2:
 
 ![](doc/ext2.png)
 
-Encontramos o pino **PA24** que pertence ao EXT2 e também ao canal 1 do PWM0, com isso conseguimos preencher a tabela:
+Encontramos o pino **PA2** que pertence ao EXT2 e também ao canal 1 do PWM0, com isso conseguimos preencher a tabela:
 
 | PIO   | Pino | PWM   | Canal | Periférico |
 |-------|------|-------|-------|------------|
 | PIO A | PA2  | PWM 0 | 1     | A          |
 
-Com as informações podemos fazer o código que inicializa o pino PA24 como sendo controlado pelo PWM:
+Com as informações podemos fazer o código que inicializa o pino PA2 como sendo controlado pelo PWM:
 
 ``` c
 pmc_enable_periph_clk(ID_PIOA);
