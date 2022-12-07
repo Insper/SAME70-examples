@@ -1,7 +1,6 @@
 /************************************************************************/
 /* includes                                                             */
 /************************************************************************/
-
 #include <asf.h>
 #include <string.h>
 #include "ili9341.h"
@@ -10,14 +9,11 @@
 #include "conf_board.h"
 
 /************************************************************************/
-/* LEITURA DIGITAL/ANALÓGICA                                            */
+/* LEITURA DIGITAL/ANALï¿½GICA                                            */
 /************************************************************************/
-#define TASK_ADC_STACK_SIZE (4096/ sizeof(portSTACK_TYPE))
-#define TASK_ADC_STACK_PRIORITY (tskIDLE_PRIORITY)
-
 #define AFEC_POT AFEC1
 #define AFEC_POT_ID ID_AFEC1
-#define AFEC_POT_CHANNEL 6 // Canal do pino PD31
+#define AFEC_POT_CHANNEL 6 // Canal do pino PC31
 
 #define LO_MINUS_PIO PIOC
 #define LO_MINUS_PIO_ID ID_PIOC
@@ -30,22 +26,16 @@
 #define LO_PLUS_IDX_MASK (1u << LO_PLUS_IDX)
 
 /************************************************************************/
-/* Globals                                                              */
+/* VariÃ¡veis globais de uso do RTOS                                     */
 /************************************************************************/
 
 TimerHandle_t xTimer;
-
 QueueHandle_t xQueueADC;
 QueueHandle_t xQueueECG;
 
 typedef struct {
 	uint value;
 } adcData;
-
-#define CHAR_DATA_LEN 250
-int ser1_data[CHAR_DATA_LEN];
-lv_obj_t * chart;
-lv_chart_series_t * ser1;
 
 /************************************************************************/
 /* prototypes local                                                     */
@@ -70,12 +60,21 @@ static lv_color_t buf_1[LV_HOR_RES_MAX * LV_VER_RES_MAX];
 static lv_disp_drv_t disp_drv;          /*A variable to hold the drivers. Must be static or global.*/
 static lv_indev_drv_t indev_drv;
 
+/*Vetor de alocaÃ§Ã£o dos pontos a serem mostrados pelo ECG*/
+#define CHAR_DATA_LEN 250
+int ser1_data[CHAR_DATA_LEN];
+lv_obj_t * chart;
+lv_chart_series_t * ser1;
+
 /************************************************************************/
 /* RTOS                                                                 */
 /************************************************************************/
 
 #define TASK_LCD_STACK_SIZE                (1024*6/sizeof(portSTACK_TYPE))
 #define TASK_LCD_STACK_PRIORITY            (tskIDLE_PRIORITY)
+
+#define TASK_ADC_STACK_SIZE (4096/ sizeof(portSTACK_TYPE))
+#define TASK_ADC_STACK_PRIORITY (tskIDLE_PRIORITY)
 
 extern void vApplicationStackOverflowHook(xTaskHandle *pxTask,  signed char *pcTaskName);
 extern void vApplicationIdleHook(void);
@@ -99,16 +98,9 @@ extern void vApplicationMallocFailedHook(void) {
 /************************************************************************/
 /* handlers / callbacks                                                 */
 /************************************************************************/
-void but1_callback(){
-	
-};
-
-void but2_callback(){
-
-};
 
 void vTimerCallback(TimerHandle_t xTimer) {
-	/* Selecina canal e inicializa conversão */
+	/* Selecina canal e inicializa conversï¿½o */
 	afec_channel_enable(AFEC_POT, AFEC_POT_CHANNEL);
 	afec_start_software_conversion(AFEC_POT);
 }
@@ -123,30 +115,19 @@ static void AFEC_pot_callback(void) {
 /* lvgl                                                                 */
 /************************************************************************/
 
-void lv_ex_btn_1(void) {
-	lv_obj_t * label;
-
-	lv_obj_t * btn1 = lv_btn_create(lv_scr_act());
-	lv_obj_align(btn1, LV_ALIGN_CENTER, 0, -40);
-
-	label = lv_label_create(btn1);
-	lv_label_set_text(label, "Corsi");
-	lv_obj_center(label);
-}
-
+/* Tela de amostragem do ECG                                             */
 void lv_screen_chart(void) {
 	chart = lv_chart_create(lv_scr_act());
-	lv_obj_set_size(chart, 300, 250);
+	lv_obj_set_size(chart, 300, 200);
 	lv_obj_align(chart, LV_ALIGN_CENTER, 0, 0);
 	lv_chart_set_type(chart, LV_CHART_TYPE_LINE);
-	lv_chart_set_range(chart,LV_CHART_AXIS_PRIMARY_Y, 0, 4095);
+	lv_chart_set_range(chart,LV_CHART_AXIS_PRIMARY_Y, 100, 4095);
 	lv_chart_set_point_count(chart, CHAR_DATA_LEN);
 	lv_chart_set_div_line_count(chart, 0, 0);
 	lv_chart_set_update_mode(chart, LV_CHART_UPDATE_MODE_SHIFT);
 
 	ser1 = lv_chart_add_series(chart,  lv_palette_main(LV_PALETTE_RED), LV_CHART_AXIS_PRIMARY_Y);
 	lv_chart_set_ext_y_array(chart, ser1, (lv_coord_t *)ser1_data);
-	//lv_obj_set_style_local_line_width(chart, LV_CHART_PART_SERIES, LV_STATE_DEFAULT, 1);
 }
 
 /************************************************************************/
@@ -155,9 +136,11 @@ void lv_screen_chart(void) {
 
 
 static void task_adc(void *pvParameters) {
-	io_init();
+  // Inicia pinos digitais
+  io_init();
   // configura ADC e TC para controlar a leitura
   config_AFEC_pot(AFEC_POT, AFEC_POT_ID, AFEC_POT_CHANNEL, AFEC_pot_callback);
+  // Configura timer para captar pontos a cada 250Hz, permitindo efetividade na captaÃ§Ã£o de pulsos
   xTimer = xTimerCreate("Timer",
                         250,       // amostragem escolhida         
                         pdTRUE,                      
@@ -165,16 +148,27 @@ static void task_adc(void *pvParameters) {
                         vTimerCallback);
   xTimerStart(xTimer, 0);
 
-  // variável para recever dados da fila
+  // variï¿½vel para recever dados da fila
   adcData adc;
 
   while (1) {
-	  if (pio_get(LO_MINUS_PIO,PIO_INPUT,LO_MINUS_IDX_MASK) || pio_get(LO_PLUS_PIO,PIO_INPUT,LO_PLUS_IDX_MASK)){ //Detecta se os pulsos identificados estão na threshold do fabricante, se recebe algo envia sinal não permite leitura analógica
+	//Detecta se os pulsos identificados estï¿½o na threshold do fabricante (filtro passa altas), 
+	// se recebe algo nesse sinal digital, nÃ£o deve exibir o pulso. Segundo o fabricante:
+	/* The AD8232 includes a fast restore function that reduces the
+	duration of otherwise long settling tails of the high-pass filters.
+	After an abrupt signal change that rails the amplifier (such as a
+	leads off condition), the AD8232 automatically adjusts to a
+	higher filter cutoff. This feature allows the AD8232 to recover
+	quickly, and therefore, to take valid measurements soon after
+	connecting the electrodes to the subject.                                                                */
+	if (pio_get(LO_MINUS_PIO,PIO_INPUT,LO_MINUS_IDX_MASK) || pio_get(LO_PLUS_PIO,PIO_INPUT,LO_PLUS_IDX_MASK)){ 
 		   printf("-\n");
-	  }
-     else if(xQueueReceive(xQueueADC, &(adc), 1000)) { // Pulsos adequados
-      printf("ADC: %d \n", adc);
-	  xQueueSend(xQueueECG,&adc.value,0);
+	}
+	// Se dentro do Lead off, realiza a leitura do valor recebido na fila do analÃ³gico, printa seu valor
+	// e envia para a task de gerenciamento grÃ¡fico da tela do ECG
+     else if(xQueueReceive(xQueueADC, &(adc), 1000)) {
+      	printf("ADC: %d \n", adc);
+	  	xQueueSend(xQueueECG,&adc.value,0);
     }
   }
 }
@@ -185,6 +179,7 @@ static void task_lcd(void *pvParameters) {
 	lv_screen_chart();
 	int ecg;
 	for (;;)  {
+		// Recebe valor anÃ¡logico adequado, preenche novo ponto e gera refresh na tela
 		if (xQueueReceive(xQueueECG,&ecg,0)){
 			lv_chart_set_next_value(chart, ser1, ecg);
 			lv_chart_refresh(chart);
@@ -218,7 +213,7 @@ static void config_AFEC_pot(Afec *afec, uint32_t afec_id, uint32_t afec_channel,
   /* Configura trigger por software */
   afec_set_trigger(afec, AFEC_TRIG_SW);
 
-  /*** Configuracao específica do canal AFEC ***/
+  /*** Configuracao especï¿½fica do canal AFEC ***/
   struct afec_ch_config afec_ch_cfg;
   afec_ch_get_config_defaults(&afec_ch_cfg);
   afec_ch_cfg.gain = AFEC_GAINVALUE_0;
@@ -244,7 +239,7 @@ static void config_AFEC_pot(Afec *afec, uint32_t afec_id, uint32_t afec_channel,
 }
 
 void io_init(void) {
-
+	// Configura-se leitura de output digital com Pull-up desligado
 	pmc_enable_periph_clk(LO_MINUS_PIO_ID);
 	pmc_enable_periph_clk(LO_PLUS_PIO_ID);
 	
@@ -253,26 +248,6 @@ void io_init(void) {
 	
 	pio_set_input(LO_PLUS_PIO, LO_PLUS_IDX_MASK, PIO_DEFAULT);
 	pio_pull_up(LO_PLUS_PIO, LO_PLUS_IDX_MASK, 0);
-
-	pio_handler_set(LO_MINUS_PIO, LO_MINUS_PIO_ID, LO_MINUS_IDX_MASK, PIO_IT_EDGE,
-	but1_callback);
-
-	pio_handler_set(LO_PLUS_PIO, LO_PLUS_PIO_ID, LO_PLUS_IDX_MASK, PIO_IT_EDGE,
-	but2_callback);
-
-	pio_enable_interrupt(LO_MINUS_PIO, LO_MINUS_IDX_MASK);
-	pio_enable_interrupt(LO_PLUS_PIO, LO_PLUS_IDX_MASK);
-
-
-	pio_get_interrupt_status(LO_MINUS_PIO);
-	pio_get_interrupt_status(LO_PLUS_PIO);
-
-
-	NVIC_EnableIRQ(LO_MINUS_PIO_ID);
-	NVIC_SetPriority(LO_MINUS_PIO_ID, 4);
-
-	NVIC_EnableIRQ(LO_PLUS_PIO_ID);
-	NVIC_SetPriority(LO_PLUS_PIO_ID, 4);
 }
 
 static void configure_lcd(void) {
@@ -363,7 +338,7 @@ int main(void) {
 	configure_lvgl();
 	
 	xQueueADC = xQueueCreate(250, sizeof(adcData));
-	xQueueECG =  xQueueCreate(10, sizeof(int));
+	xQueueECG =  xQueueCreate(32, sizeof(int));
 	if (xQueueADC == NULL)
 	printf("falha em criar a queue xQueueADC \n");
 
