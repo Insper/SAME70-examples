@@ -142,16 +142,7 @@ static void task_afec(void *pvParameters) {
 	gfx_mono_draw_filled_rect(0, 0, 150, 20, GFX_PIXEL_CLR);
 	gfx_mono_draw_string("4095", 0,0, &sysfont);
 
-	char nome1[]="10";
-	int val1 = 10;
-	
-	char nome2[]="2000";
-	int val2 = 2000;
-	
-	char nome3[]="4095";
-	int val3 = 4095;
-	
-	char *valores_potenciometro[]={&nome1, &nome2, &nome3};
+	int *valores_potenciometro[] = {10, 2000, 4095};
 
 	uint valor_afec;
 	uint valor_oled;
@@ -162,28 +153,24 @@ static void task_afec(void *pvParameters) {
 	
 	for (;;) {
 		if (xQueueReceiveFromISR(xQueueAFEC, &valor_afec, 10)){
-			
 			pot1.valor_atual = valor_afec;
-			
-			
 		} 
 		
 		if (xQueueReceiveFromISR(xQueueModo, &valor_oled, 10)){
 			gfx_mono_draw_filled_rect(0, 0, 150, 20, GFX_PIXEL_CLR);
-			gfx_mono_draw_string("entrou", 0,0, &sysfont);
-			char *valor_potenciometro = valores_potenciometro[valor_oled-1];
+			int *valor_potenciometro = valores_potenciometro[valor_oled-1];
 			
+			char str[128];
+			sprintf(str, "%d", valor_potenciometro);
 			gfx_mono_draw_filled_rect(0, 0, 150, 20, GFX_PIXEL_CLR);
-			gfx_mono_draw_string(valor_potenciometro, 0,0, &sysfont);
+			gfx_mono_draw_string(str, 0,0, &sysfont);
 			
 			if (valor_oled == 1){
-				pot1.valor_desejado = val1;
-			}
-			if (valor_oled == 2){
-				pot1.valor_desejado = val2;
-			}
-			if (valor_oled == 3){
-				pot1.valor_desejado = val3;
+				pot1.valor_desejado = valores_potenciometro[valor_oled-1];
+			} else if (valor_oled == 2){
+				pot1.valor_desejado = valores_potenciometro[valor_oled-1];
+			} else if (valor_oled == 3){
+				pot1.valor_desejado = valores_potenciometro[valor_oled-1];
 			}
 		}
 		
@@ -220,14 +207,9 @@ static void task_motor(void *pvParameters) {
 	
 	/* Initialize PID system, float32_t format */
 	arm_pid_init_f32(&PID, 1);
-	
-	int debug_pot;
 
 	while (1) {
-		if (xQueueReceive(xQueueMOTOR, &pot2, 10)) {
-			debug_pot = 1;		
-		}
-		
+		xQueueReceive(xQueueMOTOR, &pot2, 10);
 		
 		/* Calculate error */
 		convert(&pot2.valor_atual, &pot2.valor_desejado);
@@ -235,9 +217,7 @@ static void task_motor(void *pvParameters) {
 		
 		/* Calculate PID here, argument is error */
 		/* Output data will be returned, we will use it as duty cycle parameter */
-		
 		duty = arm_pid_f32(&PID, pid_error);
-		
 		
 		/* Check overflow, duty cycle in percent */
 		if (duty > 255) {
