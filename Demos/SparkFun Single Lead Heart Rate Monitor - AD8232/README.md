@@ -212,8 +212,9 @@ static void task_lcd(void *pvParameters) {
  ```
 
  ## Vídeo de demonstração
- 
+ Para verificar o Funcionamento do Sensor com ECG ilustrado no display LCD, veja o [vídeo](https://youtube.com/shorts/bZRhbvklFco?feature=share) abaixo:
 
+[![Video](pulsos.jpeg)](https://youtube.com/shorts/bZRhbvklFco?feature=share)
 
  ## Referências
  [Data Sheet AD8232](https://cdn.sparkfun.com/datasheets/Sensors/Biometric/AD8232.pdf)
