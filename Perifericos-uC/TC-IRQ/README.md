@@ -45,8 +45,12 @@ int main(void){
 }
 ```
 
-- `TC_init`: Inicializa TC, **mas não inicializa contagem**
-- `tc_start` Faz com que o TC inicialize a contagem, as interrupções só vão parar quando você chamar a função `tc_stop`.
+- `TC_init(...)`: Inicializa TC, **mas não inicializa contagem**
+- `tc_start(...)` Faz com que o TC inicialize a contagem, as interrupções só vão parar quando você chamar a função `tc_stop(...)`.
+
+Para parar o TC basta usar a função: 
+
+- `tc_stop(TC0, 1)`: Para o TC 0 canal 1
 
 #### Interrupção
 
