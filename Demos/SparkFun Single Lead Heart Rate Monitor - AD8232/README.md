@@ -12,7 +12,7 @@ Exemplo de como usar o sensor de batimentos cardíacos com o kit de desenvolvime
 
 O AD8232 é um pequeno chip usado para medir a atividade elétrica do coração. Esta atividade elétrica pode ser mapeada como um ECG ou Eletrocardiograma. A eletrocardiografia é usada para ajudar a diagnosticar várias doenças cardíacas, apesar deste sensor em específico **não ser indicado para detecção ou diagnóstico de qualquer anomalia ou distúrbio**.
 
-## Entendo na prática o que é o ECG
+## Entendendo na prática o que é o ECG
 De maneira simples, o ECG  pode ser definido em  dois intervalos básicos, o intervalo PR e o intervalo QT, descritos abaixo.
 <div align="center">
     <img src="https://cdn.sparkfun.com/assets/learn_tutorials/2/5/0/EKG_Complex_en.svg.png" style="width:30%;">
@@ -44,8 +44,8 @@ Para a montagem utilizou-se os seguintes pinos:
 | GND  |        GND         | Aterramento  |
 | 3.3V   |        3.3V         | Alimentação| 
 | OUTPUT |         PC31      | Leitura Analógica|
-| LO- |         PC17      | Leitura digital de threshold mínima|
-| LO+ |         PA4      |Leitura digital de threshold máxima|
+| LO- (Leads Off -) |         PC17      | Leitura digital de threshold mínima|
+| LO+ (Leads Off +)|         PA4      |Leitura digital de threshold máxima|
 | LVGL |         EXT2      |Visualização gráfica de ECG|
 
 
@@ -62,7 +62,9 @@ Visualmente a montagem deve seguir o seguinte padrão:
 
 Após a montagem dos componentes eletrônicos, conecte o cabo de três sensores Pads à entrada de captação.
 
-O sensor tem relativa instabilidade, e as conexões Pads, para melhores medições, devem ser colocadas em pontos próximos ao coração além de respeitar o lado correto de sua indicação (escrito "R" [Direita] ou "L"[Esquerda] em cada Pad). Nota-se que apesar destes cuidados, o sensor pode não ter valores totalmente adequados, mas quanto mais menos movimentos (devido a menor ativação muscular), melhor os resultados se mostram. O posicionamento dos Pads pode ser feito conforme nos esquemas abaixo:
+O sensor tem relativa instabilidade, e as conexões Pads, para melhores medições, devem ser colocadas em pontos próximos ao coração além de respeitar o lado correto de sua indicação (escrito "R" [Direita] ou "L"[Esquerda] em cada Pad). 
+
+Nota-se que apesar destes cuidados, o sensor pode não ter valores totalmente adequados, mas quanto mais menos movimentos (devido a menor ativação muscular), melhor os resultados se mostram. O posicionamento dos Pads pode ser feito conforme nos esquemas abaixo:
 <div align="center">
     <img src="https://cdn.sparkfun.com/r/600-600/assets/learn_tutorials/2/5/0/body.png" style="width:30%;">
 </div>
@@ -70,6 +72,7 @@ O sensor tem relativa instabilidade, e as conexões Pads, para melhores mediçõ
 ## Exemplo
 Esta demo tem sua parte principal dentro da pasta **src**.
 
+#### Leitura analógica 
 Para a leitura analógica dos valores gerados pelo sensor, configurou-se o AFEC1, no canal 6 (pino PC31).
 Foram captadas amostras a cada 250Hz, e cada valor lido, fora enviado para a task de processamento (task_adc) que, caso dado seja válido, envia para task de ilustração gráfica do ECG.
 
@@ -98,7 +101,11 @@ static void task_adc(void *pvParameters) {
 }
 ```
 
-Para leitura digital dos valores de Leads off - e Leads off +, com dois tipos de detecção (AC e DC). Segundo fabricante essas detecções ocorrem da seguinte forma:
+#### Detecção de Leads Off (LO- e LO+)
+
+Para leitura digital dos valores de Leads off - e Leads off +, respectivamente **LO-** e **LO+**, com dois tipos de detecção (AC e DC). 
+Assim, nota-se que essa detecção é essencial para detecção de pulsos adequados (retirando falsos positivos) advindos de mal contato, posicionamento inadequado dos Pads ou ligação inadequada de pinos.
+Segundo fabricante essas detecções ocorrem da seguinte forma em Hardware:
 
 >**DC Leads Off Detection**
 
@@ -122,7 +129,7 @@ Para leitura digital dos valores de Leads off - e Leads off +, com dois tipos de
 >within the common-mode range of the instrumentation
 >amplifier. 
 
-Dessa, maneira, configurou-se a leitura desses Outputs digitais para condição de verificação de adequação na medida
+Dessa maneira, configurou-se a leitura desses Inputs digitais via Software, onde estes configurados com Pull-up desabilitado para leitura adequada. 
 ```c
 #define LO_MINUS_PIO PIOC
 #define LO_MINUS_PIO_ID ID_PIOC
@@ -145,7 +152,12 @@ void io_init(void) {
 	pio_set_input(LO_PLUS_PIO, LO_PLUS_IDX_MASK, PIO_DEFAULT);
 	pio_pull_up(LO_PLUS_PIO, LO_PLUS_IDX_MASK, 0);
 }
+```
 
+Posteriormente, analisa-se se algum sinal é detectado via leitura digital, usando função *pio_get*. Caso detecta-se alguma leitura em um desses pinos, significa que uma condição de **Leads Off** foi detectada, logo, o pulso em questão não se encontra como válido para plotagem em ECG, não sendo realizada a leitura analógica.
+
+Esse funcionamento é exemplificado no trecho de código abaixo:
+```c
 static void task_adc(void *pvParameters) {
   // Inicia pinos digitais
   io_init();
@@ -153,13 +165,13 @@ static void task_adc(void *pvParameters) {
   while (1) {
 	//Detecta se os pulsos identificados est�o na threshold do fabricante (filtro passa altas), 
 	// se recebe algo nesse sinal digital, não deve exibir o pulso. Segundo o fabricante:
-	/* The AD8232 includes a fast restore function that reduces the
-	duration of otherwise long settling tails of the high-pass filters.
-	After an abrupt signal change that rails the amplifier (such as a
-	leads off condition), the AD8232 automatically adjusts to a
-	higher filter cutoff. This feature allows the AD8232 to recover
-	quickly, and therefore, to take valid measurements soon after
-	connecting the electrodes to the subject.                                                                */
+			/* The AD8232 includes a fast restore function that reduces the
+			duration of otherwise long settling tails of the high-pass filters.
+			After an abrupt signal change that rails the amplifier (such as a
+			leads off condition), the AD8232 automatically adjusts to a
+			higher filter cutoff. This feature allows the AD8232 to recover
+			quickly, and therefore, to take valid measurements soon after
+			connecting the electrodes to the subject.*/
 	if (pio_get(LO_MINUS_PIO,PIO_INPUT,LO_MINUS_IDX_MASK) || pio_get(LO_PLUS_PIO,PIO_INPUT,LO_PLUS_IDX_MASK)){ 
 		   printf("-\n");
 	}
@@ -167,8 +179,8 @@ static void task_adc(void *pvParameters) {
   }
 }
 ```
-
-Posteriormente, deve-se realizar a exibição gráfica do ECG. Utilizando o display Adafruit, com apoio da biblioteca gráfica LVGL, iremos utilizar o wigdet **lv_chart**, que irá ilustrar os pulsos detectados. Desse modo, declara-se variáveis globais necessárias:
+#### Plotagem de ECG
+Em seguida, deve-se realizar a exibição gráfica do ECG. Utilizando o display Adafruit, com apoio da biblioteca gráfica LVGL, iremos utilizar o wigdet **lv_chart**, que irá ilustrar os pulsos detectados. Desse modo, declara-se variáveis globais necessárias:
 ```c
 /*Vetor de alocação dos pontos a serem mostrados pelo ECG*/
 #define CHAR_DATA_LEN 250
