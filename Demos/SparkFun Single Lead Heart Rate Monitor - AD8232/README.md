@@ -32,7 +32,7 @@ Essa fase de relaxamento redefine os ventrículos para serem novamente preenchid
 Esses processos podem ser vistos de maneira mais adequada com a imagem abaixo. Conseguimos captar esses diferentes estímulos, ao colocar detectores em flancos direitos e esquerdos do corpo, que "fecham" o circuito com os átrios, permitindo a detecção destes via kit de desenvolvimento.
 
 <div align="center">
-    <img src="https://cdn.sparkfun.com/assets/0/5/1/f/b/ECG_principle_slow__1_.gif" style="width:30%;">
+    <img src="https://cdn.sparkfun.com/assets/0/5/1/f/b/ECG_principle_slow__1_.gif" style="width:60%;">
 </div>
 
 ## Conectando
