@@ -1,7 +1,8 @@
 # Potenciômetro Motorizado (PWM - PID)
 
+- Avaliação assíncrona embarcado
 - Ano: 22b
-- Nome: Tiago Vitorino Seixas
+- Alino: Tiago Vitorino Seixas
 - Email: tiagovs1@al.insper.edu.br
 
 Dada uma posição atual do potenciômetro, e uma posição desejada determinada usando o OLED, controla-se o motor para que a posição do potenciômetro mude para a posição desejada. Isso é feito por meio de PWM (Pulse Width Modulation) usado na ativação do motor, que é normalizado por um controlador PID (leva em consideração os ganhos proporcional, integrativo e derivativo).
