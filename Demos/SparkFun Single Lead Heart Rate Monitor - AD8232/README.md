@@ -1,5 +1,10 @@
 # SparkFun Single Lead Heart Rate Monitor - AD8232
 
+- Avaliação assíncrona Computação Embarcada
+- Ano: 22b
+- Aluno: Nívea Abreu
+- Email: niveaadl@al.insper.edu.br
+
 Exemplo de como usar o sensor de batimentos cardíacos com o kit de desenvolvimento SAME70-XPLD.
 <div align="center">
     <img src="https://cdn.sparkfun.com/r/500-500/assets/3/b/a/e/1/Ad8232_headers.jpg" style="width:30%;">
