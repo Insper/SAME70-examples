@@ -5,23 +5,23 @@ Email:tiagovs1@al.insper.edu.br
 
 Dada uma posição atual do potenciômetro, e uma posição desejada determinada usando o OLED, controla-se o motor para que a posição do potenciômetro mude para a posição desejada. Isso é feito por meio de PWM (Pulse Width Modulation) usado na ativação do motor, que é normalizado por um controlador PID (leva em consideração os ganhos proporcional, integrativo e derivativo).
 
-![alt text](https://github.com/TiagoSeixas2103/22b-emb-PM-TiagoSeixas2103/blob/main/Diagrama1.png)
+![alt text](Diagrama1.png)
 
-![alt text](https://github.com/TiagoSeixas2103/22b-emb-PM-TiagoSeixas2103/blob/main/Diagrama2.png)
+![alt text](Diagrama2.png)
 
 ## Componentes/Periféricos usados:
 
 ### Ponte h L298N
 
-![alt text](https://github.com/TiagoSeixas2103/22b-emb-PM-TiagoSeixas2103/blob/main/Ponte_H.png)
+![alt text](Ponte_H.png)
 
 ### Potenciômetro Motorizado
 
-![alt text](https://github.com/TiagoSeixas2103/22b-emb-PM-TiagoSeixas2103/blob/main/pot.jpe)
+![alt text](pot.jpe)
 
 ### Placa OLED
 
-![alt text](https://github.com/TiagoSeixas2103/22b-emb-PM-TiagoSeixas2103/blob/main/OLED.jpeg)
+![alt text](OLED.jpeg)
 
 ## Conexões e configurações da Ponte H, do Potenciômetro, da Placa Atmel e da placa OLED
 
@@ -67,7 +67,7 @@ Para a realização deste módulo, foi utilizada a Biblioteca CMSIS de PID, que 
 
 O WaveForms proporciona um gráfico como o que segue:
 
-![alt text](https://github.com/TiagoSeixas2103/22b-emb-PM-TiagoSeixas2103/blob/main/osciloscopio.PNG)
+![alt text](osciloscopio.PNG)
 
 No gráfico se observa a transição da posição 10 do potenciômetro para a posição 2000, e da posição 2000 para a posição 4095. Como há uso de um controle PID no sistema, percebe-se que essas duas transições não tem oscilações, porém como a alimentação da placa Atmel é de no máximo 5V, a transição é um pouco lenta. Caso se conecte a Ponte h a uma fonte de até 30V, o sistema posssivelmente terá uma resposta mais rápida, porém é provável que seja necessário ajustar os ganhos de PID para essa nova iteração do módulo.
 
