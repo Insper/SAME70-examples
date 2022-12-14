@@ -1,27 +1,22 @@
 # Potenciômetro Motorizado (PWM - PID)
-Ano:22b
-Nome:Tiago Vitorino Seixas
-Email:tiagovs1@al.insper.edu.br
+
+- Ano: 22b
+- Nome: Tiago Vitorino Seixas
+- Email: tiagovs1@al.insper.edu.br
 
 Dada uma posição atual do potenciômetro, e uma posição desejada determinada usando o OLED, controla-se o motor para que a posição do potenciômetro mude para a posição desejada. Isso é feito por meio de PWM (Pulse Width Modulation) usado na ativação do motor, que é normalizado por um controlador PID (leva em consideração os ganhos proporcional, integrativo e derivativo).
 
-![alt text](Diagrama1.png)
-
-![alt text](Diagrama2.png)
+| antes | depois |
+|-------|--------|
+|![alt text](Diagrama1.png) | ![alt text](Diagrama2.png)
 
 ## Componentes/Periféricos usados:
 
-### Ponte h L298N
+Para este exemplo é necessários os seguintes componentes:
 
-![alt text](Ponte_H.png)
-
-### Potenciômetro Motorizado
-
-![alt text](pot.jpe)
-
-### Placa OLED
-
-![alt text](OLED.jpeg)
+| ponte h L298N | potenciômetro motorizado | oled |
+|----------|----------|---------|
+| ![alt text](Ponte_H.png) | ![alt text](pot.jpe) | ![alt text](OLED.jpeg) |
 
 ## Conexões e configurações da Ponte H, do Potenciômetro, da Placa Atmel e da placa OLED
 
@@ -47,25 +42,25 @@ Dada uma posição atual do potenciômetro, e uma posição desejada determinada
 
 # Explicação
 
-O exemplo utiliza do valor atual do potenciômetro, fornecido pela saída 2 do mesmo.
+O exemplo utiliza:
 
-O exmeplo utiliza dos valores predeterminados para serem selecionados pela placa OLED, ao pressionar diferentes botões da mesma.
-
-O exemplo usa as entradas IN1 e IN2 da ponte h para ligar o motor do potenciômetro quando o valor atual do mesmo diferir do valor desejado, com o IN1 atuando como polo positivo da fonte e o IN2 como terra quando o valor desejado é maior do que o valor atual, e o contrário quando valor desejado é menor do que o valor atual.
+- o  valor atual do potenciômetro, fornecido pela saída 2 do mesmo.
+- valores predeterminados para serem selecionados pela placa OLED, ao pressionar diferentes botões da mesma.
+- as entradas IN1 e IN2 da ponte h para ligar o motor do potenciômetro quando o valor atual do mesmo diferir do valor desejado, com o IN1 atuando como polo positivo da fonte e o IN2 como terra quando o valor desejado é maior do que o valor atual, e o contrário quando valor desejado é menor do que o valor atual.
 
 # Potenciometro motorizado - (PWM - PID)
 
-Se utiliza do valor atual do potenciômetro e o valor solicitado ao pressionar um dos botões da placa OLED para saber qual o erro de posição (diferença entre valor atual e valor desejado). Caso o erro seja muito grande, o motor então direciona a posição do potenciômetro para o valor desejado por meio de pulsos gerados pelo PWM, cujo duty é determinado pelo controle PID.
+Se utiliza do valor atual do potenciômetro e o valor solicitado ao pressionar um dos botões da placa OLED para saber qual o erro de posição (diferença entre valor atual e valor desejado). Caso exista algum erro, o motor então atua no motor por meio de pulsos gerados pelo PWM, cujo duty é determinado pelo controle PID.
 
 # Biblioteca CMSIS de PID
 
-Para a realização deste módulo, foi utilizada a Biblioteca CMSIS de PID, que é basicamente um módulo de controlador PID imbutido no projeto. Para usar essa biblioteca, basta importar "arm_math.h". O mais importante dessa biblioteca é que ao invés de calcular todos os parâmetros de um controle PID e aplicá-los, basta definir os três ganhos (proporcional, integral e derivativo) e ajustá-los de acordo com a sua observação das flutuações da tensão medida. Como é exibido no vídeo no final deste readme, a melhor forma de observar essas flutuações é usando um osciloscópio (no vídeo foi usado o app WaveForms com o dispositivo AnalogDiscovery) para examinar se a variação das posições é constante ou não.
+Para a realização deste módulo, foi utilizada a Biblioteca [CMSIS de PID](https://arm-software.github.io/CMSIS-DSP/latest/group__PID.html), que é basicamente um módulo de controlador PID otimizado para chips ARM. Para usar essa biblioteca, basta importar "arm_math.h". O mais importante dessa biblioteca é que ao invés de calcular todos os parâmetros de um controle PID e aplicá-los, basta definir os três ganhos (proporcional, integral e derivativo) e ajustá-los de acordo com a sua observação das flutuações da tensão medida. Como é exibido no vídeo no final deste readme, a melhor forma de observar essas flutuações é usando um osciloscópio (no vídeo foi usado o app WaveForms com o dispositivo AnalogDiscovery) para examinar se a variação das posições é constante ou não.
 
 ```c
 #include "arm_math.h"
 ```
 
-O WaveForms proporciona um gráfico como o que segue:
+O gráfico asseguir demonstra o controle de posição do projeto:
 
 ![alt text](osciloscopio.PNG)
 
