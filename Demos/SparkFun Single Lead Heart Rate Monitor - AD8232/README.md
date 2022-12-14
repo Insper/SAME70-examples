@@ -217,6 +217,8 @@ static void task_lcd(void *pvParameters) {
 [![Video](pulsos.jpeg)](https://youtube.com/shorts/bZRhbvklFco?feature=share)
 
  ## Referências
- [Data Sheet AD8232](https://cdn.sparkfun.com/datasheets/Sensors/Biometric/AD8232.pdf)
+ [Data Sheet do AD8232](https://cdn.sparkfun.com/datasheets/Sensors/Biometric/AD8232.pdf)
 
- [SparkFun Tutorial](https://learn.sparkfun.com/tutorials/ad8232-heart-rate-monitor-hookup-guide/)
+ [SparkFun Tutorial / Documentação ](https://learn.sparkfun.com/tutorials/ad8232-heart-rate-monitor-hookup-guide/)
+
+ [AD8232 Esquemática](https://cdn.sparkfun.com/datasheets/Sensors/Biometric/AD8232_Heart_Rate_Monitor_v10.pdf)
