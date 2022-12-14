@@ -2,7 +2,7 @@
 
 Exemplo de como usar o sensor de batimentos cardíacos com o kit de desenvolvimento SAME70-XPLD.
 <div align="center">
-    <img src="https://cdn.sparkfun.com/r/500-500/assets/3/b/a/e/1/Ad8232_headers.jpg" style="max-width:18rem;">
+    <img src="https://cdn.sparkfun.com/r/500-500/assets/3/b/a/e/1/Ad8232_headers.jpg" style="width:30%;">
 </div>
 
 O AD8232 é um pequeno chip usado para medir a atividade elétrica do coração. Esta atividade elétrica pode ser mapeada como um ECG ou Eletrocardiograma. A eletrocardiografia é usada para ajudar a diagnosticar várias doenças cardíacas, apesar deste sensor em específico **não ser indicado para detecção ou diagnóstico de qualquer anomalia ou distúrbio**.
@@ -10,7 +10,7 @@ O AD8232 é um pequeno chip usado para medir a atividade elétrica do coração.
 ## Entendo na prática o que é o ECG
 De maneira simples, o ECG  pode ser definido em  dois intervalos básicos, o intervalo PR e o intervalo QT, descritos abaixo.
 <div align="center">
-    <img src="https://cdn.sparkfun.com/assets/learn_tutorials/2/5/0/EKG_Complex_en.svg.png" style="max-width:38rem;">
+    <img src="https://cdn.sparkfun.com/assets/learn_tutorials/2/5/0/EKG_Complex_en.svg.png" style="width:30%;">
 </div>
 
 * Intervalo PR
@@ -27,7 +27,7 @@ Essa fase de relaxamento redefine os ventrículos para serem novamente preenchid
 Esses processos podem ser vistos de maneira mais adequada com a imagem abaixo. Conseguimos captar esses diferentes estímulos, ao colocar detectores em flancos direitos e esquerdos do corpo, que "fecham" o circuito com os átrios, permitindo a detecção destes via kit de desenvolvimento.
 
 <div align="center">
-    <img src="https://cdn.sparkfun.com/assets/0/5/1/f/b/ECG_principle_slow__1_.gif" style="max-width:38rem;">
+    <img src="https://cdn.sparkfun.com/assets/0/5/1/f/b/ECG_principle_slow__1_.gif" style="width:30%;">
 </div>
 
 ## Conectando
@@ -48,18 +48,18 @@ Para a montagem utilizou-se os seguintes pinos:
 
 Visualmente a montagem deve seguir o seguinte padrão:
 <div align="center">
-    <img src="montagem.png">
+    <img src="montagem.png" style="width:50%;">
 </div>
 
 <div align="center">
-    <img src="circuito.jpeg">
+    <img src="circuito.jpeg" style="width:50%;">
 </div>
 
 Após a montagem dos componentes eletrônicos, conecte o cabo de três sensores Pads à entrada de captação.
 
 O sensor tem relativa instabilidade, e as conexões Pads, para melhores medições, devem ser colocadas em pontos próximos ao coração além de respeitar o lado correto de sua indicação (escrito "R" [Direita] ou "L"[Esquerda] em cada Pad). Nota-se que apesar destes cuidados, o sensor pode não ter valores totalmente adequados, mas quanto mais menos movimentos (devido a menor ativação muscular), melhor os resultados se mostram. O posicionamento dos Pads pode ser feito conforme nos esquemas abaixo:
 <div align="center">
-    <img src="https://cdn.sparkfun.com/r/600-600/assets/learn_tutorials/2/5/0/body.png">
+    <img src="https://cdn.sparkfun.com/r/600-600/assets/learn_tutorials/2/5/0/body.png" style="width:30%;">
 </div>
 
 ## Exemplo
