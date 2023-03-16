@@ -23,7 +23,7 @@
  
 #include "asf.h"
 #include "mpu6050.h"
-#include "Fusion/Fusion.h"
+#include "fusion/fusion.h"
 
 /************************************************************************/
 /* VAR globais                                                          */
