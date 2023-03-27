@@ -110,7 +110,7 @@ static void configure_console(void) {
 
 static void BUT_init(void) {
 
-	/* conf bot„o como entrada */
+	/* conf bot√£o como entrada */
 	pio_configure(BUT_PLACA_PIO, PIO_INPUT, BUT_PLACA_PIO_PIN_MASK, PIO_PULLUP | PIO_DEBOUNCE);
 	pio_set_debounce_filter(BUT_PLACA_PIO, BUT_PLACA_PIO_PIN_MASK, 60);
 	
@@ -122,6 +122,7 @@ static void BUT_init(void) {
 					but_callback);
 					
 	pio_enable_interrupt(BUT_PLACA_PIO, BUT_PLACA_PIO_PIN_MASK);
+	pio_get_interrupt_status(BUT_PLACA_PIO);
 	
 	/* configura prioridae */
 	NVIC_EnableIRQ(BUT_PLACA_PIO_ID);
@@ -154,7 +155,7 @@ int main(void) {
 	/* Start the scheduler. */
 	vTaskStartScheduler();
 
-  /* RTOS n„o deve chegar aqui !! */
+  /* RTOS n√£o deve chegar aqui !! */
 	while(1){}
 
 	/* Will only get here if there was insufficient memory to create the idle task. */
