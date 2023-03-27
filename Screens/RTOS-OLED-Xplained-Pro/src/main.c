@@ -6,14 +6,17 @@
 #include "sysfont.h"
 
 /* Botao da placa */
-#define BUT_PIO     PIOA
-#define BUT_PIO_ID  ID_PIOA
-#define BUT_PIO_PIN 11
-#define BUT_PIO_PIN_MASK (1 << BUT_PIO_PIN)
+#define BUT_PLACA_PIO     PIOA
+#define BUT_PLACA_PIO_ID  ID_PIOA
+#define BUT_PLACA_PIO_PIN 11
+#define BUT_PLACA_PIO_PIN_MASK (1 << BUT_PLACA_PIO_PIN)
 
 /** RTOS  */
 #define TASK_OLED_STACK_SIZE                (1024*6/sizeof(portSTACK_TYPE))
 #define TASK_OLED_STACK_PRIORITY            (tskIDLE_PRIORITY)
+
+#define TASK_PRINTCONSOLE_STACK_SIZE                (1024*6/sizeof(portSTACK_TYPE))
+#define TASK_PRINTCONSOLE_STACK_PRIORITY            (tskIDLE_PRIORITY)
 
 extern void vApplicationStackOverflowHook(xTaskHandle *pxTask,  signed char *pcTaskName);
 extern void vApplicationIdleHook(void);
@@ -54,13 +57,35 @@ void but_callback(void) {
 /************************************************************************/
 
 static void task_oled(void *pvParameters) {
-	gfx_mono_ssd1306_init();
+  gfx_mono_ssd1306_init();
   gfx_mono_draw_string("Exemplo RTOS", 0, 0, &sysfont);
   gfx_mono_draw_string("oii", 0, 20, &sysfont);
 
-	for (;;)  {
-    
+	uint32_t cont=0;
+	for (;;)
+	{
+		char buf[3];
+		
+		cont++;
+		
+		sprintf(buf,"%03d",cont);
+		gfx_mono_draw_string(buf, 0, 20, &sysfont);
+				
+		vTaskDelay(1000);
+	}
+}
 
+
+static void task_printConsole(void *pvParameters) {
+	
+	uint32_t cont=0;
+	for (;;)
+	{		
+		cont++;
+		
+		printf("%03d\n",cont);
+		
+		vTaskDelay(1000);
 	}
 }
 
@@ -84,15 +109,24 @@ static void configure_console(void) {
 }
 
 static void BUT_init(void) {
-	/* configura prioridae */
-	NVIC_EnableIRQ(BUT_PIO_ID);
-	NVIC_SetPriority(BUT_PIO_ID, 4);
 
 	/* conf botão como entrada */
-	pio_configure(BUT_PIO, PIO_INPUT, BUT_PIO_PIN_MASK, PIO_PULLUP | PIO_DEBOUNCE);
-	pio_set_debounce_filter(BUT_PIO, BUT_PIO_PIN_MASK, 60);
-	pio_enable_interrupt(BUT_PIO, BUT_PIO_PIN_MASK);
-	pio_handler_set(BUT_PIO, BUT_PIO_ID, BUT_PIO_PIN_MASK, PIO_IT_FALL_EDGE , but_callback);
+	pio_configure(BUT_PLACA_PIO, PIO_INPUT, BUT_PLACA_PIO_PIN_MASK, PIO_PULLUP | PIO_DEBOUNCE);
+	pio_set_debounce_filter(BUT_PLACA_PIO, BUT_PLACA_PIO_PIN_MASK, 60);
+	
+	
+	pio_handler_set(BUT_PLACA_PIO,
+					BUT_PLACA_PIO_ID,
+					BUT_PLACA_PIO_PIN_MASK,
+					PIO_IT_FALL_EDGE,
+					but_callback);
+					
+	pio_enable_interrupt(BUT_PLACA_PIO, BUT_PLACA_PIO_PIN_MASK);
+	
+	/* configura prioridae */
+	NVIC_EnableIRQ(BUT_PLACA_PIO_ID);
+	NVIC_SetPriority(BUT_PLACA_PIO_ID, 4);
+	
 }
 
 /************************************************************************/
@@ -111,6 +145,10 @@ int main(void) {
 	/* Create task to control oled */
 	if (xTaskCreate(task_oled, "oled", TASK_OLED_STACK_SIZE, NULL, TASK_OLED_STACK_PRIORITY, NULL) != pdPASS) {
 	  printf("Failed to create oled task\r\n");
+	}
+	
+	if (xTaskCreate(task_printConsole, "task_printConsole", TASK_PRINTCONSOLE_STACK_SIZE, NULL, TASK_PRINTCONSOLE_STACK_PRIORITY, NULL) != pdPASS) {
+		printf("Failed to create printConsole task\r\n");
 	}
 
 	/* Start the scheduler. */
