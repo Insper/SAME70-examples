@@ -1,2 +1,0 @@
-# RTOS - SIMULADOR_RODA
-
