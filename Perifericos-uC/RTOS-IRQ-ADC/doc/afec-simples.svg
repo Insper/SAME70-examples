@@ -1,0 +1,499 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!-- Created with Inkscape (http://www.inkscape.org/) -->
+
+<svg
+   xmlns:dc="http://purl.org/dc/elements/1.1/"
+   xmlns:cc="http://creativecommons.org/ns#"
+   xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
+   xmlns:svg="http://www.w3.org/2000/svg"
+   xmlns="http://www.w3.org/2000/svg"
+   xmlns:sodipodi="http://sodipodi.sourceforge.net/DTD/sodipodi-0.dtd"
+   xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape"
+   width="237.65756mm"
+   height="116.92316mm"
+   viewBox="0 0 842.09372 414.29465"
+   id="svg2"
+   version="1.1"
+   inkscape:version="0.92.3 (2405546, 2018-03-11)"
+   sodipodi:docname="drawing-1.svg">
+  <defs
+     id="defs4">
+    <marker
+       inkscape:isstock="true"
+       style="overflow:visible"
+       id="marker4801"
+       refX="0"
+       refY="0"
+       orient="auto"
+       inkscape:stockid="Arrow1Mend">
+      <path
+         transform="matrix(-0.4,0,0,-0.4,-4,0)"
+         style="fill:#000000;fill-opacity:1;fill-rule:evenodd;stroke:#000000;stroke-width:1.00000003pt;stroke-opacity:1"
+         d="M 0,0 5,-5 -12.5,0 5,5 Z"
+         id="path4803"
+         inkscape:connector-curvature="0" />
+    </marker>
+    <marker
+       inkscape:isstock="true"
+       style="overflow:visible"
+       id="marker4773"
+       refX="0"
+       refY="0"
+       orient="auto"
+       inkscape:stockid="Arrow1Mend">
+      <path
+         transform="matrix(-0.4,0,0,-0.4,-4,0)"
+         style="fill:#000000;fill-opacity:1;fill-rule:evenodd;stroke:#000000;stroke-width:1.00000003pt;stroke-opacity:1"
+         d="M 0,0 5,-5 -12.5,0 5,5 Z"
+         id="path4775"
+         inkscape:connector-curvature="0" />
+    </marker>
+    <marker
+       inkscape:isstock="true"
+       style="overflow:visible"
+       id="marker4751"
+       refX="0"
+       refY="0"
+       orient="auto"
+       inkscape:stockid="Arrow1Mend">
+      <path
+         transform="matrix(-0.4,0,0,-0.4,-4,0)"
+         style="fill:#000000;fill-opacity:1;fill-rule:evenodd;stroke:#000000;stroke-width:1.00000003pt;stroke-opacity:1"
+         d="M 0,0 5,-5 -12.5,0 5,5 Z"
+         id="path4753"
+         inkscape:connector-curvature="0" />
+    </marker>
+    <marker
+       inkscape:stockid="Arrow1Mend"
+       orient="auto"
+       refY="0"
+       refX="0"
+       id="Arrow1Mend"
+       style="overflow:visible"
+       inkscape:isstock="true"
+       inkscape:collect="always">
+      <path
+         id="path4484"
+         d="M 0,0 5,-5 -12.5,0 5,5 Z"
+         style="fill:#000000;fill-opacity:1;fill-rule:evenodd;stroke:#000000;stroke-width:1.00000003pt;stroke-opacity:1"
+         transform="matrix(-0.4,0,0,-0.4,-4,0)"
+         inkscape:connector-curvature="0" />
+    </marker>
+  </defs>
+  <sodipodi:namedview
+     id="base"
+     pagecolor="#ffffff"
+     bordercolor="#666666"
+     borderopacity="1.0"
+     inkscape:pageopacity="0.0"
+     inkscape:pageshadow="2"
+     inkscape:zoom="0.9899495"
+     inkscape:cx="369.12232"
+     inkscape:cy="-44.607946"
+     inkscape:document-units="px"
+     inkscape:current-layer="layer1"
+     showgrid="false"
+     showguides="false"
+     fit-margin-top="0"
+     fit-margin-left="0"
+     fit-margin-right="0"
+     fit-margin-bottom="0"
+     inkscape:window-width="2880"
+     inkscape:window-height="1620"
+     inkscape:window-x="1675"
+     inkscape:window-y="588"
+     inkscape:window-maximized="0" />
+  <metadata
+     id="metadata7">
+    <rdf:RDF>
+      <cc:Work
+         rdf:about="">
+        <dc:format>image/svg+xml</dc:format>
+        <dc:type
+           rdf:resource="http://purl.org/dc/dcmitype/StillImage" />
+        <dc:title></dc:title>
+      </cc:Work>
+    </rdf:RDF>
+  </metadata>
+  <g
+     inkscape:label="Camada 1"
+     inkscape:groupmode="layer"
+     id="layer1"
+     sodipodi:insensitive="true"
+     transform="translate(-15.947266,-319.52878)">
+    <path
+       style="fill:none;fill-rule:evenodd;stroke:#000000;stroke-width:1;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1"
+       d="m 185.36299,323.03207 v 195.96959 l 46.2658,-26.71157 V 350.81126 Z"
+       id="path4136"
+       inkscape:connector-curvature="0" />
+    <g
+       id="g4197">
+      <path
+         inkscape:connector-curvature="0"
+         id="path4138"
+         d="M 83.337585,347.27573 H 184.35284"
+         style="fill:none;fill-rule:evenodd;stroke:#000000;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1" />
+      <rect
+         rx="0.9739958"
+         ry="1.0625409"
+         y="337.59518"
+         x="65.426239"
+         height="18.992918"
+         width="18.99292"
+         id="rect4140"
+         style="fill:#dcdcdc;fill-opacity:1;stroke:#000000;stroke-width:1.00708103;stroke-miterlimit:4;stroke-dasharray:none;stroke-dashoffset:0;stroke-opacity:1" />
+      <path
+         inkscape:connector-curvature="0"
+         id="path4142"
+         d="m 65.803572,338.16577 18.035714,18.03572"
+         style="fill:none;fill-rule:evenodd;stroke:#000000;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1" />
+      <path
+         inkscape:connector-curvature="0"
+         id="path4144"
+         d="M 65.714286,356.29077 83.75,338.25506"
+         style="fill:none;fill-rule:evenodd;stroke:#000000;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1" />
+      <text
+         id="text4146"
+         y="330.39792"
+         x="71.875"
+         style="font-style:normal;font-weight:normal;line-height:0%;font-family:sans-serif;text-align:center;letter-spacing:0px;word-spacing:0px;text-anchor:middle;fill:#000000;fill-opacity:1;stroke:none;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
+         xml:space="preserve"><tspan
+           id="tspan4169"
+           y="330.39792"
+           x="71.875"
+           sodipodi:role="line"
+           style="font-size:15px;line-height:1.25">PIN (AFE1_AD0)</tspan></text>
+    </g>
+    <g
+       transform="translate(0.7740455,43.942048)"
+       id="g4197-3">
+      <path
+         inkscape:connector-curvature="0"
+         id="path4138-5"
+         d="M 83.337585,347.27573 H 184.35284"
+         style="fill:none;fill-rule:evenodd;stroke:#000000;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1" />
+      <rect
+         rx="0.9739958"
+         ry="1.0625409"
+         y="337.59518"
+         x="65.426239"
+         height="18.992918"
+         width="18.99292"
+         id="rect4140-6"
+         style="fill:#dcdcdc;fill-opacity:1;stroke:#000000;stroke-width:1.00708103;stroke-miterlimit:4;stroke-dasharray:none;stroke-dashoffset:0;stroke-opacity:1" />
+      <path
+         inkscape:connector-curvature="0"
+         id="path4142-2"
+         d="m 65.803572,338.16577 18.035714,18.03572"
+         style="fill:none;fill-rule:evenodd;stroke:#000000;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1" />
+      <path
+         inkscape:connector-curvature="0"
+         id="path4144-9"
+         d="M 65.714286,356.29077 83.75,338.25506"
+         style="fill:none;fill-rule:evenodd;stroke:#000000;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1" />
+      <text
+         id="text4146-1"
+         y="330.39792"
+         x="71.875"
+         style="font-style:normal;font-weight:normal;line-height:0%;font-family:sans-serif;text-align:center;letter-spacing:0px;word-spacing:0px;text-anchor:middle;fill:#000000;fill-opacity:1;stroke:none;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
+         xml:space="preserve"><tspan
+           id="tspan4169-2"
+           y="330.39792"
+           x="71.875"
+           sodipodi:role="line"
+           style="font-size:15px;line-height:1.25">PIN (AFE1_AD1)</tspan></text>
+    </g>
+    <g
+       transform="translate(1.1037834,156.90914)"
+       id="g4197-3-7">
+      <path
+         inkscape:connector-curvature="0"
+         id="path4138-5-0"
+         d="M 83.337585,347.27573 H 184.35284"
+         style="fill:none;fill-rule:evenodd;stroke:#000000;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1" />
+      <rect
+         rx="0.9739958"
+         ry="1.0625409"
+         y="337.59518"
+         x="65.426239"
+         height="18.992918"
+         width="18.99292"
+         id="rect4140-6-9"
+         style="fill:#dcdcdc;fill-opacity:1;stroke:#000000;stroke-width:1.00708103;stroke-miterlimit:4;stroke-dasharray:none;stroke-dashoffset:0;stroke-opacity:1" />
+      <path
+         inkscape:connector-curvature="0"
+         id="path4142-2-3"
+         d="m 65.803572,338.16577 18.035714,18.03572"
+         style="fill:none;fill-rule:evenodd;stroke:#000000;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1" />
+      <path
+         inkscape:connector-curvature="0"
+         id="path4144-9-6"
+         d="M 65.714286,356.29077 83.75,338.25506"
+         style="fill:none;fill-rule:evenodd;stroke:#000000;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1" />
+      <text
+         id="text4146-1-0"
+         y="330.39792"
+         x="71.875"
+         style="font-style:normal;font-weight:normal;line-height:0%;font-family:sans-serif;text-align:center;letter-spacing:0px;word-spacing:0px;text-anchor:middle;fill:#000000;fill-opacity:1;stroke:none;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
+         xml:space="preserve"><tspan
+           id="tspan4169-2-6"
+           y="330.39792"
+           x="71.875"
+           sodipodi:role="line"
+           style="font-size:15px;line-height:1.25">PIN (AFE1_AD6)</tspan></text>
+    </g>
+    <path
+       style="fill:none;fill-rule:evenodd;stroke:#000000;stroke-width:1;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1"
+       d="m 283.47628,377.27084 v 87.54214 L 385.32919,421.1724 Z"
+       id="path4273"
+       inkscape:connector-curvature="0"
+       sodipodi:nodetypes="cccc" />
+    <path
+       style="fill:none;fill-rule:evenodd;stroke:#000000;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1;marker-end:url(#marker4751)"
+       d="m 231.32493,421.00817 h 53.53809"
+       id="path4277"
+       inkscape:connector-curvature="0" />
+    <path
+       style="fill:none;fill-rule:evenodd;stroke:#000000;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1;marker-end:url(#Arrow1Mend)"
+       d="m 385.87827,421.00817 h 44.44671"
+       id="path4279"
+       inkscape:connector-curvature="0" />
+    <text
+       xml:space="preserve"
+       style="font-style:normal;font-weight:normal;line-height:0%;font-family:sans-serif;text-align:center;letter-spacing:0px;word-spacing:0px;text-anchor:middle;fill:#000000;fill-opacity:1;stroke:none;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
+       x="313.39984"
+       y="426.40234"
+       id="text4285"><tspan
+         sodipodi:role="line"
+         id="tspan4287"
+         x="313.39984"
+         y="426.40234"
+         style="font-size:15px;line-height:1.25">Gain</tspan></text>
+    <text
+       xml:space="preserve"
+       style="font-style:normal;font-weight:normal;line-height:0%;font-family:sans-serif;text-align:center;letter-spacing:0px;word-spacing:0px;text-anchor:middle;fill:#000000;fill-opacity:1;stroke:none;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
+       x="208.07841"
+       y="424.97058"
+       id="text4289"><tspan
+         sodipodi:role="line"
+         id="tspan4291"
+         x="208.07841"
+         y="424.97058"
+         style="font-size:15px;line-height:1.25">mux</tspan></text>
+    <g
+       id="g4333"
+       transform="translate(96.469567,123.23861)">
+      <path
+         inkscape:connector-curvature="0"
+         id="path4275"
+         d="m 579.19082,423.48492 -38.82311,33.66284 h -107.8913 v -72.27919 h 108.39724 z"
+         style="fill:none;fill-rule:evenodd;stroke:#000000;stroke-width:1;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1" />
+      <text
+         id="text4281"
+         y="426.36951"
+         x="494.20575"
+         style="font-style:normal;font-weight:normal;line-height:0%;font-family:sans-serif;text-align:center;letter-spacing:0px;word-spacing:0px;text-anchor:middle;fill:#000000;fill-opacity:1;stroke:none;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
+         xml:space="preserve"><tspan
+           y="426.36951"
+           x="494.20575"
+           id="tspan4283"
+           sodipodi:role="line"
+           style="font-size:15px;line-height:1.25">ADC 12 Bits</tspan></text>
+      <path
+         inkscape:connector-curvature="0"
+         id="path4279-2"
+         d="m 579.9195,423.43363 h 44.44671"
+         style="fill:none;fill-rule:evenodd;stroke:#000000;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1" />
+      <rect
+         ry="1.0625401"
+         rx="0.97399598"
+         y="401.64792"
+         x="625"
+         height="45.357143"
+         width="136.07143"
+         id="rect4308"
+         style="fill:#ffffff;fill-opacity:1;stroke:#000000;stroke-width:1;stroke-miterlimit:4;stroke-dasharray:none;stroke-dashoffset:0;stroke-opacity:1" />
+      <text
+         id="text4310"
+         y="428.79077"
+         x="691.07141"
+         style="font-style:normal;font-weight:normal;line-height:0%;font-family:sans-serif;text-align:center;letter-spacing:0px;word-spacing:0px;text-anchor:middle;fill:#000000;fill-opacity:1;stroke:none;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
+         xml:space="preserve"><tspan
+           y="428.79077"
+           x="691.07141"
+           id="tspan4312"
+           sodipodi:role="line"
+           style="font-size:15px;line-height:1.25">AFEC_CDR</tspan></text>
+    </g>
+    <path
+       style="fill:none;fill-rule:evenodd;stroke:#000000;stroke-width:1.28472435;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1"
+       d="m 436.67613,392.06694 v 326.1243 l 45.88656,-44.45227 V 438.29589 Z"
+       id="path4136-1"
+       inkscape:connector-curvature="0" />
+    <path
+       style="fill:none;fill-rule:evenodd;stroke:#000000;stroke-width:1;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1"
+       d="M 186.48073,536.98781 V 732.9574 l 46.2658,-26.71157 V 564.767 Z"
+       id="path4136-8"
+       inkscape:connector-curvature="0" />
+    <g
+       transform="translate(1.1177444,213.95574)"
+       id="g4197-7">
+      <path
+         inkscape:connector-curvature="0"
+         id="path4138-9"
+         d="M 83.337585,347.27573 H 184.35284"
+         style="fill:none;fill-rule:evenodd;stroke:#000000;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1" />
+      <rect
+         rx="0.9739958"
+         ry="1.0625409"
+         y="337.59518"
+         x="65.426239"
+         height="18.992918"
+         width="18.99292"
+         id="rect4140-2"
+         style="fill:#dcdcdc;fill-opacity:1;stroke:#000000;stroke-width:1.00708103;stroke-miterlimit:4;stroke-dasharray:none;stroke-dashoffset:0;stroke-opacity:1" />
+      <path
+         inkscape:connector-curvature="0"
+         id="path4142-0"
+         d="m 65.803572,338.16577 18.035714,18.03572"
+         style="fill:none;fill-rule:evenodd;stroke:#000000;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1" />
+      <path
+         inkscape:connector-curvature="0"
+         id="path4144-2"
+         d="M 65.714286,356.29077 83.75,338.25506"
+         style="fill:none;fill-rule:evenodd;stroke:#000000;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1" />
+      <text
+         id="text4146-3"
+         y="330.39792"
+         x="71.875"
+         style="font-style:normal;font-weight:normal;line-height:0%;font-family:sans-serif;text-align:center;letter-spacing:0px;word-spacing:0px;text-anchor:middle;fill:#000000;fill-opacity:1;stroke:none;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
+         xml:space="preserve"><tspan
+           id="tspan4169-7"
+           y="330.39792"
+           x="71.875"
+           sodipodi:role="line"
+           style="font-size:15px;line-height:1.25">PIN (AFE1_AD0)</tspan></text>
+    </g>
+    <g
+       transform="translate(1.8917904,257.89779)"
+       id="g4197-3-5">
+      <path
+         inkscape:connector-curvature="0"
+         id="path4138-5-9"
+         d="M 83.337585,347.27573 H 184.35284"
+         style="fill:none;fill-rule:evenodd;stroke:#000000;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1" />
+      <rect
+         rx="0.9739958"
+         ry="1.0625409"
+         y="337.59518"
+         x="65.426239"
+         height="18.992918"
+         width="18.99292"
+         id="rect4140-6-2"
+         style="fill:#dcdcdc;fill-opacity:1;stroke:#000000;stroke-width:1.00708103;stroke-miterlimit:4;stroke-dasharray:none;stroke-dashoffset:0;stroke-opacity:1" />
+      <path
+         inkscape:connector-curvature="0"
+         id="path4142-2-2"
+         d="m 65.803572,338.16577 18.035714,18.03572"
+         style="fill:none;fill-rule:evenodd;stroke:#000000;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1" />
+      <path
+         inkscape:connector-curvature="0"
+         id="path4144-9-8"
+         d="M 65.714286,356.29077 83.75,338.25506"
+         style="fill:none;fill-rule:evenodd;stroke:#000000;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1" />
+      <text
+         id="text4146-1-9"
+         y="330.39792"
+         x="71.875"
+         style="font-style:normal;font-weight:normal;line-height:0%;font-family:sans-serif;text-align:center;letter-spacing:0px;word-spacing:0px;text-anchor:middle;fill:#000000;fill-opacity:1;stroke:none;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
+         xml:space="preserve"><tspan
+           id="tspan4169-2-7"
+           y="330.39792"
+           x="71.875"
+           sodipodi:role="line"
+           style="font-size:15px;line-height:1.25">PIN (AFE1_AD1)</tspan></text>
+    </g>
+    <g
+       transform="translate(2.2215284,370.86488)"
+       id="g4197-3-7-3">
+      <path
+         inkscape:connector-curvature="0"
+         id="path4138-5-0-6"
+         d="M 83.337585,347.27573 H 184.35284"
+         style="fill:none;fill-rule:evenodd;stroke:#000000;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1" />
+      <rect
+         rx="0.9739958"
+         ry="1.0625409"
+         y="337.59518"
+         x="65.426239"
+         height="18.992918"
+         width="18.99292"
+         id="rect4140-6-9-1"
+         style="fill:#dcdcdc;fill-opacity:1;stroke:#000000;stroke-width:1.00708103;stroke-miterlimit:4;stroke-dasharray:none;stroke-dashoffset:0;stroke-opacity:1" />
+      <path
+         inkscape:connector-curvature="0"
+         id="path4142-2-3-2"
+         d="m 65.803572,338.16577 18.035714,18.03572"
+         style="fill:none;fill-rule:evenodd;stroke:#000000;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1" />
+      <path
+         inkscape:connector-curvature="0"
+         id="path4144-9-6-9"
+         d="M 65.714286,356.29077 83.75,338.25506"
+         style="fill:none;fill-rule:evenodd;stroke:#000000;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1" />
+      <text
+         id="text4146-1-0-3"
+         y="330.39792"
+         x="71.875"
+         style="font-style:normal;font-weight:normal;line-height:0%;font-family:sans-serif;text-align:center;letter-spacing:0px;word-spacing:0px;text-anchor:middle;fill:#000000;fill-opacity:1;stroke:none;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
+         xml:space="preserve"><tspan
+           id="tspan4169-2-6-1"
+           y="330.39792"
+           x="71.875"
+           sodipodi:role="line"
+           style="font-size:15px;line-height:1.25">PIN (AFE1_AD6)</tspan></text>
+    </g>
+    <path
+       style="fill:none;fill-rule:evenodd;stroke:#000000;stroke-width:1;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1"
+       d="m 284.59402,591.22658 v 87.54214 l 101.85291,-43.64058 z"
+       id="path4273-9"
+       inkscape:connector-curvature="0"
+       sodipodi:nodetypes="cccc" />
+    <path
+       style="fill:none;fill-rule:evenodd;stroke:#000000;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1;marker-end:url(#marker4773)"
+       d="m 232.44267,634.96391 h 53.53809"
+       id="path4277-4"
+       inkscape:connector-curvature="0" />
+    <path
+       style="fill:none;fill-rule:evenodd;stroke:#000000;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1;marker-end:url(#marker4801)"
+       d="m 386.99601,634.96391 h 44.44671"
+       id="path4279-7"
+       inkscape:connector-curvature="0" />
+    <text
+       xml:space="preserve"
+       style="font-style:normal;font-weight:normal;line-height:0%;font-family:sans-serif;text-align:center;letter-spacing:0px;word-spacing:0px;text-anchor:middle;fill:#000000;fill-opacity:1;stroke:none;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
+       x="314.51758"
+       y="640.35809"
+       id="text4285-8"><tspan
+         sodipodi:role="line"
+         id="tspan4287-4"
+         x="314.51758"
+         y="640.35809"
+         style="font-size:15px;line-height:1.25">Gain</tspan></text>
+    <text
+       xml:space="preserve"
+       style="font-style:normal;font-weight:normal;line-height:0%;font-family:sans-serif;text-align:center;letter-spacing:0px;word-spacing:0px;text-anchor:middle;fill:#000000;fill-opacity:1;stroke:none;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
+       x="209.19615"
+       y="638.92633"
+       id="text4289-5"><tspan
+         sodipodi:role="line"
+         id="tspan4291-0"
+         x="209.19615"
+         y="638.92633"
+         style="font-size:15px;line-height:1.25">mux</tspan></text>
+    <path
+       style="fill:none;fill-rule:evenodd;stroke:#000000;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1;marker-end:url(#Arrow1Mend)"
+       d="m 484.87323,543.24532 h 44.44671"
+       id="path4279-7-3"
+       inkscape:connector-curvature="0" />
+  </g>
+</svg>
