@@ -25,10 +25,17 @@ typedef struct  {
 #define LED_PIO_IDX	8
 #define LED_IDX_MASK    (1<<LED_PIO_IDX)
 
+// LED 1
+#define LED1_PIO PIOA
+#define LED1_PIO_ID ID_PIOA
+#define LED1_PIO_IDX 0
+#define LED1_PIO_IDX_MASK (1 << LED1_PIO_IDX)
+
 /************************************************************************/
 /* VAR globais                                                          */
 /************************************************************************/
 volatile char flag_rtc_alarm = 0;
+volatile char flag_rtc_alarm1 = 0;
 
 /************************************************************************/
 /* PROTOTYPES                                                           */
@@ -36,7 +43,7 @@ volatile char flag_rtc_alarm = 0;
 
 void LED_init(int estado);
 void RTC_init(Rtc *rtc, uint32_t id_rtc, calendar t, uint32_t irq_type);
-void pisca_led(int n, int t);
+void pisca_led(int n, int t, int l);
 
 /************************************************************************/
 /* Handlers                                                             */
@@ -50,13 +57,16 @@ void RTC_Handler(void) {
 	
     /* seccond tick */
     if ((ul_status & RTC_SR_SEC) == RTC_SR_SEC) {	
-	// o código para irq de segundo vem aqui
+			// o código para irq de segundo vem aqui
+			printf("Sec alarm \n");
+			flag_rtc_alarm1 = 1;
     }
 	
     /* Time or date alarm */
     if ((ul_status & RTC_SR_ALARM) == RTC_SR_ALARM) {
     	// o código para irq de alame vem aqui
         flag_rtc_alarm = 1;
+				printf("Time alarm \n");
     }
 
     rtc_clear_status(RTC, RTC_SCCR_SECCLR);
@@ -72,13 +82,22 @@ void RTC_Handler(void) {
 /* Funcoes                                                              */
 /************************************************************************/
 
-void pisca_led (int n, int t) {
-    for (int i=0;i<n;i++){
-      pio_clear(LED_PIO, LED_IDX_MASK);
-      delay_ms(t);
-      pio_set(LED_PIO, LED_IDX_MASK);
-      delay_ms(t);
-    }
+void pisca_led (int n, int t, int l) {
+	if (l) {
+		for (int i=0;i<n;i++){
+			pio_clear(LED1_PIO, LED1_PIO_IDX_MASK);
+			delay_ms(t);
+			pio_set(LED1_PIO, LED1_PIO_IDX_MASK);
+			delay_ms(t);
+		}
+	} else {
+		for (int i=0;i<n;i++){
+			pio_clear(LED_PIO, LED_IDX_MASK);
+			delay_ms(t);
+			pio_set(LED_PIO, LED_IDX_MASK);
+			delay_ms(t);
+		}
+	}
 }
 
 /**
@@ -87,6 +106,9 @@ void pisca_led (int n, int t) {
 void LED_init(int estado) {
      pmc_enable_periph_clk(LED_PIO_ID);
      pio_set_output(LED_PIO, LED_IDX_MASK, estado, 0, 0 );
+		 
+		 pmc_enable_periph_clk(LED1_PIO_ID);
+		 pio_set_output(LED1_PIO, LED1_PIO_IDX_MASK, estado, 0, 0 );
 };
 
 /**
@@ -113,22 +135,41 @@ void RTC_init(Rtc *rtc, uint32_t id_rtc, calendar t, uint32_t irq_type) {
 	rtc_enable_interrupt(rtc,  irq_type);
 }
 
+static void configure_console(void) {
+	const usart_serial_options_t uart_serial_options = {
+		.baudrate = CONF_UART_BAUDRATE,
+		.charlength = CONF_UART_CHAR_LENGTH,
+		.paritytype = CONF_UART_PARITY,
+		.stopbits = CONF_UART_STOP_BITS,
+	};
+
+	/* Configure console UART. */
+	stdio_serial_init(CONF_UART, &uart_serial_options);
+
+	/* Specify that stdout should not be buffered. */
+	setbuf(stdout, NULL);
+}
+
 /************************************************************************/
 /* Main Code	                                                        */
 /************************************************************************/
 int main(void) {
     /* Initialize the SAM system */                                                                 
-    sysclk_init();                                                                                  
+    sysclk_init();        
+		
+		/* Initialize the console uart */
+		configure_console();                                                                          
                                                                                                     
     /* Disable the watchdog */                                                                      
     WDT->WDT_MR = WDT_MR_WDDIS;                                                                     
                                                                                                     
     /* Configura Leds */                                                                            
-    LED_init(0);                                                                                    
+    LED_init(1);                                                                                    
                                                                                                     
     /** Configura RTC */                                                                            
     calendar rtc_initial = {2018, 3, 19, 12, 15, 45 ,1};                                            
-    RTC_init(RTC, ID_RTC, rtc_initial, RTC_IER_ALREN);                                              
+    RTC_init(RTC, ID_RTC, rtc_initial, RTC_IER_ALREN); 
+		RTC_init(RTC, ID_RTC, rtc_initial, RTC_IER_SECEN);                                              
                                                                                                     
     /* Leitura do valor atual do RTC */           
     uint32_t current_hour, current_min, current_sec;
@@ -138,12 +179,17 @@ int main(void) {
 	
     /* configura alarme do RTC para daqui 20 segundos */                                                                   
     rtc_set_date_alarm(RTC, 1, current_month, 1, current_day);                              
-    rtc_set_time_alarm(RTC, 1, current_hour, 1, current_min, 1, current_sec + 20);
+    rtc_set_time_alarm(RTC, 1, current_hour, 1, current_min, 1, current_sec + 10);
+		printf("Chegou \n");
                                                                                                     
     while (1) {                                                                                     
       if(flag_rtc_alarm){                                                                                 
-          pisca_led(5, 200);                                                                       
-          flag_rtc_alarm = 0;                                                                             
-       }                                                                                            
+          pisca_led(5, 200, 0);                                                                       
+          flag_rtc_alarm = 0;                                                                          
+       }
+			 if(flag_rtc_alarm1){
+				 pisca_led(5, 200, 1);
+				 flag_rtc_alarm1 = 0;
+			 }                                                                                          
     }                                                                                               
 }
